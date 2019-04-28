@@ -1,5 +1,6 @@
 # iOSCodeConfuseHelper
 代码混淆助手(比手还快)
+
 针对马甲包
 立场:
 
@@ -30,47 +31,47 @@
     9.1 支持bundle,plist文件
 ```
 
-##支持运行环境:
+## 支持运行环境:
 
 ```
 MacOS
 Python 3.7
 ```
 
-##支持语言
+## 支持语言
 
 ```
 Objective-C (Swift没测过,不知道什么情况)
 ```
 
-##依赖环境配置:
+## 依赖环境配置:
 
-###安装python3
+## 安装python3
 > brew install python
 
 **检查python3安装情况**
 > which python3
 
-### 检查pip3安装情况
+## 检查pip3安装情况
 > which pip3
 
 **找不到就安装:**
 > python3 get-pip.py
 
-###安装yaml
+## 安装yaml
 > pip3 install PyYAML
 
-###安装requests
+## 安装requests
 > pip3 install requests
 
-###安装NLTK
+## 安装NLTK
 > pip3 install nltk
 
 
 
-###使用说明
+## 使用说明
 
-### 配置文件:
+## 配置文件:
 
 **1.二进制文件放这里**
 将源码编译出来的mach-o文件(编译出来的ipa包中的可执行文件)，复制到以下路径
@@ -87,12 +88,12 @@ Objective-C (Swift没测过,不知道什么情况)
 
 
 ## 运行:
-###切换到项目路径:
+### 切换到项目路径:
 打开终端,输入cd空格,将iOSCodeConfuseHelper拖到cd后面，回车
 例如:
 > cd /Users/xxx/Desktop/iOSCodeConfuseHelper
 
-###运行脚本:
+### 运行脚本:
 > python3 start.py
 
 
