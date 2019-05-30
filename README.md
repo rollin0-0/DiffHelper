@@ -1,7 +1,10 @@
 # iOSCodeDifferHelper
 代码差异化助手(比手还快)
 
-##支持运行环境:
+## 该版本会随机差异化一半的符号，符号的概念请参考[Wiki](https://github.com/rowliny/iOSCodeDifferHelper/wiki)
+如需完全修改的版本,请联系开发者,工具运行后会打印出联系方式
+
+## 支持运行环境:
 
 ```
 MacOS
