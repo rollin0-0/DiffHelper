@@ -1,0 +1,129 @@
+#以下这些类型会被忽略
+#这里的类型只能加不能减少了,未来将根据需求支持更多
+IgnoreType:
+  - a
+  - framework
+  - xcassets
+  - appiconset
+  - lproj
+  - json
+  - entitlements
+  - xcodeproj
+  - xml
+  - html
+
+# -------------------------- 以下部分可以配置 ----------------------
+
+
+# yaml语法说明
+# demo:1 #键值对,demo == 1
+# demo2: "" # demo == nil (不能什么都不配置)
+# demo3: # 数组demo3 == nil (不能什么都不配置)
+  # - ""
+# demo4: #数组 demo4 == ["test1","test2"]
+# - test1
+# - test2
+
+# demo3: #空数组
+# - ""
+
+# 1.资源相关
+# 目前支持修改:png/jpg/mp3/wav/xib/sb/bundle/plist类型资源名差异化
+# 资源名字会被修改,并且在代码/xib/sb中会相应的替换成新的名字
+# 除xib/sb外 其他资源文件本身不会修改
+
+# plist文件白名单(白名单中的文件不会被修改)
+# 不在该列表的plist文件将被修改
+# 如果在代码中引用到会对应修改,例如
+# NSString *path= [bundle pathForResource:@"Discolour" ofType:@"plist"];
+# NSString *path= [bundle pathForResource:@"Discolour.plist"];
+# Discolour.plist 被修改成xx.plist
+# 代码会对应修改为
+# NSString *path= [bundle pathForResource:@"xx" ofType:@"plist"];
+# NSString *path= [bundle pathForResource:@"xx.plist"];
+IgnorePlistList:
+  - Info.plist
+  - info.plist
+
+# 2.类相关
+# 2.1 类白名单(白名单中的类不会被修改)
+# 假设 AppDelegate类需要忽略,配置如下即可
+# - AppDelegate
+# 这样 AppDelegate.h 和AppDelegate.m文件中自身的方法和属性等符号都不会被修改
+# AppDelegate.h 和AppDelegate.m文件中引用的类和调用的外部方法等会被修改
+# 如果需要忽略 .a静态库对应的头文件,需要将对应的头文件配置在下面
+IgnoreClassNameList:
+  - AppDelegate
+  - ViewController
+  - IgnoreClassName
+
+# 2.2 文件夹白名单(文件夹中的文件不会被修改)
+# 例如 x/y/z.h
+# - x #忽略x文件夹下所有类型的文件
+# - y #忽略y文件夹下所有类型的文件
+IgnoreFolder:
+  - ignoreFolder
+
+# 2.3 属性白名单(对应的类属性不会修改)
+# 以下的类 属性不会被修改,其他都会修改,主要针对和网络交互的model类
+IgnorePropertyOfClassList:
+  - IgnoreProperty
+
+
+# 3.前缀相关
+
+# 3.1类前缀
+# 当前类名前缀集合,如果项目中的资源文件或者类文件有特殊的前缀,可以通过这里处理掉
+# 如果没有需要替换掉的前缀,就配置无
+# - "" #表示无
+CurClassNamePrefix:
+  - XXX
+
+# 用来替换当前类前缀的前缀们
+# CurClassNamePrefix中的前缀会被ClassNamePrefix中的前缀随机替换
+# - "" 表示用空来替换 例如 XXHello 用空替换后就是 Hello
+ClassNamePrefix:
+  - Iris
+
+# 3.2 属性名前缀
+# 如果项目中有属性包含特殊的前缀,可以通过这里处理掉
+# - "" #表示无
+CurPropertyPrefix:
+  - YYY_
+  - ZZZ_
+
+# 用来替换当前属性前缀的前缀们
+# CurPropertyPrefix中的前缀会被PropertyPrefix中的前缀随机替换
+# - "" #表示用空来替换
+PropertyPrefix:
+  - Hello
+
+# 3.3 方法名前缀
+# 如果项目中有方法包含特殊的前缀,可以通过这里处理掉
+# - "" #表示无
+CurMethodNamePrefix:
+  - ""
+
+# 用来替换当前方法前缀的前缀们
+# CurMethodNamePrefix中的前缀会被MethodNamePrefix中的前缀随机替换
+# - "" #表示用空来替换
+MethodNamePrefix:
+  - ""
+
+# 4. 新符号长度控制
+# 控制新方法中用来替代的单词的最大长度 可以随便自定义
+# 该工具通过将方法、类名、属性等分割成一个个单词,处理后拼接成新的方法、类名、属性
+# 如果方法本身过长那么生成的新方法相应的也会越长,为了看起来更加接近人类写的方法
+# 所以增加了对于单个单词的长度限制,以下的数字可自行修改
+
+LongMethodNewWordMaxLen: 8 #7个及以上单词组成的符号,每个单词最大长度为8
+MidMethodNewWordMaxLen: 10 #4~6个单词组成的符号,每个单词最大长度10
+ShortMethodNewWordMaxLen: 15 #不大于3个单词组成的符号,每个单词最大长度15
+NewWordCutUpLen: 6 #当所有的单词都过长 截取前6个字母
+
+# 4. 头文件暴露
+# 如果是SDK,配置这个会在result.txt将需要暴露的头文件在最开始的位置展示出来
+# 如果不是SDK,配置为无即可
+# - "" #表示无
+SDKHeader:
+  - ""
