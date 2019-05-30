@@ -6,13 +6,14 @@ import os
 
 
 try:
+	pipVersion =  ""
 	if sys.version_info[0] > 3:
 		pipVersion = "pip3"
 		import pip3
 		print('检测到已经安装pip模块')
 except:
 	print('检测到未安装pip模块,现在开始安装......')
-	command = "sudo easy_install pip"
+	command = "sudo easy_install pip3"
 	os.system(command)
 	
 
