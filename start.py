@@ -2,13 +2,8 @@
 
 import os
 import sys
-import inspect
 
-currentFilePath = inspect.getfile(inspect.currentframe())
-currentDir = os.path.dirname(currentFilePath)
-# /Users/rowling/iOSCodeConfuseHelper/iOSCodeConfuseHelper
-
-utilPath = os.path.join(currentDir,"Tool")
+utilPath = os.path.join(os.getcwd(),"Tool")
 sys.path.append(utilPath)
 
 import JustDoIT
