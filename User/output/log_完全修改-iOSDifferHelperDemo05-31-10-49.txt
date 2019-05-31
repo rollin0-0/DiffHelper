@@ -1,0 +1,4 @@
+2019.05.31-10:49:13 当前运行log文件在:
+2019.05.31-10:49:13 /Users/rowling/iOSCodeDifferHelper/User/output/log_完全修改-iOSDifferHelperDemo05-31-10-49.txt
+2019.05.31-10:49:13 当前存在备份:
+2019.05.31-10:49:13 	未修改过-iOSDifferHelperDemo
