@@ -40,7 +40,8 @@ Objective-C (不支持Swift)
     9.0 支持png,jpg文件
     9.1 支持bundle,plist文件
     9.2 支持mp3,wav文件
-    9.3 xib、sb文件
+    9.3 xib、sb文件 xib、sb文件和对应的类同步修改
+11.支持修改文件创建时间和修改时间
 ```
 
 详情见
