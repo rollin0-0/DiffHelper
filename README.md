@@ -1,6 +1,7 @@
 # 更新日期: 2019-06-04 
 
 1.修复修改分类时出现的bug 感谢[Kuitous](https://github.com/Kuitous)提供的详细执行过程
+
 2.demo更新为线上的一个开源项目
 
 # 详情见
