@@ -1,0 +1,609 @@
+2019.06.04-19:10:23 当前运行log文件在:
+2019.06.04-19:10:23 /Users/rowling/iOSCodeDifferHelper/User/output/log_YoCelsius-master06-04-19-10.txt
+2019.06.04-19:10:23 开始备份
+2019.06.04-19:10:23 源位置:
+2019.06.04-19:10:23 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master
+2019.06.04-19:10:23 备份位置:
+2019.06.04-19:10:23 /Users/rowling/iOSCodeDifferHelper/User/backup/YoCelsius-master-06-04-19-10-23
+2019.06.04-19:10:23 备份完成
+2019.06.04-19:10:23 请选择需要使用的配置文件:
+2019.06.04-19:10:23 [0] UserConfig-YoCelsius.yaml
+2019.06.04-19:10:25 请选择需要处理的根路径(你想要处理的所有代码文件和资源文件都应该在该路径下):
+2019.06.04-19:10:25 [0] YoCelsius.xcodeproj
+2019.06.04-19:10:25 [1] README.md
+2019.06.04-19:10:25 [2] YoCelsius
+2019.06.04-19:10:28 需要忽略的类数量:2
+2019.06.04-19:10:28 needIgnoreList
+2019.06.04-19:10:28 ['AppDelegate', 'ViewController']
+2019.06.04-19:10:28 获取忽略文件夹 开始
+2019.06.04-19:10:28 获取忽略文件夹 结束
+2019.06.04-19:10:28 需要忽略的文件夹类数量:20
+2019.06.04-19:10:28 需要忽略的文件夹类
+2019.06.04-19:10:28 ['ARCGPathFromString', 'UIBezierPath+TextPaths', 'UIProgressView+AFNetworking', 'UIButton+AFNetworking', 'UIRefreshControl+AFNetworking', 'UIImageView+AFNetworking', 'AFImageDownloader', 'AFNetworkActivityIndicatorManager', 'AFAutoPurgingImageCache', 'UIWebView+AFNetworking', 'UIActivityIndicatorView+AFNetworking', 'UIImage+AFNetworking', 'UIKit+AFNetworking', 'AFSecurityPolicy', 'AFNetworkReachabilityManager', 'AFURLSessionManager', 'AFURLRequestSerialization', 'AFURLResponseSerialization', 'AFHTTPSessionManager', 'AFNetworking']
+2019.06.04-19:10:28 所有需要忽略的类:
+2019.06.04-19:10:28 ['UIKit+AFNetworking', 'UIButton+AFNetworking', 'AFAutoPurgingImageCache', 'UIActivityIndicatorView+AFNetworking', 'AFSecurityPolicy', 'UIProgressView+AFNetworking', 'UIImage+AFNetworking', 'AFURLRequestSerialization', 'UIBezierPath+TextPaths', 'AFNetworkActivityIndicatorManager', 'UIImageView+AFNetworking', 'AFURLSessionManager', 'ViewController', 'AppDelegate', 'ARCGPathFromString', 'AFNetworkReachabilityManager', 'AFNetworking', 'AFImageDownloader', 'UIWebView+AFNetworking', 'AFURLResponseSerialization', 'UIRefreshControl+AFNetworking', 'AFHTTPSessionManager']
+2019.06.04-19:10:28 项目分析结果写入:
+2019.06.04-19:10:28 /Users/rowling/iOSCodeDifferHelper/Tool/log/project.json
+2019.06.04-19:10:28 解析mach-o文件,创建1-Output.txt
+2019.06.04-19:10:28 二进制方法列表已经写入:
+2019.06.04-19:10:28 /Users/rowling/iOSCodeDifferHelper/Tool/log/1-Output.txt
+2019.06.04-19:10:28 
+
+2019.06.04-19:10:28 分析methodList.txt文件
+2019.06.04-19:10:28 nm中一共:160个类
+2019.06.04-19:10:28 macho分析完成
+2019.06.04-19:10:28 macho分析结果写入:
+2019.06.04-19:10:28 /Users/rowling/iOSCodeDifferHelper/Tool/log/2-OutputParserResult.json
+2019.06.04-19:10:28 
+根据配置创建临时白名单文件
+2019.06.04-19:10:28 清空临时白名单文件:
+2019.06.04-19:10:28 /Users/rowling/iOSCodeDifferHelper/Tool/log/tmpWhiteList.txt
+2019.06.04-19:10:28 忽略白名单类属性 开始
+2019.06.04-19:10:28 需要忽略属性的类数量:1
+2019.06.04-19:10:28 忽略白名单类属性 结束
+2019.06.04-19:10:28 忽略白名单类 类名 属性 方法 开始
+2019.06.04-19:10:28 忽略白名单类 类名 属性 方法 结束
+2019.06.04-19:10:28 
+完成临时白名单文件写入
+2019.06.04-19:10:28 /Users/rowling/iOSCodeDifferHelper/Tool/log/tmpWhiteList.txt
+2019.06.04-19:10:28 临时白名单文件完成
+2019.06.04-19:10:28 
+清空重命名记录文件:
+2019.06.04-19:10:28 /Users/rowling/iOSCodeDifferHelper/Tool/log/RenameRecord.txt
+2019.06.04-19:10:28 
+清空新symbol记录文件:
+2019.06.04-19:10:28 /Users/rowling/iOSCodeDifferHelper/Tool/log/newSymbolRecordFile.txt
+2019.06.04-19:10:28 清空遗留的日志:
+2019.06.04-19:10:28 /Users/rowling/iOSCodeDifferHelper/Tool/log/log.txt
+2019.06.04-19:10:28 output所有类数量:
+2019.06.04-19:10:28 160
+2019.06.04-19:10:28 ['AFActivityIndicatorViewNotificationObserver', 'AFRefreshControlNotificationObserver', 'YoCelsiusRequestParameterSerializer', 'AFNetworkActivityIndicatorManager', 'POPPlaceholderAnimatableProperty', 'AFPropertyListResponseSerializer', 'AFImageDownloaderResponseHandler', 'AFPropertyListRequestSerializer', 'AFURLSessionManagerTaskDelegate', 'POPConcreteAnimatableProperty', 'AbsRequestParameterSerializer', 'WeatherNumberMeaningTransform', 'TWDefaultMessageBarStyleSheet', 'FailedLongPressViewStoreValue', 'AFXMLParserResponseSerializer', 'AFStreamingMultipartFormData', 'AFCompoundResponseSerializer', 'POPMutableAnimatableProperty', 'AFNetworkReachabilityManager', 'POPStaticAnimatableProperty', 'AFImageDownloaderMergedTask', 'WeatherTitleViewStoreValue', '_AFURLSessionTaskSwizzling', 'RequestParameterSerializer', 'TWMessageBarViewController', 'AFImageResponseSerializer', 'AbsNetworkingReachability', 'AbsResponseDataSerializer', 'WeatherIconViewStoreValue', 'AFHTTPResponseSerializer', 'AFJSONResponseSerializer', 'AFJSONRequestSerializer', 'AFAutoPurgingImageCache', 'YoCelsiusNetworkingInfo', 'AFHTTPRequestSerializer', 'AFImageDownloadReceipt', 'ConfigAttributedString', 'UpdatingViewStoreValue', 'ResponseDataSerializer', 'AbsNetworkingIndicator', 'POPAnimationValueEvent', 'TemperatureCountLabel', 'SunriseViewStoreValue', 'POPAnimatableProperty', 'AFMultipartBodyStream', 'LongTapAnimationView', 'PressAnimationButton', 'AFHTTPSessionManager', 'SunsetViewStoreValue', 'POPPropertyAnimation', 'ForecastWeatherView', 'ResponseDataManager', 'AFURLSessionManager', 'WindSpeedCountLabel', 'FailedLongPressView', 'TWMessageBarManager', 'HumidityCountLabel', 'POPCustomAnimation', 'PresentingAnimator', 'ForecastController', 'CurrentWeatherData', 'POPSpringAnimation', 'DismissingAnimator', 'LineBackgroundView', 'POPAnimationTracer', 'POPBasicAnimation', 'POPAnimationEvent', 'AFImageDownloader', 'POPDecayAnimation', 'CurrentConditions', 'AFQueryStringPair', 'LineAnimationView', 'MaxTempCountLabel', 'RequestMethodType', 'PathDirectionView', 'WeatherTitleView', 'ResponseDataType', 'AFSecurityPolicy', 'CGRectStoreValue', 'RotatedAngleView', 'EmitterLayerView', 'SunriseAndSunset', 'ChangeColorLabel', 'AnimatedLineView', 'TemperatureCount', 'MinTempContLabel', 'TWMessageWindow', 'RequestBodyType', 'TemperatureView', 'WeatherIconView', 'LeftToRightView', 'WindSpeedCount', 'StoreFrameInfo', 'ViewController', 'TitleMoveLabel', 'FontInfomation', 'GetWeatherData', 'AFHTTPBodyPart', 'NetworkingInfo', 'TWMessageView', 'NetworkConfig', 'ThreeLineView', 'AFCachedImage', 'WindSpeedView', 'FadeBlackView', 'HumidityCount', 'PlistBodyType', 'CityTitleView', 'ShapeWordView', 'AbsNetworking', 'JsonBodyType', 'GCDSemaphore', 'UpToDownView', 'TapTitleView', 'POPAnimation', 'MaxTempCount', 'HttpDataType', 'ShowDownView', 'UpdatingView', 'MinTempCount', 'HumidityView', 'JsonDataType', 'ForecastCell', 'HttpBodyType', 'WeatherInfo', 'WeatherView', 'MaxTempView', 'LoadingView', 'POPAnimator', 'SunInfoView', 'NumberCount', 'SunriseView', 'AppDelegate', 'MapManager', 'PostMethod', 'SearchCell', 'SunsetView', 'Networking', 'CircleView', 'SearchView', 'FrameView', 'GetMethod', 'AlphaView', 'LabelView', 'GCDGroup', 'GCDQueue', 'YXEasing', 'SnowView', 'RainView', 'MainInfo', 'GridView', 'GCDTimer', 'Weather', 'Clouds', 'Coord', 'City', 'Wind', 'Temp', 'Sun', 'Sys']
+2019.06.04-19:10:28 项目中排除忽略后的所有类数量:
+2019.06.04-19:10:28 134
+2019.06.04-19:10:28 ['YoCelsiusRequestParameterSerializer', 'POPPlaceholderAnimatableProperty', 'POPConcreteAnimatableProperty', 'AbsRequestParameterSerializer', 'WeatherNumberMeaningTransform', 'FailedLongPressViewStoreValue', 'TWDefaultMessageBarStyleSheet', 'POPMutableAnimatableProperty', 'POPStaticAnimatableProperty', 'RequestParameterSerializer', 'WeatherTitleViewStoreValue', 'TWMessageBarViewController', 'WeatherIconViewStoreValue', 'AbsNetworkingReachability', 'AbsResponseDataSerializer', 'YoCelsiusNetworkingInfo', 'POPAnimationValueEvent', 'AbsNetworkingIndicator', 'UpdatingViewStoreValue', 'ConfigAttributedString', 'ResponseDataSerializer', 'POPAnimatableProperty', 'SunriseViewStoreValue', 'TemperatureCountLabel', 'POPPropertyAnimation', 'SunsetViewStoreValue', 'LongTapAnimationView', 'PressAnimationButton', 'ResponseDataManager', 'FailedLongPressView', 'TWMessageBarManager', 'ForecastWeatherView', 'WindSpeedCountLabel', 'POPSpringAnimation', 'POPCustomAnimation', 'POPAnimationTracer', 'DismissingAnimator', 'CurrentWeatherData', 'PresentingAnimator', 'ForecastController', 'HumidityCountLabel', 'LineBackgroundView', 'POPDecayAnimation', 'POPBasicAnimation', 'POPAnimationEvent', 'RequestMethodType', 'CurrentConditions', 'LineAnimationView', 'PathDirectionView', 'MaxTempCountLabel', 'ResponseDataType', 'SunriseAndSunset', 'TemperatureCount', 'AnimatedLineView', 'RotatedAngleView', 'WeatherTitleView', 'EmitterLayerView', 'MinTempContLabel', 'ChangeColorLabel', 'CGRectStoreValue', 'RequestBodyType', 'TWMessageWindow', 'LeftToRightView', 'WeatherIconView', 'TemperatureView', 'FontInfomation', 'NetworkingInfo', 'GetWeatherData', 'StoreFrameInfo', 'WindSpeedCount', 'TitleMoveLabel', 'PlistBodyType', 'HumidityCount', 'WindSpeedView', 'CityTitleView', 'TWMessageView', 'ShapeWordView', 'FadeBlackView', 'ThreeLineView', 'AbsNetworking', 'JsonDataType', 'HttpDataType', 'GCDSemaphore', 'POPAnimation', 'HttpBodyType', 'JsonBodyType', 'ForecastCell', 'ShowDownView', 'MinTempCount', 'UpToDownView', 'UpdatingView', 'MaxTempCount', 'HumidityView', 'TapTitleView', 'CAAnimation', 'POPAnimator', 'WeatherInfo', 'NumberCount', 'LoadingView', 'WeatherView', 'SunriseView', 'MaxTempView', 'SunInfoView', 'Networking', 'PostMethod', 'MapManager', 'SunsetView', 'SearchCell', 'CircleView', 'SearchView', 'GetMethod', 'FrameView', 'AlphaView', 'LabelView', 'GCDQueue', 'GCDTimer', 'GCDGroup', 'NSObject', 'MainInfo', 'YXEasing', 'GridView', 'UIDevice', 'RainView', 'SnowView', 'NSProxy', 'NSValue', 'Weather', 'Clouds', 'Coord', 'Temp', 'Wind', 'City', 'Sys', 'Sun']
+2019.06.04-19:10:28 处理的类:
+2019.06.04-19:10:28 129
+2019.06.04-19:10:28 ['YoCelsiusRequestParameterSerializer', 'POPPlaceholderAnimatableProperty', 'POPConcreteAnimatableProperty', 'AbsRequestParameterSerializer', 'WeatherNumberMeaningTransform', 'FailedLongPressViewStoreValue', 'TWDefaultMessageBarStyleSheet', 'POPMutableAnimatableProperty', 'POPStaticAnimatableProperty', 'RequestParameterSerializer', 'WeatherTitleViewStoreValue', 'TWMessageBarViewController', 'WeatherIconViewStoreValue', 'AbsNetworkingReachability', 'AbsResponseDataSerializer', 'YoCelsiusNetworkingInfo', 'POPAnimationValueEvent', 'AbsNetworkingIndicator', 'UpdatingViewStoreValue', 'ConfigAttributedString', 'ResponseDataSerializer', 'POPAnimatableProperty', 'SunriseViewStoreValue', 'TemperatureCountLabel', 'POPPropertyAnimation', 'SunsetViewStoreValue', 'LongTapAnimationView', 'PressAnimationButton', 'ResponseDataManager', 'FailedLongPressView', 'TWMessageBarManager', 'ForecastWeatherView', 'WindSpeedCountLabel', 'POPSpringAnimation', 'POPCustomAnimation', 'POPAnimationTracer', 'DismissingAnimator', 'CurrentWeatherData', 'PresentingAnimator', 'ForecastController', 'HumidityCountLabel', 'LineBackgroundView', 'POPDecayAnimation', 'POPBasicAnimation', 'POPAnimationEvent', 'RequestMethodType', 'CurrentConditions', 'LineAnimationView', 'PathDirectionView', 'MaxTempCountLabel', 'ResponseDataType', 'SunriseAndSunset', 'TemperatureCount', 'AnimatedLineView', 'RotatedAngleView', 'WeatherTitleView', 'EmitterLayerView', 'MinTempContLabel', 'ChangeColorLabel', 'CGRectStoreValue', 'RequestBodyType', 'TWMessageWindow', 'LeftToRightView', 'WeatherIconView', 'TemperatureView', 'FontInfomation', 'NetworkingInfo', 'GetWeatherData', 'StoreFrameInfo', 'WindSpeedCount', 'TitleMoveLabel', 'PlistBodyType', 'HumidityCount', 'WindSpeedView', 'CityTitleView', 'TWMessageView', 'ShapeWordView', 'FadeBlackView', 'ThreeLineView', 'AbsNetworking', 'JsonDataType', 'HttpDataType', 'GCDSemaphore', 'POPAnimation', 'HttpBodyType', 'JsonBodyType', 'ForecastCell', 'ShowDownView', 'MinTempCount', 'UpToDownView', 'UpdatingView', 'MaxTempCount', 'HumidityView', 'TapTitleView', 'POPAnimator', 'WeatherInfo', 'NumberCount', 'LoadingView', 'WeatherView', 'SunriseView', 'MaxTempView', 'SunInfoView', 'Networking', 'PostMethod', 'MapManager', 'SunsetView', 'SearchCell', 'CircleView', 'SearchView', 'GetMethod', 'FrameView', 'AlphaView', 'LabelView', 'GCDQueue', 'GCDTimer', 'GCDGroup', 'MainInfo', 'YXEasing', 'GridView', 'RainView', 'SnowView', 'Weather', 'Clouds', 'Coord', 'Temp', 'Wind', 'City', 'Sys', 'Sun']
+2019.06.04-19:10:28 只需要重命名的类:
+2019.06.04-19:10:28 31
+2019.06.04-19:10:28 ['AFImageDownloadReceipt', 'AFJSONResponseSerializer', 'AFAutoPurgingImageCache', 'AFHTTPResponseSerializer', 'NetworkConfig', 'AFPropertyListRequestSerializer', 'AFSecurityPolicy', 'AFImageResponseSerializer', 'AFCachedImage', '_AFURLSessionTaskSwizzling', 'AFQueryStringPair', 'AFActivityIndicatorViewNotificationObserver', 'AFNetworkActivityIndicatorManager', 'AFRefreshControlNotificationObserver', 'AFJSONRequestSerializer', 'AFURLSessionManager', 'ViewController', 'AFStreamingMultipartFormData', 'AppDelegate', 'AFHTTPRequestSerializer', 'AFNetworkReachabilityManager', 'AFImageDownloader', 'AFImageDownloaderMergedTask', 'AFURLSessionManagerTaskDelegate', 'AFPropertyListResponseSerializer', 'AFHTTPBodyPart', 'AFXMLParserResponseSerializer', 'AFMultipartBodyStream', 'AFCompoundResponseSerializer', 'AFHTTPSessionManager', 'AFImageDownloaderResponseHandler']
+2019.06.04-19:10:28 开始替换方法名和属性
+2019.06.04-19:10:28 处理类文件:YoCelsiusRequestParameterSerializer
+2019.06.04-19:10:28 处理类文件:POPPlaceholderAnimatableProperty
+2019.06.04-19:10:30 处理类文件:POPConcreteAnimatableProperty
+2019.06.04-19:10:30 处理类文件:AbsRequestParameterSerializer
+2019.06.04-19:10:30 处理类文件:WeatherNumberMeaningTransform
+2019.06.04-19:10:30 处理类文件:TWDefaultMessageBarStyleSheet
+2019.06.04-19:10:30 处理类文件:FailedLongPressViewStoreValue
+2019.06.04-19:10:30 处理类文件:POPMutableAnimatableProperty
+2019.06.04-19:10:30 处理类文件:POPStaticAnimatableProperty
+2019.06.04-19:10:30 处理类文件:WeatherTitleViewStoreValue
+2019.06.04-19:10:30 处理类文件:RequestParameterSerializer
+2019.06.04-19:10:30 处理类文件:TWMessageBarViewController
+2019.06.04-19:10:30 处理类文件:AbsNetworkingReachability
+2019.06.04-19:10:30 处理类文件:AbsResponseDataSerializer
+2019.06.04-19:10:30 处理类文件:WeatherIconViewStoreValue
+2019.06.04-19:10:30 处理类文件:YoCelsiusNetworkingInfo
+2019.06.04-19:10:30 处理类文件:ConfigAttributedString
+2019.06.04-19:10:30 处理类文件:UpdatingViewStoreValue
+2019.06.04-19:10:30 处理类文件:ResponseDataSerializer
+2019.06.04-19:10:30 处理类文件:AbsNetworkingIndicator
+2019.06.04-19:10:31 处理类文件:POPAnimationValueEvent
+2019.06.04-19:10:31 处理类文件:TemperatureCountLabel
+2019.06.04-19:10:31 处理类文件:SunriseViewStoreValue
+2019.06.04-19:10:31 处理类文件:POPAnimatableProperty
+2019.06.04-19:10:31 处理类文件:LongTapAnimationView
+2019.06.04-19:10:31 处理类文件:PressAnimationButton
+2019.06.04-19:10:31 处理类文件:SunsetViewStoreValue
+2019.06.04-19:10:31 处理类文件:POPPropertyAnimation
+2019.06.04-19:10:32 处理类文件:ForecastWeatherView
+2019.06.04-19:10:32 处理类文件:ResponseDataManager
+2019.06.04-19:10:32 处理类文件:WindSpeedCountLabel
+2019.06.04-19:10:32 处理类文件:FailedLongPressView
+2019.06.04-19:10:32 处理类文件:TWMessageBarManager
+2019.06.04-19:10:32 处理类文件:HumidityCountLabel
+2019.06.04-19:10:32 处理类文件:POPCustomAnimation
+2019.06.04-19:10:33 处理类文件:PresentingAnimator
+2019.06.04-19:10:33 处理类文件:ForecastController
+2019.06.04-19:10:33 处理类文件:CurrentWeatherData
+2019.06.04-19:10:33 处理类文件:POPSpringAnimation
+2019.06.04-19:10:33 处理类文件:DismissingAnimator
+2019.06.04-19:10:33 处理类文件:LineBackgroundView
+2019.06.04-19:10:33 处理类文件:POPAnimationTracer
+2019.06.04-19:10:34 处理类文件:POPBasicAnimation
+2019.06.04-19:10:34 处理类文件:POPAnimationEvent
+2019.06.04-19:10:34 处理类文件:POPDecayAnimation
+2019.06.04-19:10:34 处理类文件:CurrentConditions
+2019.06.04-19:10:34 处理类文件:LineAnimationView
+2019.06.04-19:10:34 处理类文件:MaxTempCountLabel
+2019.06.04-19:10:34 处理类文件:RequestMethodType
+2019.06.04-19:10:34 处理类文件:PathDirectionView
+2019.06.04-19:10:34 处理类文件:WeatherTitleView
+2019.06.04-19:10:35 处理类文件:ResponseDataType
+2019.06.04-19:10:35 处理类文件:CGRectStoreValue
+2019.06.04-19:10:35 处理类文件:RotatedAngleView
+2019.06.04-19:10:35 处理类文件:EmitterLayerView
+2019.06.04-19:10:35 处理类文件:SunriseAndSunset
+2019.06.04-19:10:35 处理类文件:ChangeColorLabel
+2019.06.04-19:10:35 处理类文件:AnimatedLineView
+2019.06.04-19:10:35 处理类文件:TemperatureCount
+2019.06.04-19:10:35 处理类文件:MinTempContLabel
+2019.06.04-19:10:35 处理类文件:TWMessageWindow
+2019.06.04-19:10:35 处理类文件:RequestBodyType
+2019.06.04-19:10:35 处理类文件:TemperatureView
+2019.06.04-19:10:35 处理类文件:WeatherIconView
+2019.06.04-19:10:35 处理类文件:LeftToRightView
+2019.06.04-19:10:35 处理类文件:WindSpeedCount
+2019.06.04-19:10:35 处理类文件:StoreFrameInfo
+2019.06.04-19:10:36 处理类文件:TitleMoveLabel
+2019.06.04-19:10:36 处理类文件:FontInfomation
+2019.06.04-19:10:36 处理类文件:GetWeatherData
+2019.06.04-19:10:36 处理类文件:NetworkingInfo
+2019.06.04-19:10:36 处理类文件:TWMessageView
+2019.06.04-19:10:36 处理类文件:ThreeLineView
+2019.06.04-19:10:36 处理类文件:WindSpeedView
+2019.06.04-19:10:37 处理类文件:FadeBlackView
+2019.06.04-19:10:37 处理类文件:HumidityCount
+2019.06.04-19:10:37 处理类文件:PlistBodyType
+2019.06.04-19:10:37 处理类文件:CityTitleView
+2019.06.04-19:10:37 处理类文件:ShapeWordView
+2019.06.04-19:10:37 处理类文件:AbsNetworking
+2019.06.04-19:10:38 处理类文件:JsonBodyType
+2019.06.04-19:10:38 处理类文件:GCDSemaphore
+2019.06.04-19:10:38 处理类文件:UpToDownView
+2019.06.04-19:10:38 处理类文件:TapTitleView
+2019.06.04-19:10:38 处理类文件:POPAnimation
+2019.06.04-19:10:38 处理类文件:MaxTempCount
+2019.06.04-19:10:38 处理类文件:HttpDataType
+2019.06.04-19:10:38 处理类文件:ShowDownView
+2019.06.04-19:10:38 处理类文件:UpdatingView
+2019.06.04-19:10:38 处理类文件:MinTempCount
+2019.06.04-19:10:38 处理类文件:HumidityView
+2019.06.04-19:10:38 处理类文件:JsonDataType
+2019.06.04-19:10:38 处理类文件:HttpBodyType
+2019.06.04-19:10:38 处理类文件:ForecastCell
+2019.06.04-19:10:38 处理类文件:WeatherInfo
+2019.06.04-19:10:39 处理类文件:WeatherView
+2019.06.04-19:10:39 处理类文件:MaxTempView
+2019.06.04-19:10:39 处理类文件:LoadingView
+2019.06.04-19:10:39 处理类文件:POPAnimator
+2019.06.04-19:10:40 处理类文件:SunInfoView
+2019.06.04-19:10:40 处理类文件:NumberCount
+2019.06.04-19:10:40 处理类文件:SunriseView
+2019.06.04-19:10:40 处理类文件:MapManager
+2019.06.04-19:10:40 处理类文件:PostMethod
+2019.06.04-19:10:40 处理类文件:SearchCell
+2019.06.04-19:10:40 处理类文件:SunsetView
+2019.06.04-19:10:40 处理类文件:Networking
+2019.06.04-19:10:41 处理类文件:CircleView
+2019.06.04-19:10:41 处理类文件:SearchView
+2019.06.04-19:10:41 处理类文件:FrameView
+2019.06.04-19:10:41 处理类文件:GetMethod
+2019.06.04-19:10:41 处理类文件:AlphaView
+2019.06.04-19:10:41 处理类文件:LabelView
+2019.06.04-19:10:41 处理类文件:GCDGroup
+2019.06.04-19:10:41 处理类文件:GCDQueue
+2019.06.04-19:10:42 处理类文件:YXEasing
+2019.06.04-19:10:42 处理类文件:SnowView
+2019.06.04-19:10:42 处理类文件:RainView
+2019.06.04-19:10:42 处理类文件:MainInfo
+2019.06.04-19:10:42 处理类文件:GridView
+2019.06.04-19:10:42 处理类文件:GCDTimer
+2019.06.04-19:10:42 处理类文件:Weather
+2019.06.04-19:10:42 处理类文件:Clouds
+2019.06.04-19:10:42 处理类文件:Coord
+2019.06.04-19:10:42 处理类文件:City
+2019.06.04-19:10:43 处理类文件:Wind
+2019.06.04-19:10:43 处理类文件:Temp
+2019.06.04-19:10:43 处理类文件:Sun
+2019.06.04-19:10:43 处理类文件:Sys
+2019.06.04-19:10:51 根据白名单忽略文件夹:Images.xcassets
+2019.06.04-19:11:17 差异化完成
+2019.06.04-19:11:17 文件夹名重命名结束
+2019.06.04-19:11:17 开始修改文件 创建时间、修改时间
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius 创建时间修改为 201906031419
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/PresentingAnimator.h 创建时间修改为 201805112152
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/YoCelsiusRequestParameterSerializer.h 创建时间修改为 201901010530
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Network.m 创建时间修改为 201812141638
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/ResponseDataType.m 创建时间修改为 201809092020
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/YXGCD 创建时间修改为 201808240522
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/YXGCD/GCDSemaphore.h 创建时间修改为 201802081040
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/YXGCD/GCDGrouping.m 创建时间修改为 201804031018
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/YXGCD/GCDQueue.m 创建时间修改为 201905030547
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/YXGCD/GCDTimekeeper.m 创建时间修改为 201804190621
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/YXGCD/GCD.h 创建时间修改为 201804230542
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/YXGCD/GCDSemaphore.m 创建时间修改为 201806210347
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/YXGCD/GCDGrouping.h 创建时间修改为 201805062257
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/YXGCD/GCDTimekeeper.h 创建时间修改为 201811241512
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/YXGCD/GCDQueue.h 创建时间修改为 201905031649
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Lato-Thin.ttf 创建时间修改为 201809220106
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/PrognosisAccountant.h 创建时间修改为 201906021316
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop 创建时间修改为 201906040356
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPMath.h 创建时间修改为 201903021651
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPDefines.h 创建时间修改为 201806292248
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/PoppingVivificationBuckPrivate.h 创建时间修改为 201904020050
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/DrinkDownAnimationTracerBullet.h 创建时间修改为 201812290424
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPAnimationExtras.h 创建时间修改为 201807191752
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/BulgeOutLivingOutcomeNational.h 创建时间修改为 201809280052
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPCGUtils.mm 创建时间修改为 201903020022
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPPropertyAnimationInternal.h 创建时间修改为 201901010505
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPDecayAnimationInternal.h 创建时间修改为 201901031928
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPSpringAnimation.h 创建时间修改为 201812281629
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPBasicAnimation.h 创建时间修改为 201901021707
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPMath.mm 创建时间修改为 201808151140
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPSpringAnimation.mm 创建时间修改为 201802042132
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/DrinkDownAnimationTracerBullet.mm 创建时间修改为 201905031042
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPCustomAnimation.mm 创建时间修改为 201906031059
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPCustomAnimation.h 创建时间修改为 201803040056
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/BoltDownLifeIssue.h 创建时间修改为 201904040333
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/TossOffAttributeLiving.mm 创建时间修改为 201807290041
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPCGUtils.h 创建时间修改为 201905011131
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/SodaActivity.h 创建时间修改为 201802050821
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPAnimationExtras.mm 创建时间修改为 201903041646
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/CropUpCanonicAnimationIntragroup.h 创建时间修改为 201901032002
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPGeometry.h 创建时间修改为 201803200917
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPDecayAnimation.mm 创建时间修改为 201902030626
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/BoltDownLifeIssue.mm 创建时间修改为 201804020529
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPSpringAnimationInternal.h 创建时间修改为 201802270917
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/TossOffAttributeLiving.h 创建时间修改为 201906022108
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPDecayAnimation.h 创建时间修改为 201810181849
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPAnimatableProperty.h 创建时间修改为 201809040320
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPAnimator.h 创建时间修改为 201905020148
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPAnimationRuntime.h 创建时间修改为 201806072116
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPLayerExtras.h 创建时间修改为 201802070215
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPAnimation.mm 创建时间修改为 201807251948
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPGeometry.mm 创建时间修改为 201808020953
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPBasicAnimation.mm 创建时间修改为 201812081845
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/CropUpRecoilProblemSolver.h 创建时间修改为 201902011652
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/PopMusicAnimatableHoldingEccentric.h 创建时间修改为 201902031129
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/WebCore 创建时间修改为 201902012011
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/WebCore/TransformationMatrix.cpp 创建时间修改为 201906021743
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/WebCore/ShiftGroundSubstance.h 创建时间修改为 201903031307
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/WebCore/FloatConversion.h 创建时间修改为 201810161508
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/WebCore/UnitBezier.h 创建时间修改为 201902042155
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPAnimationTracerInternal.h 创建时间修改为 201901032113
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/PappaLifeInner.h 创建时间修改为 201812111736
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPAnimator.mm 创建时间修改为 201812052353
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPAnimatableProperty.mm 创建时间修改为 201902030411
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPAnimation.h 创建时间修改为 201802280434
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPAnimationRuntime.mm 创建时间修改为 201904020717
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/ComeOut.h 创建时间修改为 201810231151
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPLayerExtras.mm 创建时间修改为 201802242058
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPVector.mm 创建时间修改为 201804082110
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPVector.h 创建时间修改为 201901012117
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Pop/POPAnimatorPrivate.h 创建时间修改为 201901030519
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/WeatherActHaveInMindTransmute.m 创建时间修改为 201810290720
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/ForecastCell.h 创建时间修改为 201902032320
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/AppDelegate.h 创建时间修改为 201811091543
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Lato-Bold.ttf 创建时间修改为 201805191150
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/ResponseDataManager.m 创建时间修改为 201906022350
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/YoCelsiusNetworkingInfo.h 创建时间修改为 201904030108
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/File 创建时间修改为 201803181809
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/File/NSString+File.h 创建时间修改为 201808110613
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/File/NSString+File.m 创建时间修改为 201808210118
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/RequestBodyType.h 创建时间修改为 201901021716
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CGRectStoreValue.h 创建时间修改为 201904010527
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/BaptistryInfomation 创建时间修改为 201906021030
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/BaptistryInfomation/TypefaceInfomation.h 创建时间修改为 201906020221
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/BaptistryInfomation/TypefaceInfomation.m 创建时间修改为 201804200253
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/AbsNetworkingReachability.h 创建时间修改为 201806011337
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/DismissingAnimator.m 创建时间修改为 201906011223
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/AbsResponseDataSerializer.h 创建时间修改为 201904040255
+2019.06.04-19:11:17 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/ResponseDataSerializer.h 创建时间修改为 201801051233
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Simulate 创建时间修改为 201808192223
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Simulate/Temporary.m 创建时间修改为 201904010113
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Simulate/WeatherInfo.h 创建时间修改为 201905030420
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Simulate/CurrentWeatherData.h 创建时间修改为 201904041539
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Simulate/Brave.m 创建时间修改为 201809062144
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Simulate/CurrentConditions.h 创建时间修改为 201905040225
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Simulate/Sys.m 创建时间修改为 201802021239
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Simulate/City.m 创建时间修改为 201808222225
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Simulate/BreakOfTheDayAndSunset.h 创建时间修改为 201902031332
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Simulate/WindInstrument.h 创建时间修改为 201805142335
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Simulate/Coord.h 创建时间修改为 201803080819
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Simulate/MainInfo.h 创建时间修改为 201810220552
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Simulate/Clouds.h 创建时间修改为 201902042212
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Simulate/Brave.h 创建时间修改为 201804192248
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Simulate/CurrentWeatherData.m 创建时间修改为 201806130250
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Simulate/WeatherInfo.m 创建时间修改为 201811131754
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Simulate/Temporary.h 创建时间修改为 201809020227
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Simulate/Sys.h 创建时间修改为 201808260447
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Simulate/CurrentConditions.m 创建时间修改为 201905030814
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Simulate/WindInstrument.m 创建时间修改为 201811242255
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Simulate/BreakOfTheDayAndSunset.m 创建时间修改为 201906040903
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Simulate/City.h 创建时间修改为 201905031544
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Simulate/Clouds.m 创建时间修改为 201902030547
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Simulate/MainInfo.m 创建时间修改为 201805271759
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Simulate/Coord.m 创建时间修改为 201802271835
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/AbsNetworkingIndicator.m 创建时间修改为 201812231143
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Weather&Time.ttf 创建时间修改为 201804250232
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/YXEasement 创建时间修改为 201804232118
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/YXEasement/YXEasing.m 创建时间修改为 201807141108
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/YXEasement/Easing.c 创建时间修改为 201807121904
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/YXEasement/YXEasing.h 创建时间修改为 201904021629
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/YXEasement/Facilitate.h 创建时间修改为 201808180242
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/IrisRequestArgumentSerializer.m 创建时间修改为 201811040648
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Network+YoCelsius.h 创建时间修改为 201906020423
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/IrisNetwork.m 创建时间修改为 201805240528
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Lato-Regular.ttf 创建时间修改为 201904011508
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CallForParameterSerializer.m 创建时间修改为 201905020158
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/ViewController.m 创建时间修改为 201902041316
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/RequestMethodType.m 创建时间修改为 201905011800
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/NetworkingInfo.m 创建时间修改为 201906041845
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/BuzzOffBraveOutInformation.m 创建时间修改为 201807210730
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/PrognosisAccountant.m 创建时间修改为 201812120834
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/UI+AFKitNetwork 创建时间修改为 201804261309
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/UI+AFKitNetwork/UIProgressView+AFNetworking.m 创建时间修改为 201903020505
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/UI+AFKitNetwork/UIButton+AFNetworking.h 创建时间修改为 201904031803
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/UI+AFKitNetwork/UIRefreshControl+AFNetworking.m 创建时间修改为 201806250022
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/UI+AFKitNetwork/UIImageView+AFNetworking.h 创建时间修改为 201811271427
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/UI+AFKitNetwork/AFImageDownloader.h 创建时间修改为 201801040200
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/UI+AFKitNetwork/AFNetworkActivityIndicatorManager.m 创建时间修改为 201906041449
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/UI+AFKitNetwork/AFAutoPurgingImageCache.h 创建时间修改为 201903021936
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/UI+AFKitNetwork/UIWebView+AFNetworking.h 创建时间修改为 201903030357
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/UI+AFKitNetwork/UIActivityIndicatorView+AFNetworking.h 创建时间修改为 201801300530
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/UI+AFKitNetwork/UIImage+AFNetworking.h 创建时间修改为 201810081505
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/UI+AFKitNetwork/UIProgressView+AFNetworking.h 创建时间修改为 201808291159
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/UI+AFKitNetwork/UIImageView+AFNetworking.m 创建时间修改为 201801080740
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/UI+AFKitNetwork/UIKit+AFNetworking.h 创建时间修改为 201802051336
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/UI+AFKitNetwork/UIRefreshControl+AFNetworking.h 创建时间修改为 201906040235
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/UI+AFKitNetwork/UIButton+AFNetworking.m 创建时间修改为 201904010426
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/UI+AFKitNetwork/UIActivityIndicatorView+AFNetworking.m 创建时间修改为 201901040113
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/UI+AFKitNetwork/UIWebView+AFNetworking.m 创建时间修改为 201803210301
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/UI+AFKitNetwork/AFAutoPurgingImageCache.m 创建时间修改为 201905030648
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/UI+AFKitNetwork/AFNetworkActivityIndicatorManager.h 创建时间修改为 201904021234
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/UI+AFKitNetwork/AFImageDownloader.m 创建时间修改为 201812071340
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/YoCelsius.pch 创建时间修改为 201809151911
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/ResponseDataType.h 创建时间修改为 201805162334
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Network.h 创建时间修改为 201809172007
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/YoCelsiusRequestParameterSerializer.m 创建时间修改为 201804291128
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/PresentingAnimator.m 创建时间修改为 201805162358
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/main.m 创建时间修改为 201902011018
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/RequestBodyType.m 创建时间修改为 201901032336
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/ResponseDataManager.h 创建时间修改为 201903021452
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/YoCelsiusNetworkingInfo.m 创建时间修改为 201905030017
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/StringHeightAndWidth 创建时间修改为 201807031240
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/StringHeightAndWidth/NSString+StringHeight.m 创建时间修改为 201804121829
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/StringHeightAndWidth/NSString+StringHeight.h 创建时间修改为 201906012205
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/ARCGCourseFromStrand 创建时间修改为 201903031023
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/ARCGCourseFromStrand/ARCGPathFromString.h 创建时间修改为 201902011145
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/ARCGCourseFromStrand/UIBezierPath+TextPaths.m 创建时间修改为 201905012308
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/ARCGCourseFromStrand/ARCGPathFromString.m 创建时间修改为 201807071646
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/ARCGCourseFromStrand/UIBezierPath+TextPaths.h 创建时间修改为 201806180211
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets 创建时间修改为 201903020226
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/cover.imageset 创建时间修改为 201801281855
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/cover.imageset/Contents.json 创建时间修改为 201903010213
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/cover.imageset/cover@3x.png 创建时间修改为 201904042043
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures 创建时间修改为 201903041105
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/alpha.imageset 创建时间修改为 201906041639
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/alpha.imageset/alpha@2x.png 创建时间修改为 201905010656
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/alpha.imageset/Contents.json 创建时间修改为 201810251259
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/snow.imageset 创建时间修改为 201806301604
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/snow.imageset/Contents.json 创建时间修改为 201905031454
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/snow.imageset/snow@2x.png 创建时间修改为 201812282306
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/moon.imageset 创建时间修改为 201807161019
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/moon.imageset/moon@2x.png 创建时间修改为 201803182315
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/moon.imageset/Contents.json 创建时间修改为 201806151806
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/icon-info.imageset 创建时间修改为 201808141050
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/icon-info.imageset/icon-info@2x.png 创建时间修改为 201902041354
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/icon-info.imageset/icon-info.png 创建时间修改为 201906012115
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/icon-info.imageset/Contents.json 创建时间修改为 201904010817
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/icon-error.imageset 创建时间修改为 201905022305
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/icon-error.imageset/icon-error.png 创建时间修改为 201805121156
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/icon-error.imageset/Contents.json 创建时间修改为 201810100857
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/icon-error.imageset/icon-error@2x.png 创建时间修改为 201906010730
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/icon-success.imageset 创建时间修改为 201811110647
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/icon-success.imageset/Contents.json 创建时间修改为 201812150909
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/icon-success.imageset/icon-success@2x.png 创建时间修改为 201901031129
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/icon-success.imageset/icon-success.png 创建时间修改为 201812270251
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/rain.imageset 创建时间修改为 201904020444
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/rain.imageset/rain@2x.png 创建时间修改为 201906010541
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/rain.imageset/Contents.json 创建时间修改为 201903040933
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/sun.imageset 创建时间修改为 201902010640
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/sun.imageset/Contents.json 创建时间修改为 201810252211
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/sun.imageset/sun@2x.png 创建时间修改为 201802082346
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/WindSpeed.imageset 创建时间修改为 201903042132
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/WindSpeed.imageset/WindSpeed@2x.png 创建时间修改为 201905011011
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/Pictures/WindSpeed.imageset/Contents.json 创建时间修改为 201807181420
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/AppIcon.appiconset 创建时间修改为 201812300821
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/AppIcon.appiconset/Icon.png 创建时间修改为 201808270035
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/AppIcon.appiconset/Icon-76@2x.png 创建时间修改为 201905031555
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/AppIcon.appiconset/1024x1024.png 创建时间修改为 201806101405
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/AppIcon.appiconset/Icon-Small.png 创建时间修改为 201809261702
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/AppIcon.appiconset/Icon-60@3x.png 创建时间修改为 201902031857
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/AppIcon.appiconset/Icon-Spotlight-40@3x.png 创建时间修改为 201809011945
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/AppIcon.appiconset/Icon-76.png 创建时间修改为 201808122313
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/AppIcon.appiconset/Icon-Spotlight-40.png 创建时间修改为 201906042342
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/AppIcon.appiconset/Icon-Small-50@2x.png 创建时间修改为 201811261358
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/AppIcon.appiconset/Icon-72.png 创建时间修改为 201906012253
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/AppIcon.appiconset/Icon-72@2x.png 创建时间修改为 201901042148
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/AppIcon.appiconset/Icon-Spotlight-40@2x.png 创建时间修改为 201806020419
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/AppIcon.appiconset/Icon-60@2x.png 创建时间修改为 201904041142
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/AppIcon.appiconset/Icon@2x.png 创建时间修改为 201904012224
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/AppIcon.appiconset/Contents.json 创建时间修改为 201804122205
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/AppIcon.appiconset/Icon-Small@3x.png 创建时间修改为 201902010150
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/AppIcon.appiconset/Icon-Small-50.png 创建时间修改为 201812191045
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/AppIcon.appiconset/Icon-Small@2x.png 创建时间修改为 201905021106
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/LaunchImage.launchimage 创建时间修改为 201902032244
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/LaunchImage.launchimage/640x960.png 创建时间修改为 201805150536
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/LaunchImage.launchimage/750x1334.png 创建时间修改为 201902031221
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/LaunchImage.launchimage/640x1136.png 创建时间修改为 201807231933
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/LaunchImage.launchimage/Contents.json 创建时间修改为 201812290038
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Images.xcassets/LaunchImage.launchimage/1242x2208.png 创建时间修改为 201807221309
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/AFNetworking 创建时间修改为 201906020626
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/AFNetworking/AFSecurityPolicy.h 创建时间修改为 201901031655
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/AFNetworking/AFNetworkReachabilityManager.h 创建时间修改为 201808021643
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/AFNetworking/AFURLSessionManager.h 创建时间修改为 201804191349
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/AFNetworking/AFURLRequestSerialization.h 创建时间修改为 201801122239
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/AFNetworking/AFURLResponseSerialization.m 创建时间修改为 201804161320
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/AFNetworking/AFHTTPSessionManager.m 创建时间修改为 201804191156
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/AFNetworking/AFURLResponseSerialization.h 创建时间修改为 201807061033
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/AFNetworking/AFURLSessionManager.m 创建时间修改为 201810282335
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/AFNetworking/AFURLRequestSerialization.m 创建时间修改为 201804121647
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/AFNetworking/AFNetworking.h 创建时间修改为 201906020830
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/AFNetworking/AFNetworkReachabilityManager.m 创建时间修改为 201906032330
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/AFNetworking/AFSecurityPolicy.m 创建时间修改为 201807282038
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/AFNetworking/AFHTTPSessionManager.h 创建时间修改为 201906021721
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/AppDelegate.m 创建时间修改为 201906041239
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/WeatherActHaveInMindTransmute.h 创建时间修改为 201904011904
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Launch Screen.storyboard 创建时间修改为 201904041309
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/ForecastCell.m 创建时间修改为 201812141119
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView 创建时间修改为 201905021613
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/TitleMoveLabel.h 创建时间修改为 201812171620
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/TWContentBarDirector.h 创建时间修改为 201906031137
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/TemperatureCount.m 创建时间修改为 201802170750
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/SnowView.h 创建时间修改为 201905040038
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/LongTapAnimationView.h 创建时间修改为 201904031423
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/WindSpeedCountLabel.h 创建时间修改为 201812272028
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/UILabel+Temperature.h 创建时间修改为 201906032045
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/WindSpeedNumerate.h 创建时间修改为 201808212000
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/LineOfProductsInvigorationEyeshot.m 创建时间修改为 201802221935
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/AnimatedLineView.m 创建时间修改为 201904041939
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/UpdateRegard.h 创建时间修改为 201902042103
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/RecordingLabelHorizon.h 创建时间修改为 201901010937
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/FrameView.m 创建时间修改为 201812161714
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/NumberCount.m 创建时间修改为 201812060221
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/HumidnessMatter.h 创建时间修改为 201806062033
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/GoopTemporaryNumber.m 创建时间修改为 201903040527
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/HumidityPanorama.h 创建时间修改为 201807282358
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/UpToDownView.h 创建时间修改为 201803081924
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/HumidnessConsiderMark.h 创建时间修改为 201905011711
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/UIView+GlowView.h 创建时间修改为 201904031020
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/SoapTempCountingMark.h 创建时间修改为 201811220603
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/WindSpeedView.m 创建时间修改为 201803140403
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/ExchangeColourizeTag.m 创建时间修改为 201901030259
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/LoadingView.m 创建时间修改为 201902011815
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/MoldParolePurview.h 创建时间修改为 201802161822
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/BloodlineBackgroundLookAt.m 创建时间修改为 201804022047
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/RotatedAngleView.m 创建时间修改为 201905010515
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/LeftToRightView.h 创建时间修改为 201803030607
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/GridView.m 创建时间修改为 201803262245
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/WeatherView.m 创建时间修改为 201906041139
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/WeatherImageSentiment.m 创建时间修改为 201904012232
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/AlphaPerspective.m 创建时间修改为 201902041249
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/BraveTitleOfRespectPanorama.m 创建时间修改为 201904020004
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/SunsetView.m 创建时间修改为 201906030228
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/SearchCell.m 创建时间修改为 201803152254
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/GiveOutLongPushHorizon.m 创建时间修改为 201905032145
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/CALayer+MaskLayer.h 创建时间修改为 201803141653
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/LeashMelodicLineWatch.h 创建时间修改为 201903041222
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/SunriseView.m 创建时间修改为 201810211500
+2019.06.04-19:11:18 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/MinTempCount.m 创建时间修改为 201906010108
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/PresentDownwardsSee.m 创建时间修改为 201803051844
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/Sun.m 创建时间修改为 201801060019
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/RainView.m 创建时间修改为 201802121435
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/TemperatureView.h 创建时间修改为 201905030144
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/MaxTempView.m 创建时间修改为 201810111025
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/BlowOverPitchBlackView.m 创建时间修改为 201812051853
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/ForgetMeDrugScene.h 创建时间修改为 201806131759
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/TaiwaneseTempContTag.m 创建时间修改为 201901011718
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/ForecastWeatherView.m 创建时间修改为 201902031624
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/SunInfoView.m 创建时间修改为 201905020658
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/TemperatureReckonTag.h 创建时间修改为 201805241440
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/ResearchLookAt.m 创建时间修改为 201805230704
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/TapTitleView.h 创建时间修改为 201902021339
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/EmitterLayerView.m 创建时间修改为 201810131254
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/MetropolisDeedPerspective.h 创建时间修改为 201808010910
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/PathDirectionView.h 创建时间修改为 201803031602
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/PressAnimationButton.h 创建时间修改为 201903012155
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/HumidnessMatter.m 创建时间修改为 201902032013
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/NumberCount.h 创建时间修改为 201806131807
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/FrameView.h 创建时间修改为 201802240029
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/RecordingLabelHorizon.m 创建时间修改为 201804210727
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/UpdateRegard.m 创建时间修改为 201812222354
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/AnimatedLineView.h 创建时间修改为 201901030724
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/LineOfProductsInvigorationEyeshot.h 创建时间修改为 201902010658
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/WindSpeedNumerate.m 创建时间修改为 201906010158
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/UILabel+Temperature.m 创建时间修改为 201905031032
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/WindSpeedCountLabel.m 创建时间修改为 201807200823
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/TemperatureCount.h 创建时间修改为 201902011421
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/SnowView.m 创建时间修改为 201906021039
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/LongTapAnimationView.m 创建时间修改为 201905012213
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/TitleMoveLabel.m 创建时间修改为 201905010646
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/TWContentBarDirector.m 创建时间修改为 201808200305
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/WeatherImageSentiment.h 创建时间修改为 201906040204
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/LeftToRightView.m 创建时间修改为 201901022210
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/GridView.h 创建时间修改为 201903011815
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/WeatherView.h 创建时间修改为 201809110846
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/BloodlineBackgroundLookAt.h 创建时间修改为 201801170530
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/RotatedAngleView.h 创建时间修改为 201810250727
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/LoadingView.h 创建时间修改为 201807262340
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/MoldParolePurview.m 创建时间修改为 201802151154
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/ExchangeColourizeTag.h 创建时间修改为 201807130423
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/WindSpeedView.h 创建时间修改为 201906031037
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/SoapTempCountingMark.m 创建时间修改为 201806292334
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/UIView+GlowView.m 创建时间修改为 201906010518
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/UpToDownView.m 创建时间修改为 201901021100
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/HumidnessConsiderMark.m 创建时间修改为 201906020456
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/HumidityPanorama.m 创建时间修改为 201901011018
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/GoopTemporaryNumber.h 创建时间修改为 201804301651
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/Sun.h 创建时间修改为 201902010023
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/PresentDownwardsSee.h 创建时间修改为 201801102233
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/MinTempCount.h 创建时间修改为 201901020607
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/SunriseView.h 创建时间修改为 201903041314
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/CALayer+MaskLayer.m 创建时间修改为 201802060609
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/LeashMelodicLineWatch.m 创建时间修改为 201902012108
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/SearchCell.h 创建时间修改为 201810011200
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/GiveOutLongPushHorizon.h 创建时间修改为 201903010434
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/SunsetView.h 创建时间修改为 201809150433
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/BraveTitleOfRespectPanorama.h 创建时间修改为 201809171906
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/AlphaPerspective.h 创建时间修改为 201905030725
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/PathDirectionView.m 创建时间修改为 201807250218
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/MetropolisDeedPerspective.m 创建时间修改为 201904011856
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/PressAnimationButton.m 创建时间修改为 201906030128
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/EmitterLayerView.h 创建时间修改为 201903041123
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/TapTitleView.m 创建时间修改为 201801091813
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/ResearchLookAt.h 创建时间修改为 201905030302
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/TemperatureReckonTag.m 创建时间修改为 201905020602
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/SunInfoView.h 创建时间修改为 201902030709
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/TaiwaneseTempContTag.h 创建时间修改为 201806101551
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/ForecastWeatherView.h 创建时间修改为 201903030626
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/BlowOverPitchBlackView.h 创建时间修改为 201802282130
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/ForgetMeDrugScene.m 创建时间修改为 201802260053
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/MaxTempView.h 创建时间修改为 201903031442
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/RainView.h 创建时间修改为 201901010831
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CustomView/TemperatureView.m 创建时间修改为 201810201853
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/IrisNetwork.h 创建时间修改为 201809300453
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Network+YoCelsius.m 创建时间修改为 201811230448
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/IrisRequestArgumentSerializer.h 创建时间修改为 201811050229
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/RichText 创建时间修改为 201810041340
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/RichText/NSString+RichText.h 创建时间修改为 201901011334
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/RichText/ConfigAttributedString.m 创建时间修改为 201812180539
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/RichText/NSString+RichText.m 创建时间修改为 201812040524
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/RichText/ConfigAttributedString.h 创建时间修改为 201804021050
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/AbsNetworkingIndicator.h 创建时间修改为 201906021707
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Lato-Light.ttf 创建时间修改为 201904021436
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/ResponseDataSerializer.m 创建时间修改为 201807300002
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/SimpleNSLog.h 创建时间修改为 201905041738
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/AbsNetworkingReachability.m 创建时间修改为 201906020410
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Lato-ThinItalic.ttf 创建时间修改为 201906041550
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/DismissingAnimator.h 创建时间修改为 201809240714
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/AbsResponseDataSerializer.m 创建时间修改为 201805232254
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CGRectStoreValue.m 创建时间修改为 201902010544
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/BuzzOffBraveOutInformation.h 创建时间修改为 201805110235
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/NetworkingInfo.h 创建时间修改为 201901042332
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Represent 创建时间修改为 201812051041
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Represent/MapManager.h 创建时间修改为 201906041427
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Represent/MapManager.m 创建时间修改为 201812121648
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Info.plist 创建时间修改为 201903020859
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/RequestMethodType.h 创建时间修改为 201903011524
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/SetRect 创建时间修改为 201904030926
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/SetRect/UIView+SetRect.m 创建时间修改为 201906021644
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/SetRect/UIView+SetRect.h 创建时间修改为 201903030017
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Colorise 创建时间修改为 201905042311
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Colorise/NSString+Color.h 创建时间修改为 201809020555
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Colorise/NSString+Color.m 创建时间修改为 201803131246
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/Colorise/AppColor.h 创建时间修改为 201811120851
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/ViewController.h 创建时间修改为 201902040536
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/CallForParameterSerializer.h 创建时间修改为 201801010221
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius/ContributeBaptistry.h 创建时间修改为 201802250018
+2019.06.04-19:11:19 完成修改文件 创建时间、修改时间
+2019.06.04-19:11:19 差异化结果记录文件排序,需要暴露的头文件在最上面
+2019.06.04-19:11:19 差异化结束,结果记录在:
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/output/result_YoCelsius-master06-04-19-10.txt
+2019.06.04-19:11:19 差异化后的代码在:
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master
+2019.06.04-19:11:19 /Users/rowling/iOSCodeDifferHelper/User/源码放这里/YoCelsius-master/YoCelsius
+2019.06.04-19:11:19 源码差异化完成,需要手动将改文件夹重新加入编译
+2019.06.04-19:11:19 源码差异化完成,需要手动将改文件夹重新加入编译
+2019.06.04-19:11:19 源码差异化完成,需要手动将改文件夹重新加入编译
