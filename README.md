@@ -1,3 +1,5 @@
+存在的bug麻烦提issue,所有的bug我都抽时间修复的,越详细的issue,能越定位问题和修复,如果可以的话,直接丢相关的工程是坠吼滴
+
 # 更新日期: 2019-06-04 
 
 1.修复修改分类时出现的bug 感谢[Kuitous](https://github.com/Kuitous)提供的详细执行过程
@@ -11,7 +13,6 @@
 代码差异化助手(比手还快)
 
 ## 该版本会随机差异化一半的符号，符号的概念请参考[Wiki](https://github.com/rowliny/iOSCodeDifferHelper/wiki)
-如需完全修改的版本,请联系开发者,工具运行后会打印出联系方式
 
 ## 支持运行环境:
 
