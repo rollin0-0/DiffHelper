@@ -6,9 +6,6 @@
 
 2.demo更新为线上的一个开源项目
 
-# 详情见
-[Wiki](https://github.com/rowliny/iOSCodeDifferHelper/wiki)
-
 # iOSCodeDifferHelper
 代码差异化助手(比手还快)
 
@@ -53,6 +50,9 @@ Objective-C (不支持Swift)
     9.3 xib、sb文件 xib、sb文件和对应的类同步修改
 11.支持修改文件创建时间和修改时间
 ```
+
+# 安装和使用说明
+[点击前往Wiki](https://github.com/rowliny/iOSCodeDifferHelper/wiki)
 
 
 
