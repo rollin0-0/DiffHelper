@@ -10,7 +10,7 @@
 
 4.优化枚举的问题
 
-# iOSCodeDifferHelper
+# iOSCodeDifferHelper[QQ群:594957417]
 代码差异化助手(比手还快)
 
 ## 该版本会随机差异化一半的符号，符号的概念请参考[Wiki](https://github.com/rowliny/iOSCodeDifferHelper/wiki)
