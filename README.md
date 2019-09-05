@@ -12,17 +12,11 @@
 5.增加敏感词检测
 ```
 
-
-## 更新日期: 0.99 2019-07-23
-> 1."修复该设备无运行权限"的问题
-
-[详细更新日志](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/更新日志)
+## 该版本会随机差异化一半的符号，另外一半只是简单的添加前后缀字母，符号的概念请参考[Wiki](https://github.com/rowliny/iOSCodeDifferHelper/wiki)
 
 
 ## iOSCodeDifferHelper[QQ群:594957417]
 代码差异化助手(比手还快)
-
-## 该版本会随机差异化一半的符号，符号的概念请参考[Wiki](https://github.com/rowliny/iOSCodeDifferHelper/wiki)
 
 ## 支持运行环境:
 
