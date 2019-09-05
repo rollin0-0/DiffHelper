@@ -1,5 +1,7 @@
 **这个仓库会一直维护的,因为开发者本人一直在使用和改进,存在的bug麻烦提issue,所有的bug我都会修复的,越详细的issue,越能定位问题和修复,如果可以的话,直接丢相关的工程是坠吼滴**
 
+![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/blob/master/QRCode.png)
+
 ## 更新预告: 2019-08-09
  最近一直加功能,基本完成增加一些功能:
  ```
