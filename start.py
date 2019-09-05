@@ -14,6 +14,12 @@ if sys.version_info[0] < 3:
     print("请确认在python3环境运行该工具")
     os._exit(1)
 
+# 判断是否安装xcode
+# if not os.path.exists("/Applications/Xcode.app"):
+#     print("安装xcode后才能正常运行")
+#     os._exit(1)
+
+# 路径空格判断
 if " " in os.getcwd():
     print(os.getcwd())
     print("工具所在的路径包含了空格,请移除路径中的空格后重试")
@@ -21,11 +27,13 @@ if " " in os.getcwd():
 
 # 需要安装的依赖以及对应的版本
 kRequiredLib = {
+    "pbxproj": "2.5.1",
     "nltk": "3.4.1",
     "ntplib": "0.3.3",
     "requests": "2.21.0",
-    "PyYAML": "5.1",
-    "pyDes": "2.0.1"
+    "PyYAML": "5.1.2",
+    "pyDes": "2.0.1",
+    "biplist": "1.0.2"
 }
 
 
@@ -34,6 +42,7 @@ def pip3Check():
     command = "pip3 list"
     output = os.popen(command)
     lines = output.readlines()
+    output.close()
     if len(lines) == 0:
         print('检测到未安装pip3模块,现在开始安装......')
         os.system("sudo easy_install pip3")
@@ -79,22 +88,18 @@ def operateEnvOK():
         if lib not in installedDict:
             allInstalled = False
 
-    if allInstalled:
-        return True
-    else:
-        return False
+    return allInstalled
 
 
 def checkOperateEnv():
     print("开始检测运行环境.")
-    pip3Check()
     time = 1
     while not operateEnvOK():
         if time > 3:
             print("多次安装依赖库失败,请确认网络连接,重启终端重试")
             os._exit(1)
         else:
-            print("\n运行环境不符合要求,正在安装工具依赖[%d]" %(time))
+            print("\n运行环境不符合要求,正在安装工具依赖[%d]" % (time))
             operateEnvOK()
             time += 1
     print("-------------------------运行环境符合要求-------------------------")
@@ -102,13 +107,13 @@ def checkOperateEnv():
 
 checkOperateEnv()
 
-utilPath = os.path.join(os.getcwd(), "Tool")
-sys.path.append(utilPath)
+toolPath = os.path.join(os.getcwd(), "Tool")
+sys.path.append(toolPath)
 
 try:
     import JustDoIT
 except Exception as exception:
-    print("请打开终端,输入cd,输入空格,将iOSCodeDifferHelper文件夹拖到cd后面,输入回车")
+    print("请打开终端,输入cd,输入空格,将iOSCodeDifferHelper文件夹拖到空格后面,输入回车")
     print("输入python3 start.py,输入回车")
 
 if __name__ == "__main__":
