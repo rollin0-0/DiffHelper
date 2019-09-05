@@ -2,13 +2,14 @@
 
 ![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/blob/master/QRCode.png)
 
-## 更新预告: 2019-08-09
- 最近一直加功能,基本完成增加一些功能:
+## 更新日期: 2019-09-05
+
  ```
 1.不再需要提供machO文件
 2.移除注释
 3.修改文件hash值
 4.增加了单词库随机混淆模式
+5.增加敏感词检测
 ```
 周末有空的话会更新一版
 
