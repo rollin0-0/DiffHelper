@@ -1,4 +1,10 @@
-**这个仓库会一直维护的,因为开发者本人一直在使用和改进,存在的bug麻烦提issue,所有的bug我都会修复的,越详细的issue,越能定位问题和修复,如果可以的话,直接丢相关的工程是坠吼滴**
+**这个仓库会一直维护的,开发者本人一直在使用和改进**
+
+**使用过程中如果遇到问题可以加群及时反馈,teamViewer手把手也要给你整好**
+
+**您的star是我更新最大的动力,么么哒**
+
+**公众号会更新一些过包相关的思路、技术、总结,感谢**
 
 ![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/blob/master/QRCode.png)
 
@@ -17,6 +23,10 @@
 
 ## iOSCodeDifferHelper[QQ群:594957417]
 代码差异化助手(比手还快)
+
+**该工具是针对混淆OC开发的sdk/app**
+
+**不能混淆unity/cocos的C++、C#代码**
 
 ## 支持运行环境:
 
@@ -59,7 +69,7 @@ Objective-C (不支持Swift)
 ```
 
 ## 使用说明
-[点击前往Wiki](https://github.com/rowliny/iOSCodeDifferHelper/wiki)
+[点击前往使用说明](https://github.com/rowliny/iOSCodeDifferHelper/wiki)
 
 
 
