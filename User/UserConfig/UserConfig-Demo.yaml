@@ -1,27 +1,77 @@
-# -------------------------- 以下部分可以配置 ----------------------
-
-
 # yaml语法说明
-# demo:1 #键值对,demo == 1
-# demo2: "" # demo == nil (不能什么都不配置)
-# demo3: # 数组demo3 == nil (不能什么都不配置)
-  # - ""
-# demo4: #数组 demo4 == ["test1","test2"]
+
+# 示例1 配置demo为hello
+# demo: hello
+# 示例1.1 配置demo为1
+# demo: 1
+
+# 示例2 配置demo2为nil(不能什么都不配置)
+# demo2: ""
+
+# 示例3 配置demo3为["test1","test2"]
+# demo3:
 # - test1
 # - test2
 
-# demo3: #空数组
+# 示例4 配置demo4空数组(不能什么都不配置)
+# demo4:
 # - ""
 
 # 1.敏感词检测 可以自行添加
 
 SensitiveWords:
-  - ali
-  - wecaht
+  - zf
+  - zfb
+  - zhifubao
+  - alipay
+  - wx
+  - wechat
+  - weixin
   - pay
-  - order
+  - defray
+  - disburse
   - buy
-  - Test
+  - goumai
+  - purchase
+  - purchasing
+  - order
+  - dingdan
+  - goods
+  - salad
+  - libao
+  - gift
+  - hongbao
+  - diamond
+  - ingots
+  - money
+  - show
+  - hidden
+  - platform
+  - sdk
+  - bugly
+  - qq
+  - hot
+  - jine
+  - 微信
+  - 支付宝
+  - 银联
+  - 支付
+  - 充值
+  - 交易
+  - 购
+  - 买
+  - 内购
+  - 商品
+  - 兑换
+  - 礼包
+  - 开关
+  - 订单
+  - 下单
+  - 金额
+  - 元
+  - ¥
+  - $
+
 
 # 2.类相关
 # 2.1 类白名单(白名单中的类不会被修改)
