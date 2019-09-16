@@ -6,7 +6,7 @@
 
 **公众号会更新一些过包相关的思路、技术、总结,感谢**
 
-![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/blob/master/QRCode.png)
+![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/img/QRCode.png)
 
 ## 更新日期: 2019-09-05
 
@@ -19,7 +19,7 @@
 ```
 
 ## 功能
-![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/blob/master/差异化助手功能介绍.png)
+![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/img/desc.png)
 
 ## 该版本会随机差异化一半的符号，另外一半只是简单的添加前后缀字母，符号的概念请参考[Wiki](https://github.com/rowliny/iOSCodeDifferHelper/wiki)
 
