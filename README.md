@@ -27,9 +27,9 @@
 
 ## iOSCodeDifferHelper[QQ群:594957417]
 
-**该工具是针对混淆OC开发的sdk/app**
+**该工具针对混淆OC开发的SDK/App**
 
-**该工具不能混淆swift开发的sdk/app**
+**该工具不能混淆swift开发的SDK/App**
 
 **该工具不能混淆unity/cocos的C++、C#代码**
 
