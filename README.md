@@ -24,6 +24,14 @@
 
 ## 如果需要VIP版本,请联系开发者购买
 
+## VIP版本效果展示
+
+### 同一个demo项目两次混淆结果
+
+![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/img/result_iOSTest-0918111304.png)
+
+![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/img/result_iOSTest-0918111430.png)
+
 
 ## iOSCodeDifferHelper[QQ群:594957417]
 
