@@ -8,13 +8,15 @@
 
 ![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/img/QRCode.png)
 
-## 更新日期: 2019-09-05
+## 更新日期: 2019-09-23
 
- ```
-1.增加移除代码注释功能
-2.修改文件hash值功能
-3.增加了单词库随机混淆模式
-4.增加敏感词检测
+1.增加代码中@""字符串拆分处理
+
+```
+例如:
+@"hello"
+修改为
+[@[@"h",@"e",@"l",@"l",@"o"] componentsJoinedByString:@""]
 ```
 
 ## 功能介绍图
