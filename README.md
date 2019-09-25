@@ -1,69 +1,103 @@
-**该仓库会一直维护,开发者一直在使用和增加新功能**
+该仓库会一直维护，开发者一直在使用和增加新功能
+欢迎提建议和功能需求
+您的star是我更新最大的动力
 
-**使用过程中如果遇到问题可以加群及时反馈,TeamViewer手把手也会给你整好**
-
-**您的star是我更新最大的动力**
-
-**公众号会更新一些过包相关的思路、技术、总结,欢迎关注**
+**公众号会分享一些过包相关的思路、技术、总结，欢迎关注**
 
 ![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/img/QRCode.png)
 
-## 更新日期: 2019-09-23
+### 更新日期: 2019-09-23
 
-1.增加代码中@""字符串拆分处理
+> 增加对于代码中@""字符串拆分处理
 
 ```
 例如:
-@"hello"
+NSString *str = @"hello";
 修改为
-[@[@"h",@"e",@"l",@"l",@"o"] componentsJoinedByString:@""]
+NSString *str = [@[@"h",@"e",@"l",@"l",@"o"] componentsJoinedByString:@""];
 ```
 
-## 功能介绍图
-![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/img/desc.png)
 
-## 该版本会随机混淆一半的代码，另外一半只是简单的添加前后缀字母
+-------
 
-## 如果需要VIP版本,请联系开发者购买
-
-## VIP版本效果展示
-
-### 同一个demo项目两次混淆结果
-
-![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/img/result_iOSTest-0918111304.png)
-
-![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/img/result_iOSTest-0918111430.png)
-
-
-## iOSCodeDifferHelper[QQ群:594957417]
-
-**该工具针对混淆OC开发的SDK/App**
-
-**该工具不能混淆swift开发的SDK/App**
-
-**该工具不能混淆unity/cocos的C++、C#代码**
-
-## 前提
+### 0.前提 
 
 ```
-该工具不会开源,介意勿下载
+0.该工具不会开源,介意勿下载
+1.该工具能混淆OC开发的SDK/App
+2.该工具不能混淆swift开发的SDK/App
+3.该工具不能混淆unity/cocos的C++、C#代码
 ```
 
-## 支持运行环境:
+
+
+### 1.运行环境:
 
 ```
-MacOS
-Python 3.7
+MacOS系统 Python 3.7
 ```
 
-## 支持语言
+
+
+### 2.支持的开发语言
 
 ```
 Objective-C (不支持Swift)
 ```
 
 
-## 使用说明
+### 3.功能介绍图
+![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/img/desc.png)
+
+
+### 4.关于试用版
+
+```
+0.直接下载即为试用版
+1.试用版会随机混淆30%左右的代码
+2.剩余70%部分只是简单的添加前后缀字母
+```
+
+例如：
+```
+- (void)hello;//方法
+```
+如果被混淆:
+```
+- (void)xxx;//混淆结果未知
+```
+
+如果不混淆:
+```
+- (void)aHelloB;//大概是这样,只会有前后随机字母的差别
+```
+
+
+### 5.关于VIP版
+
+```
+如需VIP版本,请联系开发者
+```
+
+
+#### VIP版本效果展示
+
+> 同一个demo项目两次混淆结果
+
+![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/img/result_iOSTest-0918111304.png)
+
+![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/img/result_iOSTest-0918111430.png)
+
+
+### 6.iOSCodeDifferHelper交流群[QQ群:594957417]
+> 欢迎一同探讨相关技术
+> 使用过程中如果遇到问题欢迎及时反馈
+
+
+
+
+
+## 7.使用说明
 [点击前往使用说明](https://github.com/rowliny/iOSCodeDifferHelper/wiki)
 
 
