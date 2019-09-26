@@ -6,7 +6,10 @@
 
 ![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/img/QRCode.png)
 
-### 更新日期: 2019-09-23
+### 更新日期: 2019-09-26
+> 修复一丢丢bug
+
+2019-09-23
 
 > 增加对于代码中@""字符串拆分处理
 
