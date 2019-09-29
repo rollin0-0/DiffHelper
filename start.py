@@ -63,9 +63,9 @@ def installLib(lib, requiredVersion):
 def operateEnvOK():
     installedDict = getInstalledLib()
     for lib in kRequiredLib:
-        curVersion = installedDict[lib]
         requiredVersion = kRequiredLib[lib]
         if lib in installedDict:
+            curVersion = installedDict[lib]
             if StrictVersion(curVersion) < StrictVersion(requiredVersion):
                 installLib(lib, requiredVersion)
         else:
