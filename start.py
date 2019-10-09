@@ -24,25 +24,26 @@ kRequiredLib = {
     "requests": "2.21.0",
     "PyYAML": "5.1.2",
     "pyDes": "2.0.1",
-    "biplist": "1.0.2"
+    "biplist": "1.0.2",
+    "Pillow": "6.1.0"
 }
 
 
-# 判断当前是否存在pip3
-def pip3Check():
+# 获取当前pip3 list
+def getPip3List():
     output = os.popen("pip3 list")
     lines = output.readlines()
     output.close()
     if len(lines) == 0:
-        print('检测到未安装pip3模块,现在开始安装......')
-        os.system("sudo easy_install pip3")
-        return None
+        print('检测到未安装pip3模块,请重新运行当前脚本')
+        print("或者安装工具文件夹下的python-3.7.3-macosx10.9.pkg后重试")
+        os._exit(1)
     return lines
 
 
 # 获取已经安装的依赖库
 def getInstalledLib():
-    lines = pip3Check()
+    lines = getPip3List()
     installedDict = {}
     for line in lines:
         line = line.strip()
@@ -88,11 +89,14 @@ def curPythonVersion():
         os._exit(1)
 
 
-# 当前xcode版本信息
+# 当前Xcode版本信息
 def checkXcodeInstalled():
     output = os.popen("/usr/bin/xcodebuild -version")
     lines = output.readlines()
     output.close()
+    if len(lines) == 0:
+        print("请确认已经安装Xcode")
+        os._exit(1)
     for line in lines:
         print(line.strip())
 
@@ -109,9 +113,23 @@ def xcodeSelect():
         os.system("xcode-select --install")
 
 
+# pip3版本
+def curPip():
+    output = os.popen("pip3 -V")
+    lines = output.readlines()
+    output.close()
+    if len(lines) == 0:
+        print("检测到未安装pip3模块,现在开始安装......")
+        os.system("sudo easy_install pip3")
+    else:
+        for line in lines:
+            print(line.strip())
+
+
 def checkOperateEnv():
     print("*" * 32 + "开始检测运行环境" + "*" * 32)
     curPythonVersion()
+    curPip()
     checkXcodeInstalled()
     xcodeSelect()
     time = 1
