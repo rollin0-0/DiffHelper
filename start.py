@@ -35,7 +35,7 @@ def getPip3List():
     lines = output.readlines()
     output.close()
     if len(lines) == 0:
-        print('检测到未安装pip3模块,请重新运行当前脚本')
+        print("检测到未安装pip3模块,请重新运行当前脚本")
         print("或者安装工具文件夹下的python-3.7.3-macosx10.9.pkg后重试")
         os._exit(1)
     return lines
@@ -47,7 +47,7 @@ def getInstalledLib():
     installedDict = {}
     for line in lines:
         line = line.strip()
-        tmpList = line.split(' ')
+        tmpList = line.split(" ")
         tmpList = [item for item in tmpList if len(item) > 0]
         if len(tmpList) == 2:
             lib = tmpList[0]
