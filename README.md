@@ -94,16 +94,11 @@ Objective-C (不支持Swift)
 ![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/img/result_iOSTest-0918111430.png)
 
 
-### 6.iOSCodeDifferHelper交流群[QQ群:594957417]
-> 欢迎一同探讨相关技术
-
-> 使用过程中如果遇到问题欢迎及时反馈
 
 
 
 
-
-## 7.使用说明
+## 6.使用说明
 [点击前往使用说明](https://github.com/rowliny/iOSCodeDifferHelper/wiki)
 
 
