@@ -18,15 +18,71 @@ if " " in os.getcwd():
 
 # 需要安装的依赖以及对应的版本
 kRequiredLib = {
-    "pbxproj": "2.5.1",
+    "biplist": "1.0.2",
+    "filetype": "1.0.5",
     "nltk": "3.4.5",
     "ntplib": "0.3.3",
-    "requests": "2.21.0",
     "PyYAML": "5.1.2",
     "pyDes": "2.0.1",
-    "biplist": "1.0.2",
-    "Pillow": "6.1.0"
+    "pbxproj": "2.5.1",
+    "Pillow": "6.1.0",
+    "requests": "2.21.0"
 }
+
+
+# 获取当前系统版本
+def curSystemVersion():
+    output = os.popen("sw_vers | awk 'NR==2 {print $2}'")
+    lines = output.readlines()
+    output.close()
+    line = "macOS: " + lines[0].strip()
+    print(line)
+
+
+# 判断当前运行python环境
+def curPythonVersion():
+    print("Python: %s" % (platform.python_version()))
+    if sys.version_info[0] < 3:
+        print("请确认在python3环境运行该工具")
+        print("或者安装工具文件夹下的python-3.7.3-macosx10.9.pkg")
+        os._exit(1)
+
+
+# pip3版本
+def curPip():
+    output = os.popen("pip3 -V")
+    lines = output.readlines()
+    output.close()
+    if len(lines) == 0:
+        print("检测到未安装pip3模块,现在开始安装......")
+        os.system("sudo easy_install pip3")
+    else:
+        for line in lines:
+            print(line.strip())
+
+
+# 当前Xcode版本信息
+def checkXcodeInstalled():
+    output = os.popen("/usr/bin/xcodebuild -version")
+    lines = output.readlines()
+    output.close()
+    if len(lines) == 0:
+        print("请确认已经安装Xcode")
+        os._exit(1)
+    for line in lines:
+        print(line.strip())
+
+
+# 判断是否安装xcode-select
+def checkXcodeSelect():
+    output = os.popen(
+        "if xcode-select -p &>/dev/null; then echo 'installed'; else echo 'notInstall'; fi"
+    )
+    content = output.readline()
+    output.close()
+    if content == "notInstall":
+        print("当前未安装xcode-select,现在开始安装:")
+        os.system("xcode-select --install")
 
 
 # 获取当前pip3 list
@@ -80,58 +136,13 @@ def operateEnvOK():
     return allInstalled
 
 
-# 判断当前运行python环境
-def curPythonVersion():
-    print("Python: %s" % (platform.python_version()))
-    if sys.version_info[0] < 3:
-        print("请确认在python3环境运行该工具")
-        print("或者安装工具文件夹下的python-3.7.3-macosx10.9.pkg")
-        os._exit(1)
-
-
-# 当前Xcode版本信息
-def checkXcodeInstalled():
-    output = os.popen("/usr/bin/xcodebuild -version")
-    lines = output.readlines()
-    output.close()
-    if len(lines) == 0:
-        print("请确认已经安装Xcode")
-        os._exit(1)
-    for line in lines:
-        print(line.strip())
-
-
-# 判断是否安装xcode-select
-def xcodeSelect():
-    output = os.popen(
-        "if xcode-select -p &>/dev/null; then echo 'installed'; else echo 'notInstall'; fi"
-    )
-    content = output.readline()
-    output.close()
-    if content == "notInstall":
-        print("当前未安装xcode-select,现在开始安装:")
-        os.system("xcode-select --install")
-
-
-# pip3版本
-def curPip():
-    output = os.popen("pip3 -V")
-    lines = output.readlines()
-    output.close()
-    if len(lines) == 0:
-        print("检测到未安装pip3模块,现在开始安装......")
-        os.system("sudo easy_install pip3")
-    else:
-        for line in lines:
-            print(line.strip())
-
-
 def checkOperateEnv():
     print("*" * 32 + "开始检测运行环境" + "*" * 32)
+    curSystemVersion()
     curPythonVersion()
     curPip()
     checkXcodeInstalled()
-    xcodeSelect()
+    checkXcodeSelect()
     time = 1
     while not operateEnvOK():
         if time > 3:

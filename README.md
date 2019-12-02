@@ -8,8 +8,9 @@
 
 ![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/img/QRCode.png)
 
-### 更新日期: 2019-09-26
-> 修复一丢丢bug
+### 更新日期: 2019-12-02
+> 优化了混淆规则，生成的符号更加接近真人编写习惯
+> 对于使用试用版多次混淆增加了限制(同一个符号多次被混淆后会越来越长)
 
 2019-09-23
 
