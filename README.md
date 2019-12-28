@@ -102,8 +102,23 @@ Objective-C (不支持Swift)
 
 
 
-## 6.使用说明
-[点击前往使用说明](https://github.com/rowliny/iOSCodeDifferHelper/wiki)
+## 6.了解更多
+
+* [Home](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki)
+
+* [功能介绍](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/功能介绍)
+
+* [安装](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/安装)
+
+* [配置文件详解](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/配置文件详解)
+
+* [使用说明](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/使用说明)
+
+* [常见错误](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/常见错误)
+
+* [更新日志](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/更新日志)
+
+* [目前缺陷和开发计划](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/目前缺陷和计划)
 
 
 
