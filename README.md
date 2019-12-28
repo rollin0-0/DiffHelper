@@ -14,34 +14,20 @@
 对于使用试用版多次混淆增加了限制(同一个符号多次被混淆后会越来越长)
 ```
 
-2019-09-23
-
-> 增加对于代码中@""字符串拆分处理
-
-```
-例如:
-NSString *str = @"hello";
-修改为
-NSString *str = [@[@"h",@"e",@"l",@"l",@"o"] componentsJoinedByString:@""];
-```
-
-
--------
-
 ## 1. 运行环境:
 
 ```
-MacOS系统 Python 3.7
+MacOS系统 Python 3.7.3
 ```
 
 ## 2. 支持混淆的语言
 
 ```
-Objective-C (不支持Swift)
+Objective-C(不支持Swift)
 ```
 
 
-## 3. 功能介绍图
+## 3. 功能介绍图「此处有张图片」
 ![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/img/desc.png)
 
 
