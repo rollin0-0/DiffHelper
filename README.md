@@ -1,9 +1,10 @@
-该仓库会一直维护，开发者一直在使用和增加新功能
-欢迎提建议和功能需求
 
-您的star是我更新最大的动力
+# iOSCodeDifferHelper
+iOS代码差异化工具, 顾名思义, 它是对于现有iOS代码进行差异化的工具, 试用版会一直提供, 开发者一直在使用和开发ing
+> 您的star是我更新最大的动力
 
-**公众号会分享一些过包相关的思路、技术、总结，欢迎关注**
+## 个人公众号
+> 公众号会分享一些App Store过审相关的思路、技术、总结，感谢关注
 
 ![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/img/QRCode.png)
 
