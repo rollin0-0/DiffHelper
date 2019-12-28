@@ -1,5 +1,4 @@
 该仓库会一直维护，开发者一直在使用和增加新功能
-
 欢迎提建议和功能需求
 
 您的star是我更新最大的动力
@@ -29,37 +28,24 @@ NSString *str = [@[@"h",@"e",@"l",@"l",@"o"] componentsJoinedByString:@""];
 
 -------
 
-## 0.前提 
-
-```
-0.该工具不会开源,介意勿下载
-1.该工具能混淆OC开发的SDK/App
-2.该工具不能混淆swift开发的SDK/App
-3.该工具不能混淆unity/cocos的C++、C#代码
-```
-
-
-
-## 1.运行环境:
+## 1. 运行环境:
 
 ```
 MacOS系统 Python 3.7
 ```
 
-
-
-## 2.支持的开发语言
+## 2. 支持混淆的语言
 
 ```
 Objective-C (不支持Swift)
 ```
 
 
-## 3.功能介绍图
+## 3. 功能介绍图
 ![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/img/desc.png)
 
 
-## 4.关于试用版
+## 4. 关于试用版
 
 ```
 0.直接下载即为试用版
@@ -82,24 +68,20 @@ Objective-C (不支持Swift)
 ```
 
 
-## 5.关于VIP版
+## 5. 关于VIP版
 
 ```
 如需VIP版本,请联系开发者
 ```
 
 
-#### VIP版本效果展示
+### VIP版本效果展示
 
 > 同一个demo项目两次混淆结果
 
 ![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/img/result_iOSTest-0918111304.png)
 
 ![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/img/result_iOSTest-0918111430.png)
-
-
-
-
 
 
 ## 6.了解更多
