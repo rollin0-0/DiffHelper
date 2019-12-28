@@ -1,24 +1,34 @@
 # yaml语法说明
 
-# 示例1 配置demo为hello
+# 1.配置键值对
+# 示例1.0 配置demo为hello
 # demo: hello
 # 示例1.1 配置demo为1
 # demo: 1
+# 示例1.2 配置demo2为nil(不能什么都不配置)
+# demo: ""
 
-# 示例2 配置demo2为nil(不能什么都不配置)
-# demo2: ""
-
-# 示例3 配置demo3为["test1","test2"]
-# demo3:
+# 2.配置数组
+# 示例2.0 配置demo为["test1","test2"]
+# demo:
 # - test1
 # - test2
-
-# 示例4 配置demo4空数组(不能什么都不配置)
+# 示例2.1 配置demo4空数组(不能什么都不配置)
 # demo4:
 # - ""
 
-# 1.敏感词检测 可以自行添加
+# 3.配置复杂类型
+# {"demo":"world","hello1":["world1","world2"]}
+# demo:
+#    hello: world
+#    hello1:
+#        - world1
+#        - world2
 
+# 混淆的时候不混淆@""这种字符串
+IgnoreOCString: True
+
+# 1.敏感词检测 可以自行添加
 SensitiveWords:
   - zf
   - zfb
@@ -73,79 +83,83 @@ SensitiveWords:
   - $
 
 
-# 字符串差异化比例(0到1之间的小数)
+# 2.字符串差异化比例(0到1之间的小数)
 # http(s)开头的链接一定会被处理的
-# "0.5"表示除了链接之外的字符串混淆50%
-StringDifferPercent: "1"
+# "0.5"表示字符串混淆50%
+# "1"表示字符串混淆100%
+StringDifferPercent: "0"
 
 
-
-# 2.类相关
-# 2.1 类白名单(白名单中的类不会被修改)
+# 3.类相关
+# 3.1 类白名单(白名单中的类不会被修改)
 # 假设 AppDelegate类需要忽略,配置如下即可
 # - AppDelegate
-# 这样 AppDelegate.h 和AppDelegate.m文件中自身的方法和属性等符号都不会被修改
+# AppDelegate.h 和AppDelegate.m文件中自身的方法和属性等符号都不会被修改
 # AppDelegate.h 和AppDelegate.m文件中引用的类和调用的外部方法等会被修改
-# 如果需要忽略 .a静态库对应的头文件,需要将对应的头文件配置在下面
-
+# 如果需要忽略.a静态库对应的头文件,需要将对应的头文件配置在下面
 IgnoreClassNameList:
   - AppDelegate
   - ViewController
 
-# 2.2 文件夹白名单(文件夹中的文件不会被修改)
+# 3.2 文件夹白名单(文件夹中的文件不会被修改)
 # 例如 x/y/z.h
-# - x #忽略x文件夹下所有类型的文件
-# - y #忽略y文件夹下所有类型的文件
+# - x #忽略x文件夹下所有类型的文件和文件夹
+# - y #忽略y文件夹下所有类型的文件和文件夹
 IgnoreFolder:
-  - UMCommon
+  - ""
 
-
-# 2.3 属性白名单(对应的类属性不会修改)
-# 以下的类 属性不会被修改,其他都会修改,主要针对和网络交互的model类
+# 3.3 属性白名单(对应的类属性不会修改)
+# 以下的类 属性不会被修改,类名、方法等其他都会修改,主要针对和网络交互的model类
 IgnorePropertyOfClassList:
   - ""
 
+# 4.前缀相关
+# 4.1类前缀 当前类名前缀集合
+# 如果项目中的资源文件或者类文件有特殊的前缀,可以通过这里移除或者替换
+# 例如 项目中有XXHello类 配置 XX: YY 意思是用YY替换XX
+# 例如 项目中有XXHello类 配置 XX: "" 意思是用空白替换XX,也就是移除XX
+# NeedDifferClassNamePrefix:
+#   XX:
+#       - YY
+#       - YYZ
+#   iOS: andorid
+# 意思是用YY/YYZ随机替换XX
+# 意思是用andorid随机替换iOS
+# 可自行按照格式无限制添加
 
-# 3.前缀相关
+# 如果没有需要处理的,配置如下
+# NeedDifferClassNamePrefix:
+# "": ""
 
-# 3.1类前缀
-# 当前类名前缀集合,如果项目中的资源文件或者类文件有特殊的前缀,可以通过这里处理掉
-# 如果没有需要替换掉的前缀,就配置无
-# - "" #表示无
-CurClassNamePrefix:
-  - MJ
+NeedDifferClassNamePrefix:
+    "": ""
 
-# 用来替换当前类前缀的前缀们
-# CurClassNamePrefix中的前缀会被ClassNamePrefix中的前缀随机替换
-# - "" 表示用空来替换 例如 XXHello 用空替换后就是 Hello
-ClassNamePrefix:
-  - Speak
-  - Sing
-  - ML
+# 4.2 属性名前缀
+# 如果项目中有属性包含特殊的前缀,可以通过这里移除或者替换
+# 规则同NeedDifferClassNamePrefix
+NeedDifferPropertyPrefix:
+  "": ""
 
-# 3.2 属性名前缀
-# 如果项目中有属性包含特殊的前缀,可以通过这里处理掉
-# - "" #表示无
-CurPropertyPrefix:
-  - ""
 
-# 用来替换当前属性前缀的前缀们
-# CurPropertyPrefix中的前缀会被PropertyPrefix中的前缀随机替换
-# - "" #表示用空来替换
-PropertyPrefix:
-  - ""
+# 4.3 方法名前缀
+# 如果项目中有方法包含特殊的前缀,可以通过这里移除或者替换
+# 规则同NeedDifferClassNamePrefix
+NeedDifferMethodPrefix:
+  "": ""
 
-# 3.3 方法名前缀
-# 如果项目中有方法包含特殊的前缀,可以通过这里处理掉
-# - "" #表示无
-CurMethodNamePrefix:
-  - ""
+# 4.4 枚举前缀
+# 如果项目中有枚举包含特殊的前缀,可以通过这里移除或者替换
+# 规则同NeedDifferClassNamePrefix
+NeedDifferEnumPrefix:
+  "": ""
 
-# 用来替换当前方法前缀的前缀们
-# CurMethodNamePrefix中的前缀会被MethodNamePrefix中的前缀随机替换
-# - "" #表示用空来替换
-MethodNamePrefix:
-  - ""
-
+# 5.需要暴露的头文件(方便SDK)
 SDKHeader:
   - ""
+
+
+
+
+
+
+
