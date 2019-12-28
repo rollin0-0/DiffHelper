@@ -8,7 +8,7 @@
 
 ![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/img/QRCode.png)
 
-### 更新日期: 2019-12-02
+## 更新日期: 2019-12-02
 ```
 有效期到2020年1月下旬
 优化了混淆规则，生成的符号更加接近真人编写习惯
@@ -29,7 +29,7 @@ NSString *str = [@[@"h",@"e",@"l",@"l",@"o"] componentsJoinedByString:@""];
 
 -------
 
-### 0.前提 
+## 0.前提 
 
 ```
 0.该工具不会开源,介意勿下载
@@ -40,7 +40,7 @@ NSString *str = [@[@"h",@"e",@"l",@"l",@"o"] componentsJoinedByString:@""];
 
 
 
-### 1.运行环境:
+## 1.运行环境:
 
 ```
 MacOS系统 Python 3.7
@@ -48,18 +48,18 @@ MacOS系统 Python 3.7
 
 
 
-### 2.支持的开发语言
+## 2.支持的开发语言
 
 ```
 Objective-C (不支持Swift)
 ```
 
 
-### 3.功能介绍图
+## 3.功能介绍图
 ![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/img/desc.png)
 
 
-### 4.关于试用版
+## 4.关于试用版
 
 ```
 0.直接下载即为试用版
@@ -82,7 +82,7 @@ Objective-C (不支持Swift)
 ```
 
 
-### 5.关于VIP版
+## 5.关于VIP版
 
 ```
 如需VIP版本,请联系开发者
