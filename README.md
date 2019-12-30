@@ -6,7 +6,7 @@ iOS代码差异化工具, 顾名思义, 它是对于现有iOS代码进行差异�
 ## 个人公众号
 > 公众号会分享一些App Store过审相关的思路、技术、总结，感谢关注
 
-![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/img/QRCode.png)
+![QRCode.png](https://i.loli.net/2019/12/30/VqJSMD4sPeBNGW5.jpg)
 
 ## 最新版本 1.1.6 2019-12-28
 ```
@@ -58,7 +58,7 @@ Objective-C(不支持Swift)
 
 
 ## 3. 功能介绍图「此处有张图片」
-![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/img/desc.png)
+![desc.png](https://i.loli.net/2019/12/30/6A7N2nwa1HrpQP3.png)
 
 
 
@@ -93,9 +93,9 @@ Objective-C(不支持Swift)
 
 > 同一个demo项目两次混淆结果
 
-![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/img/result_iOSTest-0918111304.png)
+![result_iOSTest-0918111304.png](https://i.loli.net/2019/12/30/LPNtGDVz4Ag8u1J.png)
 
-![image](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/img/result_iOSTest-0918111430.png)
+![result_iOSTest-0918111430.png](https://i.loli.net/2019/12/30/gXGTv1QRfAzq9io.png)
 
 
 ## 6.了解更多
