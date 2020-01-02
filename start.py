@@ -42,7 +42,7 @@ def curSystemVersion():
 # 判断当前运行python环境
 def curPythonVersion():
     print("Python: %s" % (platform.python_version()))
-    if sys.version_info[0] < 3:
+    if platform.python_version() != "3.7.3":
         print("请确认在python3环境运行该工具")
         print("或者安装工具文件夹下的python-3.7.3-macosx10.9.pkg")
         os._exit(1)
