@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DJTHelperControllerD">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dBQ-4b-Jsw">
+                    <rect key="frame" x="17" y="300.5" width="380" height="295"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="layerLong.png" translatesAutoresizingMaskIntoConstraints="NO" id="WGg-Ez-eUg">
+                            <rect key="frame" x="0.0" y="-40" width="380" height="375"/>
+                        </imageView>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="titleHelper.png" translatesAutoresizingMaskIntoConstraints="NO" id="RfY-Hh-MgJ">
+                            <rect key="frame" x="160" y="-8" width="60" height="18.5"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="AV1-n6-JND"/>
+                                <constraint firstAttribute="width" secondItem="RfY-Hh-MgJ" secondAttribute="height" multiplier="93:29" id="m2T-gU-RWz"/>
+                            </constraints>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SId-Hn-AWc">
+                            <rect key="frame" x="30" y="219" width="60" height="66"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="Kdu-p8-Ta4"/>
+                                <constraint firstAttribute="width" secondItem="SId-Hn-AWc" secondAttribute="height" multiplier="91:100" id="s26-Cp-wNT"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="back.png"/>
+                            <connections>
+                                <action selector="back:" destination="-1" eventType="touchUpInside" id="fbv-sj-2DI"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="WGg-Ez-eUg" firstAttribute="leading" secondItem="dBQ-4b-Jsw" secondAttribute="leading" id="0Oo-z4-LfT"/>
+                        <constraint firstAttribute="bottom" secondItem="WGg-Ez-eUg" secondAttribute="bottom" constant="-40" id="9K3-WK-F2F"/>
+                        <constraint firstAttribute="width" secondItem="dBQ-4b-Jsw" secondAttribute="height" multiplier="623:484" id="DNM-ct-YQL"/>
+                        <constraint firstItem="RfY-Hh-MgJ" firstAttribute="top" secondItem="dBQ-4b-Jsw" secondAttribute="top" constant="-8" id="Si2-26-mGm"/>
+                        <constraint firstItem="RfY-Hh-MgJ" firstAttribute="centerX" secondItem="dBQ-4b-Jsw" secondAttribute="centerX" id="VbA-kT-mQv"/>
+                        <constraint firstItem="SId-Hn-AWc" firstAttribute="leading" secondItem="dBQ-4b-Jsw" secondAttribute="leading" constant="30" id="fgt-Aw-TbW"/>
+                        <constraint firstAttribute="bottom" secondItem="SId-Hn-AWc" secondAttribute="bottom" constant="10" id="iRR-Co-glo"/>
+                        <constraint firstItem="WGg-Ez-eUg" firstAttribute="top" secondItem="dBQ-4b-Jsw" secondAttribute="top" constant="-40" id="kA4-bj-Wq0"/>
+                        <constraint firstAttribute="width" constant="380" id="qIf-yO-aUY"/>
+                        <constraint firstAttribute="trailing" secondItem="WGg-Ez-eUg" secondAttribute="trailing" id="u1z-JZ-WDN"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HQE-Rr-pwB">
+                    <rect key="frame" x="114" y="377.5" width="186" height="37"/>
+                    <state key="normal" backgroundImage="customNum.png"/>
+                    <connections>
+                        <action selector="helperNumTouch:" destination="-1" eventType="touchUpInside" id="bVl-ZZ-rK9"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yZg-oX-Usa">
+                    <rect key="frame" x="114" y="429.5" width="186" height="37"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="186" id="LHI-zy-7MI"/>
+                        <constraint firstAttribute="width" secondItem="yZg-oX-Usa" secondAttribute="height" multiplier="186:37" id="dbq-nB-98Y"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="lineHelp.png"/>
+                    <connections>
+                        <action selector="linePeopleTouch:" destination="-1" eventType="touchUpInside" id="cHS-zg-erq"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N7e-Mw-glO">
+                    <rect key="frame" x="114" y="481.5" width="186" height="37"/>
+                    <state key="normal" backgroundImage="publicNum.png"/>
+                    <connections>
+                        <action selector="publicNumTouch:" destination="-1" eventType="touchUpInside" id="7R4-FK-bnc"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="yZg-oX-Usa" firstAttribute="width" secondItem="HQE-Rr-pwB" secondAttribute="width" id="2zw-dc-JAs"/>
+                <constraint firstItem="dBQ-4b-Jsw" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Aam-4j-ciN"/>
+                <constraint firstItem="N7e-Mw-glO" firstAttribute="height" secondItem="HQE-Rr-pwB" secondAttribute="height" id="G0U-Pi-o8m"/>
+                <constraint firstItem="yZg-oX-Usa" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="JPD-vp-zzX"/>
+                <constraint firstItem="N7e-Mw-glO" firstAttribute="width" secondItem="HQE-Rr-pwB" secondAttribute="width" id="MAJ-fb-7BS"/>
+                <constraint firstItem="N7e-Mw-glO" firstAttribute="top" secondItem="yZg-oX-Usa" secondAttribute="bottom" constant="15" id="Oqp-5L-NPZ"/>
+                <constraint firstItem="HQE-Rr-pwB" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="avP-zo-8tH"/>
+                <constraint firstItem="N7e-Mw-glO" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ccZ-5K-Rgg"/>
+                <constraint firstItem="dBQ-4b-Jsw" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="gKZ-9f-cjG"/>
+                <constraint firstItem="yZg-oX-Usa" firstAttribute="top" secondItem="HQE-Rr-pwB" secondAttribute="bottom" constant="15" id="nQe-uZ-2I6"/>
+                <constraint firstItem="yZg-oX-Usa" firstAttribute="height" secondItem="HQE-Rr-pwB" secondAttribute="height" id="njX-Bv-S1N"/>
+                <constraint firstItem="yZg-oX-Usa" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="wKT-7G-YxL"/>
+            </constraints>
+            <point key="canvasLocation" x="139" y="119"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="back.png" width="45.5" height="50"/>
+        <image name="customNum.png" width="93" height="18.5"/>
+        <image name="layerLong.png" width="311.5" height="242"/>
+        <image name="lineHelp.png" width="93" height="18.5"/>
+        <image name="publicNum.png" width="93" height="18.5"/>
+        <image name="titleHelper.png" width="24.5" height="14.5"/>
+    </resources>
+</document>
