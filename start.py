@@ -20,6 +20,7 @@ if " " in os.getcwd():
 kRequiredLib = {
     "biplist": "1.0.2",
     "filetype": "1.0.5",
+    "lxml": "4.4.2",
     "nltk": "3.4.5",
     "ntplib": "0.3.3",
     "PyYAML": "5.1.2",
