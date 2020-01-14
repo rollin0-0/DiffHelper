@@ -27,7 +27,7 @@ kRequiredLib = {
     "pyDes": "2.0.1",
     "pbxproj": "2.5.1",
     "Pillow": "6.1.0",
-    "requests": "2.21.0"
+    "requests": "2.21.0",
 }
 
 
@@ -76,9 +76,7 @@ def checkXcodeInstalled():
 
 # 判断是否安装xcode-select
 def checkXcodeSelect():
-    output = os.popen(
-        "if xcode-select -p &>/dev/null; then echo 'installed'; else echo 'notInstall'; fi"
-    )
+    output = os.popen("if xcode-select -p &>/dev/null; then echo 'installed'; else echo 'notInstall'; fi")
     content = output.readline()
     output.close()
     if content == "notInstall":
@@ -134,6 +132,7 @@ def operateEnvOK():
     for lib in kRequiredLib:
         if lib not in installedDict:
             allInstalled = False
+            break
     return allInstalled
 
 
