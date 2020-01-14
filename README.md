@@ -20,7 +20,7 @@ https://gitee.com/halocode/iOSCodeDifferHelper
 如果试用版使用过程中遇到问题，联系开发者有惊喜
 ```
 
-部分示例:
+部分混淆示例:
 ```
 类名 ASNetworking 修改为: YawNetwork
 类名 AttributeView 修改为: MulticastAttributeView
@@ -85,7 +85,7 @@ Objective-C(不支持Swift)
 - (void)xxx;//混淆结果未知
 
 随机不被混淆:
-- (void)aHelloB;//大概是这样,只会有前后随机字母的差别
+- (void)BHelloB;//大概是这样,只会有前后随机字母的差别
 ```
 
 
