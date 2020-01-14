@@ -99,6 +99,7 @@ StringDifferPercent: "0"
 # 如果需要忽略.a静态库对应的头文件,需要将对应的头文件配置在下面
 IgnoreClassNameList:
   - AppDelegate
+  - SceneDelegate
   - ViewController
 
 # 3.2 文件夹白名单(文件夹中的文件不会被修改)
