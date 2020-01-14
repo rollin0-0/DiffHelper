@@ -119,10 +119,6 @@ Objective-C(不支持Swift)
 
 * [常见错误](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/常见错误)
 
-* [更新日志](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/更新日志)
-
-* [目前缺陷和开发计划](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/目前缺陷和计划)
-
 
 
 
