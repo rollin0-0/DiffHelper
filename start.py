@@ -1,8 +1,8 @@
 # -*- coding:utf-8 -*-
 
 import os
-import sys
 import platform
+import sys
 from distutils.version import StrictVersion
 
 # 判断当前运行操作系统
@@ -44,7 +44,7 @@ def curSystemVersion():
 def curPythonVersion():
     print("Python: %s" % (platform.python_version()))
     if platform.python_version() != "3.7.3":
-        print("请确认在python3环境运行该工具")
+        print("请确认在python3.7.3环境运行该工具")
         print("或者安装工具文件夹下的python-3.7.3-macosx10.9.pkg")
         os._exit(1)
 
@@ -161,11 +161,20 @@ checkOperateEnv()
 toolPath = os.path.join(os.getcwd(), "Tool")
 sys.path.append(toolPath)
 
+
+os.chdir(os.getcwd())
+
 try:
     import JustDoIT
 except Exception as exception:
-    print("请打开终端,输入cd,输入空格,将iOSCodeDifferHelper文件夹拖到空格后面,输入回车")
-    print("输入python3 start.py,输入回车")
+    print("解决方案1:\n\t初次使用请重启终端再次运行")
+    print("解决方案2:\n\t查看以下链接中常见错误2")
+    print("\thttps://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF")
+    print("解决方案3:\n\t输入python3,输入空格,将start.py文件拖到空格后面,输入回车")
+    justDoITPath = os.path.join(toolPath, "JustDoIT.cpython-37m-darwin.so")
+    if not os.path.exists(justDoITPath):
+        print(justDoITPath)
+        print("文件不存在")
 
 if __name__ == "__main__":
     JustDoIT.justDoIT()
