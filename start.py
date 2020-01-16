@@ -157,11 +157,11 @@ def checkOperateEnv():
 
 checkOperateEnv()
 
-toolPath = os.path.join(os.getcwd(), "Tool")
+toolPath = os.path.join(os.path.dirname(__file__), "Tool")
 sys.path.append(toolPath)
 
 
-os.chdir(os.getcwd())
+os.chdir(os.path.dirname(__file__))
 
 try:
     import JustDoIT
