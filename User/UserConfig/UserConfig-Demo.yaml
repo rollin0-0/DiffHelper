@@ -82,13 +82,11 @@ SensitiveWords:
   - ¥
   - $
 
-
 # 2.字符串差异化比例(0到1之间的小数)
 # http(s)开头的链接一定会被处理的
 # "0.5"表示字符串混淆50%
 # "1"表示字符串混淆100%
-StringDifferPercent: "0"
-
+StringDifferPercent: "1"
 
 # 3.类相关
 # 3.1 类白名单(白名单中的类不会被修改)
@@ -97,17 +95,21 @@ StringDifferPercent: "0"
 # AppDelegate.h 和AppDelegate.m文件中自身的方法和属性等符号都不会被修改
 # AppDelegate.h 和AppDelegate.m文件中引用的类和调用的外部方法等会被修改
 # 如果需要忽略.a静态库对应的头文件,需要将对应的头文件配置在下面
-IgnoreClassNameList:
+IgnoreClassList:
   - AppDelegate
-  - SceneDelegate
   - ViewController
+  - SceneDelegate
 
 # 3.2 文件夹白名单(文件夹中的文件不会被修改)
 # 例如 x/y/z.h
 # - x #忽略x文件夹下所有类型的文件和文件夹
 # - y #忽略y文件夹下所有类型的文件和文件夹
 IgnoreFolder:
-  - ""
+  - Test
+  - ThirdLib
+  - ThirdFrameWork
+  - Supporting Files
+  - igonreFolder
 
 # 3.3 属性白名单(对应的类属性不会修改)
 # 以下的类 属性不会被修改,类名、方法等其他都会修改,主要针对和网络交互的model类
@@ -115,6 +117,7 @@ IgnorePropertyOfClassList:
   - ""
 
 # 4.前缀相关
+
 # 4.1类前缀 当前类名前缀集合
 # 如果项目中的资源文件或者类文件有特殊的前缀,可以通过这里移除或者替换
 # 例如 项目中有XXHello类 配置 XX: YY 意思是用YY替换XX
@@ -133,14 +136,13 @@ IgnorePropertyOfClassList:
 # "": ""
 
 NeedDifferClassNamePrefix:
-    "": ""
+  "": ""
 
 # 4.2 属性名前缀
 # 如果项目中有属性包含特殊的前缀,可以通过这里移除或者替换
 # 规则同NeedDifferClassNamePrefix
 NeedDifferPropertyPrefix:
   "": ""
-
 
 # 4.3 方法名前缀
 # 如果项目中有方法包含特殊的前缀,可以通过这里移除或者替换
@@ -157,10 +159,3 @@ NeedDifferEnumPrefix:
 # 5.需要暴露的头文件(方便SDK)
 SDKHeader:
   - ""
-
-
-
-
-
-
-
