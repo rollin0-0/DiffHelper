@@ -25,6 +25,10 @@
 #        - world1
 #        - world2
 
+# 以上是yaml语法说明配置说明
+# ---------------------------------以下才是需要配置的内容---------------------------------
+# #开头的是注释
+
 # 混淆的时候不混淆@""这种字符串
 IgnoreOCString: True
 
@@ -130,7 +134,6 @@ IgnorePropertyOfClassList:
 # 意思是用YY/YYZ随机替换XX
 # 意思是用andorid随机替换iOS
 # 可自行按照格式无限制添加
-
 # 如果没有需要处理的,配置如下
 # NeedDifferClassNamePrefix:
 # "": ""
