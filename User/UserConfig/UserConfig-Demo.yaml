@@ -158,6 +158,20 @@ NeedDifferMethodPrefix:
 # 规则同NeedDifferClassNamePrefix
 NeedDifferEnumPrefix:
   "": ""
+  
+# 修改项目文件创建时间、访问时间
+# 开始时间和结束时间需要相差一天及以上
+# 结束时间不能早于开始时间
+
+# 创建时间、访问时间的开始日期
+# 项目中所有文件的创建时间、访问时间不会早于DifferProjectStartDate
+DifferProjectStartDate: "20200101"
+
+# 创建时间、访问时间的结束日期
+# 项目中所有文件的创建时间、访问时间不会晚于DifferProjectEndDate
+DifferProjectEndDate: "20200204"
+
+
 
 # 5.需要暴露的头文件(方便SDK)
 SDKHeader:
