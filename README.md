@@ -1,5 +1,6 @@
 # iOSCodeDifferHelper
-iOS代码差异化工具, 顾名思义, 它是对于现有iOS代码进行差异化的工具, 试用版会一直提供, 开发者一直在使用和开发ing
+iOS代码差异化工具, 顾名思义, 它是对于现有iOS代码进行差异化的工具, 试用版会一直提供, 开发者一直在使用和开发中
+
 [了解更多](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki)
 
 > 您的star是我更新最大的动力
