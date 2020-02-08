@@ -18,6 +18,9 @@ iPA安装包中的二进制(可执行)文件能找到以上所有的符号,所�
 5. 支持多种白名单
 6. 其实1才是优势(也是绝对的优势)
 
+## 功能介绍图「此处有张图片」
+![desc.png](https://i.loli.net/2019/12/30/6A7N2nwa1HrpQP3.png)
+
 
 ##  更新及日志:
 最新版本: **1.2.3 2020-02-04**
@@ -65,13 +68,7 @@ MacOS系统 Python 3.7.3
 Objective-C(不支持Swift)
 ```
 
-
-## 3. 功能介绍图「此处有张图片」
-![desc.png](https://i.loli.net/2019/12/30/6A7N2nwa1HrpQP3.png)
-
-
-
-## 4. 关于试用版
+## 3. 关于试用版
 
 ```
 0. 直接下载即为试用版(试用版会一直提供)
@@ -92,7 +89,7 @@ Objective-C(不支持Swift)
 ```
 
 
-## 5. 关于VIP版
+## 4. 关于VIP版
 
 ```
 如需VIP版本，请联系开发者(QQ: 2108336019)
@@ -131,7 +128,7 @@ Objective-C(不支持Swift)
 ```
 
 
-## 6. 功能和使用
+## 5. 功能和使用
 
 * [功能介绍](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/功能介绍)
 
