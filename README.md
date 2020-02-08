@@ -49,37 +49,6 @@ NaturalTextView.h 创建时间修改为:202002032202 访问时间修改为:20200
 * 文件夹内文件创建时间晚于文件夹的创建时间
 * 类头文件(.h)、类实现文件(.m\.mm)创建时间一致
 * 所有文件的创建时间、访问时间在正常的工作时间范围内(8-23点)
-    
-
-
-**部分混淆示例:**
-```
-类名 ASNetworking 修改为: YawNetwork
-类名 AttributeView 修改为: MulticastAttributeView
-类名 AudioModel 修改为: AudioRoleModel
-类名 BaseViewController 修改为: InfrastructureWatchController
-类名 DDSoundWaveView 修改为: FreezingVocaliseUndulationView
-类名 EttsModelTableViewCell 修改为: TaskPoseTabulariseViewCell
-类名 EttsModelViewController 修改为: AvModelingViewController
-类名 HeChengViewController 修改为: HeAmpersandPanoramaController
-类名 InputTableViewCell 修改为: StimulationDeferHorizonCell
-类名 ItemView 修改为: ItemSee
-类名 MainTabBarController 修改为: PrincipalChitBarController
-类名 NavigationTableViewCell 修改为: NavigationTabularizeViewCell
-类名 QDAudioDataSource 修改为: MissingAudioRecordingDataSource
-类名 QDDemoModel 修改为: SectorDemoModel
-类名 QDPcmRecorder 修改为: SentencesTLGOTRecorder
-类名 QDRealTimeRecognizeViewController 修改为: GeneratingSubstantialMetreRealizeWatch
-类名 SelectionTableViewCell 修改为: ChoiceDeferSentimentCell
-类名 SelectionTableViewController 修改为: NaturalSelectionRemitPositionController
-类名 SliderTableViewCell 修改为: PseudemysScriptaHoldOverEyeshotCell
-类名 SwitchTableViewCell 修改为: ChangeOverPostponeSightCell
-类名 TTDFileReader 修改为: NecessaryChargeReader
-类名 TTDFileWriter 修改为: ClustersFileWriter
-类名 TTSConfigViewController 修改为: RetainPickerOpinionController
-类名 XHToast 修改为: MenToast
-类名 selectionCellContext 修改为: pickCellContext
-```
 
 
 ## 1. 运行环境:
@@ -130,11 +99,34 @@ Objective-C(不支持Swift)
 
 ### VIP版本效果展示
 
-> 同一个demo项目两次混淆结果
-
-![result_iOSTest-0918111304.png](https://i.loli.net/2019/12/30/LPNtGDVz4Ag8u1J.png)
-
-![result_iOSTest-0918111430.png](https://i.loli.net/2019/12/30/gXGTv1QRfAzq9io.png)
+**部分混淆示例:**
+```
+类名 ASNetworking 修改为: YawNetwork
+类名 AttributeView 修改为: MulticastAttributeView
+类名 AudioModel 修改为: AudioRoleModel
+类名 BaseViewController 修改为: InfrastructureWatchController
+类名 DDSoundWaveView 修改为: FreezingVocaliseUndulationView
+类名 EttsModelTableViewCell 修改为: TaskPoseTabulariseViewCell
+类名 EttsModelViewController 修改为: AvModelingViewController
+类名 HeChengViewController 修改为: HeAmpersandPanoramaController
+类名 InputTableViewCell 修改为: StimulationDeferHorizonCell
+类名 ItemView 修改为: ItemSee
+类名 MainTabBarController 修改为: PrincipalChitBarController
+类名 NavigationTableViewCell 修改为: NavigationTabularizeViewCell
+类名 QDAudioDataSource 修改为: MissingAudioRecordingDataSource
+类名 QDDemoModel 修改为: SectorDemoModel
+类名 QDPcmRecorder 修改为: SentencesTLGOTRecorder
+类名 QDRealTimeRecognizeViewController 修改为: GeneratingSubstantialMetreRealizeWatch
+类名 SelectionTableViewCell 修改为: ChoiceDeferSentimentCell
+类名 SelectionTableViewController 修改为: NaturalSelectionRemitPositionController
+类名 SliderTableViewCell 修改为: PseudemysScriptaHoldOverEyeshotCell
+类名 SwitchTableViewCell 修改为: ChangeOverPostponeSightCell
+类名 TTDFileReader 修改为: NecessaryChargeReader
+类名 TTDFileWriter 修改为: ClustersFileWriter
+类名 TTSConfigViewController 修改为: RetainPickerOpinionController
+类名 XHToast 修改为: MenToast
+类名 selectionCellContext 修改为: pickCellContext
+```
 
 
 ## 6. 功能和使用
