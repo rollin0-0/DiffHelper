@@ -1,12 +1,12 @@
 # iOSCodeDifferHelper
-iOS代码差异化工具, 顾名思义, 它是对于现有iOS代码进行差异化的工具, 试用版会一直提供, 开发者一直在使用和开发中
-
-[了解更多](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki)
+iOS代码差异化工具, 顾名思义, 它是针对现有iOS代码进行差异化的工具, 试用版会一直提供, 开发者一直在使用和开发中
 
 > 您的star是我更新最大的动力
 
-## 如果下载慢可以去码云下载:
-2020.02.04已同步更新
+[了解更多](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki)
+
+## 备份下载地址:
+如果下载慢可以去码云下载-2020.02.04已同步更新
 ```
 https://gitee.com/halocode/iOSCodeDifferHelper
 ```
