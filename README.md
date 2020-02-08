@@ -139,7 +139,7 @@ QQ: 2108336019
 
 
 ## 个人公众号
-> 公众号会分享一些App Store过审相关的思路、技术、总结，感谢关注
+> 公众号会分享一些App Store过审相关的思路、技术、总结，欢迎联系，感谢关注
 
 ![QRCode.png](https://i.loli.net/2020/02/08/Zdhmz9ot8N5Hw3c.png)
 
