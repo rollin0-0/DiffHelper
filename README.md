@@ -6,14 +6,16 @@ iOS代码差异化工具，顾名思义，它是针对现有iOS代码进行差�
 [了解更多](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki)
 
 ## 备份下载地址:
+
 如果下载慢可以去码云下载
-版本:`1.2.3 2020-02-04`已同步更新
+
+版本:`1.2.3 2020-02-04` 已同步更新
 ```
 https://gitee.com/halocode/iOSCodeDifferHelper
 ```
 
 ##  更新及日志:
-最新版本 **1.2.3 2020-02-04**
+最新版本: **1.2.3 2020-02-04**
 
 ### 更新日志:
 ```
@@ -110,6 +112,7 @@ Objective-C(不支持Swift)
 
 ```
 如需VIP版本，请联系开发者
+QQ: 2108336019
 ```
 
 
