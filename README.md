@@ -125,7 +125,7 @@ QQ: 2108336019
 ![result_iOSTest-0918111430.png](https://i.loli.net/2019/12/30/gXGTv1QRfAzq9io.png)
 
 
-## 6.功能和使用
+## 6. 功能和使用
 
 * [功能介绍](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/功能介绍)
 
