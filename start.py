@@ -7,13 +7,7 @@ from distutils.version import StrictVersion
 
 # 判断当前运行操作系统
 if platform.system() != "Darwin":
-    print("请在Mac OS操作系统运行该工具")
-    os._exit(1)
-
-# 路径空格判断
-if " " in os.getcwd():
-    print(os.getcwd())
-    print("工具所在的路径包含了空格,请移除路径中的空格后重试")
+    print("请在macOS操作系统运行该工具")
     os._exit(1)
 
 # 需要安装的依赖以及对应的版本
@@ -144,7 +138,10 @@ def checkOperateEnv():
     checkXcodeInstalled()
     checkXcodeSelect()
     time = 1
+    print("Pip相关的警告可以忽略")
     while not operateEnvOK():
+        if time == 1:
+            print("首次运行将自动安装工具依赖")
         if time > 3:
             print("多次安装依赖库失败,请确认网络连接,重启终端重试")
             os._exit(1)
@@ -157,17 +154,17 @@ def checkOperateEnv():
 
 checkOperateEnv()
 
-toolPath = os.path.join(os.path.dirname(__file__), "Tool")
+parentPath = os.path.dirname(os.path.abspath(__file__))
+toolPath = os.path.join(parentPath, "Tool")
 sys.path.append(toolPath)
 
-
-os.chdir(os.path.dirname(__file__))
+os.chdir(parentPath)
 
 try:
     import JustDoIT
 except Exception as exception:
     print("解决方案1:\n\t初次使用请重启终端再次运行")
-    print("解决方案2:\n\t查看以下链接中常见错误2")
+    print("解决方案2:\n\t查看以下链接中常见错误3")
     print("\thttps://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF")
     print("解决方案3:\n\t输入python3,输入空格,将start.py文件拖到空格后面,输入回车")
     justDoITPath = os.path.join(toolPath, "JustDoIT.cpython-37m-darwin.so")
