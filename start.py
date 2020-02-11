@@ -39,7 +39,7 @@ def curPythonVersion():
     print("Python: %s" % (platform.python_version()))
     if platform.python_version() != "3.7.3":
         print("请确认在python3.7.3环境运行该工具")
-        print("或者安装工具文件夹下的python-3.7.3-macosx10.9.pkg")
+        print("或者安装工具文件夹下的python3.7.3安装包(python-3.7.3-macosx10.9.pkg)")
         os._exit(1)
 
 
