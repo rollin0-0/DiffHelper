@@ -50,7 +50,7 @@ NaturalTextView.h 创建时间修改为:202002032202 访问时间修改为:20200
 
 如果下载慢可以去码云下载
 
-版本:`1.2.3 2020-02-04` 已同步更新
+版本:`1.2.6 2020-02-11` 已同步更新
 ```
 https://gitee.com/halocode/iOSCodeDifferHelper
 ```
