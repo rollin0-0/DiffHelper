@@ -59,7 +59,7 @@ https://gitee.com/halocode/iOSCodeDifferHelper
 ## 1. 运行环境:
 
 ```
-MacOS系统 Python 3.7.3
+MacOS系统 Python 3.7.3(工具文件夹下有python-3.7.3安装包-python-3.7.3-macosx10.9.pkg)
 ```
 
 ## 2. 支持混淆的语言
