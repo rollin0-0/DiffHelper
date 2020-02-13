@@ -10,6 +10,12 @@ if platform.system() != "Darwin":
     print("请在macOS操作系统运行该工具")
     os._exit(1)
 
+parentPath = os.path.dirname(os.path.abspath(__file__))
+if " " in parentPath:
+    print(parentPath)
+    print("工具所在的路径包含了空格,请移除路径中的空格后重试")
+    os._exit(1)
+
 # 需要安装的依赖以及对应的版本
 kRequiredLib = {
     "biplist": "1.0.2",
@@ -154,7 +160,7 @@ def checkOperateEnv():
 
 checkOperateEnv()
 
-parentPath = os.path.dirname(os.path.abspath(__file__))
+
 toolPath = os.path.join(parentPath, "Tool")
 sys.path.append(toolPath)
 
