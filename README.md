@@ -6,7 +6,7 @@ iOS代码差异化工具，顾名思义，它是针对现有iOS代码进行差�
 **符号(symbol)**
 
 ```
-iOS项目中 类、分类、协议、方法、属性、宏、静态变量、静态常量、block、枚举 等的统称
+iOS项目中 类、分类、协议、方法、属性、宏、静态变量、静态常量、block、枚举等等的统称
 iPA安装包中的二进制(可执行)文件能找到以上所有的符号,所以他们是需要被修改的
 ```
 
@@ -22,35 +22,24 @@ iPA安装包中的二进制(可执行)文件能找到以上所有的符号,所�
 ![desc.png](https://i.loli.net/2019/12/30/6A7N2nwa1HrpQP3.png)
 
 
-##  更新及日志:
-最新版本: **1.3.0 2020-02-14**
+## 更新:
+最新版本: **1.3.1(2020-02-17)**
 
-### 更新日志:
+### 日志:
 ```
 有效期到2020年3月初旬
-优化了一些小bug
+优化了拆分字符串功能
 如果试用版使用过程中遇到问题，联系开发者有惊喜
 ```
 
-**示例和详解:**
-```
-BusKeyboardDirectorConstants.h 创建时间修改为:202002031812 访问时间修改为:202002031957
-MealKeyboardHandlerInvariableInternal.h 创建时间修改为:202002032151 访问时间修改为:202002032208
-NaturalTextView 创建时间修改为:202002031644 访问时间修改为:202002032023
-NaturalTextView.m 创建时间修改为:202002032202 访问时间修改为:202002032202
-NaturalTextView.h 创建时间修改为:202002032202 访问时间修改为:202002032216
-```
-
-* 文件夹内文件创建时间晚于文件夹的创建时间
-* 类头文件(.h)、类实现文件(.m\.mm)创建时间一致
-* 所有文件的创建时间、访问时间在正常的工作时间范围内(8-23点)
+详情请见 [更新日志](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/更新日志)
 
 
 ## 备份下载地址:
 
 如果下载慢可以去码云下载
 
-版本:`1.3.0 2020-02-14` 已同步更新
+版本:`1.3.1(2020-02-17)` 已同步更新
 ```
 https://gitee.com/halocode/iOSCodeDifferHelper
 ```
@@ -125,6 +114,7 @@ Objective-C(不支持Swift)
 类名 TTSConfigViewController 修改为: RetainPickerOpinionController
 类名 XHToast 修改为: MenToast
 类名 selectionCellContext 修改为: pickCellContext
+...
 ```
 
 
