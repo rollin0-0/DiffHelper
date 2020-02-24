@@ -1,178 +1,111 @@
-# yaml语法说明
+# ------------------------------以下为开启功能配置部分------------------------------
 
-# 1.配置键值对
-# 示例1.0 配置demo为hello
-# demo: hello
-# 示例1.1 配置demo为1
-# demo: 1
-# 示例1.2 配置demo2为nil(不能什么都不配置)
-# demo: ""
+# 井号开头的为注释,开启则设置成True,关闭则设置成False
 
-# 2.配置数组
-# 示例2.0 配置demo为["test1","test2"]
-# demo:
-# - test1
-# - test2
-# 示例2.1 配置demo4空数组(不能什么都不配置)
-# demo4:
-# - ""
+# 删除代码中NSLog日志输出
+RemoveNSLog: True
 
-# 3.配置复杂类型
-# {"demo":"world","hello1":["world1","world2"]}
-# demo:
-#    hello: world
-#    hello1:
-#        - world1
-#        - world2
+# 修改资源文件md5
+ChangeResourceMd5: True
 
-# 以上是yaml语法说明配置说明
-# ---------------------------------以下才是需要配置的内容---------------------------------
-# #开头的是注释
+# 敏感词检查,敏感词在该文件同级目录 敏感词.txt文件,可按照格式自行删减
+CheckSensitive: True
 
-# 混淆的时候不混淆@""这种字符串
-IgnoreOCString: True
+# 不混淆@"xxx"字符串,例如 @{@"userName":userInfo.userName} 开启则不会替换@"userName"
+IgnoreOCString: False
 
-# 1.敏感词检测 可以自行添加
-SensitiveWords:
-  - zf
-  - zfb
-  - zhifubao
-  - alipay
-  - wx
-  - wechat
-  - weixin
-  - pay
-  - defray
-  - disburse
-  - buy
-  - goumai
-  - purchase
-  - purchasing
-  - order
-  - dingdan
-  - goods
-  - salad
-  - libao
-  - gift
-  - hongbao
-  - diamond
-  - ingots
-  - money
-  - show
-  - hidden
-  - platform
-  - sdk
-  - bugly
-  - qq
-  - hot
-  - jine
-  - 微信
-  - 支付宝
-  - 银联
-  - 支付
-  - 充值
-  - 交易
-  - 购
-  - 买
-  - 内购
-  - 商品
-  - 兑换
-  - 礼包
-  - 开关
-  - 订单
-  - 下单
-  - 金额
-  - 元
-  - ¥
-  - $
+# 字符串拆分比例(0到1之间的小数)
+# 0表示不拆分,http(s)开头的链接也不会拆分,大于0的情况下,http(s)开头的链接一定会被拆分
+# 0.5表示字符串50%拆分,1.0表示字符串100%拆分
+SplitOCStringPercent: 1
 
-# 2.字符串差异化比例(0到1之间的小数)
-# http(s)开头的链接一定会被处理的
-# "0.5"表示字符串混淆50%
-# "1"表示字符串混淆100%
-StringDifferPercent: "1"
+# 修改项目文件的创建时间、修改时间,开始时间和结束时间需要相差一天及以上
+DifferProjectFileTime: True
+DifferProjectStartDate: "20200101"
+DifferProjectEndDate: "20200223"
 
-# 3.类相关
-# 3.1 类白名单(白名单中的类不会被修改)
-# 假设 AppDelegate类需要忽略,配置如下即可
-# - AppDelegate
-# AppDelegate.h 和AppDelegate.m文件中自身的方法和属性等符号都不会被修改
-# AppDelegate.h 和AppDelegate.m文件中引用的类和调用的外部方法等会被修改
-# 如果需要忽略.a静态库对应的头文件,需要将对应的头文件配置在下面
-IgnoreClassList:
-  - AppDelegate
-  - ViewController
-  - SceneDelegate
+# ------------------------------以下为白名单配置部分------------------------------
 
-# 3.2 文件夹白名单(文件夹中的文件不会被修改)
-# 例如 x/y/z.h
-# - x #忽略x文件夹下所有类型的文件和文件夹
-# - y #忽略y文件夹下所有类型的文件和文件夹
+# 1.项目中接入的其他库所在文件夹
+# 项目中C/C++开源所在文件夹
+# 第三方SDK以及其bundle文件所在的文件夹
+# 文件中如果包含OC代码也不会被混淆
+OtherLibFolder:
+  - "TiLiveSDK_Standard2070130300"
+  - "webSDK"
+  - "SDK"
+
+# 2.设置不混淆的文件夹
+# 文件夹下的所有文件、文件夹本身不会被混淆
+# 文件夹下的类引用的类和调用的外部方法等会被修改
+# 例如
+#    /Users/xxx/Desktop/x/y/z.h
+#    /Users/xxx/Desktop/x/q/r.h
+# - y //表示y文件夹下所有类型的文件和文件夹不混淆
+# - q //表示q文件夹下所有类型的文件和文件夹不混淆
 IgnoreFolder:
-  - Test
-  - ThirdLib
-  - ThirdFrameWork
-  - Supporting Files
-  - igonreFolder
+  - "igonreFolder1"
+  - "igonreFolder2"
 
-# 3.3 属性白名单(对应的类属性不会修改)
+# 3.设置不需要混淆的类
+# 假设 Hello类不需要混淆,配置如下即可
+# - "Hello"
+# Hello.h、Hello.m中自身的方法和属性等符号都不会被修改
+# Hello.h、Hello.m中引用的类和调用的外部方法等会被修改
+IgnoreClassList:
+  - "AppDelegate"
+  - "ViewController"
+  - "SceneDelegate"
+
+# 4.设置不混淆某些类的属性
 # 以下的类 属性不会被修改,类名、方法等其他都会修改,主要针对和网络交互的model类
 IgnorePropertyOfClassList:
   - ""
 
-# 4.前缀相关
+# ------------------------------以下为前缀配置部分------------------------------
 
-# 4.1类前缀 当前类名前缀集合
-# 如果项目中的资源文件或者类文件有特殊的前缀,可以通过这里移除或者替换
-# 例如 项目中有XXHello类 配置 XX: YY 意思是用YY替换XX
-# 例如 项目中有XXHello类 配置 XX: "" 意思是用空白替换XX,也就是移除XX
-# NeedDifferClassNamePrefix:
-#   XX:
-#       - YY
-#       - YYZ
-#   iOS: andorid
-# 意思是用YY/YYZ随机替换XX
-# 意思是用andorid随机替换iOS
-# 可自行按照格式无限制添加
+# 1.类前缀 当前类名前缀集合
+# 如果项目中的资源文件、类文件、文件夹有特殊的前缀,可以通过这里移除或者替换
 # 如果没有需要处理的,配置如下
 # NeedDifferClassNamePrefix:
 # "": ""
 
 NeedDifferClassNamePrefix:
-  "": ""
+  "XX":
+    - "YY"
+    - "YYZ"
+  "IOS": " Android"
+# 以上配置1表示:用YY/YYZ随机替换XX
+# 例如: 类名为XXHello
+#     则会被混淆成 YYXXX
+#     或者被混淆成 YYZXXX
+# XXX代表未知单词
+# 以上配置2表示:用Android替换IOS
+# 例如: 类名为IOSHello
+#     则会被混淆成AndroidXXX
+# XXX代表未知单词
+# 可自行将XX,YY,YYZ修改成你想要的情况
+# 可按照格式自行添加新的键值对
 
-# 4.2 属性名前缀
+# 2.属性名前缀
 # 如果项目中有属性包含特殊的前缀,可以通过这里移除或者替换
 # 规则同NeedDifferClassNamePrefix
 NeedDifferPropertyPrefix:
   "": ""
 
-# 4.3 方法名前缀
+# 3.方法名前缀
 # 如果项目中有方法包含特殊的前缀,可以通过这里移除或者替换
 # 规则同NeedDifferClassNamePrefix
 NeedDifferMethodPrefix:
   "": ""
 
-# 4.4 枚举前缀
+# 4.枚举前缀
 # 如果项目中有枚举包含特殊的前缀,可以通过这里移除或者替换
 # 规则同NeedDifferClassNamePrefix
 NeedDifferEnumPrefix:
   "": ""
-  
-# 修改项目文件创建时间、访问时间
-# 开始时间和结束时间需要相差一天及以上
-# 结束时间不能早于开始时间
 
-# 创建时间、访问时间的开始日期
-# 项目中所有文件的创建时间、访问时间不会早于DifferProjectStartDate
-DifferProjectStartDate: "20200101"
-
-# 创建时间、访问时间的结束日期
-# 项目中所有文件的创建时间、访问时间不会晚于DifferProjectEndDate
-DifferProjectEndDate: "20200204"
-
-
-
-# 5.需要暴露的头文件(方便SDK)
+# 其他部分
+# 需要暴露的头文件(方便SDK)
 SDKHeader:
   - ""
