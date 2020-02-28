@@ -1,4 +1,9 @@
-# iOSCodeDifferHelper
+
+<div align=center>
+<img src="https://i.loli.net/2020/02/28/ATf369QX5v1Om8i.png" width = "100" height = "100"/>
+</div>
+
+# DifferHelper
 iOS代码差异化工具，顾名思义，它是针对现有iOS代码进行差异化的工具，开发者一直在使用和开发中
 
 > 您的star是我更新最大的动力
