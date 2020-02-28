@@ -1,6 +1,6 @@
 
 <div align=center>
-<img src="https://i.loli.net/2020/02/28/ATf369QX5v1Om8i.png" width = "100" height = "100"/>
+<img src="https://i.loli.net/2020/02/28/P8WDcVXi4ISk7f1.png" width = "100" height = "100"/>
 </div>
 
 # DifferHelper
