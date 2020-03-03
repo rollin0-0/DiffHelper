@@ -47,7 +47,7 @@ iPA安装包中的二进制(可执行)文件能找到以上所有的符号,所�
 
 版本:`1.3.4(2020-02-24)` 已同步更新
 ```
-https://gitee.com/halocode/iOSCodeDifferHelper
+https://gitee.com/halocode/DiffHelper
 ```
 
 
