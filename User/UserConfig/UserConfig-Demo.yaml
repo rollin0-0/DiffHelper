@@ -1,6 +1,5 @@
 # ------------------------------以下为开启功能配置部分------------------------------
-
-# 井号开头的为注释,开启则设置成True,关闭则设置成False
+# 井号开头的为注释,开启则设置成True,关闭则设置成False,冒号后面要有一个空格
 
 # 删除代码中NSLog日志输出
 RemoveNSLog: True
@@ -8,7 +7,7 @@ RemoveNSLog: True
 # 修改资源文件md5
 ChangeResourceMd5: True
 
-# 敏感词检查,敏感词在该文件同级目录 敏感词.txt文件,可按照格式自行删减
+# 敏感词检查,敏感词在配置文件同级目录:敏感词.txt文件,可按照格式自行删减
 CheckSensitive: True
 
 # 不混淆@"xxx"字符串,例如 @{@"userName":userInfo.userName} 开启则不会替换@"userName"
@@ -17,27 +16,28 @@ IgnoreOCString: False
 # 字符串拆分比例(0到1之间的小数)
 # 0表示不拆分,http(s)开头的链接也不会拆分,大于0的情况下,http(s)开头的链接一定会被拆分
 # 0.5表示字符串50%拆分,1.0表示字符串100%拆分
-SplitOCStringPercent: 1
+SplitOCStringPercent: 0
 
-# 修改项目文件的创建时间、修改时间,开始时间和结束时间需要相差一天及以上
-DifferProjectFileTime: True
+# 修改项目中文件的创建时间、修改时间,开始时间和结束时间需要相差一天及以上
+DifferProjectFileTime: False
 DifferProjectStartDate: "20200101"
-DifferProjectEndDate: "20200223"
+DifferProjectEndDate: "20200303"
 
 # ------------------------------以下为白名单配置部分------------------------------
 
-# 1.项目中接入的其他库所在文件夹
-# 项目中C/C++开源所在文件夹
-# 第三方SDK以及其bundle文件所在的文件夹
-# 文件中如果包含OC代码也不会被混淆
+# 1.项目中接入的其他库所在文件夹名(不是路径)
+# 请配置项目中C/C++开源库所在文件夹名
+# 请配置第三方SDK以及其bundle文件所在的文件夹名
+# 配置在该字段的文件夹,其中所有文件完全不会被修改
+# Pods默认被忽略,不需要配置在这
+# 不懂yaml配置格式的话,直接复制现有的配置将引号内的内容改成自己需要的即可
 OtherLibFolder:
-  - "TiLiveSDK_Standard2070130300"
   - "webSDK"
   - "SDK"
 
-# 2.设置不混淆的文件夹
-# 文件夹下的所有文件、文件夹本身不会被混淆
-# 文件夹下的类引用的类和调用的外部方法等会被修改
+# 2.设置不混淆的文件夹名(不是路径)
+# 配置在该字段下的文件夹,其中所有文件、文件夹本身不会被混淆
+# 文件夹下的类引用的类和调用的外部方法等会被同步混淆
 # 例如
 #    /Users/xxx/Desktop/x/y/z.h
 #    /Users/xxx/Desktop/x/q/r.h
@@ -47,17 +47,17 @@ IgnoreFolder:
   - "igonreFolder1"
   - "igonreFolder2"
 
-# 3.设置不需要混淆的类
-# 假设 Hello类不需要混淆,配置如下即可
+# 3.设置不需要混淆的类(类名,不带后缀)
+# 假设:Hello类不需要混淆,配置如下即可
 # - "Hello"
-# Hello.h、Hello.m中自身的方法和属性等符号都不会被修改
-# Hello.h、Hello.m中引用的类和调用的外部方法等会被修改
+# Hello.h、Hello.m中自身的方法和属性等符号都不会被混淆
+# Hello.h、Hello.m中引用的类和调用的外部方法等会被混淆
 IgnoreClassList:
   - "AppDelegate"
   - "ViewController"
   - "SceneDelegate"
 
-# 4.设置不混淆某些类的属性
+# 4.设置不需要混淆属性的类(类名,不带后缀)
 # 以下的类 属性不会被修改,类名、方法等其他都会修改,主要针对和网络交互的model类
 IgnorePropertyOfClassList:
   - ""
@@ -68,24 +68,27 @@ IgnorePropertyOfClassList:
 # 如果项目中的资源文件、类文件、文件夹有特殊的前缀,可以通过这里移除或者替换
 # 如果没有需要处理的,配置如下
 # NeedDifferClassNamePrefix:
-# "": ""
+#   "": ""
 
 NeedDifferClassNamePrefix:
-  "XX":
-    - "YY"
-    - "YYZ"
-  "IOS": " Android"
-# 以上配置1表示:用YY/YYZ随机替换XX
-# 例如: 类名为XXHello
-#     则会被混淆成 YYXXX
-#     或者被混淆成 YYZXXX
-# XXX代表未知单词
-# 以上配置2表示:用Android替换IOS
-# 例如: 类名为IOSHello
-#     则会被混淆成AndroidXXX
-# XXX代表未知单词
-# 可自行将XX,YY,YYZ修改成你想要的情况
-# 可按照格式自行添加新的键值对
+  "hello": ""
+  "world":
+    - "hei"
+    - "welcome"
+  "do": "try"
+# 以上配置1表示: 用空去替换hello,也就是移除hello
+# 以上配置2表示:用hei/welcome随机替换world
+# 例如: 类名为worldController
+#     则会被混淆成heiX
+#     或者被混淆成welcomeX
+# X代表未知单词
+
+# 以上配置3表示:用try替换do
+# 例如: 类名为doIt
+#     则会被混淆成tryX
+# X代表未知单词
+# 可自行将hello,world,hei等修改成你想要的前缀
+# 可按照格式无限添加新的键值对
 
 # 2.属性名前缀
 # 如果项目中有属性包含特殊的前缀,可以通过这里移除或者替换
@@ -106,6 +109,6 @@ NeedDifferEnumPrefix:
   "": ""
 
 # 其他部分
-# 需要暴露的头文件(方便SDK)
+# 需要暴露的头文件(方便查找SDK需要暴露头文件,非SDK可以忽略这个,配置后在混淆结束后的result.txt的顶端)
 SDKHeader:
   - ""
