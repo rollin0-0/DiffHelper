@@ -29,6 +29,8 @@ bugly
 qq
 hot
 jine
+email
+mail
 微信
 支付宝
 银联
