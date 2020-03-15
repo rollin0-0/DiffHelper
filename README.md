@@ -127,7 +127,7 @@ VIP版本100%混淆
 
 * [功能介绍](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/功能介绍)
 
-* [安装](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/安装)
+* [Python环境安装](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/Python环境安装)
 
 * [配置文件详解](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/配置文件详解)
 
