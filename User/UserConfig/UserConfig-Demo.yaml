@@ -21,7 +21,7 @@ IgnoreOCString: False
 # 字符串拆分比例(0到1之间的小数)
 # 0表示不拆分,http(s)开头的链接也不会拆分,大于0的情况下,http(s)开头的链接一定会被拆分
 # 0.5表示字符串50%拆分,1.0表示字符串100%拆分
-SplitOCStringPercent: 1
+SplitOCStringPercent: 0
 
 # 修改项目中文件的创建时间、修改时间
 # 开始日期和结束日期需要相差一天及以上
@@ -43,7 +43,7 @@ OtherLibFolder:
   - "SDK"
 
 # 2.设置不混淆的文件夹名(不是路径)
-# 配置在该字段下的文件夹,其中资源文件md5会被修改
+# 配置在该字段下的文件夹,其中资源文件md5会被处理
 # 配置在该字段下的文件夹,其中代码文件名、文件夹名不会被混淆
 # 配置在该字段下的文件夹,其中代码文件引用的外部类和调用的外部方法等会被同步混淆
 # 例如
@@ -59,14 +59,14 @@ IgnoreFolder:
 # 假设:Hello类不需要混淆,配置如下即可
 # - "Hello"
 # Hello.h、Hello.m中自身的方法和属性等符号都不会被混淆
-# Hello.h、Hello.m中引用的外部类和调用的外部方法等会被混淆
+# Hello.h、Hello.m中引用的外部类和调用的外部方法等会被同步混淆
 IgnoreClassList:
   - "AppDelegate"
   - "ViewController"
   - "SceneDelegate"
 
 # 4.设置不需要混淆属性的类(类名,不带后缀)
-# 以下的类 属性不会被修改,类名、方法等其他都会修改,主要针对和网络交互的model类
+# 以下的类 属性不会被混淆,除属性以外的所有都会混淆,主要针对和网络交互的model类
 IgnorePropertyOfClassList:
   - ""
 
@@ -74,7 +74,7 @@ IgnorePropertyOfClassList:
 
 # 工具在运行过程中,会对以下字段提供配置建议
 
-# 1.类前缀 当前类名前缀集合
+# 1.类前缀 当前项目类名前缀集合
 # 如果项目中的资源文件、类文件、文件夹有特殊的前缀,可以通过这里移除或者替换
 # 如果没有需要处理的,配置如下
 # NeedDifferClassNamePrefix:
