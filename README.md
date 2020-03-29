@@ -51,7 +51,7 @@ iPA安装包中的二进制(可执行)文件能找到以上所有的符号,所�
 6. 其实1才是优势(也是绝对的优势)
 
 ## 功能介绍图「此处有张图片」
-![desc.png](https://i.loli.net/2019/12/30/6A7N2nwa1HrpQP3.png)
+![desc.png](https://i.loli.net/2020/03/29/WwfGeCxLoKNiIp8.png)
 
 ## 备份下载地址:
 
