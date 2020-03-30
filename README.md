@@ -30,6 +30,14 @@
 
 详情请见 [更新日志](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/更新日志)
 
+## 备份下载地址:
+
+如果github下载慢可以去码云下载
+版本:`1.4.2(2020-03-30)` 已同步更新
+```
+https://gitee.com/halocode/DiffHelper
+```
+
 # 介绍
 
 ## DiffHelper
@@ -53,14 +61,6 @@ iPA安装包中的二进制(可执行)文件能找到以上所有的符号,所�
 
 ## 功能介绍图「此处有张图片」
 ![desc.png](https://i.loli.net/2020/03/29/WwfGeCxLoKNiIp8.png)
-
-## 备份下载地址:
-
-如果github下载慢可以去码云下载
-版本:`1.4.2(2020-03-30)` 已同步更新
-```
-https://gitee.com/halocode/DiffHelper
-```
 
 
 ## 1. 运行环境:
