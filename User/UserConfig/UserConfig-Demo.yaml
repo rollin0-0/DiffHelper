@@ -16,7 +16,7 @@ ChangeResourceMd5: True
 CheckSensitive: True
 
 # 不混淆@"xxx"字符串,例如 @{@"userName":userInfo.userName} 开启则不会替换@"userName"
-IgnoreOCString: False
+IgnoreOCString: True
 
 # 字符串拆分比例(0到1之间的小数)
 # 0表示不拆分,http(s)开头的链接也不会拆分,大于0的情况下,http(s)开头的链接一定会被拆分
@@ -28,7 +28,7 @@ SplitOCStringPercent: 0
 # 结束日期要早于当前日期
 DifferProjectFileTime: True
 DifferProjectStartDate: "20200101"
-DifferProjectEndDate: "20200303"
+DifferProjectEndDate: "20200403"
 
 # ------------------------------以下为白名单配置部分------------------------------
 

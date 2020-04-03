@@ -1378,7 +1378,6 @@ Lenient
 Decrypt
 Burmese
 Passing
-Russian
 Turkish
 Persian
 Entropy
