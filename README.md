@@ -3,31 +3,17 @@
 <img src="https://i.loli.net/2020/02/28/H5ukD27Wa1olx4h.png" width = "100" height = "100"/>
 </div>
 
-## 信息收集
-
-该工具在使用的时候,总共会发出4个网络请求
-```
-1.获取网络时间(域名是baidu.com,鉴权)
-2.鉴定网络时间(域名是yq.aliyun.com,鉴权)
-3.日志收集(工具启动上报)
-4.日志收集(工具成功上报)
-```
-**一旦使用本工具代表允许以上信息的收集**
-
-**除以上信息收集之外,一旦发现其他请求,送VIP使用时间半年**
+## [信息收集说明](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/信息收集说明)
 
 
 
 
 ## 版本:
-最新版本: **1.4.5(2020-04-03)**
+最新版本: **1.4.7(2020-04-10)**
 
 ### 更新日志:
 ```
-1.不强制要求修改中文目录和文件名
-2.增加对于strings类型文件的支持
-3.增加对于colorst类型文件夹的支持
-4.优化了输出
+增加在现有类"新增property/protocol/block/define/各种static"功能
 ```
 
 详情请见 [更新日志](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/更新日志)
@@ -35,7 +21,7 @@
 ## 备份下载地址:
 
 如果github下载慢可以去码云下载
-版本:`1.4.5(2020-04-03)` 已同步更新
+版本:`1.4.7(2020-04-10)` 已同步更新
 ```
 https://gitee.com/halocode/DiffHelper
 ```
