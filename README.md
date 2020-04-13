@@ -125,6 +125,8 @@ protocol Optional 修改为: Several
 
 * [常见错误](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/常见错误)
 
+* [混淆前后注意事宜和建议](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/混淆前后注意事宜和建议)
+
 
 ## 个人公众号
 > 公众号会分享一些App Store过审相关的思路、技术、总结，欢迎联系，感谢关注
