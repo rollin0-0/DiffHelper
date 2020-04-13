@@ -45,7 +45,8 @@ def curPythonVersion():
     print("Python: %s" % (platform.python_version()))
     if platform.python_version() != "3.7.3":
         print("请确认在python3.7.3环境运行该工具")
-        print("或者安装工具文件夹下的python3.7.3安装包(python-3.7.3-macosx10.9.pkg)")
+        print("请查看Wiki:")
+        print("https://github.com/iOSCoderR/DiffHelper/wiki/Python%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85")
         os._exit(1)
 
 
