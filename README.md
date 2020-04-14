@@ -19,6 +19,10 @@
 
 详情请见 [更新日志](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/更新日志)
 
+### 温馨提示
+**如果按照使用文档,期间遇到错误,麻烦先移步到[常见错误](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/常见错误)
+如果是这以外的错误,那么肯定是我兼容性做的还不够好,希望你能联系我**
+
 ## 备份下载地址:
 
 如果github下载慢可以去码云下载
