@@ -9,10 +9,11 @@
 
 
 ## 版本:
-最新版本: **1.4.8(2020-04-13)**
+最新版本: **1.4.9(2020-04-16)**
 
 ### 更新日志:
 ```
+试用版有效期到5月初
 修复混淆期间报错
 增加在现有类"新增property/protocol/block/define/各种static"功能
 ```
@@ -20,13 +21,14 @@
 详情请见 [更新日志](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/更新日志)
 
 ### 温馨提示
-**如果按照使用文档,期间遇到错误,麻烦先移步到[常见错误](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/常见错误)
-如果是这以外的错误,那么肯定是我兼容性做的还不够好,希望你能联系我**
+
+> 如果按照使用文档,期间遇到错误,麻烦先移步到[常见错误](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/常见错误)
+如果是这之外的错误,那么肯定是我兼容性做的还不够好,希望你能联系我
 
 ## 备份下载地址:
 
 如果github下载慢可以去码云下载
-版本:`1.4.8(2020-04-13)` 已同步更新
+版本:`1.4.9(2020-04-16)` 已同步更新
 ```
 https://gitee.com/halocode/DiffHelper
 ```
@@ -59,7 +61,7 @@ iPA安装包中的二进制(可执行)文件能找到以上所有的符号,所�
 ## 1. 运行环境:
 
 ```
-MacOS系统 Python3.7.3版本(工具下有python-3.7.3安装包--python-3.7.3-macosx10.9.pkg)
+MacOS系统 Python3.7.3版本
 ```
 
 ## 2. 支持混淆的语言
