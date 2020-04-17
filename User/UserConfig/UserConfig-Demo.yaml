@@ -41,7 +41,7 @@ DifferProjectEndDate: "20200409"
 
 # 在现有类新增代码的概率
 # 0表示不增加 0.5表示有50%的概率新增代码 1表示100%新增代码
-InjectPercent: 1
+InjectPercent: 0.5
 
 # 新增代码后的标示,在代码的结尾,方便区分原有代码和新增代码
 InjectMark: " //new"
