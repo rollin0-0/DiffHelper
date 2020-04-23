@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 
 import os
+import re
 import platform
 import sys
 from distutils.version import StrictVersion
@@ -59,8 +60,19 @@ def curPip():
         print("检测到未安装pip3模块,现在开始安装......")
         os.system("sudo easy_install pip3")
     else:
-        for line in lines:
-            print(line.strip())
+        outputString = lines[0]
+        resultList = re.findall(r"\((.*?)\)", outputString)
+        if len(resultList) == 0:
+            print("检测到未安装pip3模块,现在开始安装......")
+            os.system("sudo easy_install pip3")
+        else:
+            curPipViersion = resultList[0]
+            if curPipViersion == "python 3.7":
+                print("Pip3: " + curPipViersion)
+            else:
+                print("检测到未安装pip3模块,现在开始安装......")
+                os.system("sudo easy_install pip3")
+            
 
 
 # 当前Xcode版本信息
