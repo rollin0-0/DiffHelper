@@ -33,11 +33,7 @@
 
 ## 备份下载地址:
 
-如果github下载慢可以去码云下载
-版本:`1.5.0(2020-04-17)` 已同步更新
-```
-https://gitee.com/halocode/DiffHelper
-```
+如果github下载慢可以去 [码云下载](https://gitee.com/halocode/DiffHelper)
 
 # 介绍
 
