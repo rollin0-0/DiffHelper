@@ -128,6 +128,8 @@ protocol Optional 修改为: Several
 
 * [功能介绍](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/功能介绍)
 
+* [混淆前后注意事宜和建议](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/混淆前后注意事宜和建议)
+
 * [Python环境安装](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/Python环境安装)
 
 * [配置文件详解](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/配置文件详解)
@@ -136,7 +138,7 @@ protocol Optional 修改为: Several
 
 * [常见错误](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/常见错误)
 
-* [混淆前后注意事宜和建议](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/混淆前后注意事宜和建议)
+
 
 
 ## 个人公众号
