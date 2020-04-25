@@ -11,7 +11,6 @@
 ## 版本: **1.5.0(2020-04-17)**
 
 ### 更新日志:
-
 ```
 2020-04-17 修复开启插入代码功能报错
 (非常抱歉,昨天更新太匆忙了)
@@ -24,11 +23,10 @@
 
 详情请见 [更新日志](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/更新日志)
 
-### 温馨提示
+### 温馨提示:
+> 如果按照下面的使用文档，期间遇到错误，麻烦先移步到 [常见错误](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/常见错误)
 
-> 如果按照使用文档,期间遇到错误,麻烦先移步到 [常见错误](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/常见错误)
-
-> 如果是这之外的错误,那么肯定是我兼容性做的还不够好,希望你能联系我
+> 如果是这之外的错误，那么肯定是我兼容性做的还不够好，希望你能联系我
 
 ## 备份下载地址: 如果github下载慢可以去 [码云下载](https://gitee.com/halocode/DiffHelper)
 
