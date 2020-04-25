@@ -25,7 +25,7 @@
 
 ### 温馨提示:
 > 如果按照最下面的使用文档，期间遇到错误，麻烦先移步到 [常见错误](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/常见错误)
-
+>
 > 如果是这之外的错误，那么肯定是我兼容性做的还不够好，希望你能联系我
 
 ## 备份下载地址: 如果github下载慢可以去 [码云下载](https://gitee.com/halocode/DiffHelper)
@@ -71,15 +71,13 @@ iPA安装包中的二进制(可执行)文件能找到以上所有的符号，所
 
 
 **示例：**
-```
-- (void)hello;//原方法
+> +(void)hello;//原方法
 
-如果在混淆的50%里:
-- (void)xxx;//混淆结果未知
+**如果在混淆的50%里:**
+> +(void)xxx;//混淆结果未知
 
-如果在不混淆的50%里:
-- (void)aHelloa;//大概是这样，只会有前后随机字母的差别
-```
+**如果在不混淆的50%里:**
+> +(void)aHelloa;//大概是这样，只会有前后随机字母的差别
 
 
 ## 4. 关于VIP版
@@ -87,7 +85,6 @@ iPA安装包中的二进制(可执行)文件能找到以上所有的符号，所
 VIP版本100%混淆
 如需VIP版本，请联系开发者(QQ: 2108336019)
 ```
-
 
 ### VIP版本效果展示
 **混淆示例:**
@@ -107,7 +104,6 @@ protocol Optional 修改为: Several
 ...
 ```
 
-
 ## 5. 功能和使用
 
 * [功能介绍](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/功能介绍)
@@ -121,9 +117,6 @@ protocol Optional 修改为: Several
 * [使用说明](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/使用说明)
 
 * [常见错误](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/常见错误)
-
-
-
 
 ## 个人公众号
 > 公众号会分享一些App Store过审相关的思路、技术、总结，欢迎联系，感谢关注
