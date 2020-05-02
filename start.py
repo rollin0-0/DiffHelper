@@ -154,7 +154,7 @@ def checkOperateEnv():
     checkXcodeInstalled()
     checkXcodeSelect()
     time = 1
-    print("\033[0;33;m%s\033[0m" % ("Pip相关的警告可以忽略,提示更新而已"))
+    print("\033[0;33;m%s\033[0m" % ("Pip提示更新的警告可以忽略"))
     while not operateEnvOK():
         if time == 1:
             print("首次运行将自动安装工具依赖")
