@@ -83,8 +83,7 @@ def checkXcodeInstalled():
     if len(lines) == 0:
         print("请确认已经安装Xcode")
         os._exit(1)
-    for line in lines:
-        print(line.strip())
+    print(lines[0].strip())
 
 
 # 判断是否安装xcode-select
@@ -184,7 +183,7 @@ os.chdir(parentPath)
 try:
     import JustDoIT
 except Exception as exception:
-    print("解决方案1:\n\t初次使用请重启终端再次运行")
+    print("解决方案1:\n\t初次完成依赖安装请重启终端再次运行")
     print("解决方案2:\n\t查看以下链接中常见错误3")
     print("\thttps://github.com/iOSCoda/DiffHelper/wiki/常见错误")
     print("解决方案3:\n\t输入python3,输入空格,将start.py文件拖到空格后面,输入回车")
