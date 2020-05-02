@@ -11,9 +11,9 @@ if platform.system() != "Darwin":
     print("请在macOS操作系统运行该工具")
     os._exit(1)
 
-parentPath = os.path.dirname(os.path.abspath(__file__))
-if " " in parentPath:
-    print(parentPath)
+parPath = os.path.dirname(os.path.abspath(__file__))
+if " " in parPath:
+    print(parPath)
     print("工具所在的路径包含了空格,请移除路径中的空格后重试")
     os._exit(1)
 
@@ -37,8 +37,7 @@ def curSystemVersion():
     output = os.popen("sw_vers | awk 'NR==2 {print $2}'")
     lines = output.readlines()
     output.close()
-    line = "MacOS: " + lines[0].strip()
-    print(line)
+    print("MacOS: " + lines[0].strip())
 
 
 # 判断当前运行python环境
@@ -72,7 +71,7 @@ def curPip():
             else:
                 print("检测到未安装pip3模块,现在开始安装......")
                 os.system("sudo easy_install pip3")
-            
+
 
 
 # 当前Xcode版本信息
@@ -175,10 +174,9 @@ def checkOperateEnv():
 checkOperateEnv()
 
 
-toolPath = os.path.join(parentPath, "Tool")
+toolPath = os.path.join(parPath, "Tool")
 sys.path.append(toolPath)
-
-os.chdir(parentPath)
+os.chdir(parPath)
 
 try:
     import JustDoIT
@@ -187,10 +185,6 @@ except Exception as exception:
     print("解决方案2:\n\t查看以下链接中常见错误3")
     print("\thttps://github.com/iOSCoda/DiffHelper/wiki/常见错误")
     print("解决方案3:\n\t输入python3,输入空格,将start.py文件拖到空格后面,输入回车")
-    justDoITPath = os.path.join(toolPath, "JustDoIT.cpython-37m-darwin.so")
-    if not os.path.exists(justDoITPath):
-        print(justDoITPath)
-        print("文件不存在")
 
 if __name__ == "__main__":
     JustDoIT.justDoIT()
