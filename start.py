@@ -37,7 +37,7 @@ def curSystemVersion():
     output = os.popen("sw_vers | awk 'NR==2 {print $2}'")
     lines = output.readlines()
     output.close()
-    line = "macOS: " + lines[0].strip()
+    line = "MacOS: " + lines[0].strip()
     print(line)
 
 
@@ -46,8 +46,8 @@ def curPythonVersion():
     print("Python: %s" % (platform.python_version()))
     if platform.python_version() != "3.7.3":
         print("请确认在python3.7.3环境运行该工具")
-        print("请查看Wiki:")
-        print("https://github.com/iOSCoderR/DiffHelper/wiki/Python%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85")
+        print("请查看wiki:")
+        print("https://github.com/iOSCoda/DiffHelper/wiki/Python环境安装")
         os._exit(1)
 
 
@@ -89,10 +89,10 @@ def checkXcodeInstalled():
 
 # 判断是否安装xcode-select
 def checkXcodeSelect():
-    output = os.popen("if xcode-select -p &>/dev/null; then echo 'installed'; else echo 'notInstall'; fi")
+    output = os.popen("if xcode-select -p &>/dev/null; then echo '1'; else echo '0'; fi")
     content = output.readline()
     output.close()
-    if content == "notInstall":
+    if content == "0":
         print("当前未安装xcode-select,现在开始安装:")
         os.system("xcode-select --install")
 
@@ -104,7 +104,6 @@ def getPip3List():
     output.close()
     if len(lines) == 0:
         print("检测到未安装pip3模块,请重新运行当前脚本")
-        print("或者安装工具文件夹下的python-3.7.3-macosx10.9.pkg后重试")
         os._exit(1)
     return lines
 
@@ -157,12 +156,15 @@ def checkOperateEnv():
     checkXcodeInstalled()
     checkXcodeSelect()
     time = 1
-    print("Pip相关的警告可以忽略")
+    print("\033[0;33;m%s\033[0m" % ("Pip相关的警告可以忽略,提示更新而已"))
     while not operateEnvOK():
         if time == 1:
             print("首次运行将自动安装工具依赖")
         if time > 3:
             print("多次安装依赖库失败,请确认网络连接,重启终端重试")
+            print("或者尝试手动安装依赖,所有依赖库在上面的第21行代码里")
+            print("\t例如安装biplist,命令如下:")
+            print("\tpip3 install biplist==1.0.2")
             os._exit(1)
         else:
             print("\n运行环境不符合要求,正在安装依赖[%d]" % (time))
@@ -184,7 +186,7 @@ try:
 except Exception as exception:
     print("解决方案1:\n\t初次使用请重启终端再次运行")
     print("解决方案2:\n\t查看以下链接中常见错误3")
-    print("\thttps://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF")
+    print("\thttps://github.com/iOSCoda/DiffHelper/wiki/常见错误")
     print("解决方案3:\n\t输入python3,输入空格,将start.py文件拖到空格后面,输入回车")
     justDoITPath = os.path.join(toolPath, "JustDoIT.cpython-37m-darwin.so")
     if not os.path.exists(justDoITPath):
