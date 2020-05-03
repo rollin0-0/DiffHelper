@@ -23,10 +23,8 @@ kRequiredLib = {
     "filetype": "1.0.5",
     "lxml": "4.4.2",
     "nltk": "3.4.5",
-    "ntplib": "0.3.3",
     "PyYAML": "5.1.2",
     "pyDes": "2.0.1",
-    "pbxproj": "2.5.1",
     "Pillow": "6.1.0",
     "requests": "2.21.0",
 }
