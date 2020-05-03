@@ -6,9 +6,6 @@
 # 按照下面的配置则混淆后不会超过5个单词
 SymbolMaxCount: 5
 
-# 删除代码中的注释
-RemoveAnnotate: True
-
 # 删除代码中NSLog日志输出
 RemoveNSLog: True
 
