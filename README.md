@@ -30,7 +30,9 @@
 >
 > 如果是这之外的错误，那么肯定是我兼容性做的还不够好，希望你能联系我
 
-## 备份下载地址: 如果github下载慢可以去 [码云下载](https://gitee.com/halocode/DiffHelper)
+## 备份下载地址1: [微云下载](https://share.weiyun.com/5nj1Obj)
+## 备份下载地址2: [码云下载](https://gitee.com/halocode/DiffHelper)
+
 
 
 
