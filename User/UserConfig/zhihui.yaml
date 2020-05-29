@@ -1,0 +1,161 @@
+# ------------------------------以下为开启功能配置部分------------------------------
+# 井号开头的为注释,开启则设置成True,关闭则设置成False,冒号后面要有一个空格
+
+# 混淆后的符号最大单词数量
+# 例如方法: AFURLSessionDidReceiveAuthenticationChallengeBlock 混淆前有七个单词
+# 按照下面的配置则混淆后不会超过5个单词
+SymbolMaxCount: 4
+
+# 删除代码中NSLog日志输出
+RemoveNSLog: True
+
+# 修改资源文件md5
+ChangeResourceMd5: True
+
+# 敏感词检查,敏感词在配置文件同级目录:敏感词.txt文件,可按照格式自行删减
+CheckSensitive: True
+
+# 不混淆@"xxx"字符串,例如 @{@"userName":userInfo.userName} 开启则不会替换@"userName"
+# 属性和资源文件名不受这个影响,忽略属性请看IgnorePropertyOfClassList字段
+IgnoreOCString: True
+
+# 字符串拆分比例(0到1之间的小数)
+# 0表示不拆分,http(s)开头的链接也不会拆分,大于0的情况下,http(s)开头的链接一定会被拆分
+# 0.5表示字符串50%拆分,1.0表示字符串100%拆分
+SplitOCStringPercent: 0
+
+# 修改项目中文件的创建时间、修改时间
+# 开始日期和结束日期需要相差一天及以上
+# 结束日期要早于当前日期
+DifferProjectFileTime: True
+DifferProjectStartDate: "20200101"
+DifferProjectEndDate: "20200525"
+
+# ------------------------------以下为插入代码功能配置部分------------------------------
+# 目前能新增property/protocol/block/define/各种static
+# 目前不能新增方法
+# property部分能新增 普通属性/protocol属性/block属性 数量受InjectMinAmount InjectMaxAmount控制
+# define/各种static 数量受InjectMinAmount InjectMaxAmount控制 各种类型随机生成
+# protocol 随机0～1个 会同步生成protocol属性
+# block 随机0～2个 会同步生成block属性
+
+# 在现有类新增代码的概率
+# 0表示不增加 0.5表示有50%的概率新增代码 1表示100%新增代码
+InjectPercent: 0.5
+
+# 新增代码后的标示,在代码的结尾,方便区分原有代码和新增代码
+InjectMark: " //com"
+
+# 表示类新增 property/define/static等的最小数量
+InjectMinAmount: 2
+
+# 表示类新增 property/define/static等的最大数量
+InjectMaxAmount: 5
+
+# ------------------------------以下为白名单配置部分------------------------------
+
+# 1.项目中接入的其他库所在文件夹名(不是路径)
+# 请配置项目中C/C++开源库所在文件夹名
+# 请配置第三方SDK(.framework/.a)以及其资源文件(bundle)所在的文件夹名
+# 配置在该字段的文件夹,其中所有文件完全不会被修改
+# Pods默认被忽略,不需要配置在这,如果希望混淆Pods中开源库的源码,请通过源码的方式接入工程,而不是通过Pods依赖
+# 不懂yaml配置格式的话,直接复制现有的配置将引号内的内容改成自己需要的即可,-后面要有一个空格
+OtherLibFolder:
+  - "WebP.framework"
+  - "WebPDecoder.framework"
+
+# 2.设置不混淆的文件夹名(不是路径)
+# 配置在该字段下的文件夹,其中资源文件md5会被处理
+# 配置在该字段下的文件夹,其中代码文件名、文件夹名不会被混淆
+# 配置在该字段下的文件夹,其中代码文件引用的外部类和调用的外部方法等会被同步混淆
+# 例如
+#    路径 /Users/xxx/Desktop/Demo/Hello/z.h
+#    路径 /Users/xxx/Desktop/Demo/World/r.h
+# - "Hello" //表示Hello文件夹下所有类型的文件和文件夹不混淆,z类中import的其他类会被混淆
+# - "World" //表示World文件夹下所有类型的文件和文件夹不混淆,r类中import的其他类会被混淆
+IgnoreFolder:
+  - "SDCycleScrollView"
+  - "SDWebImage"
+
+# 3.设置不需要混淆的类(类名,不带后缀)
+# 假设:Hello.m类不需要混淆,配置如下即可
+# - "Hello"
+# Hello.h、Hello.m中自身的方法和属性等符号都不会被混淆
+# Hello.h、Hello.m中引用的外部类和调用的外部方法等会被同步混淆
+IgnoreClassList:
+  - "AppDelegate"
+  - "ViewController"
+  - "SceneDelegate"
+
+# 4.设置不需要混淆属性的类(类名,不带后缀)
+# 以下的类 属性不会被混淆,除属性以外的所有都会混淆,主要针对和网络交互的model类
+IgnorePropertyOfClassList:
+  - ""
+
+# 5.设置不需要混淆属性的类的文件夹
+# 配置xxxmodel.h或xxxmodel.m的上级文件夹
+IgnoreModelFolder:
+  - "mhome"
+  - "mStock"
+  - "modleZhongHe"
+  - "Utils"
+  - "Object"
+  - "UISesrchs"
+  - "Common"
+
+# ------------------------------以下为前缀配置部分------------------------------
+# 工具在运行过程中,会对以下字段提供配置建议
+
+# 1.类前缀 当前项目类名前缀集合
+# 如果项目中的资源文件、类文件、文件夹有特殊的前缀,可以通过这里移除或者替换
+# 如果没有需要处理的,配置如下
+# NeedDifferClassNamePrefix:
+#   "": ""
+
+NeedDifferClassNamePrefix:
+  "hello": ""
+  "Lenmo": "ZHihui"
+  "AV": "ZHi"
+  "LC": "HUi"
+  "GuTian":
+    - "ZHihui"
+    - "ZHi"
+# 以上配置1表示: 移除前缀hello,不影响中间和尾部的hello
+
+# 以上配置2表示: 用try替换do,不影响中间和尾部的do
+# 例如: 类名为doIt
+#     则会被混淆成tryX
+# X代表未知单词
+
+# 以上配置3表示:用hei/welcome随机替换world,不影响中间和尾部的world
+# 例如: 类名为worldController
+#     则会被混淆成heiX
+#     或者被混淆成welcomeX
+# X代表未知单词
+
+# 可自行将hello,world,hei等修改成你想要的前缀
+# 可按照格式无限添加新的键值对
+
+# 2.属性名前缀
+# 如果项目中有属性包含特殊的前缀,可以通过这里移除或者替换
+# 规则同NeedDifferClassNamePrefix
+NeedDifferPropertyPrefix:
+  "": ""
+
+# 3.方法名前缀
+# 如果项目中有方法包含特殊的前缀,可以通过这里移除或者替换
+# 规则同NeedDifferClassNamePrefix
+NeedDifferMethodPrefix:
+  "add": "action"
+
+# 4.枚举前缀
+# 如果项目中有枚举包含特殊的前缀,可以通过这里移除或者替换
+# 规则同NeedDifferClassNamePrefix
+NeedDifferEnumPrefix:
+  "JXCategoryTitleImage": "STNewTitleImage"
+
+# 其他部分
+# 需要暴露的头文件(方便查找SDK需要暴露头文件,非SDK可以忽略这个,配置后在混淆结束后的result.txt的顶端)
+SDKHeader:
+  - ""
+# OldMode: True

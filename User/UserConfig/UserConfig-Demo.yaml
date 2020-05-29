@@ -29,7 +29,7 @@ SplitOCStringPercent: 0
 # 结束日期要早于当前日期
 DifferProjectFileTime: True
 DifferProjectStartDate: "20200101"
-DifferProjectEndDate: "20200409"
+DifferProjectEndDate: "20200429"
 
 # ------------------------------以下为插入代码功能配置部分------------------------------
 # 目前能新增property/protocol/block/define/各种static
@@ -92,6 +92,11 @@ IgnoreClassList:
 IgnorePropertyOfClassList:
   - ""
 
+# 5.设置不需要混淆属性的类的文件夹
+# 配置xxxmodel.h或xxxmodel.m的上级文件夹
+IgnoreModelFolder:
+  - "Model"
+
 # ------------------------------以下为前缀配置部分------------------------------
 # 工具在运行过程中,会对以下字段提供配置建议
 
@@ -145,3 +150,5 @@ NeedDifferEnumPrefix:
 # 需要暴露的头文件(方便查找SDK需要暴露头文件,非SDK可以忽略这个,配置后在混淆结束后的result.txt的顶端)
 SDKHeader:
   - ""
+
+OldMode: True

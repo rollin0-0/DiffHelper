@@ -8,19 +8,13 @@
 
 
 
-## 版本: **1.5.3(2020-05-04)**
+## 版本: **1.5.8(2020-05-29)**
 
 ### 更新日志:
 ```
-优化使用过程中的提示
-移除"移除注释"开关
-移除多余的依赖库
-兼容带有软连接的framework
-```
-
-```
-试用版有效期到5月中旬
-增加在现有类"新增property/protocol/block/define/各种static"功能
+试用版有效期到6月下旬
+优化"项目检查"体验
+优化了很多功能,具体见下面的链接
 ```
 
 详情请见 [更新日志](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/更新日志)
@@ -30,7 +24,7 @@
 >
 > 如果是这之外的错误，那么肯定是我兼容性做的还不够好，希望你能联系我
 
-## 备份下载地址1: [微云下载](https://share.weiyun.com/5nj1Obj)
+## 备份下载地址1: [微云下载](https://share.weiyun.com/tI3fESBD)
 ## 备份下载地址2: [码云下载](https://gitee.com/halocode/DiffHelper)
 
 
