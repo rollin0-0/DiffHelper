@@ -8,14 +8,14 @@
 
 
 
-## 版本: **1.5.8(2020-05-29)**
+## 版本: **1.6.0(2020-06-25)**
 
 ### 更新日志:
 ```
-试用版有效期到6月下旬
-优化"项目检查"体验
-优化了很多功能,具体见下面的链接
+试用版有效期到7月下旬
+配置文件修改为json类型
 ```
+[配置文件详解](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/配置文件详解)
 
 详情请见 [更新日志](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/更新日志)
 

@@ -1,0 +1,32 @@
+{
+  "RemoveNSLog": true,
+  "ModifyResourceMd5": true,
+  "CheckSensitiveWord": true,
+  "IgnoreOCString": true,
+
+  "InjectPercent": 0,
+  "InjectMark": "//mark",
+  "InjectMinCount": 1,
+  "InjectMaxCount": 5,
+
+  "ExcludeFolderList": [],
+  "IgnoreFolderList": [],
+  "IgnoreClassList": [],
+  "IgnorePropertyOfClassList": [],
+  "IgnoreModelFolderList": [],
+
+  "SymbolMaxCount": 5,
+  "ClassNamePrefixMap": {},
+  "PropertyPrefixMap": {},
+  "MethodPrefixMap": {},
+  "EnumPrefixMap": {},
+
+  "SplitOCStringPercent": 0,
+
+  "ModifyProjectTime": true,
+  "ProjectStartDate": "20200301",
+  "ProjectEndDate": "20200623",
+
+  "SDKHeaderList": [],
+  "OldMode": false
+}
