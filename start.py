@@ -56,16 +56,18 @@ def curSystemVersion():
     output.close()
     systemVersion = lines[0].strip()
     print("MacOS: " + systemVersion)
-    if existLaunchFile():
-        return
     if StrictVersion(systemVersion) > StrictVersion("10.14"):
+        output = os.popen("spctl --status | awk 'NR==1 {print $2}'")
+        status = output.readline()
+        output.close()
+        if status.strip() == "disabled":
+            return
         colorPrint("10.15系统开始,使用本工具需要关闭spctl", "33")
         colorPrint("请在终端执行下面命令来关闭spctl:", "33")
         print("sudo spctl --master-disable")
         colorPrint("因为涉及到sudo,本工具不提供自动执行操作,建议自行了解以上命令后决定")
         colorPrint('执行完成后需要设置: 系统偏好设置 -> 安全性与隐私 -> 通用 -> 选择"任何来源"')
         colorPrint("设置之后重新运行当前脚本即可")
-        createLaunchFile()
         os._exit(1)
 
 
