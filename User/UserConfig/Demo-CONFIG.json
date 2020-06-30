@@ -10,8 +10,8 @@
   "InjectMaxCount": 5,
 
   "ExcludeFolderList": [],
+  "IgnoreClassList": ["AppDelegate","ViewController","SceneDelegate"],
   "IgnoreFolderList": [],
-  "IgnoreClassList": [],
   "IgnorePropertyOfClassList": [],
   "IgnoreModelFolderList": [],
 
