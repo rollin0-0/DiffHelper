@@ -4,16 +4,17 @@
   "CheckSensitiveWord": true,
   "IgnoreOCString": true,
 
-  "InjectPercent": 0,
-  "InjectMark": "//mark",
-  "InjectMinCount": 1,
-  "InjectMaxCount": 5,
-
   "ExcludeFolderList": [],
-  "IgnoreClassList": ["AppDelegate","ViewController","SceneDelegate"],
+  "IgnoreClassList": ["AppDelegate", "ViewController", "SceneDelegate"],
   "IgnoreFolderList": [],
   "IgnorePropertyOfClassList": [],
   "IgnoreModelFolderList": [],
+
+  "InjectPercent": 0.5,
+  "InjectMark": "//mark",
+  "InjectMinCount": 2,
+  "InjectMaxCount": 3,
+  "OpenInjectMethod": false,
 
   "SymbolMaxCount": 5,
   "ClassNamePrefixMap": {},
@@ -25,7 +26,7 @@
 
   "ModifyProjectTime": true,
   "ProjectStartDate": "20200301",
-  "ProjectEndDate": "20200623",
+  "ProjectEndDate": "20200711",
 
   "SDKHeaderList": [],
   "OldMode": false
