@@ -34,21 +34,6 @@ kRequiredLib = {
 }
 
 
-def existLaunchFile():
-    toolPath = os.path.join(parPath, "User")
-    launchFile = "launchFlag.txt"
-    launchFilePath = os.path.join(toolPath, launchFile)
-    return os.path.exists(launchFilePath)
-
-
-def createLaunchFile():
-    toolPath = os.path.join(parPath, "User")
-    launchFile = "launchFlag.txt"
-    launchFilePath = os.path.join(toolPath, launchFile)
-    with open(launchFilePath, "w") as f:
-        f.write("1")
-
-
 # 获取当前系统版本
 def curSystemVersion():
     output = os.popen("sw_vers | awk 'NR==2 {print $2}'")
@@ -56,14 +41,14 @@ def curSystemVersion():
     output.close()
     systemVersion = lines[0].strip()
     print("MacOS: " + systemVersion)
-    if StrictVersion(systemVersion) > StrictVersion("10.14"):
+    if StrictVersion(systemVersion) >= StrictVersion("10.15"):
         output = os.popen("spctl --status | awk 'NR==1 {print $2}'")
         status = output.readline()
         output.close()
         if status.strip() == "disabled":
             return
         colorPrint("10.15系统开始,使用本工具需要关闭spctl", "33")
-        colorPrint("请在终端执行下面命令来关闭spctl:", "33")
+        colorPrint("请在终端执行以下命令来关闭spctl:", "33")
         print("sudo spctl --master-disable")
         colorPrint("因为涉及到sudo,本工具不提供自动执行操作,建议自行了解以上命令后决定")
         colorPrint('执行完成后需要设置: 系统偏好设置 -> 安全性与隐私 -> 通用 -> 选择"任何来源"')
@@ -75,7 +60,9 @@ def curSystemVersion():
 def curPythonVersion():
     print("Python: %s" % (platform.python_version()))
     if platform.python_version() != "3.7.3":
-        colorPrint("请确认在python3.7.3环境运行该工具")
+        colorPrint("请确认在python3.7.3环境运行该工具,其他版本确认不能正常运行")
+        colorPrint("详情见:", "32")
+        colorPrint("https://github.com/iOSCoda/DiffHelper/wiki/Python环境安装", "33")
         os._exit(1)
 
 
@@ -86,7 +73,7 @@ def curPip():
     output.close()
     if len(lines) == 0:
         colorPrint("本工具依赖pip3,检测到未安装pip3模块", "33")
-        colorPrint("请在终端执行下面命令来安装pip3:", "33")
+        colorPrint("请在终端执行以下命令来安装pip3:", "33")
         print("sudo easy_install pip3")
         colorPrint("因为涉及到sudo,本工具不提供自动执行操作,建议自行了解以上命令后决定")
         colorPrint("执行完成后重新运行当前脚本即可")
@@ -96,7 +83,7 @@ def curPip():
         resultList = re.findall(r"\((.*?)\)", outputString)
         if len(resultList) == 0:
             colorPrint("本工具依赖pip3,检测到未安装pip3模块", "33")
-            colorPrint("请在终端执行下面命令来安装pip3:", "33")
+            colorPrint("请在终端执行以下命令来安装pip3:", "33")
             print("sudo easy_install pip3")
             colorPrint("因为涉及到sudo,本工具不提供自动执行操作,建议自行了解以上命令后决定")
             colorPrint("执行完成后重新运行当前脚本即可")
@@ -107,7 +94,7 @@ def curPip():
                 print("Pip3: " + curPipViersion)
             else:
                 colorPrint("本工具依赖pip3,检测到未安装pip3模块", "33")
-                colorPrint("请在终端执行下面命令来安装pip3:", "33")
+                colorPrint("请在终端执行以下命令来安装pip3:", "33")
                 print("sudo easy_install pip3")
                 colorPrint("因为涉及到sudo,本工具不提供自动执行操作,建议自行了解以上命令后决定")
                 colorPrint("执行完成后重新运行当前脚本即可")
@@ -135,8 +122,8 @@ def checkXcodeSelect():
         os.system("xcode-select --install")
     elif "Xcode.app/Contents/Developer" not in content.strip():
         colorPrint("工具会使用到脚本打包项目的功能,需要设置xcode-select对应的位置", "33")
-        colorPrint("请在终端执行下面命令完成设置:", "33")
-        print("sudo xcode-select -s %s" %(content.strip()))
+        colorPrint("请在终端执行以下命令完成设置:", "33")
+        print("sudo xcode-select -s %s" % (content.strip()))
         colorPrint("因为涉及到sudo,本工具不提供自动执行操作,建议自行了解以上命令后决定")
         colorPrint("执行完成后重新运行当前脚本即可")
         os._exit(1)
