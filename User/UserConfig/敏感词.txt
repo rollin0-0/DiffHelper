@@ -6,6 +6,7 @@ wx
 wechat
 weixin
 pay
+payment
 defray
 disburse
 buy

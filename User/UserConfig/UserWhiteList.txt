@@ -25,3 +25,9 @@ carrier_code
 iapps
 phone_name
 test
+failure
+AFNetworkReachabilityStatus
+AFNetworkReachabilityStatusNotReachable
+AFNetworkReachabilityStatusReachableViaWWAN
+AFNetworkReachabilityStatusReachableViaWiFi
+AFNetworkReachabilityStatusUnknown
