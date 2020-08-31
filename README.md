@@ -4,12 +4,12 @@
 
 ## [信息收集说明](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/信息收集说明)
 
-## 版本: **1.6.2(2020-07-31)**
+## 版本: **1.6.3(2020-08-31)**
 
 ### 更新日志:
 
 ```
-试用版有效期到8月下旬
+试用版有效期到9月下旬
 配置文件修改为json类型
 人工干预模式增加了选词功能
 ```
@@ -24,7 +24,7 @@
 >
 > 如果是这之外的错误，那么肯定是我兼容性做的还不够好，希望你能联系我
 
-## 备份下载地址 1: [微云下载](https://share.weiyun.com/8KI4vovw)
+## 备份下载地址 1: [微云下载](https://share.weiyun.com/uQFXsJxe)
 
 ## 备份下载地址 2: [码云下载](https://gitee.com/halocode/DiffHelper)
 
