@@ -17,6 +17,7 @@
   "OpenInjectMethod": false,
 
   "SymbolMaxCount": 5,
+  "AutoDealUnevenSymbol":true,
   "RemoveWordList": [],
   "ClassNamePrefixMap": {},
   "PropertyPrefixMap": {},
