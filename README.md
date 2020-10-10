@@ -4,7 +4,7 @@
 
 ## [信息收集说明](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/信息收集说明)
 
-## 版本: **1.6.4(2020-10-09)**
+## 版本: **1.6.5(2020-10-10)**
 
 ### 更新日志:
 
