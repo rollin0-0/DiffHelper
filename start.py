@@ -40,7 +40,7 @@ def curSystemVersion():
     lines = output.readlines()
     output.close()
     systemVersion = lines[0].strip()
-    print("MacOS: " + systemVersion)
+    colorPrint("MacOS: " + systemVersion, "32")
     if StrictVersion(systemVersion) >= StrictVersion("10.15"):
         output = os.popen("spctl --status | awk 'NR==1 {print $2}'")
         status = output.readline()
@@ -58,12 +58,21 @@ def curSystemVersion():
 
 # 判断当前运行python环境
 def curPythonVersion():
-    print("Python: %s" % (platform.python_version()))
+    colorPrint("Python: " + platform.python_version(), "32")
     if platform.python_version() != "3.7.3":
         colorPrint("请确认在python3.7.3环境运行该工具,其他版本确认不能正常运行")
         colorPrint("详情见:", "32")
         colorPrint("https://github.com/iOSCoda/DiffHelper/wiki/Python环境安装", "33")
         os._exit(1)
+
+
+def checkPipTip():
+    colorPrint("本工具依赖pip3,检测到未安装pip3模块", "33")
+    colorPrint("请在终端执行以下命令来安装pip3:", "33")
+    print("sudo easy_install pip3")
+    colorPrint("因为涉及到sudo,本工具不提供自动执行操作,建议自行了解以上命令后决定")
+    colorPrint("执行完成后重新运行当前脚本即可")
+    os._exit(1)
 
 
 # pip3版本
@@ -72,33 +81,18 @@ def curPip():
     lines = output.readlines()
     output.close()
     if len(lines) == 0:
-        colorPrint("本工具依赖pip3,检测到未安装pip3模块", "33")
-        colorPrint("请在终端执行以下命令来安装pip3:", "33")
-        print("sudo easy_install pip3")
-        colorPrint("因为涉及到sudo,本工具不提供自动执行操作,建议自行了解以上命令后决定")
-        colorPrint("执行完成后重新运行当前脚本即可")
-        os._exit(1)
+        checkPipTip()
     else:
         outputString = lines[0]
         resultList = re.findall(r"\((.*?)\)", outputString)
         if len(resultList) == 0:
-            colorPrint("本工具依赖pip3,检测到未安装pip3模块", "33")
-            colorPrint("请在终端执行以下命令来安装pip3:", "33")
-            print("sudo easy_install pip3")
-            colorPrint("因为涉及到sudo,本工具不提供自动执行操作,建议自行了解以上命令后决定")
-            colorPrint("执行完成后重新运行当前脚本即可")
-            os._exit(1)
+            checkPipTip()
         else:
             curPipViersion = resultList[0]
             if curPipViersion == "python 3.7":
-                print("Pip3: " + curPipViersion)
+                colorPrint("Pip3: " + curPipViersion, "32")
             else:
-                colorPrint("本工具依赖pip3,检测到未安装pip3模块", "33")
-                colorPrint("请在终端执行以下命令来安装pip3:", "33")
-                print("sudo easy_install pip3")
-                colorPrint("因为涉及到sudo,本工具不提供自动执行操作,建议自行了解以上命令后决定")
-                colorPrint("执行完成后重新运行当前脚本即可")
-                os._exit(1)
+                checkPipTip()
 
 
 # 当前Xcode版本信息
@@ -109,7 +103,7 @@ def checkXcodeInstalled():
     if not lines:
         colorPrint("请确认已经安装Xcode")
         os._exit(1)
-    print(lines[0].strip())
+    colorPrint(lines[0].strip(), "32")
 
 
 # 判断是否安装xcode-select
@@ -160,7 +154,20 @@ def installLib(lib, requiredVersion):
     os.system("pip3 install %s==%s" % (lib, requiredVersion))
 
 
-def operateEnvOK():
+def isAllRequiredLibInstalled():
+    installedDict = getInstalledLib()
+    for lib in kRequiredLib:
+        if lib in installedDict:
+            curVersion = installedDict[lib]
+            requiredVersion = kRequiredLib[lib]
+            if StrictVersion(curVersion) < StrictVersion(requiredVersion):
+                return False
+        else:
+            return False
+    return True
+
+
+def installRequiredLib():
     installedDict = getInstalledLib()
     for lib in kRequiredLib:
         requiredVersion = kRequiredLib[lib]
@@ -190,19 +197,19 @@ def checkOperateEnv():
     checkXcodeSelect()
     time = 1
     colorPrint("Pip提示更新的警告可以忽略", "32")
-    while not operateEnvOK():
+    while not isAllRequiredLibInstalled():
         if time == 1:
             colorPrint("首次运行将自动安装工具依赖库", "33")
-        if time > 3:
+        if time <= 3:
+            colorPrint("\n运行环境不符合要求,正在安装依赖[%d]" % (time), "32")
+            installRequiredLib()
+            time += 1
+        else:
             colorPrint("多次安装依赖库失败,请确认网络连接,重启终端重试")
             colorPrint("或者尝试手动安装依赖,所有依赖库在上面的第26行代码里")
             colorPrint("\t例如安装biplist,命令如下:")
             colorPrint("\tpip3 install biplist==1.0.2")
             os._exit(1)
-        else:
-            print("\n运行环境不符合要求,正在安装依赖[%d]" % (time))
-            operateEnvOK()
-            time += 1
     print("*" * 32 + "运行环境符合要求" + "*" * 32)
 
 
