@@ -30,6 +30,7 @@ imei2
 isEnabled
 isJailbroken
 isRegister
+modelCustomPropertyMapper
 isSelected
 kdevice
 kimei
