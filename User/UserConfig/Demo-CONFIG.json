@@ -1,14 +1,14 @@
 {
-  "RemoveNSLog": true,
-  "ModifyResourceMd5": true,
-  "CheckSensitiveWord": true,
-  "IgnoreOCString": true,
+  "OpenSwift": false,
+  "DiffOCString": false,
 
-  "ExcludeFolderList": [],
+  "ExcludeFolderPathList": [],
+
   "IgnoreClassList": ["AppDelegate", "ViewController", "SceneDelegate"],
-  "IgnoreFolderList": [],
-  "IgnorePropertyOfClassList": [],
-  "IgnoreModelFolderList": [],
+  "IgnoreFolderPathList": [],
+
+  "IgnoreModelList": [],
+  "IgnoreModelFolderPathList": [],
 
   "InjectPercent": 0.5,
   "InjectMark": "//mark",
@@ -16,15 +16,17 @@
   "InjectMaxCount": 3,
   "OpenInjectMethod": false,
 
-  "SymbolMaxCount": 5,
-  "AutoDealUnevenSymbol":true,
-  "RemoveWordList": [],
   "ClassNamePrefixMap": {},
   "PropertyPrefixMap": {},
   "MethodPrefixMap": {},
   "EnumPrefixMap": {},
 
-  "SplitOCStringPercent": 0,
+  "UnitDiffMaxCount": 4000,
+  "SymbolMaxCount": 5,
+  "AutoDealUnevenSymbol": true,
+  "RemoveWordList": [],
+
+  "SplitOCStringPercent": 1,
 
   "ModifyProjectTime": true,
   "ProjectStartDate": "20200301",
