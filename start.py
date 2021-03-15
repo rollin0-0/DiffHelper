@@ -107,7 +107,7 @@ def checkXcodeInstalled():
     lines = output.readlines()
     output.close()
     if not lines:
-        colorPrint("请确认已经安装Xcode")
+        colorPrint(Red, "请确认已经安装Xcode")
         os._exit(1)
     colorPrint(Green, lines[0].strip())
 
@@ -227,7 +227,7 @@ os.chdir(parPath)
 
 try:
     import JustDoIT
-except:
+except Exception:
     colorPrint(Red, "解决方案1:\n\t初次完成依赖安装请重启终端再次运行")
     colorPrint(Red, "解决方案2:\n\t请参考同级目录下的「使用演示.gif」")
 
