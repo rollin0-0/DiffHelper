@@ -1,14 +1,9 @@
 {
-  "OpenSwift": false,
-  "DiffOCString": false,
-
-  "ExcludeFolderPathList": [],
-
+  "ExcludeFolderList": [],
   "IgnoreClassList": ["AppDelegate", "ViewController", "SceneDelegate"],
-  "IgnoreFolderPathList": [],
-
+  "IgnoreFolderList": [],
   "IgnoreModelList": [],
-  "IgnoreModelFolderPathList": [],
+  "IgnoreModelFolderList": [],
 
   "InjectPercent": 0.5,
   "InjectMark": "//mark",
@@ -21,11 +16,12 @@
   "MethodPrefixMap": {},
   "EnumPrefixMap": {},
 
+  "DiffOCString": true,
   "UnitDiffMaxCount": 4000,
   "SymbolMaxCount": 5,
-  "AutoDealUnevenSymbol": true,
+  "AutoDealUnevenSymbol":true,
   "RemoveWordList": [],
-
+  
   "SplitOCStringPercent": 1,
 
   "ModifyProjectTime": true,
