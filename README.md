@@ -2,6 +2,8 @@
 <img src="https://i.loli.net/2020/02/28/H5ukD27Wa1olx4h.png" width = "100" height = "100"/>
 </div>
 
+### [EN](https://github.com/rowliny/DiffHelper/blob/master/README-EN.md)
+
 ## [信息收集说明](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/信息收集说明)
 
 ## 版本: **1.6.8(2021-03-15)**
