@@ -69,6 +69,7 @@ def curPythonVersion():
         colorPrint(Green, "详情见:")
         colorPrint(Yellow, "https://github.com/iOSCoda/DiffHelper/wiki/Python环境安装")
         colorPrint(Yellow, "或者直接安装附带的python安装包:python-3.7.3-macosx10.9.pkg")
+        colorPrint(Yellow, "如果安装python-3.7.3-macosx10.9.pkg后提示错误,请重启终端再试")
         os._exit(1)
 
 
