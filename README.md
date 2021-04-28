@@ -4,7 +4,7 @@
 
 ### [EN](https://github.com/rowliny/DiffHelper/blob/master/README-EN.md)
 
-## [信息收集说明](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/信息收集说明)
+
 
 ## 版本: **1.6.9(2021-04-28)**
 
