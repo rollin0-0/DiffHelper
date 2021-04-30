@@ -109,6 +109,9 @@ def checkXcodeInstalled():
     output.close()
     if not lines:
         colorPrint(Red, "请确认已经安装Xcode")
+        colorPrint(Yellow, "如果确认已经安装Xcode")
+        colorPrint(Yellow, "请在终端执行以下命令完成设置:")
+        colorPrint(Green, "xcode-select -s /Applications/Xcode.app/Contents/Developer")
         os._exit(1)
     colorPrint(Green, lines[0].strip())
 
