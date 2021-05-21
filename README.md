@@ -1,6 +1,8 @@
 <div align=center>
 <img src="https://i.loli.net/2020/02/28/H5ukD27Wa1olx4h.png" width = "100" height = "100"/>
+<img src="https://i.loli.net/2021/05/21/OmGaxQI4pZJM5gN.png" width = "100" height = "100"/>
 </div>
+
 
 ### [EN](https://github.com/rowliny/DiffHelper/blob/master/README-EN.md)
 
