@@ -1,6 +1,9 @@
 <div align=center>
 <img src="https://i.loli.net/2020/02/28/H5ukD27Wa1olx4h.png" width = "100" height = "100"/>
-<img src="https://i.loli.net/2021/05/21/OmGaxQI4pZJM5gN.png" width = "100" height = "100"/>
+</div>
+
+<div align=center>
+<img src="https://i.loli.net/2020/02/08/Zdhmz9ot8N5Hw3c.png" width = "908" height = "312"/>
 </div>
 
 
