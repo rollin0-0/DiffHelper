@@ -82,7 +82,7 @@ def checkXcodeSelect():
     if not content:
         colorPrint(Yellow, "当前未安装xcode-select,现在开始安装:")
         os.system("xcode-select --install")
-    elif "Xcode.app/Contents/Developer" not in content.strip():
+    elif ".app/Contents/Developer" not in content.strip():
         colorPrint(Yellow, "工具会使用到脚本打包项目的功能,需要设置xcode-select对应的位置")
         colorPrint(Yellow, "请在终端执行以下命令完成设置:")
         colorPrint(Green, "sudo xcode-select -s %s" % (content.strip()))
