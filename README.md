@@ -3,7 +3,7 @@
 </div>
 
 <div align=center>
-<img src="https://i.loli.net/2020/02/08/Zdhmz9ot8N5Hw3c.png" width = "908" height = "312"/>
+<img src="![扫码_搜索联合传播样式-白色版.png](https://i.loli.net/2021/08/14/whD2qBsblmfGxna.png)" width = "908" height = "312"/>
 </div>
 
 
