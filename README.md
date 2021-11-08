@@ -62,7 +62,7 @@ iPA安装包中的二进制(可执行)文件能找到以上所有的符号，所
 
 ## 1. 运行环境:
 
-> MacOS 系统 Python3.7.3 版本 [Python 环境安装](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/Python环境安装)
+> MacOS 系统 Python3.10.0 版本 [Python 环境安装](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/Python环境安装)
 
 ## 2. 支持混淆的语言
 
