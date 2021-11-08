@@ -1,6 +1,6 @@
 # Natural Language Toolkit: Collocations and Association Measures
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Joel Nothman <jnothman@student.usyd.edu.au>
 # URL: <http://nltk.org>
 # For license information, see LICENSE.TXT
@@ -23,7 +23,6 @@ these functionalities, dependent on being provided a function which scores a
 ngram given appropriate frequency counts. A number of standard association
 measures are provided in bigram_measures and trigram_measures.
 """
-from __future__ import print_function
 
 # Possible TODOs:
 # - consider the distinction between f(x,_) and f(x) and whether our
@@ -32,16 +31,20 @@ from __future__ import print_function
 #   and unigram counts (raw_freq, pmi, student_t)
 
 import itertools as _itertools
-from six import iteritems
 
+# these two unused imports are referenced in collocations.doctest
+from nltk.metrics import (
+    BigramAssocMeasures,
+    ContingencyMeasures,
+    QuadgramAssocMeasures,
+    TrigramAssocMeasures,
+)
+from nltk.metrics.spearman import ranks_from_scores, spearman_correlation
 from nltk.probability import FreqDist
 from nltk.util import ngrams
-# these two unused imports are referenced in collocations.doctest
-from nltk.metrics import ContingencyMeasures, BigramAssocMeasures, TrigramAssocMeasures, QuadgramAssocMeasures
-from nltk.metrics.spearman import ranks_from_scores, spearman_correlation
 
 
-class AbstractCollocationFinder(object):
+class AbstractCollocationFinder:
     """
     An abstract base class for collocation finders whose purpose is to
     collect collocation candidate frequencies, filter and rank them.
@@ -61,9 +64,9 @@ class AbstractCollocationFinder(object):
     def _build_new_documents(
         cls, documents, window_size, pad_left=False, pad_right=False, pad_symbol=None
     ):
-        '''
+        """
         Pad the document with the place holder according to the window_size
-        '''
+        """
         padding = (pad_symbol,) * (window_size - 1)
         if pad_right:
             return _itertools.chain.from_iterable(
@@ -93,7 +96,7 @@ class AbstractCollocationFinder(object):
         if the function returns True when passed an ngram tuple.
         """
         tmp_ngram = FreqDist()
-        for ngram, freq in iteritems(self.ngram_fd):
+        for ngram, freq in self.ngram_fd.items():
             if not fn(ngram, freq):
                 tmp_ngram[ngram] = freq
         self.ngram_fd = tmp_ngram
@@ -352,8 +355,8 @@ def demo(scorer=None, compare_scorer=None):
     """Finds bigram collocations in the files of the WebText corpus."""
     from nltk.metrics import (
         BigramAssocMeasures,
-        spearman_correlation,
         ranks_from_scores,
+        spearman_correlation,
     )
 
     if scorer is None:
@@ -363,7 +366,7 @@ def demo(scorer=None, compare_scorer=None):
 
     from nltk.corpus import stopwords, webtext
 
-    ignored_words = stopwords.words('english')
+    ignored_words = stopwords.words("english")
     word_filter = lambda w: len(w) < 3 or w.lower() in ignored_words
 
     for file in webtext.fileids():
@@ -378,31 +381,32 @@ def demo(scorer=None, compare_scorer=None):
             ranks_from_scores(cf.score_ngrams(compare_scorer)),
         )
         print(file)
-        print('\t', [' '.join(tup) for tup in cf.nbest(scorer, 15)])
-        print('\t Correlation to %s: %0.4f' % (compare_scorer.__name__, corr))
+        print("\t", [" ".join(tup) for tup in cf.nbest(scorer, 15)])
+        print(f"\t Correlation to {compare_scorer.__name__}: {corr:0.4f}")
 
 
 # Slows down loading too much
 # bigram_measures = BigramAssocMeasures()
 # trigram_measures = TrigramAssocMeasures()
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import sys
+
     from nltk.metrics import BigramAssocMeasures
 
     try:
-        scorer = eval('BigramAssocMeasures.' + sys.argv[1])
+        scorer = eval("BigramAssocMeasures." + sys.argv[1])
     except IndexError:
         scorer = None
     try:
-        compare_scorer = eval('BigramAssocMeasures.' + sys.argv[2])
+        compare_scorer = eval("BigramAssocMeasures." + sys.argv[2])
     except IndexError:
         compare_scorer = None
 
     demo(scorer, compare_scorer)
 
 __all__ = [
-    'BigramCollocationFinder',
-    'TrigramCollocationFinder',
-    'QuadgramCollocationFinder',
+    "BigramCollocationFinder",
+    "TrigramCollocationFinder",
+    "QuadgramCollocationFinder",
 ]

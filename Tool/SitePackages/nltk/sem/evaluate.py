@@ -1,6 +1,6 @@
 # Natural Language Toolkit: Models for first-order languages with lambda
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Ewan Klein <ewan@inf.ed.ac.uk>,
 # URL: <http://nltk.sourceforge.net>
 # For license information, see LICENSE.TXT
@@ -13,27 +13,22 @@
 This module provides data structures for representing first-order
 models.
 """
-from __future__ import print_function, unicode_literals
 
-from pprint import pformat
 import inspect
-import textwrap
 import re
 import sys
-
-from six import string_types
+import textwrap
+from pprint import pformat
 
 from nltk.decorators import decorator  # this used in code that is commented out
-from nltk.compat import python_2_unicode_compatible
-
 from nltk.sem.logic import (
     AbstractVariableExpression,
     AllExpression,
-    Expression,
     AndExpression,
     ApplicationExpression,
     EqualityExpression,
     ExistsExpression,
+    Expression,
     IffExpression,
     ImpExpression,
     IndividualVariableExpression,
@@ -54,12 +49,9 @@ class Undefined(Error):
 
 
 def trace(f, *args, **kw):
-    if sys.version_info[0] >= 3:
-        argspec = inspect.getfullargspec(f)
-    else:
-        argspec = inspect.getargspec(f)
+    argspec = inspect.getfullargspec(f)
     d = dict(zip(argspec[0], args))
-    if d.pop('trace', None):
+    if d.pop("trace", None):
         print()
         for item in d.items():
             print("%s => %s" % item)
@@ -73,7 +65,7 @@ def is_rel(s):
     :param s: a set containing tuples of str elements
     :type s: set
     :rtype: bool
-        """
+    """
     # we have the empty relation, i.e. set()
     if len(s) == 0:
         return True
@@ -99,10 +91,10 @@ def set2rel(s):
     """
     new = set()
     for elem in s:
-        if isinstance(elem, string_types):
+        if isinstance(elem, str):
             new.add((elem,))
         elif isinstance(elem, int):
-            new.add((str(elem)))
+            new.add(str(elem))
         else:
             new.add(elem)
     return new
@@ -119,7 +111,6 @@ def arity(rel):
     return len(list(rel)[0])
 
 
-@python_2_unicode_compatible
 class Valuation(dict):
     """
     A dictionary which represents a model-theoretic Valuation of non-logical constants.
@@ -136,9 +127,9 @@ class Valuation(dict):
         """
         :param xs: a list of (symbol, value) pairs.
         """
-        super(Valuation, self).__init__()
+        super().__init__()
         for (sym, val) in xs:
-            if isinstance(val, string_types) or isinstance(val, bool):
+            if isinstance(val, str) or isinstance(val, bool):
                 self[sym] = val
             elif isinstance(val, set):
                 self[sym] = set2rel(val)
@@ -165,7 +156,7 @@ class Valuation(dict):
         """Set-theoretic domain of the value-space of a Valuation."""
         dom = []
         for val in self.values():
-            if isinstance(val, string_types):
+            if isinstance(val, str):
                 dom.append(val)
             elif not isinstance(val, bool):
                 dom.extend(
@@ -186,8 +177,8 @@ class Valuation(dict):
 ##########################################
 # REs used by the _read_valuation function
 ##########################################
-_VAL_SPLIT_RE = re.compile(r'\s*=+>\s*')
-_ELEMENT_SPLIT_RE = re.compile(r'\s*,\s*')
+_VAL_SPLIT_RE = re.compile(r"\s*=+>\s*")
+_ELEMENT_SPLIT_RE = re.compile(r"\s*,\s*")
 _TUPLES_RE = re.compile(
     r"""\s*
                                 (\([^)]+\))  # tuple-expression
@@ -215,7 +206,7 @@ def _read_valuation_line(s):
     symbol = pieces[0]
     value = pieces[1]
     # check whether the value is meant to be a set
-    if value.startswith('{'):
+    if value.startswith("{"):
         value = value[1:-1]
         tuple_strings = _TUPLES_RE.findall(value)
         # are the set elements tuples?
@@ -247,21 +238,20 @@ def read_valuation(s, encoding=None):
     statements = []
     for linenum, line in enumerate(s.splitlines()):
         line = line.strip()
-        if line.startswith('#') or line == '':
+        if line.startswith("#") or line == "":
             continue
         try:
             statements.append(_read_valuation_line(line))
-        except ValueError:
-            raise ValueError('Unable to parse line %s: %s' % (linenum, line))
+        except ValueError as e:
+            raise ValueError(f"Unable to parse line {linenum}: {line}") from e
     return Valuation(statements)
 
 
-@python_2_unicode_compatible
 class Assignment(dict):
-    """
+    r"""
     A dictionary which represents an assignment of values to variables.
 
-    An assigment can only assign values from its domain.
+    An assignment can only assign values from its domain.
 
     If an unknown expression *a* is passed to a model *M*\ 's
     interpretation function *i*, *i* will first check whether *M*\ 's
@@ -311,11 +301,11 @@ class Assignment(dict):
     """
 
     def __init__(self, domain, assign=None):
-        super(Assignment, self).__init__()
+        super().__init__()
         self.domain = domain
         if assign:
             for (var, val) in assign:
-                assert val in self.domain, "'%s' is not in the domain: %s" % (
+                assert val in self.domain, "'{}' is not in the domain: {}".format(
                     val,
                     self.domain,
                 )
@@ -359,7 +349,7 @@ class Assignment(dict):
         # Deterministic output for unit testing.
         variant = sorted(self.variant)
         for (val, var) in variant:
-            gstring += "[%s/%s]" % (val, var)
+            gstring += f"[{val}/{var}]"
         return gstring
 
     def _addvariant(self):
@@ -379,15 +369,14 @@ class Assignment(dict):
         ``self.variant``.
 
         """
-        assert val in self.domain, "%s is not in the domain %s" % (val, self.domain)
+        assert val in self.domain, f"{val} is not in the domain {self.domain}"
         assert is_indvar(var), "Wrong format for an Individual Variable: '%s'" % var
         self[var] = val
         self._addvariant()
         return self
 
 
-@python_2_unicode_compatible
-class Model(object):
+class Model:
     """
     A first order model is a domain *D* of discourse and a valuation *V*.
 
@@ -416,10 +405,10 @@ class Model(object):
             )
 
     def __repr__(self):
-        return "(%r, %r)" % (self.domain, self.valuation)
+        return f"({self.domain!r}, {self.valuation!r})"
 
     def __str__(self):
-        return "Domain = %s,\nValuation = \n%s" % (self.domain, self.valuation)
+        return f"Domain = {self.domain},\nValuation = \n{self.valuation}"
 
     def evaluate(self, expr, g, trace=None):
         """
@@ -435,13 +424,13 @@ class Model(object):
             value = self.satisfy(parsed, g, trace=trace)
             if trace:
                 print()
-                print("'%s' evaluates to %s under M, %s" % (expr, value, g))
+                print(f"'{expr}' evaluates to {value} under M, {g}")
             return value
         except Undefined:
             if trace:
                 print()
-                print("'%s' is undefined under M, %s" % (expr, g))
-            return 'Undefined'
+                print(f"'{expr}' is undefined under M, {g}")
+            return "Undefined"
 
     def satisfy(self, parsed, g, trace=None):
         """
@@ -551,11 +540,11 @@ class Model(object):
         :return: a set of the entities that satisfy ``parsed``.
         """
 
-        spacer = '   '
+        spacer = "   "
         indent = spacer + (spacer * nesting)
         candidates = []
 
-        if isinstance(varex, string_types):
+        if isinstance(varex, str):
             var = Variable(varex)
         else:
             var = varex
@@ -565,7 +554,7 @@ class Model(object):
                 print()
                 print(
                     (spacer * nesting)
-                    + "Open formula is '%s' with assignment %s" % (parsed, g)
+                    + f"Open formula is '{parsed}' with assignment {g}"
                 )
             for u in self.domain:
                 new_g = g.copy()
@@ -582,23 +571,18 @@ class Model(object):
                 # parsed == False under g[u/var]?
                 if value == False:
                     if trace:
-                        print(
-                            indent + "value of '%s' under %s is False" % (parsed, new_g)
-                        )
+                        print(indent + f"value of '{parsed}' under {new_g} is False")
 
                 # so g[u/var] is a satisfying assignment
                 else:
                     candidates.append(u)
                     if trace:
-                        print(
-                            indent
-                            + "value of '%s' under %s is %s" % (parsed, new_g, value)
-                        )
+                        print(indent + f"value of '{parsed}' under {new_g} is {value}")
 
-            result = set(c for c in candidates)
+            result = {c for c in candidates}
         # var isn't free in parsed
         else:
-            raise Undefined("%s is not free in %s" % (var.name, parsed))
+            raise Undefined(f"{var.name} is not free in {parsed}")
 
         return result
 
@@ -615,37 +599,37 @@ def propdemo(trace=None):
     """Example of a propositional model."""
 
     global val1, dom1, m1, g1
-    val1 = Valuation([('P', True), ('Q', True), ('R', False)])
-    dom1 = set([])
+    val1 = Valuation([("P", True), ("Q", True), ("R", False)])
+    dom1 = set()
     m1 = Model(dom1, val1)
     g1 = Assignment(dom1)
 
     print()
-    print('*' * mult)
+    print("*" * mult)
     print("Propositional Formulas Demo")
-    print('*' * mult)
-    print('(Propositional constants treated as nullary predicates)')
+    print("*" * mult)
+    print("(Propositional constants treated as nullary predicates)")
     print()
     print("Model m1:\n", m1)
-    print('*' * mult)
+    print("*" * mult)
     sentences = [
-        '(P & Q)',
-        '(P & R)',
-        '- P',
-        '- R',
-        '- - P',
-        '- (P & R)',
-        '(P | R)',
-        '(R | P)',
-        '(R | R)',
-        '(- P | R)',
-        '(P | - P)',
-        '(P -> Q)',
-        '(P -> R)',
-        '(R -> P)',
-        '(P <-> P)',
-        '(R <-> R)',
-        '(P <-> R)',
+        "(P & Q)",
+        "(P & R)",
+        "- P",
+        "- R",
+        "- - P",
+        "- (P & R)",
+        "(P | R)",
+        "(R | P)",
+        "(R | R)",
+        "(- P | R)",
+        "(P | - P)",
+        "(P -> Q)",
+        "(P -> R)",
+        "(R -> P)",
+        "(P <-> P)",
+        "(R <-> R)",
+        "(P <-> R)",
     ]
 
     for sent in sentences:
@@ -653,7 +637,7 @@ def propdemo(trace=None):
             print()
             m1.evaluate(sent, g1, trace)
         else:
-            print("The value of '%s' is: %s" % (sent, m1.evaluate(sent, g1)))
+            print(f"The value of '{sent}' is: {m1.evaluate(sent, g1)}")
 
 
 # Demo 2: FOL Model
@@ -666,28 +650,28 @@ def folmodel(quiet=False, trace=None):
     global val2, v2, dom2, m2, g2
 
     v2 = [
-        ('adam', 'b1'),
-        ('betty', 'g1'),
-        ('fido', 'd1'),
-        ('girl', set(['g1', 'g2'])),
-        ('boy', set(['b1', 'b2'])),
-        ('dog', set(['d1'])),
-        ('love', set([('b1', 'g1'), ('b2', 'g2'), ('g1', 'b1'), ('g2', 'b1')])),
+        ("adam", "b1"),
+        ("betty", "g1"),
+        ("fido", "d1"),
+        ("girl", {"g1", "g2"}),
+        ("boy", {"b1", "b2"}),
+        ("dog", {"d1"}),
+        ("love", {("b1", "g1"), ("b2", "g2"), ("g1", "b1"), ("g2", "b1")}),
     ]
     val2 = Valuation(v2)
     dom2 = val2.domain
     m2 = Model(dom2, val2)
-    g2 = Assignment(dom2, [('x', 'b1'), ('y', 'g2')])
+    g2 = Assignment(dom2, [("x", "b1"), ("y", "g2")])
 
     if not quiet:
         print()
-        print('*' * mult)
+        print("*" * mult)
         print("Models Demo")
         print("*" * mult)
         print("Model m2:\n", "-" * 14, "\n", m2)
         print("Variable assignment = ", g2)
 
-        exprs = ['adam', 'boy', 'love', 'walks', 'x', 'y', 'z']
+        exprs = ["adam", "boy", "love", "walks", "x", "y", "z"]
         parsed_exprs = [Expression.fromstring(e) for e in exprs]
 
         print()
@@ -701,19 +685,19 @@ def folmodel(quiet=False, trace=None):
                 print("The interpretation of '%s' in m2 is Undefined" % parsed)
 
         applications = [
-            ('boy', ('adam')),
-            ('walks', ('adam',)),
-            ('love', ('adam', 'y')),
-            ('love', ('y', 'adam')),
+            ("boy", ("adam")),
+            ("walks", ("adam",)),
+            ("love", ("adam", "y")),
+            ("love", ("y", "adam")),
         ]
 
         for (fun, args) in applications:
             try:
                 funval = m2.i(Expression.fromstring(fun), g2)
                 argsval = tuple(m2.i(Expression.fromstring(arg), g2) for arg in args)
-                print("%s(%s) evaluates to %s" % (fun, args, argsval in funval))
+                print(f"{fun}({args}) evaluates to {argsval in funval}")
             except Undefined:
-                print("%s(%s) evaluates to Undefined" % (fun, args))
+                print(f"{fun}({args}) evaluates to Undefined")
 
 
 # Demo 3: FOL
@@ -727,29 +711,29 @@ def foldemo(trace=None):
     folmodel(quiet=True)
 
     print()
-    print('*' * mult)
+    print("*" * mult)
     print("FOL Formulas Demo")
-    print('*' * mult)
+    print("*" * mult)
 
     formulas = [
-        'love (adam, betty)',
-        '(adam = mia)',
-        '\\x. (boy(x) | girl(x))',
-        '\\x. boy(x)(adam)',
-        '\\x y. love(x, y)',
-        '\\x y. love(x, y)(adam)(betty)',
-        '\\x y. love(x, y)(adam, betty)',
-        '\\x y. (boy(x) & love(x, y))',
-        '\\x. exists y. (boy(x) & love(x, y))',
-        'exists z1. boy(z1)',
-        'exists x. (boy(x) &  -(x = adam))',
-        'exists x. (boy(x) & all y. love(y, x))',
-        'all x. (boy(x) | girl(x))',
-        'all x. (girl(x) -> exists y. boy(y) & love(x, y))',  # Every girl loves exists boy.
-        'exists x. (boy(x) & all y. (girl(y) -> love(y, x)))',  # There is exists boy that every girl loves.
-        'exists x. (boy(x) & all y. (girl(y) -> love(x, y)))',  # exists boy loves every girl.
-        'all x. (dog(x) -> - girl(x))',
-        'exists x. exists y. (love(x, y) & love(x, y))',
+        "love (adam, betty)",
+        "(adam = mia)",
+        "\\x. (boy(x) | girl(x))",
+        "\\x. boy(x)(adam)",
+        "\\x y. love(x, y)",
+        "\\x y. love(x, y)(adam)(betty)",
+        "\\x y. love(x, y)(adam, betty)",
+        "\\x y. (boy(x) & love(x, y))",
+        "\\x. exists y. (boy(x) & love(x, y))",
+        "exists z1. boy(z1)",
+        "exists x. (boy(x) &  -(x = adam))",
+        "exists x. (boy(x) & all y. love(y, x))",
+        "all x. (boy(x) | girl(x))",
+        "all x. (girl(x) -> exists y. boy(y) & love(x, y))",  # Every girl loves exists boy.
+        "exists x. (boy(x) & all y. (girl(y) -> love(y, x)))",  # There is exists boy that every girl loves.
+        "exists x. (boy(x) & all y. (girl(y) -> love(x, y)))",  # exists boy loves every girl.
+        "all x. (dog(x) -> - girl(x))",
+        "exists x. exists y. (love(x, y) & love(x, y))",
     ]
 
     for fmla in formulas:
@@ -757,7 +741,7 @@ def foldemo(trace=None):
         if trace:
             m2.evaluate(fmla, g2, trace)
         else:
-            print("The value of '%s' is: %s" % (fmla, m2.evaluate(fmla, g2)))
+            print(f"The value of '{fmla}' is: {m2.evaluate(fmla, g2)}")
 
 
 # Demo 3: Satisfaction
@@ -768,32 +752,32 @@ def satdemo(trace=None):
     """Satisfiers of an open formula in a first order model."""
 
     print()
-    print('*' * mult)
+    print("*" * mult)
     print("Satisfiers Demo")
-    print('*' * mult)
+    print("*" * mult)
 
     folmodel(quiet=True)
 
     formulas = [
-        'boy(x)',
-        '(x = x)',
-        '(boy(x) | girl(x))',
-        '(boy(x) & girl(x))',
-        'love(adam, x)',
-        'love(x, adam)',
-        '-(x = adam)',
-        'exists z22. love(x, z22)',
-        'exists y. love(y, x)',
-        'all y. (girl(y) -> love(x, y))',
-        'all y. (girl(y) -> love(y, x))',
-        'all y. (girl(y) -> (boy(x) & love(y, x)))',
-        '(boy(x) & all y. (girl(y) -> love(x, y)))',
-        '(boy(x) & all y. (girl(y) -> love(y, x)))',
-        '(boy(x) & exists y. (girl(y) & love(y, x)))',
-        '(girl(x) -> dog(x))',
-        'all y. (dog(y) -> (x = y))',
-        'exists y. love(y, x)',
-        'exists y. (love(adam, y) & love(y, x))',
+        "boy(x)",
+        "(x = x)",
+        "(boy(x) | girl(x))",
+        "(boy(x) & girl(x))",
+        "love(adam, x)",
+        "love(x, adam)",
+        "-(x = adam)",
+        "exists z22. love(x, z22)",
+        "exists y. love(y, x)",
+        "all y. (girl(y) -> love(x, y))",
+        "all y. (girl(y) -> love(y, x))",
+        "all y. (girl(y) -> (boy(x) & love(y, x)))",
+        "(boy(x) & all y. (girl(y) -> love(x, y)))",
+        "(boy(x) & all y. (girl(y) -> love(y, x)))",
+        "(boy(x) & exists y. (girl(y) & love(y, x)))",
+        "(girl(x) -> dog(x))",
+        "all y. (dog(y) -> (x = y))",
+        "exists y. love(y, x)",
+        "exists y. (love(adam, y) & love(y, x))",
     ]
 
     if trace:
@@ -807,7 +791,9 @@ def satdemo(trace=None):
 
     for p in parsed:
         g2.purge()
-        print("The satisfiers of '%s' are: %s" % (p, m2.satisfiers(p, 'x', g2, trace)))
+        print(
+            "The satisfiers of '{}' are: {}".format(p, m2.satisfiers(p, "x", g2, trace))
+        )
 
 
 def demo(num=0, trace=None):

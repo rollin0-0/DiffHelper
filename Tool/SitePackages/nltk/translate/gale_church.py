@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
-
 # Natural Language Toolkit: Gale-Church Aligner
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Torsten Marek <marek@ifi.uzh.ch>
 # Contributor: Cassidy Laidlaw, Liling Tan
 # URL: <http://nltk.org/>
@@ -17,12 +15,11 @@ http://aclweb.org/anthology/J93-1004.pdf
 
 """
 
-from __future__ import division
 import math
 
 try:
-    from scipy.stats import norm
     from norm import logsf as norm_logsf
+    from scipy.stats import norm
 except ImportError:
 
     def erfcc(x):
@@ -72,13 +69,13 @@ except ImportError:
         try:
             return math.log(1 - norm_cdf(x))
         except ValueError:
-            return float('-inf')
+            return float("-inf")
 
 
 LOG2 = math.log(2)
 
 
-class LanguageIndependent(object):
+class LanguageIndependent:
     # These are the language-independent probabilities and parameters
     # given in Gale & Church
 
@@ -147,7 +144,7 @@ def align_log_prob(i, j, source_sents, target_sents, alignment, params):
             m * params.VARIANCE_CHARACTERS
         )
     except ZeroDivisionError:
-        return float('-inf')
+        return float("-inf")
 
     return -(LOG2 + norm_logsf(abs(delta)) + math.log(params.PRIORS[alignment]))
 
@@ -179,7 +176,7 @@ def align_blocks(source_sents_lens, target_sents_lens, params=LanguageIndependen
 
     for i in range(len(source_sents_lens) + 1):
         for j in range(len(target_sents_lens) + 1):
-            min_dist = float('inf')
+            min_dist = float("inf")
             min_align = None
             for a in alignment_types:
                 prev_i = -1 - a[0]
@@ -193,7 +190,7 @@ def align_blocks(source_sents_lens, target_sents_lens, params=LanguageIndependen
                     min_dist = p
                     min_align = a
 
-            if min_dist == float('inf'):
+            if min_dist == float("inf"):
                 min_dist = 0
 
             backlinks[(i, j)] = min_align
@@ -264,12 +261,3 @@ def parse_token_stream(stream, soft_delimiter, hard_delimiter):
         ]
         for block_it in split_at(stream, hard_delimiter)
     ]
-
-
-#    Code for test files in nltk_contrib/align/data/*.tok
-#    import sys
-#    from contextlib import nested
-#    with nested(open(sys.argv[1], "r"), open(sys.argv[2], "r")) as (s, t):
-#        source = parse_token_stream((l.strip() for l in s), ".EOS", ".EOP")
-#        target = parse_token_stream((l.strip() for l in t), ".EOS", ".EOP")
-#        print align_texts(source, target)

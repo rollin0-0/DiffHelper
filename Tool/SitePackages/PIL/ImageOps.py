@@ -17,11 +17,11 @@
 # See the README file for information on usage and redistribution.
 #
 
-from . import Image
-from ._util import isStringType
-import operator
 import functools
+import operator
+import re
 
+from . import Image
 
 #
 # helpers
@@ -39,7 +39,7 @@ def _border(border):
 
 
 def _color(color, mode):
-    if isStringType(color):
+    if isinstance(color, str):
         from . import ImageColor
 
         color = ImageColor.getcolor(color, mode)
@@ -55,27 +55,40 @@ def _lut(image, lut):
             lut = lut + lut + lut
         return image.point(lut)
     else:
-        raise IOError("not supported for this image mode")
+        raise OSError("not supported for this image mode")
 
 
 #
 # actions
 
 
-def autocontrast(image, cutoff=0, ignore=None):
+def autocontrast(image, cutoff=0, ignore=None, mask=None, preserve_tone=False):
     """
     Maximize (normalize) image contrast. This function calculates a
-    histogram of the input image, removes **cutoff** percent of the
+    histogram of the input image (or mask region), removes ``cutoff`` percent of the
     lightest and darkest pixels from the histogram, and remaps the image
     so that the darkest pixel becomes black (0), and the lightest
     becomes white (255).
 
     :param image: The image to process.
-    :param cutoff: How many percent to cut off from the histogram.
+    :param cutoff: The percent to cut off from the histogram on the low and
+                   high ends. Either a tuple of (low, high), or a single
+                   number for both.
     :param ignore: The background pixel value (use None for no background).
+    :param mask: Histogram used in contrast operation is computed using pixels
+                 within the mask. If no mask is given the entire image is used
+                 for histogram computation.
+    :param preserve_tone: Preserve image tone in Photoshop-like style autocontrast.
+
+                          .. versionadded:: 8.2.0
+
     :return: An image.
     """
-    histogram = image.histogram()
+    if preserve_tone:
+        histogram = image.convert("L").histogram(mask)
+    else:
+        histogram = image.histogram(mask)
+
     lut = []
     for layer in range(0, len(histogram), 256):
         h = histogram[layer : layer + 256]
@@ -89,12 +102,14 @@ def autocontrast(image, cutoff=0, ignore=None):
                     h[ix] = 0
         if cutoff:
             # cut off pixels from both ends of the histogram
+            if not isinstance(cutoff, tuple):
+                cutoff = (cutoff, cutoff)
             # get number of pixels
             n = 0
             for ix in range(256):
                 n = n + h[ix]
             # remove cutoff% pixels from the low end
-            cut = n * cutoff // 100
+            cut = n * cutoff[0] // 100
             for lo in range(256):
                 if cut > h[lo]:
                     cut = cut - h[lo]
@@ -104,8 +119,8 @@ def autocontrast(image, cutoff=0, ignore=None):
                     cut = 0
                 if cut <= 0:
                     break
-            # remove cutoff% samples from the hi end
-            cut = n * cutoff // 100
+            # remove cutoff% samples from the high end
+            cut = n * cutoff[1] // 100
             for hi in range(255, -1, -1):
                 if cut > h[hi]:
                     cut = cut - h[hi]
@@ -143,14 +158,14 @@ def colorize(image, black, white, mid=None, blackpoint=0, whitepoint=255, midpoi
     Colorize grayscale image.
     This function calculates a color wedge which maps all black pixels in
     the source image to the first color and all white pixels to the
-    second color. If **mid** is specified, it uses three-color mapping.
-    The **black** and **white** arguments should be RGB tuples or color names;
-    optionally you can use three-color mapping by also specifying **mid**.
+    second color. If ``mid`` is specified, it uses three-color mapping.
+    The ``black`` and ``white`` arguments should be RGB tuples or color names;
+    optionally you can use three-color mapping by also specifying ``mid``.
     Mapping positions for any of the colors can be specified
-    (e.g. **blackpoint**), where these parameters are the integer
+    (e.g. ``blackpoint``), where these parameters are the integer
     value corresponding to where the corresponding color should be mapped.
     These parameters must have logical order, such that
-    **blackpoint** <= **midpoint** <= **whitepoint** (if **mid** is specified).
+    ``blackpoint <= midpoint <= whitepoint`` (if ``mid`` is specified).
 
     :param image: The image to colorize.
     :param black: The color to use for black input pixels.
@@ -222,19 +237,48 @@ def colorize(image, black, white, mid=None, blackpoint=0, whitepoint=255, midpoi
     return _lut(image, red + green + blue)
 
 
-def pad(image, size, method=Image.NEAREST, color=None, centering=(0.5, 0.5)):
+def contain(image, size, method=Image.BICUBIC):
     """
-    Returns a sized and padded version of the image, expanded to fill the
-    requested aspect ratio and size.
+    Returns a resized version of the image, set to the maximum width and height
+    within the requested size, while maintaining the original aspect ratio.
 
-    :param image: The image to size and crop.
+    :param image: The image to resize and crop.
     :param size: The requested output size in pixels, given as a
                  (width, height) tuple.
-    :param method: What resampling method to use. Default is
-                   :py:attr:`PIL.Image.NEAREST`.
+    :param method: Resampling method to use. Default is
+                   :py:attr:`PIL.Image.BICUBIC`. See :ref:`concept-filters`.
+    :return: An image.
+    """
+
+    im_ratio = image.width / image.height
+    dest_ratio = size[0] / size[1]
+
+    if im_ratio != dest_ratio:
+        if im_ratio > dest_ratio:
+            new_height = int(image.height / image.width * size[0])
+            if new_height != size[1]:
+                size = (size[0], new_height)
+        else:
+            new_width = int(image.width / image.height * size[1])
+            if new_width != size[0]:
+                size = (new_width, size[1])
+    return image.resize(size, resample=method)
+
+
+def pad(image, size, method=Image.BICUBIC, color=None, centering=(0.5, 0.5)):
+    """
+    Returns a resized and padded version of the image, expanded to fill the
+    requested aspect ratio and size.
+
+    :param image: The image to resize and crop.
+    :param size: The requested output size in pixels, given as a
+                 (width, height) tuple.
+    :param method: Resampling method to use. Default is
+                   :py:attr:`PIL.Image.BICUBIC`. See :ref:`concept-filters`.
     :param color: The background color of the padded image.
     :param centering: Control the position of the original image within the
                       padded version.
+
                           (0.5, 0.5) will keep the image centered
                           (0, 0) will keep the image aligned to the top left
                           (1, 1) will keep the image aligned to the bottom
@@ -242,27 +286,17 @@ def pad(image, size, method=Image.NEAREST, color=None, centering=(0.5, 0.5)):
     :return: An image.
     """
 
-    im_ratio = image.width / image.height
-    dest_ratio = float(size[0]) / size[1]
-
-    if im_ratio == dest_ratio:
-        out = image.resize(size, resample=method)
+    resized = contain(image, size, method)
+    if resized.size == size:
+        out = resized
     else:
         out = Image.new(image.mode, size, color)
-        if im_ratio > dest_ratio:
-            new_height = int(image.height / image.width * size[0])
-            if new_height != size[1]:
-                image = image.resize((size[0], new_height), resample=method)
-
-            y = int((size[1] - new_height) * max(0, min(centering[1], 1)))
-            out.paste(image, (0, y))
+        if resized.width != size[0]:
+            x = int((size[0] - resized.width) * max(0, min(centering[0], 1)))
+            out.paste(resized, (x, 0))
         else:
-            new_width = int(image.width / image.height * size[1])
-            if new_width != size[0]:
-                image = image.resize((new_width, size[1]), resample=method)
-
-            x = int((size[0] - new_width) * max(0, min(centering[0], 1)))
-            out.paste(image, (x, 0))
+            y = int((size[1] - resized.height) * max(0, min(centering[1], 1)))
+            out.paste(resized, (0, y))
     return out
 
 
@@ -281,7 +315,7 @@ def crop(image, border=0):
     return image.crop((left, top, image.size[0] - right, image.size[1] - bottom))
 
 
-def scale(image, factor, resample=Image.NEAREST):
+def scale(image, factor, resample=Image.BICUBIC):
     """
     Returns a rescaled image by a specific factor given in parameter.
     A factor greater than 1 expands the image, between 0 and 1 contracts the
@@ -289,8 +323,8 @@ def scale(image, factor, resample=Image.NEAREST):
 
     :param image: The image to rescale.
     :param factor: The expansion factor, as a float.
-    :param resample: An optional resampling filter. Same values possible as
-       in the PIL.Image.resize function.
+    :param resample: Resampling method to use. Default is
+                     :py:attr:`PIL.Image.BICUBIC`. See :ref:`concept-filters`.
     :returns: An :py:class:`~PIL.Image.Image` object.
     """
     if factor == 1:
@@ -298,7 +332,7 @@ def scale(image, factor, resample=Image.NEAREST):
     elif factor <= 0:
         raise ValueError("the factor must be greater than 0")
     else:
-        size = (int(round(factor * image.width)), int(round(factor * image.height)))
+        size = (round(factor * image.width), round(factor * image.height))
         return image.resize(size, resample)
 
 
@@ -308,7 +342,7 @@ def deform(image, deformer, resample=Image.BILINEAR):
 
     :param image: The image to deform.
     :param deformer: A deformer object.  Any object that implements a
-                    **getmesh** method can be used.
+                    ``getmesh`` method can be used.
     :param resample: An optional resampling filter. Same values possible as
        in the PIL.Image.transform function.
     :return: An image.
@@ -359,23 +393,33 @@ def expand(image, border=0, fill=0):
     left, top, right, bottom = _border(border)
     width = left + image.size[0] + right
     height = top + image.size[1] + bottom
-    out = Image.new(image.mode, (width, height), _color(fill, image.mode))
+    color = _color(fill, image.mode)
+    if image.mode == "P" and image.palette:
+        image.load()
+        palette = image.palette.copy()
+        if isinstance(color, tuple):
+            color = palette.getcolor(color)
+    else:
+        palette = None
+    out = Image.new(image.mode, (width, height), color)
+    if palette:
+        out.putpalette(palette.palette)
     out.paste(image, (left, top))
     return out
 
 
-def fit(image, size, method=Image.NEAREST, bleed=0.0, centering=(0.5, 0.5)):
+def fit(image, size, method=Image.BICUBIC, bleed=0.0, centering=(0.5, 0.5)):
     """
-    Returns a sized and cropped version of the image, cropped to the
+    Returns a resized and cropped version of the image, cropped to the
     requested aspect ratio and size.
 
     This function was contributed by Kevin Cazabon.
 
-    :param image: The image to size and crop.
+    :param image: The image to resize and crop.
     :param size: The requested output size in pixels, given as a
                  (width, height) tuple.
-    :param method: What resampling method to use. Default is
-                   :py:attr:`PIL.Image.NEAREST`.
+    :param method: Resampling method to use. Default is
+                   :py:attr:`PIL.Image.BICUBIC`. See :ref:`concept-filters`.
     :param bleed: Remove a border around the outside of the image from all
                   four edges. The value is a decimal percentage (use 0.01 for
                   one percent). The default value is 0 (no border).
@@ -420,13 +464,17 @@ def fit(image, size, method=Image.NEAREST, bleed=0.0, centering=(0.5, 0.5)):
     )
 
     # calculate the aspect ratio of the live_size
-    live_size_ratio = float(live_size[0]) / live_size[1]
+    live_size_ratio = live_size[0] / live_size[1]
 
     # calculate the aspect ratio of the output image
-    output_ratio = float(size[0]) / size[1]
+    output_ratio = size[0] / size[1]
 
     # figure out if the sides or top/bottom will be cropped off
-    if live_size_ratio >= output_ratio:
+    if live_size_ratio == output_ratio:
+        # live_size is already the needed ratio
+        crop_width = live_size[0]
+        crop_height = live_size[1]
+    elif live_size_ratio >= output_ratio:
         # live_size is wider than what's needed, crop the sides
         crop_width = output_ratio * live_size[1]
         crop_height = live_size[1]
@@ -541,7 +589,20 @@ def exif_transpose(image):
     }.get(orientation)
     if method is not None:
         transposed_image = image.transpose(method)
-        del exif[0x0112]
-        transposed_image.info["exif"] = exif.tobytes()
+        transposed_exif = transposed_image.getexif()
+        if 0x0112 in transposed_exif:
+            del transposed_exif[0x0112]
+            if "exif" in transposed_image.info:
+                transposed_image.info["exif"] = transposed_exif.tobytes()
+            elif "Raw profile type exif" in transposed_image.info:
+                transposed_image.info[
+                    "Raw profile type exif"
+                ] = transposed_exif.tobytes().hex()
+            elif "XML:com.adobe.xmp" in transposed_image.info:
+                transposed_image.info["XML:com.adobe.xmp"] = re.sub(
+                    r'tiff:Orientation="([0-9])"',
+                    "",
+                    transposed_image.info["XML:com.adobe.xmp"],
+                )
         return transposed_image
     return image.copy()

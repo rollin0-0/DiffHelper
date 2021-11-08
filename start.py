@@ -52,11 +52,11 @@ def curSystemVersion():
 # 判断当前运行python环境
 def curPythonVersion():
     colorPrint(Green, "Python: " + platform.python_version())
-    if platform.python_version() != "3.7.3":
-        colorPrint(Red, "请确认在python3.7.3环境运行该工具,其他版本确定不能正常运行")
+    if platform.python_version() != "3.10.0":
+        colorPrint(Red, "请确认在python3.10.0环境运行该工具,其他版本确定不能正常运行")
         colorPrint(Green, "详情见:")
         colorPrint(Yellow, "https://github.com/iOSCoda/DiffHelper/wiki/Python环境安装")
-        colorPrint(Yellow, "或者直接安装附带的python安装包:python-3.7.3-macosx10.9.pkg")
+        colorPrint(Yellow, "或者直接安装附带的python安装包:python-3.10.0post2-macos11.pkg")
         os._exit(1)
 
 

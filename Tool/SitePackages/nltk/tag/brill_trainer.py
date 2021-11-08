@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Natural Language Toolkit: Transformation-based learning
 #
 # Copyright (C) 2001-2013 NLTK Project
@@ -8,20 +7,18 @@
 # URL: <http://nltk.org/>
 # For license information, see  LICENSE.TXT
 
-from __future__ import print_function, division
-
 import bisect
 import textwrap
 from collections import defaultdict
 
-from nltk.tag import untag, BrillTagger
+from nltk.tag import BrillTagger, untag
 
 ######################################################################
 #  Brill Tagger Trainer
 ######################################################################
 
 
-class BrillTaggerTrainer(object):
+class BrillTaggerTrainer:
     """
     A trainer for tbl taggers.
     """
@@ -253,19 +250,19 @@ class BrillTaggerTrainer(object):
 
         # Collect some statistics on the training process
         trainstats = {}
-        trainstats['min_acc'] = min_acc
-        trainstats['min_score'] = min_score
-        trainstats['tokencount'] = sum(len(t) for t in test_sents)
-        trainstats['sequencecount'] = len(test_sents)
-        trainstats['templatecount'] = len(self._templates)
-        trainstats['rulescores'] = []
-        trainstats['initialerrors'] = sum(
+        trainstats["min_acc"] = min_acc
+        trainstats["min_score"] = min_score
+        trainstats["tokencount"] = sum(len(t) for t in test_sents)
+        trainstats["sequencecount"] = len(test_sents)
+        trainstats["templatecount"] = len(self._templates)
+        trainstats["rulescores"] = []
+        trainstats["initialerrors"] = sum(
             tag[1] != truth[1]
             for paired in zip(test_sents, train_sents)
             for (tag, truth) in zip(*paired)
         )
-        trainstats['initialacc'] = (
-            1 - trainstats['initialerrors'] / trainstats['tokencount']
+        trainstats["initialacc"] = (
+            1 - trainstats["initialerrors"] / trainstats["tokencount"]
         )
         if self._trace > 0:
             print(
@@ -282,7 +279,7 @@ class BrillTaggerTrainer(object):
             print("Finding initial useful rules...")
         self._init_mappings(test_sents, train_sents)
         if self._trace:
-            print(("    Found %d useful rules." % len(self._rule_scores)))
+            print(f"    Found {len(self._rule_scores)} useful rules.")
 
         # Let the user know what we're up to.
         if self._trace > 2:
@@ -299,7 +296,7 @@ class BrillTaggerTrainer(object):
                 if rule:
                     rules.append(rule)
                     score = self._rule_scores[rule]
-                    trainstats['rulescores'].append(score)
+                    trainstats["rulescores"].append(score)
                 else:
                     break  # No more good rules left!
 
@@ -320,15 +317,15 @@ class BrillTaggerTrainer(object):
 
         # The user can cancel training manually:
         except KeyboardInterrupt:
-            print("Training stopped manually -- %d rules found" % len(rules))
+            print(f"Training stopped manually -- {len(rules)} rules found")
 
         # Discard our tag position mapping & rule mappings.
         self._clean()
-        trainstats['finalerrors'] = trainstats['initialerrors'] - sum(
-            trainstats['rulescores']
+        trainstats["finalerrors"] = trainstats["initialerrors"] - sum(
+            trainstats["rulescores"]
         )
-        trainstats['finalacc'] = (
-            1 - trainstats['finalerrors'] / trainstats['tokencount']
+        trainstats["finalacc"] = (
+            1 - trainstats["finalerrors"] / trainstats["tokencount"]
         )
         # Create and return a tagger from the rules we found.
         return BrillTagger(self._initial_tagger, rules, trainstats)
@@ -373,8 +370,7 @@ class BrillTaggerTrainer(object):
         in the sentence *sent* and generate the tag *new_tag*.
         """
         for template in self._templates:
-            for rule in template.applicable_rules(sent, wordnum, new_tag):
-                yield rule
+            yield from template.applicable_rules(sent, wordnum, new_tag)
 
     def _update_rule_applies(self, rule, sentnum, wordnum, train_sents):
         """
@@ -602,30 +598,33 @@ class BrillTaggerTrainer(object):
         rulestr = rule.format(self._ruleformat)
         if self._trace > 2:
             print(
-                '%4d%4d%4d%4d  |' % (score, num_fixed, num_broken, num_other), end=' '
+                "{:4d}{:4d}{:4d}{:4d}  |".format(
+                    score, num_fixed, num_broken, num_other
+                ),
+                end=" ",
             )
             print(
                 textwrap.fill(
                     rulestr,
-                    initial_indent=' ' * 20,
+                    initial_indent=" " * 20,
                     width=79,
-                    subsequent_indent=' ' * 18 + '|   ',
+                    subsequent_indent=" " * 18 + "|   ",
                 ).strip()
             )
         else:
             print(rulestr)
 
     def _trace_apply(self, num_updates):
-        prefix = ' ' * 18 + '|'
+        prefix = " " * 18 + "|"
         print(prefix)
-        print(prefix, 'Applying rule to %d positions.' % num_updates)
+        print(prefix, f"Applying rule to {num_updates} positions.")
 
     def _trace_update_rules(self, num_obsolete, num_new, num_unseen):
-        prefix = ' ' * 18 + '|'
-        print(prefix, 'Updated rule tables:')
-        print(prefix, ('  - %d rule applications removed' % num_obsolete))
+        prefix = " " * 18 + "|"
+        print(prefix, "Updated rule tables:")
+        print(prefix, (f"  - {num_obsolete} rule applications removed"))
         print(
             prefix,
-            ('  - %d rule applications added (%d novel)' % (num_new, num_unseen)),
+            (f"  - {num_new} rule applications added ({num_unseen} novel)"),
         )
         print(prefix)

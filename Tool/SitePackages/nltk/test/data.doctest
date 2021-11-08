@@ -1,4 +1,4 @@
-.. Copyright (C) 2001-2019 NLTK Project
+.. Copyright (C) 2001-2021 NLTK Project
 .. For license information, see LICENSE.TXT
 
 =========================================
@@ -20,7 +20,6 @@ takes as its first argument a URL specifying what file should be
 loaded.  The ``nltk:`` protocol loads files from the NLTK data
 distribution:
 
-    >>> from __future__ import print_function
     >>> tokenizer = nltk.data.load('nltk:tokenizers/punkt/english.pickle')
     >>> tokenizer.tokenize('Hello.  This is a test.  It works!')
     ['Hello.', 'This is a test.', 'It works!']
@@ -31,7 +30,7 @@ not work!
 
 The ``nltk:`` protocol is used by default if no protocol is specified:
 
-    >>> nltk.data.load('tokenizers/punkt/english.pickle') # doctest: +ELLIPSIS
+    >>> nltk.data.load('tokenizers/punkt/english.pickle')
     <nltk.tokenize.punkt.PunktSentenceTokenizer object at ...>
 
 But it is also possible to load resources from ``http:``, ``ftp:``,
@@ -39,9 +38,9 @@ and ``file:`` URLs, e.g. ``cfg = nltk.data.load('http://example.com/path/to/toy.
 
     >>> # Load a grammar using an absolute path.
     >>> url = 'file:%s' % nltk.data.find('grammars/sample_grammars/toy.cfg')
-    >>> url.replace('\\', '/') # doctest: +ELLIPSIS
+    >>> url.replace('\\', '/')
     'file:...toy.cfg'
-    >>> print(nltk.data.load(url)) # doctest: +ELLIPSIS
+    >>> print(nltk.data.load(url))
     Grammar with 14 productions (start state = S)
         S -> NP VP
         PP -> P NP
@@ -56,7 +55,7 @@ currently supported by the data module are described by the dictionary
 `nltk.data.FORMATS`:
 
     >>> for format, descr in sorted(nltk.data.FORMATS.items()):
-    ...     print('{0:<7} {1:}'.format(format, descr)) # doctest: +NORMALIZE_WHITESPACE
+    ...     print('{0:<7} {1:}'.format(format, descr))
     cfg     A context free grammar.
     fcfg    A feature CFG.
     fol     A list of first order logic expressions, parsed with
@@ -69,7 +68,7 @@ currently supported by the data module are described by the dictionary
     pickle  A serialized python object, stored using the pickle
     module.
     raw     The raw (byte string) contents of a file.
-    text    The raw (unicode string) contents of a file. 
+    text    The raw (unicode string) contents of a file.
     val     A semantic valuation, parsed by
     nltk.sem.Valuation.fromstring.
     yaml    A serialized python object, stored using the yaml module.
@@ -113,8 +112,8 @@ Note that by explicitly specifying the ``format`` argument, you can
 override the load method's default processing behavior.  For example,
 to get the raw contents of any file, simply use ``format="raw"``:
 
-    >>> s = nltk.data.load('grammars/sample_grammars/toy.cfg', 'text') 
-    >>> print(s) # doctest: +ELLIPSIS
+    >>> s = nltk.data.load('grammars/sample_grammars/toy.cfg', 'text')
+    >>> print(s)
     S -> NP VP
     PP -> P NP
     NP -> Det N | NP PP
@@ -145,7 +144,7 @@ sample grammars.
 
     >>> # Load the edited grammar, & display it.
     >>> cfg = nltk.data.load('file:///' + os.path.abspath('toy.cfg'))
-    >>> print(cfg) # doctest: +ELLIPSIS
+    >>> print(cfg)
     Grammar with 14 productions (start state = S)
         S -> DP VP
         PP -> P DP
@@ -172,7 +171,7 @@ ValueError exception.  It will *not* overwrite the file:
 
     >>> os.path.isfile('./toy.cfg')
     True
-    >>> nltk.data.retrieve('grammars/sample_grammars/toy.cfg') # doctest: +ELLIPSIS
+    >>> nltk.data.retrieve('grammars/sample_grammars/toy.cfg')
     Traceback (most recent call last):
       . . .
     ValueError: File '...toy.cfg' already exists!
@@ -194,11 +193,11 @@ types define the `open()` method, which can be used to read the string
 contents of the file.
 
     >>> path = nltk.data.find('corpora/abc/rural.txt')
-    >>> str(path) # doctest: +ELLIPSIS
+    >>> str(path)
     '...rural.txt'
     >>> print(path.open().read(60).decode())
     PM denies knowledge of AWB kickbacks
-    The Prime Minister has 
+    The Prime Minister has
 
 Alternatively, the `nltk.data.load()` function can be used with the
 keyword argument ``format="raw"``:
@@ -206,14 +205,14 @@ keyword argument ``format="raw"``:
     >>> s = nltk.data.load('corpora/abc/rural.txt', format='raw')[:60]
     >>> print(s.decode())
     PM denies knowledge of AWB kickbacks
-    The Prime Minister has 
+    The Prime Minister has
 
 Alternatively, you can use the keyword argument ``format="text"``:
 
     >>> s = nltk.data.load('corpora/abc/rural.txt', format='text')[:60]
     >>> print(s)
     PM denies knowledge of AWB kickbacks
-    The Prime Minister has 
+    The Prime Minister has
 
 Resource Caching
 ~~~~~~~~~~~~~~~~
@@ -282,7 +281,7 @@ The `retrieve()` function accepts all url types:
     ...         'nltk:grammars/sample_grammars/toy.cfg',
     ...         'grammars/sample_grammars/toy.cfg']
     >>> for i, url in enumerate(urls):
-    ...     nltk.data.retrieve(url, 'toy-%d.cfg' % i) # doctest: +ELLIPSIS
+    ...     nltk.data.retrieve(url, 'toy-%d.cfg' % i)
     Retrieving 'https://raw.githubusercontent.com/nltk/nltk/develop/nltk/test/toy.cfg', saving to 'toy-0.cfg'
     Retrieving 'file:...toy.cfg', saving to 'toy-1.cfg'
     Retrieving 'nltk:grammars/sample_grammars/toy.cfg', saving to 'toy-2.cfg'
@@ -305,7 +304,7 @@ internal use by NLTK's corpus readers.
     >>> ll = nltk.data.LazyLoader('grammars/sample_grammars/toy.cfg')
 
     >>> # Show that it's not loaded yet:
-    >>> object.__repr__(ll) # doctest: +ELLIPSIS
+    >>> object.__repr__(ll)
     '<nltk.data.LazyLoader object at ...>'
 
     >>> # printing it is enough to cause it to be loaded:
@@ -313,7 +312,7 @@ internal use by NLTK's corpus readers.
     <Grammar with 14 productions>
 
     >>> # Show that it's now been loaded:
-    >>> object.__repr__(ll) # doctest: +ELLIPSIS
+    >>> object.__repr__(ll)
     '<nltk.grammar.CFG object at ...>'
 
 
@@ -321,7 +320,7 @@ internal use by NLTK's corpus readers.
     >>> ll = nltk.data.LazyLoader('grammars/sample_grammars/toy.cfg')
     >>> ll.start()
     S
-    >>> object.__repr__(ll) # doctest: +ELLIPSIS
+    >>> object.__repr__(ll)
     '<nltk.grammar.CFG object at ...>'
 
 Buffered Gzip Reading and Writing
@@ -337,7 +336,7 @@ This is mainly intended for internal use. The test simply tests that reading
 and writing work as intended and does not test how much improvement buffering
 provides.
 
-    >>> from nltk.compat import StringIO
+    >>> from io import StringIO
     >>> test = nltk.data.BufferedGzipFile('testbuf.gz', 'wb', size=2**10)
     >>> ans = []
     >>> for i in range(10000):
@@ -376,4 +375,3 @@ JSON serialization is used instead of pickle for some classes.
     '{"!JSONSerializable": 1}'
     >>> JSONTaggedDecoder().decode('{"!JSONSerializable": 1}').n
     1
-

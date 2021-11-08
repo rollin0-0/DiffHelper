@@ -1,6 +1,6 @@
 # Natural Language Toolkit: Twitter Corpus Reader
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Ewan Klein <ewan@inf.ed.ac.uk>
 # URL: <http://nltk.org/>
 # For license information, see LICENSE.TXT
@@ -13,16 +13,13 @@ have been serialised into line-delimited JSON.
 import json
 import os
 
-from six import string_types
-
-from nltk.tokenize import TweetTokenizer
-
-from nltk.corpus.reader.util import StreamBackedCorpusView, concat, ZipFilePathPointer
 from nltk.corpus.reader.api import CorpusReader
+from nltk.corpus.reader.util import StreamBackedCorpusView, ZipFilePathPointer, concat
+from nltk.tokenize import TweetTokenizer
 
 
 class TwitterCorpusReader(CorpusReader):
-    """
+    r"""
     Reader for corpora that consist of Tweets represented as a list of line-delimited JSON.
 
     Individual Tweets can be tokenized using the default tokenizer, or by a
@@ -59,7 +56,7 @@ class TwitterCorpusReader(CorpusReader):
     """
 
     def __init__(
-        self, root, fileids=None, word_tokenizer=TweetTokenizer(), encoding='utf8'
+        self, root, fileids=None, word_tokenizer=TweetTokenizer(), encoding="utf8"
     ):
         """
 
@@ -77,7 +74,7 @@ class TwitterCorpusReader(CorpusReader):
             if isinstance(path, ZipFilePathPointer):
                 pass
             elif os.path.getsize(path) == 0:
-                raise ValueError("File {} is empty".format(path))
+                raise ValueError(f"File {path} is empty")
         """Check that all user-created corpus files are non-empty."""
 
         self._word_tokenizer = word_tokenizer
@@ -110,7 +107,7 @@ class TwitterCorpusReader(CorpusReader):
         tweets = []
         for jsono in fulltweets:
             try:
-                text = jsono['text']
+                text = jsono["text"]
                 if isinstance(text, bytes):
                     text = text.decode(self.encoding)
                 tweets.append(text)
@@ -128,16 +125,6 @@ class TwitterCorpusReader(CorpusReader):
         tweets = self.strings(fileids)
         tokenizer = self._word_tokenizer
         return [tokenizer.tokenize(t) for t in tweets]
-
-    def raw(self, fileids=None):
-        """
-        Return the corpora in their raw form.
-        """
-        if fileids is None:
-            fileids = self._fileids
-        elif isinstance(fileids, string_types):
-            fileids = [fileids]
-        return concat([self.open(f).read() for f in fileids])
 
     def _read_tweets(self, stream):
         """

@@ -5,7 +5,7 @@
 # URL: <http://nltk.org/>
 # For license information, see LICENSE.TXT
 
-"""
+r"""
 A collection of methods for tree (grammar) transformations used
 in parsing natural language.
 
@@ -106,7 +106,6 @@ The following is a short tutorial on the available transformations.
      C   D      C   D
 
 """
-from __future__ import print_function
 
 from nltk.tree import Tree
 
@@ -137,7 +136,7 @@ def chomsky_normal_form(
             parentString = ""
             originalNode = node.label()
             if vertMarkov != 0 and node != tree and isinstance(node[0], Tree):
-                parentString = "%s<%s>" % (parentChar, "-".join(parent))
+                parentString = "{}<{}>".format(parentChar, "-".join(parent))
                 node.set_label(node.label() + parentString)
                 parent = [originalNode] + parent[: vertMarkov - 1]
 
@@ -155,7 +154,7 @@ def chomsky_normal_form(
                 numChildren = len(nodeCopy)
                 for i in range(1, numChildren - 1):
                     if factor == "right":
-                        newHead = "%s%s<%s>%s" % (
+                        newHead = "{}{}<{}>{}".format(
                             originalNode,
                             childChar,
                             "-".join(
@@ -166,7 +165,7 @@ def chomsky_normal_form(
                         newNode = Tree(newHead, [])
                         curNode[0:] = [nodeCopy.pop(0), newNode]
                     else:
-                        newHead = "%s%s<%s>%s" % (
+                        newHead = "{}{}<{}>{}".format(
                             originalNode,
                             childChar,
                             "-".join(
@@ -284,9 +283,10 @@ def demo():
     A demonstration showing how each tree transform can be used.
     """
 
-    from nltk.draw.tree import draw_trees
-    from nltk import tree, treetransforms
     from copy import deepcopy
+
+    from nltk import tree, treetransforms
+    from nltk.draw.tree import draw_trees
 
     # original tree from WSJ bracketed text
     sentence = """(TOP
@@ -332,7 +332,7 @@ def demo():
     draw_trees(t, collapsedTree, cnfTree, parentTree, original)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     demo()
 
 __all__ = ["chomsky_normal_form", "un_chomsky_normal_form", "collapse_unary"]

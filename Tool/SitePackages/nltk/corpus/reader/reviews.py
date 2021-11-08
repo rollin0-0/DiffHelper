@@ -1,6 +1,6 @@
 # Natural Language Toolkit: Product Reviews Corpus Reader
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Pierpaolo Pantone <24alsecondo@gmail.com>
 # URL: <http://nltk.org/>
 # For license information, see LICENSE.TXT
@@ -59,25 +59,20 @@ Note: Some of the files (e.g. "ipod.txt", "Canon PowerShot SD500.txt") do not
     consideration.
 """
 
-from __future__ import division
-
 import re
-
-from six import string_types
 
 from nltk.corpus.reader.api import *
 from nltk.tokenize import *
 
-TITLE = re.compile(r'^\[t\](.*)$')  # [t] Title
+TITLE = re.compile(r"^\[t\](.*)$")  # [t] Title
 FEATURES = re.compile(
-    r'((?:(?:\w+\s)+)?\w+)\[((?:\+|\-)\d)\]'
+    r"((?:(?:\w+\s)+)?\w+)\[((?:\+|\-)\d)\]"
 )  # find 'feature' in feature[+3]
-NOTES = re.compile(r'\[(?!t)(p|u|s|cc|cs)\]')  # find 'p' in camera[+2][p]
-SENT = re.compile(r'##(.*)$')  # find tokenized sentence
+NOTES = re.compile(r"\[(?!t)(p|u|s|cc|cs)\]")  # find 'p' in camera[+2][p]
+SENT = re.compile(r"##(.*)$")  # find tokenized sentence
 
 
-@compat.python_2_unicode_compatible
-class Review(object):
+class Review:
     """
     A Review is the main block of a ReviewsCorpusReader.
     """
@@ -125,13 +120,12 @@ class Review(object):
         return [review_line.sent for review_line in self.review_lines]
 
     def __repr__(self):
-        return 'Review(title=\"{}\", review_lines={})'.format(
+        return 'Review(title="{}", review_lines={})'.format(
             self.title, self.review_lines
         )
 
 
-@compat.python_2_unicode_compatible
-class ReviewLine(object):
+class ReviewLine:
     """
     A ReviewLine represents a sentence of the review, together with (optional)
     annotations of its features and notes about the reviewed item.
@@ -150,7 +144,7 @@ class ReviewLine(object):
             self.notes = notes
 
     def __repr__(self):
-        return 'ReviewLine(features={}, notes={}, sent={})'.format(
+        return "ReviewLine(features={}, notes={}, sent={})".format(
             self.features, self.notes, self.sent
         )
 
@@ -180,10 +174,8 @@ class ReviewsCorpusReader(CorpusReader):
 
     We can compute stats for specific product features:
 
-        >>> from __future__ import division
         >>> n_reviews = len([(feat,score) for (feat,score) in product_reviews_1.features('Canon_G3.txt') if feat=='picture'])
         >>> tot = sum([int(score) for (feat,score) in product_reviews_1.features('Canon_G3.txt') if feat=='picture'])
-        >>> # We use float for backward compatibility with division in Python2.7
         >>> mean = tot / n_reviews
         >>> print(n_reviews, tot, mean)
         15 24 1.6
@@ -192,7 +184,7 @@ class ReviewsCorpusReader(CorpusReader):
     CorpusView = StreamBackedCorpusView
 
     def __init__(
-        self, root, fileids, word_tokenizer=WordPunctTokenizer(), encoding='utf8'
+        self, root, fileids, word_tokenizer=WordPunctTokenizer(), encoding="utf8"
     ):
         """
         :param root: The root directory for the corpus.
@@ -204,6 +196,7 @@ class ReviewsCorpusReader(CorpusReader):
 
         CorpusReader.__init__(self, root, fileids, encoding)
         self._word_tokenizer = word_tokenizer
+        self._readme = "README.txt"
 
     def features(self, fileids=None):
         """
@@ -217,7 +210,7 @@ class ReviewsCorpusReader(CorpusReader):
         """
         if fileids is None:
             fileids = self._fileids
-        elif isinstance(fileids, string_types):
+        elif isinstance(fileids, str):
             fileids = [fileids]
         return concat(
             [
@@ -225,25 +218,6 @@ class ReviewsCorpusReader(CorpusReader):
                 for (fileid, enc) in self.abspaths(fileids, True)
             ]
         )
-
-    def raw(self, fileids=None):
-        """
-        :param fileids: a list or regexp specifying the fileids of the files that
-            have to be returned as a raw string.
-        :return: the given file(s) as a single string.
-        :rtype: str
-        """
-        if fileids is None:
-            fileids = self._fileids
-        elif isinstance(fileids, string_types):
-            fileids = [fileids]
-        return concat([self.open(f).read() for f in fileids])
-
-    def readme(self):
-        """
-        Return the contents of the corpus README.txt file.
-        """
-        return self.open("README.txt").read()
 
     def reviews(self, fileids=None):
         """

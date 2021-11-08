@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 # Natural Language Toolkit: Twitter client
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Ewan Klein <ewan@inf.ed.ac.uk>
 #         Lorenzo Rubio <lrnzcig@gmail.com>
 # URL: <http://nltk.org/>
@@ -30,25 +29,22 @@ For documentation about the Twitter APIs, see `The Streaming APIs Overview
 For error codes see Twitter's
 `Error Codes and Responses <https://dev.twitter.com/overview/api/response-codes>`
 """
-from __future__ import print_function
 
 import datetime
-from functools import wraps
 import json
-
-from nltk.compat import StringIO
+from functools import wraps
+from io import StringIO
 
 from nltk.twitter import (
     Query,
     Streamer,
-    Twitter,
     TweetViewer,
     TweetWriter,
+    Twitter,
     credsfromfile,
 )
 
-
-SPACER = '###################################'
+SPACER = "###################################"
 
 
 def verbose(func):
@@ -81,10 +77,10 @@ def setup():
     """
     global USERIDS, FIELDS
 
-    USERIDS = ['759251', '612473', '15108702', '6017542', '2673523800']
+    USERIDS = ["759251", "612473", "15108702", "6017542", "2673523800"]
     # UserIDs corresponding to\
     #           @CNN,    @BBCNews, @ReutersLive, @BreakingNews, @AJELive
-    FIELDS = ['id_str']
+    FIELDS = ["id_str"]
 
 
 @verbose
@@ -94,18 +90,18 @@ def twitterclass_demo():
     """
     tw = Twitter()
     print("Track from the public stream\n")
-    tw.tweets(keywords='love, hate', limit=10)  # public stream
+    tw.tweets(keywords="love, hate", limit=10)  # public stream
     print(SPACER)
     print("Search past Tweets\n")
     tw = Twitter()
-    tw.tweets(keywords='love, hate', stream=False, limit=10)  # search past tweets
+    tw.tweets(keywords="love, hate", stream=False, limit=10)  # search past tweets
     print(SPACER)
     print(
         "Follow two accounts in the public stream"
         + " -- be prepared to wait a few minutes\n"
     )
     tw = Twitter()
-    tw.tweets(follow=['759251', '6017542'], stream=True, limit=5)  # public stream
+    tw.tweets(follow=["759251", "6017542"], stream=True, limit=5)  # public stream
 
 
 @verbose
@@ -131,18 +127,18 @@ def tracktoscreen_demo(track="taylor swift", limit=10):
 
 
 @verbose
-def search_demo(keywords='nltk'):
+def search_demo(keywords="nltk"):
     """
     Use the REST API to search for past tweets containing a given keyword.
     """
     oauth = credsfromfile()
     client = Query(**oauth)
     for tweet in client.search_tweets(keywords=keywords, limit=10):
-        print(tweet['text'])
+        print(tweet["text"])
 
 
 @verbose
-def tweets_by_user_demo(user='NLTK_org', count=200):
+def tweets_by_user_demo(user="NLTK_org", count=200):
     """
     Use the REST API to search for past tweets by a given user.
     """
@@ -161,10 +157,10 @@ def lookup_by_userid_demo():
     client = Query(**oauth)
     user_info = client.user_info_from_id(USERIDS)
     for info in user_info:
-        name = info['screen_name']
-        followers = info['followers_count']
-        following = info['friends_count']
-        print("{0}, followers: {1}, following: {2}".format(name, followers, following))
+        name = info["screen_name"]
+        followers = info["followers_count"]
+        following = info["friends_count"]
+        print(f"{name}, followers: {followers}, following: {following}")
 
 
 @verbose
@@ -208,10 +204,10 @@ def limit_by_time_demo(keywords="nltk"):
     client = Query(**oauth)
     client.register(TweetViewer(limit=100, lower_date_limit=date))
 
-    print("Cutoff date: {}\n".format(dt_date))
+    print(f"Cutoff date: {dt_date}\n")
 
     for tweet in client.search_tweets(keywords=keywords):
-        print("{} ".format(tweet['created_at']), end='')
+        print("{} ".format(tweet["created_at"]), end="")
         client.handler.handle(tweet)
 
 
@@ -271,12 +267,12 @@ def expand_tweetids_demo():
     hydrated = client.expand_tweetids(ids_f)
 
     for tweet in hydrated:
-        id_str = tweet['id_str']
-        print('id: {}'.format(id_str))
-        text = tweet['text']
-        if text.startswith('@null'):
+        id_str = tweet["id_str"]
+        print(f"id: {id_str}")
+        text = tweet["text"]
+        if text.startswith("@null"):
             text = "[Tweet not available]"
-        print(text + '\n')
+        print(text + "\n")
 
 
 ALL = [

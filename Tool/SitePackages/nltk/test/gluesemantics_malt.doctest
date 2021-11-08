@@ -1,4 +1,4 @@
-.. Copyright (C) 2001-2019 NLTK Project
+.. Copyright (C) 2001-2021 NLTK Project
 .. For license information, see LICENSE.TXT
 
 .. see also: gluesemantics.doctest
@@ -6,6 +6,9 @@
 ==============================================================================
  Glue Semantics
 ==============================================================================
+
+    >>> from nltk.test.gluesemantics_malt_fixt import setup_module
+    >>> setup_module()
 
     >>> from nltk.sem.glue import *
     >>> nltk.sem.logic._counter._value = 0
@@ -21,8 +24,8 @@ Initialize the Dependency Parser
     ...      ('^(a)$', 'ex_quant'),
     ...      ('^(every)$', 'univ_quant'),
     ...      ('^(girl|dog)$', 'NN')
-    ... ])
-    >>> depparser = MaltParser(tagger=tagger)
+    ... ]).tag
+    >>> depparser = MaltParser("maltparser-1.7.2", tagger=tagger)
 
 --------------------
 Automated Derivation
@@ -64,5 +67,3 @@ default.
 
     >>> readings[0].equiv(readings[1])
     True
-
-

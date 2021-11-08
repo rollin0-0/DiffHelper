@@ -1,19 +1,10 @@
-# -*- coding: utf-8 -*-
-from __future__ import absolute_import, unicode_literals
-
-import unittest
 import contextlib
 import sys
-
-from nose import with_setup
+import unittest
+from io import StringIO
 
 from nltk.corpus import gutenberg
 from nltk.text import Text
-
-try:
-    from StringIO import StringIO
-except ImportError as e:
-    from io import StringIO
 
 
 @contextlib.contextmanager
@@ -29,11 +20,11 @@ class TestConcordance(unittest.TestCase):
     """Text constructed using: http://www.nltk.org/book/ch01.html"""
 
     @classmethod
-    def setup_class(cls):
-        cls.corpus = gutenberg.words('melville-moby_dick.txt')
+    def setUpClass(cls):
+        cls.corpus = gutenberg.words("melville-moby_dick.txt")
 
     @classmethod
-    def teardown_class(cls):
+    def tearDownClass(cls):
         pass
 
     def setUp(self):
@@ -41,17 +32,17 @@ class TestConcordance(unittest.TestCase):
         self.query = "monstrous"
         self.maxDiff = None
         self.list_out = [
-            'ong the former , one was of a most monstrous size . ... This came towards us , ',
+            "ong the former , one was of a most monstrous size . ... This came towards us , ",
             'ON OF THE PSALMS . " Touching that monstrous bulk of the whale or ork we have r',
-            'll over with a heathenish array of monstrous clubs and spears . Some were thick',
-            'd as you gazed , and wondered what monstrous cannibal and savage could ever hav',
-            'that has survived the flood ; most monstrous and most mountainous ! That Himmal',
-            'they might scout at Moby Dick as a monstrous fable , or still worse and more de',
-            'th of Radney .\'" CHAPTER 55 Of the Monstrous Pictures of Whales . I shall ere l',
-            'ing Scenes . In connexion with the monstrous pictures of whales , I am strongly',
-            'ere to enter upon those still more monstrous stories of them which are to be fo',
-            'ght have been rummaged out of this monstrous cabinet there is no telling . But ',
-            'of Whale - Bones ; for Whales of a monstrous size are oftentimes cast up dead u',
+            "ll over with a heathenish array of monstrous clubs and spears . Some were thick",
+            "d as you gazed , and wondered what monstrous cannibal and savage could ever hav",
+            "that has survived the flood ; most monstrous and most mountainous ! That Himmal",
+            "they might scout at Moby Dick as a monstrous fable , or still worse and more de",
+            "th of Radney .'\" CHAPTER 55 Of the Monstrous Pictures of Whales . I shall ere l",
+            "ing Scenes . In connexion with the monstrous pictures of whales , I am strongly",
+            "ere to enter upon those still more monstrous stories of them which are to be fo",
+            "ght have been rummaged out of this monstrous cabinet there is no telling . But ",
+            "of Whale - Bones ; for Whales of a monstrous size are oftentimes cast up dead u",
         ]
 
     def tearDown(self):

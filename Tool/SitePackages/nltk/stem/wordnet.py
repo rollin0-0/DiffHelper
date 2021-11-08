@@ -1,19 +1,15 @@
 # Natural Language Toolkit: WordNet stemmer interface
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Steven Bird <stevenbird1@gmail.com>
 #         Edward Loper <edloper@gmail.com>
 # URL: <http://nltk.org/>
 # For license information, see LICENSE.TXT
-from __future__ import unicode_literals
 
-from nltk.corpus.reader.wordnet import NOUN
-from nltk.corpus import wordnet
-from nltk.compat import python_2_unicode_compatible
+from nltk.corpus import wordnet as wn
 
 
-@python_2_unicode_compatible
-class WordNetLemmatizer(object):
+class WordNetLemmatizer:
     """
     WordNet Lemmatizer
 
@@ -34,19 +30,20 @@ class WordNetLemmatizer(object):
         hardrock
     """
 
-    def __init__(self):
-        pass
+    def lemmatize(self, word: str, pos: str = "n") -> str:
+        """Lemmatize `word` using WordNet's built-in morphy function.
+        Returns the input word unchanged if it cannot be found in WordNet.
 
-    def lemmatize(self, word, pos=NOUN):
-        lemmas = wordnet._morphy(word, pos)
+        :param word: The input word to lemmatize.
+        :type word: str
+        :param pos: The Part Of Speech tag. Valid options are `"n"` for nouns,
+            `"v"` for verbs, `"a"` for adjectives, `"r"` for adverbs and `"s"`
+            for satellite adjectives.
+        :param pos: str
+        :return: The lemma of `word`, for the given `pos`.
+        """
+        lemmas = wn._morphy(word, pos)
         return min(lemmas, key=len) if lemmas else word
 
     def __repr__(self):
-        return '<WordNetLemmatizer>'
-
-
-# unload wordnet
-def teardown_module(module=None):
-    from nltk.corpus import wordnet
-
-    wordnet._unload()
+        return "<WordNetLemmatizer>"

@@ -1,16 +1,15 @@
-# -*- coding: utf-8 -*-
 # Natural Language Toolkit: Generating from a CFG
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Steven Bird <stevenbird1@gmail.com>
 #         Peter Ljunglöf <peter.ljunglof@heatherleaf.se>
 # URL: <http://nltk.org/>
 # For license information, see LICENSE.TXT
 #
-from __future__ import print_function
 
 import itertools
 import sys
+
 from nltk.grammar import Nonterminal
 
 
@@ -48,7 +47,7 @@ def _generate_all(grammar, items, depth):
                 # Helpful error message while still showing the recursion stack.
                 raise RuntimeError(
                     "The grammar has rule(s) that yield infinite recursion!!"
-                )
+                ) from _error
             else:
                 raise
     else:
@@ -59,8 +58,7 @@ def _generate_one(grammar, item, depth):
     if depth > 0:
         if isinstance(item, Nonterminal):
             for prod in grammar.productions(lhs=item):
-                for frag in _generate_all(grammar, prod.rhs(), depth - 1):
-                    yield frag
+                yield from _generate_all(grammar, prod.rhs(), depth - 1)
         else:
             yield [item]
 
@@ -79,12 +77,12 @@ demo_grammar = """
 def demo(N=23):
     from nltk.grammar import CFG
 
-    print('Generating the first %d sentences for demo grammar:' % (N,))
+    print("Generating the first %d sentences for demo grammar:" % (N,))
     print(demo_grammar)
     grammar = CFG.fromstring(demo_grammar)
     for n, sent in enumerate(generate(grammar, n=N), 1):
-        print('%3d. %s' % (n, ' '.join(sent)))
+        print("%3d. %s" % (n, " ".join(sent)))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     demo()

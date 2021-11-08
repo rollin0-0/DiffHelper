@@ -1,13 +1,13 @@
 # Natural Language Toolkit: Tagger Utilities
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Edward Loper <edloper@gmail.com>
 #         Steven Bird <stevenbird1@gmail.com>
 # URL: <http://nltk.org/>
 # For license information, see LICENSE.TXT
 
 
-def str2tuple(s, sep='/'):
+def str2tuple(s, sep="/"):
     """
     Given the string representation of a tagged token, return the
     corresponding tuple representation.  The rightmost occurrence of
@@ -31,7 +31,7 @@ def str2tuple(s, sep='/'):
         return (s, None)
 
 
-def tuple2str(tagged_token, sep='/'):
+def tuple2str(tagged_token, sep="/"):
     """
     Given the tuple representation of a tagged token, return the
     corresponding string representation.  This representation is
@@ -54,8 +54,8 @@ def tuple2str(tagged_token, sep='/'):
     if tag is None:
         return word
     else:
-        assert sep not in tag, 'tag may not contain sep!'
-        return '%s%s%s' % (word, sep, tag)
+        assert sep not in tag, "tag may not contain sep!"
+        return f"{word}{sep}{tag}"
 
 
 def untag(tagged_sentence):

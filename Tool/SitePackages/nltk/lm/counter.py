@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 # Natural Language Toolkit
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Ilia Kurenkov <ilia.kurenkov@gmail.com>
 # URL: <http://nltk.org/>
 # For license information, see LICENSE.TXT
@@ -10,17 +9,13 @@ Language Model Counter
 ----------------------
 """
 
-from __future__ import unicode_literals
+from collections import defaultdict
+from collections.abc import Sequence
 
-from collections import Sequence, defaultdict
-
-from six import string_types
-from nltk import compat
 from nltk.probability import ConditionalFreqDist, FreqDist
 
 
-@compat.python_2_unicode_compatible
-class NgramCounter(object):
+class NgramCounter:
     """Class for counting ngrams.
 
     Will count any ngram sequence you give it ;)
@@ -96,7 +91,7 @@ class NgramCounter(object):
         If `ngram_text` is specified, counts ngrams from it, otherwise waits for
         `update` method to be called explicitly.
 
-        :param ngram_text: Optional text containing senteces of ngrams, as for `update` method.
+        :param ngram_text: Optional text containing sentences of ngrams, as for `update` method.
         :type ngram_text: Iterable(Iterable(tuple(str))) or None
 
         """
@@ -112,7 +107,7 @@ class NgramCounter(object):
         Expects `ngram_text` to be a sequence of sentences (sequences).
         Each sentence consists of ngrams as tuples of strings.
 
-        :param Iterable(Iterable(tuple(str))) ngram_text: Text containing senteces of ngrams.
+        :param Iterable(Iterable(tuple(str))) ngram_text: Text containing sentences of ngrams.
         :raises TypeError: if the ngrams are not tuples.
 
         """
@@ -121,8 +116,7 @@ class NgramCounter(object):
             for ngram in sent:
                 if not isinstance(ngram, tuple):
                     raise TypeError(
-                        "Ngram <{0}> isn't a tuple, "
-                        "but {1}".format(ngram, type(ngram))
+                        "Ngram <{}> isn't a tuple, " "but {}".format(ngram, type(ngram))
                     )
 
                 ngram_order = len(ngram)
@@ -151,13 +145,13 @@ class NgramCounter(object):
         """User-friendly access to ngram counts."""
         if isinstance(item, int):
             return self._counts[item]
-        elif isinstance(item, string_types):
+        elif isinstance(item, str):
             return self._counts.__getitem__(1)[item]
         elif isinstance(item, Sequence):
             return self._counts.__getitem__(len(item) + 1)[tuple(item)]
 
     def __str__(self):
-        return "<{0} with {1} ngram orders and {2} ngrams>".format(
+        return "<{} with {} ngram orders and {} ngrams>".format(
             self.__class__.__name__, len(self._counts), self.N()
         )
 

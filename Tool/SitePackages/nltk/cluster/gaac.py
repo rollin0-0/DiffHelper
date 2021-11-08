@@ -1,21 +1,18 @@
 # Natural Language Toolkit: Group Average Agglomerative Clusterer
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Trevor Cohn <tacohn@cs.mu.oz.au>
 # URL: <http://nltk.org/>
 # For license information, see LICENSE.TXT
-from __future__ import print_function, unicode_literals, division
 
 try:
     import numpy
 except ImportError:
     pass
 
-from nltk.cluster.util import VectorSpaceClusterer, Dendrogram, cosine_distance
-from nltk.compat import python_2_unicode_compatible
+from nltk.cluster.util import Dendrogram, VectorSpaceClusterer, cosine_distance
 
 
-@python_2_unicode_compatible
 class GAAClusterer(VectorSpaceClusterer):
     """
     The Group Average Agglomerative starts with each of the N vectors as singleton
@@ -51,7 +48,7 @@ class GAAClusterer(VectorSpaceClusterer):
 
         # construct the similarity matrix
         dims = (N, N)
-        dist = numpy.ones(dims, dtype=numpy.float) * numpy.inf
+        dist = numpy.ones(dims, dtype=float) * numpy.inf
         for i in range(N):
             for j in range(i + 1, N):
                 dist[i, j] = cosine_distance(vectors[i], vectors[j])
@@ -137,7 +134,7 @@ class GAAClusterer(VectorSpaceClusterer):
         return self._num_clusters
 
     def __repr__(self):
-        return '<GroupAverageAgglomerative Clusterer n=%d>' % self._num_clusters
+        return "<GroupAverageAgglomerative Clusterer n=%d>" % self._num_clusters
 
 
 def demo():
@@ -154,9 +151,9 @@ def demo():
     clusterer = GAAClusterer(4)
     clusters = clusterer.cluster(vectors, True)
 
-    print('Clusterer:', clusterer)
-    print('Clustered:', vectors)
-    print('As:', clusters)
+    print("Clusterer:", clusterer)
+    print("Clustered:", vectors)
+    print("As:", clusters)
     print()
 
     # show the dendrogram
@@ -164,10 +161,10 @@ def demo():
 
     # classify a new vector
     vector = numpy.array([3, 3])
-    print('classify(%s):' % vector, end=' ')
+    print("classify(%s):" % vector, end=" ")
     print(clusterer.classify(vector))
     print()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     demo()

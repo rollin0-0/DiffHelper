@@ -5,10 +5,9 @@
 #
 # Copyright (c) 2014 Dov Grobgeld <dov.grobgeld@gmail.com>
 
-from __future__ import print_function
+import re
 
 from . import Image, _imagingmorph
-import re
 
 LUT_SIZE = 1 << 9
 
@@ -26,39 +25,39 @@ MIRROR_MATRIX = [
 # fmt: on
 
 
-class LutBuilder(object):
+class LutBuilder:
     """A class for building a MorphLut from a descriptive language
 
-      The input patterns is a list of a strings sequences like these::
+    The input patterns is a list of a strings sequences like these::
 
-          4:(...
-             .1.
-             111)->1
+        4:(...
+           .1.
+           111)->1
 
-      (whitespaces including linebreaks are ignored). The option 4
-      describes a series of symmetry operations (in this case a
-      4-rotation), the pattern is described by:
+    (whitespaces including linebreaks are ignored). The option 4
+    describes a series of symmetry operations (in this case a
+    4-rotation), the pattern is described by:
 
-      - . or X - Ignore
-      - 1 - Pixel is on
-      - 0 - Pixel is off
+    - . or X - Ignore
+    - 1 - Pixel is on
+    - 0 - Pixel is off
 
-      The result of the operation is described after "->" string.
+    The result of the operation is described after "->" string.
 
-      The default is to return the current pixel value, which is
-      returned if no other match is found.
+    The default is to return the current pixel value, which is
+    returned if no other match is found.
 
-      Operations:
+    Operations:
 
-      - 4 - 4 way rotation
-      - N - Negate
-      - 1 - Dummy op for no other operation (an op must always be given)
-      - M - Mirroring
+    - 4 - 4 way rotation
+    - N - Negate
+    - 1 - Dummy op for no other operation (an op must always be given)
+    - M - Mirroring
 
-      Example::
+    Example::
 
-          lb = LutBuilder(patterns = ["4:(... .1. 111)->1"])
-          lut = lb.build_lut()
+        lb = LutBuilder(patterns = ["4:(... .1. 111)->1"])
+        lut = lb.build_lut()
 
     """
 
@@ -177,7 +176,7 @@ class LutBuilder(object):
         return self.lut
 
 
-class MorphOp(object):
+class MorphOp:
     """A class for binary morphological operators"""
 
     def __init__(self, lut=None, op_name=None, patterns=None):
@@ -197,7 +196,7 @@ class MorphOp(object):
             raise Exception("No operator loaded")
 
         if image.mode != "L":
-            raise Exception("Image must be binary, meaning it must use mode L")
+            raise ValueError("Image mode must be L")
         outimage = Image.new(image.mode, image.size, None)
         count = _imagingmorph.apply(bytes(self.lut), image.im.id, outimage.im.id)
         return count, outimage
@@ -212,7 +211,7 @@ class MorphOp(object):
             raise Exception("No operator loaded")
 
         if image.mode != "L":
-            raise Exception("Image must be binary, meaning it must use mode L")
+            raise ValueError("Image mode must be L")
         return _imagingmorph.match(bytes(self.lut), image.im.id)
 
     def get_on_pixels(self, image):
@@ -222,7 +221,7 @@ class MorphOp(object):
         of all matching pixels. See :ref:`coordinate-system`."""
 
         if image.mode != "L":
-            raise Exception("Image must be binary, meaning it must use mode L")
+            raise ValueError("Image mode must be L")
         return _imagingmorph.get_on_pixels(image.im.id)
 
     def load_lut(self, filename):

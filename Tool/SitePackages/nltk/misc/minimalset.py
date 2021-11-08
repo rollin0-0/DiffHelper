@@ -1,6 +1,6 @@
 # Natural Language Toolkit: Minimal Sets
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Steven Bird <stevenbird1@gmail.com>
 # URL: <http://nltk.org>
 # For license information, see LICENSE.TXT
@@ -8,7 +8,7 @@
 from collections import defaultdict
 
 
-class MinimalSet(object):
+class MinimalSet:
     """
     Find contexts where more than one possible target value can
     appear.  E.g. if targets are word-initial letters, and contexts

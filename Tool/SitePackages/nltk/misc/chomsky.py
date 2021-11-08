@@ -12,7 +12,6 @@ To generate n sentences of linguistic wisdom, type
     (CHOMSKY n)  -- for example
     (CHOMSKY 5) generates half a screen of linguistic truth.
 """
-from __future__ import print_function
 
 leadins = """To characterize a linguistic level L,
     On the other hand,
@@ -116,10 +115,9 @@ scope of a complex symbol.
     the strong generative capacity of the theory."""
 # List of OBJECTs selected for profound sententiousness.
 
-import textwrap, random
+import random
+import textwrap
 from itertools import chain, islice
-
-from six.moves import zip
 
 
 def generate_chomsky(times=5, line_length=72):
@@ -128,9 +126,9 @@ def generate_chomsky(times=5, line_length=72):
         phraselist = list(map(str.strip, part.splitlines()))
         random.shuffle(phraselist)
         parts.append(phraselist)
-    output = chain(*islice(zip(*parts), 0, times))
+    output = chain.from_iterable(islice(zip(*parts), 0, times))
     print(textwrap.fill(" ".join(output), line_length))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     generate_chomsky()

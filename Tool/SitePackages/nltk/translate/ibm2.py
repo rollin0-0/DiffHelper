@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Natural Language Toolkit: IBM Model 2
 #
 # Copyright (C) 2001-2013 NLTK Project
@@ -46,15 +45,10 @@ Translation: Parameter Estimation. Computational Linguistics, 19 (2),
 263-311.
 """
 
-from __future__ import division
-
 import warnings
 from collections import defaultdict
 
-from nltk.translate import AlignedSent
-from nltk.translate import Alignment
-from nltk.translate import IBMModel
-from nltk.translate import IBMModel1
+from nltk.translate import AlignedSent, Alignment, IBMModel, IBMModel1
 from nltk.translate.ibm_model import Counts
 
 
@@ -120,7 +114,7 @@ class IBMModel2(IBMModel):
             See ``IBMModel`` for the type and purpose of these tables.
         :type probability_tables: dict[str]: object
         """
-        super(IBMModel2, self).__init__(sentence_aligned_corpus)
+        super().__init__(sentence_aligned_corpus)
 
         if probability_tables is None:
             # Get translation probabilities from IBM Model 1
@@ -131,8 +125,8 @@ class IBMModel2(IBMModel):
             self.set_uniform_probabilities(sentence_aligned_corpus)
         else:
             # Set user-defined probabilities
-            self.translation_table = probability_tables['translation_table']
-            self.alignment_table = probability_tables['alignment_table']
+            self.translation_table = probability_tables["translation_table"]
+            self.alignment_table = probability_tables["alignment_table"]
 
         for n in range(0, iterations):
             self.train(sentence_aligned_corpus)
@@ -163,7 +157,7 @@ class IBMModel2(IBMModel):
         counts = Model2Counts()
         for aligned_sentence in parallel_corpus:
             src_sentence = [None] + aligned_sentence.mots
-            trg_sentence = ['UNUSED'] + aligned_sentence.words  # 1-indexed
+            trg_sentence = ["UNUSED"] + aligned_sentence.words  # 1-indexed
             l = len(aligned_sentence.mots)
             m = len(aligned_sentence.words)
 
@@ -304,7 +298,7 @@ class Model2Counts(Counts):
     """
 
     def __init__(self):
-        super(Model2Counts, self).__init__()
+        super().__init__()
         self.alignment = defaultdict(
             lambda: defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: 0.0)))
         )

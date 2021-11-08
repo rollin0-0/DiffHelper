@@ -1,6 +1,6 @@
 # Natural Language Toolkit: Tokenizers
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Christopher Hench <chris.l.hench@gmail.com>
 #         Alex Estes
 # URL: <http://nltk.sourceforge.net>
@@ -18,7 +18,7 @@ universal syllabification algorithm, but that does not mean it performs equally
 across languages. Bartlett et al. (2009) is a good benchmark for English accuracy
 if utilizing IPA (pg. 311).
 
-Importantly, if a custom hiearchy is supplied and vowels span across more than
+Importantly, if a custom hierarchy is supplied and vowels span across more than
 one level, they should be given separately to the `vowels` class attribute.
 
 References:
@@ -31,10 +31,8 @@ References:
   In HLT-NAACL. pp. 308-316.
 """
 
-from __future__ import unicode_literals
-import warnings
-
 import re
+import warnings
 from string import punctuation
 
 from nltk.tokenize.api import TokenizerI
@@ -45,6 +43,7 @@ class SyllableTokenizer(TokenizerI):
     """
     Syllabifies words based on the Sonority Sequencing Principle (SSP).
 
+        >>> from nltk.tokenize import SyllableTokenizer
         >>> from nltk import word_tokenize
         >>> SSP = SyllableTokenizer()
         >>> SSP.tokenize('justification')
@@ -54,7 +53,7 @@ class SyllableTokenizer(TokenizerI):
         [['This'], ['is'], ['a'], ['foo', 'bar', '-', 'li', 'ke'], ['sen', 'ten', 'ce'], ['.']]
     """
 
-    def __init__(self, lang='en', sonority_hierarchy=False):
+    def __init__(self, lang="en", sonority_hierarchy=False):
         """
         :param lang: Language parameter, default is English, 'en'
         :type lang: str
@@ -66,12 +65,13 @@ class SyllableTokenizer(TokenizerI):
         # If vowels are spread across multiple levels, they should be
         # passed assigned self.vowels var together, otherwise should be
         # placed in first index of hierarchy.
-        if not sonority_hierarchy and lang == 'en':
-            sonority_hierarchy = ['aeiouy',  # vowels.
-                                  'lmnrw',  # nasals.
-                                  'zvsf',  # fricatives.
-                                  'bcdgtkpqxhj'  # stops.
-                                  ]
+        if not sonority_hierarchy and lang == "en":
+            sonority_hierarchy = [
+                "aeiouy",  # vowels.
+                "lmnrw",  # nasals.
+                "zvsf",  # fricatives.
+                "bcdgtkpqxhj",  # stops.
+            ]
 
         self.vowels = sonority_hierarchy[0]
         self.phoneme_map = {}
@@ -98,11 +98,13 @@ class SyllableTokenizer(TokenizerI):
                 syllables_values.append((c, self.phoneme_map[c]))
             except KeyError:
                 if c not in punctuation:
-                    warnings.warn("Character not defined in sonority_hierarchy,"
-                                  " assigning as vowel: '{}'".format(c))
+                    warnings.warn(
+                        "Character not defined in sonority_hierarchy,"
+                        " assigning as vowel: '{}'".format(c)
+                    )
                     syllables_values.append((c, max(self.phoneme_map.values())))
                     self.vowels += c
-                else: # If it's a punctuation, assing -1.
+                else:  # If it's a punctuation, assign -1.
                     syllables_values.append((c, -1))
         return syllables_values
 
@@ -123,11 +125,13 @@ class SyllableTokenizer(TokenizerI):
             if syllable in punctuation:
                 valid_syllables.append(syllable)
                 continue
-            if not re.search('|'.join(self.vowels), syllable):
+            if not re.search("|".join(self.vowels), syllable):
                 if len(valid_syllables) == 0:
                     front += syllable
                 else:
-                    valid_syllables = valid_syllables[:-1] + [valid_syllables[-1] + syllable]
+                    valid_syllables = valid_syllables[:-1] + [
+                        valid_syllables[-1] + syllable
+                    ]
             else:
                 if len(valid_syllables) == 0:
                     valid_syllables.append(front + syllable)
@@ -163,7 +167,7 @@ class SyllableTokenizer(TokenizerI):
             focal_phoneme = phonemes[1]
 
             # These cases trigger syllable break.
-            if focal_value == -1: # If it's a punctuation, just break.
+            if focal_value == -1:  # If it's a punctuation, just break.
                 syllable_list.append(syllable)
                 syllable_list.append(focal_phoneme)
                 syllable = ""

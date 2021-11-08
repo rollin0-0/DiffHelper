@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 # Natural Language Toolkit: Transformation-based learning
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Marcus Uneson <marcus.uneson@gmail.com>
 #   based on previous (nltk2) version by
 #   Christopher Maloof, Edward Loper, Steven Bird
@@ -13,6 +12,8 @@ Transformation Based Learning
 
 A general purpose package for Transformation Based Learning,
 currently used by nltk.tag.BrillTagger.
+
+isort:skip_file
 """
 
 from nltk.tbl.template import Template

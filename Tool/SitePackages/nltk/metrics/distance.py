@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 # Natural Language Toolkit: Distance Metrics
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Edward Loper <edloper@gmail.com>
 #         Steven Bird <stevenbird1@gmail.com>
 #         Tom Lippincott <tom@cs.columbia.edu>
@@ -20,11 +19,9 @@ As metrics, they must satisfy the following three requirements:
 3. d(a, c) <= d(a, b) + d(b, c)
 """
 
-from __future__ import print_function
-from __future__ import division
-
-import warnings
 import operator
+import warnings
+
 
 def _edit_dist_init(len1, len2):
     lev = []
@@ -37,7 +34,13 @@ def _edit_dist_init(len1, len2):
     return lev
 
 
-def _edit_dist_step(lev, i, j, s1, s2, substitution_cost=1, transpositions=False):
+def _last_left_t_init(sigma):
+    return {c: 0 for c in sigma}
+
+
+def _edit_dist_step(
+    lev, i, j, s1, s2, last_left, last_right, substitution_cost=1, transpositions=False
+):
     c1 = s1[i - 1]
     c2 = s2[j - 1]
 
@@ -50,9 +53,8 @@ def _edit_dist_step(lev, i, j, s1, s2, substitution_cost=1, transpositions=False
 
     # transposition
     d = c + 1  # never picked by default
-    if transpositions and i > 1 and j > 1:
-        if s1[i - 2] == c2 and s2[j - 2] == c1:
-            d = lev[i - 2][j - 2] + 1
+    if transpositions and last_left > 0 and last_right > 0:
+        d = lev[last_left - 1][last_right - 1] + i - last_left + j - last_right - 1
 
     # pick the cheapest
     lev[i][j] = min(a, b, c, d)
@@ -88,18 +90,33 @@ def edit_distance(s1, s2, substitution_cost=1, transpositions=False):
     len2 = len(s2)
     lev = _edit_dist_init(len1 + 1, len2 + 1)
 
+    # retrieve alphabet
+    sigma = set()
+    sigma.update(s1)
+    sigma.update(s2)
+
+    # set up table to remember positions of last seen occurrence in s1
+    last_left_t = _last_left_t_init(sigma)
+
     # iterate over the array
     for i in range(len1):
+        last_right = 0
         for j in range(len2):
+            last_left = last_left_t[s2[j]]
             _edit_dist_step(
                 lev,
                 i + 1,
                 j + 1,
                 s1,
                 s2,
+                last_left,
+                last_right,
                 substitution_cost=substitution_cost,
                 transpositions=transpositions,
             )
+            if s1[i] == s2[j]:
+                last_right = j + 1
+            last_left_t[s1[i]] = i + 1
     return lev[len1][len2]
 
 
@@ -115,7 +132,8 @@ def _edit_dist_backtrace(lev):
         ]
 
         direction_costs = (
-            (lev[i][j] if (i >= 0 and j >= 0) else float('inf'), (i, j)) for i, j in directions
+            (lev[i][j] if (i >= 0 and j >= 0) else float("inf"), (i, j))
+            for i, j in directions
         )
         _, (i, j) = min(direction_costs, key=operator.itemgetter(0))
 
@@ -164,6 +182,8 @@ def edit_distance_align(s1, s2, substitution_cost=1):
                 j + 1,
                 s1,
                 s2,
+                0,
+                0,
                 substitution_cost=substitution_cost,
                 transpositions=False,
             )
@@ -190,9 +210,7 @@ def binary_distance(label1, label2):
 
 
 def jaccard_distance(label1, label2):
-    """Distance metric comparing set-similarity.
-
-    """
+    """Distance metric comparing set-similarity."""
     return (len(label1.union(label2)) - len(label1.intersection(label2))) / len(
         label1.union(label2)
     )
@@ -244,25 +262,23 @@ def interval_distance(label1, label2):
 
 
 def presence(label):
-    """Higher-order function to test presence of a given label
-    """
+    """Higher-order function to test presence of a given label"""
 
     return lambda x, y: 1.0 * ((label in x) == (label in y))
 
 
 def fractional_presence(label):
     return (
-        lambda x, y: abs(((1.0 / len(x)) - (1.0 / len(y))))
-        * (label in x and label in y)
+        lambda x, y: abs((1.0 / len(x)) - (1.0 / len(y))) * (label in x and label in y)
         or 0.0 * (label not in x and label not in y)
-        or abs((1.0 / len(x))) * (label in x and label not in y)
-        or ((1.0 / len(y))) * (label not in x and label in y)
+        or abs(1.0 / len(x)) * (label in x and label not in y)
+        or (1.0 / len(y)) * (label not in x and label in y)
     )
 
 
 def custom_distance(file):
     data = {}
-    with open(file, 'r') as infile:
+    with open(file) as infile:
         for l in infile:
             labelA, labelB, dist = l.strip().split("\t")
             labelA = frozenset([labelA])
@@ -273,7 +289,7 @@ def custom_distance(file):
 
 def jaro_similarity(s1, s2):
     """
-   Computes the Jaro similarity between 2 sequences from:
+    Computes the Jaro similarity between 2 sequences from:
 
         Matthew A. Jaro (1989). Advances in record linkage methodology
         as applied to the 1985 census of Tampa Florida. Journal of the
@@ -460,22 +476,22 @@ def demo():
         ("language", "lngauage"),
     ]
     for s1, s2 in string_distance_examples:
-        print("Edit distance btwn '%s' and '%s':" % (s1, s2), edit_distance(s1, s2))
+        print(f"Edit distance btwn '{s1}' and '{s2}':", edit_distance(s1, s2))
         print(
-            "Edit dist with transpositions btwn '%s' and '%s':" % (s1, s2),
+            f"Edit dist with transpositions btwn '{s1}' and '{s2}':",
             edit_distance(s1, s2, transpositions=True),
         )
-        print("Jaro similarity btwn '%s' and '%s':" % (s1, s2), jaro_similarity(s1, s2))
+        print(f"Jaro similarity btwn '{s1}' and '{s2}':", jaro_similarity(s1, s2))
         print(
-            "Jaro-Winkler similarity btwn '%s' and '%s':" % (s1, s2),
+            f"Jaro-Winkler similarity btwn '{s1}' and '{s2}':",
             jaro_winkler_similarity(s1, s2),
         )
         print(
-            "Jaro-Winkler distance btwn '%s' and '%s':" % (s1, s2),
+            f"Jaro-Winkler distance btwn '{s1}' and '{s2}':",
             1 - jaro_winkler_similarity(s1, s2),
         )
-    s1 = set([1, 2, 3, 4])
-    s2 = set([3, 4, 5])
+    s1 = {1, 2, 3, 4}
+    s2 = {3, 4, 5}
     print("s1:", s1)
     print("s2:", s2)
     print("Binary distance:", binary_distance(s1, s2))
@@ -483,5 +499,5 @@ def demo():
     print("MASI distance:", masi_distance(s1, s2))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     demo()

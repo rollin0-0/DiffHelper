@@ -17,17 +17,13 @@ the model builder tries to build a model for the assumptions. Given a set of ass
 goal *G*, the model builder tries to find a counter-model, in the sense of a model that will satisfy
 the assumptions plus the negation of *G*.
 """
-from __future__ import print_function
 
-from abc import ABCMeta, abstractmethod
 import threading
 import time
+from abc import ABCMeta, abstractmethod
 
-from six import add_metaclass
 
-
-@add_metaclass(ABCMeta)
-class Prover(object):
+class Prover(metaclass=ABCMeta):
     """
     Interface for trying to prove a goal from assumptions.  Both the goal and
     the assumptions are constrained to be formulas of ``logic.Expression``.
@@ -48,8 +44,7 @@ class Prover(object):
         """
 
 
-@add_metaclass(ABCMeta)
-class ModelBuilder(object):
+class ModelBuilder(metaclass=ABCMeta):
     """
     Interface for trying to build a model of set of formulas.
     Open formulas are assumed to be universally quantified.
@@ -74,8 +69,7 @@ class ModelBuilder(object):
         """
 
 
-@add_metaclass(ABCMeta)
-class TheoremToolCommand(object):
+class TheoremToolCommand(metaclass=ABCMeta):
     """
     This class holds a goal and a list of assumptions to be used in proving
     or model building.
@@ -356,7 +350,7 @@ class BaseModelBuilderCommand(BaseTheoremToolCommand, ModelBuilderCommand):
         :return: str
         """
         if self._result is None:
-            raise LookupError('You have to call build_model() first to ' 'get a model!')
+            raise LookupError("You have to call build_model() first to " "get a model!")
         else:
             return self._decorate_model(self._model, format)
 
@@ -490,7 +484,7 @@ class ModelBuilderCommandDecorator(TheoremToolCommandDecorator, ModelBuilderComm
         :return: str
         """
         if self._result is None:
-            raise LookupError('You have to call build_model() first to ' 'get a model!')
+            raise LookupError("You have to call build_model() first to " "get a model!")
         else:
             return self._decorate_model(self._model, format)
 
@@ -520,26 +514,26 @@ class ParallelProverBuilder(Prover, ModelBuilder):
         self._modelbuilder = modelbuilder
 
     def _prove(self, goal=None, assumptions=None, verbose=False):
-        return self._run(goal, assumptions, verbose), ''
+        return self._run(goal, assumptions, verbose), ""
 
     def _build_model(self, goal=None, assumptions=None, verbose=False):
-        return not self._run(goal, assumptions, verbose), ''
+        return not self._run(goal, assumptions, verbose), ""
 
     def _run(self, goal, assumptions, verbose):
         # Set up two thread, Prover and ModelBuilder to run in parallel
         tp_thread = TheoremToolThread(
-            lambda: self._prover.prove(goal, assumptions, verbose), verbose, 'TP'
+            lambda: self._prover.prove(goal, assumptions, verbose), verbose, "TP"
         )
         mb_thread = TheoremToolThread(
             lambda: self._modelbuilder.build_model(goal, assumptions, verbose),
             verbose,
-            'MB',
+            "MB",
         )
 
         tp_thread.start()
         mb_thread.start()
 
-        while tp_thread.isAlive() and mb_thread.isAlive():
+        while tp_thread.is_alive() and mb_thread.is_alive():
             # wait until either the prover or the model builder is done
             pass
 
@@ -575,16 +569,16 @@ class ParallelProverBuilderCommand(BaseProverCommand, BaseModelBuilderCommand):
     def _run(self, verbose):
         # Set up two thread, Prover and ModelBuilder to run in parallel
         tp_thread = TheoremToolThread(
-            lambda: BaseProverCommand.prove(self, verbose), verbose, 'TP'
+            lambda: BaseProverCommand.prove(self, verbose), verbose, "TP"
         )
         mb_thread = TheoremToolThread(
-            lambda: BaseModelBuilderCommand.build_model(self, verbose), verbose, 'MB'
+            lambda: BaseModelBuilderCommand.build_model(self, verbose), verbose, "MB"
         )
 
         tp_thread.start()
         mb_thread.start()
 
-        while tp_thread.isAlive() and mb_thread.isAlive():
+        while tp_thread.is_alive() and mb_thread.is_alive():
             # wait until either the prover or the model builder is done
             pass
 
@@ -608,12 +602,12 @@ class TheoremToolThread(threading.Thread):
             self._result = self._command()
             if self._verbose:
                 print(
-                    'Thread %s finished with result %s at %s'
+                    "Thread %s finished with result %s at %s"
                     % (self._name, self._result, time.localtime(time.time()))
                 )
         except Exception as e:
             print(e)
-            print('Thread %s completed abnormally' % (self._name))
+            print("Thread %s completed abnormally" % (self._name))
 
     @property
     def result(self):

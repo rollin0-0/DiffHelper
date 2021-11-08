@@ -1,33 +1,21 @@
-# -*- coding: utf-8 -*-
 # Natural Language Toolkit
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Ilia Kurenkov <ilia.kurenkov@gmail.com>
 # URL: <http://nltk.org/>
 # For license information, see LICENSE.TXT
 """Language Model Vocabulary"""
 
-from __future__ import unicode_literals
-
 import sys
-from collections import Counter, Iterable
+from collections import Counter
+from collections.abc import Iterable
+from functools import singledispatch
 from itertools import chain
-
-from nltk import compat
-
-try:
-    # Python >= 3.4
-    from functools import singledispatch
-except ImportError:
-    # Python < 3.4
-    from singledispatch import singledispatch
 
 
 @singledispatch
 def _dispatched_lookup(words, vocab):
-    raise TypeError(
-        "Unsupported type for looking up in vocabulary: {0}".format(type(words))
-    )
+    raise TypeError(f"Unsupported type for looking up in vocabulary: {type(words)}")
 
 
 @_dispatched_lookup.register(Iterable)
@@ -40,22 +28,13 @@ def _(words, vocab):
     return tuple(_dispatched_lookup(w, vocab) for w in words)
 
 
-try:
-    # Python 2 unicode + str type
-    basestring
-except NameError:
-    # Python 3 unicode + str type
-    basestring = str
-
-
-@_dispatched_lookup.register(basestring)
+@_dispatched_lookup.register(str)
 def _string_lookup(word, vocab):
     """Looks up one word in the vocabulary."""
     return word if word in vocab else vocab.unk_label
 
 
-@compat.python_2_unicode_compatible
-class Vocabulary(object):
+class Vocabulary:
     """Stores language model vocabulary.
 
     Satisfies two common language modeling requirements for a vocabulary:
@@ -135,7 +114,7 @@ class Vocabulary(object):
     ('<UNK>', 'a', '<UNK>', 'd', '<UNK>', 'c')
 
     It's possible to update the counts after the vocabulary has been created.
-    The interface follows that of `collections.Counter`.
+    In general, the interface is the same as that of `collections.Counter`.
 
     >>> vocab['b']
     1
@@ -155,18 +134,13 @@ class Vocabulary(object):
         :param unk_label: Label for marking words not part of vocabulary.
 
         """
-        if isinstance(counts, Counter):
-            self.counts = counts
-        else:
-            self.counts = Counter()
-            if isinstance(counts, Iterable):
-                self.counts.update(counts)
         self.unk_label = unk_label
         if unk_cutoff < 1:
-            raise ValueError(
-                "Cutoff value cannot be less than 1. Got: {0}".format(unk_cutoff)
-            )
+            raise ValueError(f"Cutoff value cannot be less than 1. Got: {unk_cutoff}")
         self._cutoff = unk_cutoff
+
+        self.counts = Counter()
+        self.update(counts if counts is not None else "")
 
     @property
     def cutoff(self):
@@ -184,6 +158,7 @@ class Vocabulary(object):
 
         """
         self.counts.update(*counter_args, **counter_kwargs)
+        self._len = sum(1 for _ in self)
 
     def lookup(self, words):
         """Look up one or more words in the vocabulary.
@@ -227,7 +202,7 @@ class Vocabulary(object):
 
     def __len__(self):
         """Computing size of vocabulary reflects the cutoff."""
-        return sum(1 for _ in self)
+        return self._len
 
     def __eq__(self, other):
         return (
@@ -236,13 +211,7 @@ class Vocabulary(object):
             and self.counts == other.counts
         )
 
-    if sys.version_info[0] == 2:
-        # see https://stackoverflow.com/a/35781654/4501212
-        def __ne__(self, other):
-            equal = self.__eq__(other)
-            return equal if equal is NotImplemented else not equal
-
     def __str__(self):
-        return "<{0} with cutoff={1} unk_label='{2}' and {3} items>".format(
+        return "<{} with cutoff={} unk_label='{}' and {} items>".format(
             self.__class__.__name__, self.cutoff, self.unk_label, len(self)
         )

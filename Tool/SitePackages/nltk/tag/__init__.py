@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 # Natural Language Toolkit: Taggers
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Edward Loper <edloper@gmail.com>
 #         Steven Bird <stevenbird1@gmail.com> (minor additions)
 # URL: <http://nltk.org/>
@@ -59,11 +58,12 @@ of ``None``.
 We evaluate a tagger on data that was not seen during training:
 
     >>> tagger.evaluate(brown.tagged_sents(categories='news')[500:600])
-    0.73...
+    0.7...
 
 For more information, please consult chapter 5 of the NLTK Book.
+
+isort:skip_file
 """
-from __future__ import print_function
 
 from nltk.tag.api import TaggerI
 from nltk.tag.util import str2tuple, tuple2str, untag
@@ -94,14 +94,14 @@ from nltk.tag.perceptron import PerceptronTagger
 from nltk.data import load, find
 
 RUS_PICKLE = (
-    'taggers/averaged_perceptron_tagger_ru/averaged_perceptron_tagger_ru.pickle'
+    "taggers/averaged_perceptron_tagger_ru/averaged_perceptron_tagger_ru.pickle"
 )
 
 
 def _get_tagger(lang=None):
-    if lang == 'rus':
+    if lang == "rus":
         tagger = PerceptronTagger(False)
-        ap_russian_model_loc = 'file:' + str(find(RUS_PICKLE))
+        ap_russian_model_loc = "file:" + str(find(RUS_PICKLE))
         tagger.load(ap_russian_model_loc)
     else:
         tagger = PerceptronTagger()
@@ -109,31 +109,35 @@ def _get_tagger(lang=None):
 
 
 def _pos_tag(tokens, tagset=None, tagger=None, lang=None):
-    # Currently only supoorts English and Russian.
-    if lang not in ['eng', 'rus']:
+    # Currently only supports English and Russian.
+    if lang not in ["eng", "rus"]:
         raise NotImplementedError(
             "Currently, NLTK pos_tag only supports English and Russian "
             "(i.e. lang='eng' or lang='rus')"
         )
+    # Throws Error if tokens is of string type
+    elif isinstance(tokens, str):
+        raise TypeError("tokens: expected a list of strings, got a string")
+
     else:
         tagged_tokens = tagger.tag(tokens)
         if tagset:  # Maps to the specified tagset.
-            if lang == 'eng':
+            if lang == "eng":
                 tagged_tokens = [
-                    (token, map_tag('en-ptb', tagset, tag))
+                    (token, map_tag("en-ptb", tagset, tag))
                     for (token, tag) in tagged_tokens
                 ]
-            elif lang == 'rus':
-                # Note that the new Russion pos tags from the model contains suffixes,
+            elif lang == "rus":
+                # Note that the new Russian pos tags from the model contains suffixes,
                 # see https://github.com/nltk/nltk/issues/2151#issuecomment-430709018
                 tagged_tokens = [
-                    (token, map_tag('ru-rnc-new', tagset, tag.partition('=')[0]))
+                    (token, map_tag("ru-rnc-new", tagset, tag.partition("=")[0]))
                     for (token, tag) in tagged_tokens
                 ]
         return tagged_tokens
 
 
-def pos_tag(tokens, tagset=None, lang='eng'):
+def pos_tag(tokens, tagset=None, lang="eng"):
     """
     Use NLTK's currently recommended part of speech tagger to
     tag the given list of tokens.
@@ -162,13 +166,13 @@ def pos_tag(tokens, tagset=None, lang='eng'):
     return _pos_tag(tokens, tagset, tagger, lang)
 
 
-def pos_tag_sents(sentences, tagset=None, lang='eng'):
+def pos_tag_sents(sentences, tagset=None, lang="eng"):
     """
     Use NLTK's currently recommended part of speech tagger to tag the
     given list of sentences, each consisting of a list of tokens.
 
-    :param tokens: List of sentences to be tagged
-    :type tokens: list(list(str))
+    :param sentences: List of sentences to be tagged
+    :type sentences: list(list(str))
     :param tagset: the tagset to be used, e.g. universal, wsj, brown
     :type tagset: str
     :param lang: the ISO 639 code of the language, e.g. 'eng' for English, 'rus' for Russian

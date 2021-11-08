@@ -1,9 +1,12 @@
-.. Copyright (C) 2001-2019 NLTK Project
+.. Copyright (C) 2001-2021 NLTK Project
 .. For license information, see LICENSE.TXT
 
 ====================================
 Logical Inference and Model Building
 ====================================
+
+    >>> from nltk.test.inference_fixt import setup_module
+    >>> setup_module()
 
     >>> from nltk import *
     >>> from nltk.sem.drt import DrtParser
@@ -73,7 +76,7 @@ If the ``prove()`` method has not been called,
 then the prover command will be unable to display a proof.
 
     >>> prover = ResolutionProverCommand(c, [p1,p2])
-    >>> print(prover.proof()) # doctest: +ELLIPSIS
+    >>> print(prover.proof())
     Traceback (most recent call last):
       File "...", line 1212, in __run
         compileflags, 1) in test.globs
@@ -106,7 +109,7 @@ The assumptions and goal may be accessed using the ``assumptions()`` and
 ``goal()`` methods, respectively.
 
     >>> prover.assumptions()
-    [<ApplicationExpression man(socrates)>, <Alread_expression all x.(man(x) -> mortal(x))>]
+    [<ApplicationExpression man(socrates)>, <AllExpression all x.(man(x) -> mortal(x))>]
     >>> prover.goal()
     <ApplicationExpression mortal(socrates)>
 
@@ -118,7 +121,7 @@ That means that ``proof()`` will be unavailable until ``prove()`` is called and
 a call to ``prove()`` will execute the theorem prover.
 
     >>> prover.retract_assumptions([read_expr('man(socrates)')])
-    >>> print(prover.proof()) # doctest: +ELLIPSIS
+    >>> print(prover.proof())
     Traceback (most recent call last):
       File "...", line 1212, in __run
         compileflags, 1) in test.globs
@@ -153,7 +156,7 @@ Install these into an appropriate location; the
 following locations:
 
     >>> p = Prover9()
-    >>> p.binary_locations() # doctest: +NORMALIZE_WHITESPACE
+    >>> p.binary_locations()
     ['/usr/local/bin/prover9',
      '/usr/local/bin/prover9/bin',
      '/usr/local/bin',
@@ -296,7 +299,7 @@ statements as new assumptions.
     >>> prover.add_assumptions(new)
     >>> print(prover.prove())
     True
-    >>> print(prover.proof()) # doctest: +ELLIPSIS
+    >>> print(prover.proof())
     ============================== prooftrans ============================
     Prover9 (...) version ...
     Process ... was started by ... on ...
@@ -312,9 +315,8 @@ statements as new assumptions.
     % Proof 1 at ... seconds.
     % Length of proof is 13.
     % Level of proof is 4.
-    % Maximum clause weight is 0.000.
+    % Maximum clause weight is 0.
     % Given clauses 0.
-    <BLANKLINE>
     <BLANKLINE>
     1 (all x (boxerdog(x) -> dog(x))).  [assumption].
     2 (all x (boxer(x) -> person(x))).  [assumption].

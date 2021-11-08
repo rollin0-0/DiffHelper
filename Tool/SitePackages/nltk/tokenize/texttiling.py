@@ -1,13 +1,13 @@
 # Natural Language Toolkit: TextTiling
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: George Boutsioukis
 #
 # URL: <http://nltk.org/>
 # For license information, see LICENSE.TXT
 
-import re
 import math
+import re
 
 try:
     import numpy
@@ -77,9 +77,9 @@ class TextTilingTokenizer(TokenizerI):
         if stopwords is None:
             from nltk.corpus import stopwords
 
-            stopwords = stopwords.words('english')
+            stopwords = stopwords.words("english")
         self.__dict__.update(locals())
-        del self.__dict__['self']
+        del self.__dict__["self"]
 
     def tokenize(self, text):
         """Return a tokenized copy of *text*, where each "token" represents
@@ -92,8 +92,8 @@ class TextTilingTokenizer(TokenizerI):
         # Tokenization step starts here
 
         # Remove punctuation
-        nopunct_text = ''.join(
-            c for c in lowercase_text if re.match("[a-z\-\' \n\t]", c)
+        nopunct_text = "".join(
+            c for c in lowercase_text if re.match(r"[a-z\-' \n\t]", c)
         )
         nopunct_par_breaks = self._mark_paragraph_breaks(nopunct_text)
 
@@ -122,15 +122,13 @@ class TextTilingTokenizer(TokenizerI):
             raise NotImplementedError("Vocabulary introduction not implemented")
         else:
             raise ValueError(
-                "Similarity method {} not recognized".format(self.similarity_method)
+                f"Similarity method {self.similarity_method} not recognized"
             )
 
         if self.smoothing_method == DEFAULT_SMOOTHING:
             smooth_scores = self._smooth_scores(gap_scores)
         else:
-            raise ValueError(
-                "Smoothing method {} not recognized".format(self.smoothing_method)
-            )
+            raise ValueError(f"Smoothing method {self.smoothing_method} not recognized")
         # End of Lexical score Determination
 
         # Boundary identification
@@ -165,7 +163,7 @@ class TextTilingTokenizer(TokenizerI):
 
         def blk_frq(tok, block):
             ts_occs = filter(lambda o: o[0] in block, token_table[tok].ts_occurences)
-            freq = sum([tsocc[1] for tsocc in ts_occs])
+            freq = sum(tsocc[1] for tsocc in ts_occs)
             return freq
 
         gap_scores = []
@@ -226,7 +224,7 @@ class TextTilingTokenizer(TokenizerI):
         "Divides the text into pseudosentences of fixed size"
         w = self.w
         wrdindex_list = []
-        matches = re.finditer("\w+", text)
+        matches = re.finditer(r"\w+", text)
         for match in matches:
             wrdindex_list.append((match.group(), match.start()))
         return [
@@ -244,10 +242,10 @@ class TextTilingTokenizer(TokenizerI):
         if current_par_break == 0:
             try:
                 current_par_break = next(pb_iter)  # skip break at 0
-            except StopIteration:
+            except StopIteration as e:
                 raise ValueError(
                     "No paragraph breaks were found(text too short perhaps?)"
-                )
+                ) from e
         for ts in token_sequences:
             for word, index in ts.wrdindex_list:
                 try:
@@ -378,7 +376,7 @@ class TextTilingTokenizer(TokenizerI):
         return norm_boundaries
 
 
-class TokenTableField(object):
+class TokenTableField:
     """A field in the token table holding parameters for each token,
     used later in the process"""
 
@@ -392,20 +390,20 @@ class TokenTableField(object):
         last_tok_seq=None,
     ):
         self.__dict__.update(locals())
-        del self.__dict__['self']
+        del self.__dict__["self"]
 
 
-class TokenSequence(object):
+class TokenSequence:
     "A token list with its original length and its index"
 
     def __init__(self, index, wrdindex_list, original_length=None):
         original_length = original_length or len(wrdindex_list)
         self.__dict__.update(locals())
-        del self.__dict__['self']
+        del self.__dict__["self"]
 
 
 # Pasted from the SciPy cookbook: http://www.scipy.org/Cookbook/SignalSmooth
-def smooth(x, window_len=11, window='flat'):
+def smooth(x, window_len=11, window="flat"):
     """smooth the data using a window with requested size.
 
     This method is based on the convolution of a scaled window with the signal.
@@ -441,7 +439,7 @@ def smooth(x, window_len=11, window='flat'):
     if window_len < 3:
         return x
 
-    if window not in ['flat', 'hanning', 'hamming', 'bartlett', 'blackman']:
+    if window not in ["flat", "hanning", "hamming", "bartlett", "blackman"]:
         raise ValueError(
             "Window is on of 'flat', 'hanning', 'hamming', 'bartlett', 'blackman'"
         )
@@ -449,19 +447,20 @@ def smooth(x, window_len=11, window='flat'):
     s = numpy.r_[2 * x[0] - x[window_len:1:-1], x, 2 * x[-1] - x[-1:-window_len:-1]]
 
     # print(len(s))
-    if window == 'flat':  # moving average
-        w = numpy.ones(window_len, 'd')
+    if window == "flat":  # moving average
+        w = numpy.ones(window_len, "d")
     else:
-        w = eval('numpy.' + window + '(window_len)')
+        w = eval("numpy." + window + "(window_len)")
 
-    y = numpy.convolve(w / w.sum(), s, mode='same')
+    y = numpy.convolve(w / w.sum(), s, mode="same")
 
     return y[window_len - 1 : -window_len + 1]
 
 
 def demo(text=None):
-    from nltk.corpus import brown
     from matplotlib import pylab
+
+    from nltk.corpus import brown
 
     tt = TextTilingTokenizer(demo_mode=True)
     if text is None:

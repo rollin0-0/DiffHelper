@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 # Natural Language Toolkit: Tokenizer Utilities
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Steven Bird <stevenbird1@gmail.com>
 # URL: <http://nltk.sourceforge.net>
 # For license information, see LICENSE.TXT
@@ -93,7 +92,7 @@ def spans_to_relative(spans):
         prev = right
 
 
-class CJKChars(object):
+class CJKChars:
     """
     An object that enumerates the code points of the CJK characters as listed on
     http://en.wikipedia.org/wiki/Basic_Multilingual_Plane#Basic_Multilingual_Plane
@@ -289,8 +288,8 @@ def align_tokens(tokens, sentence):
     for token in tokens:
         try:
             start = sentence.index(token, point)
-        except ValueError:
-            raise ValueError('substring "{}" not found in "{}"'.format(token, sentence))
+        except ValueError as e:
+            raise ValueError(f'substring "{token}" not found in "{sentence}"') from e
         point = start + len(token)
         offsets.append((start, point))
     return offsets

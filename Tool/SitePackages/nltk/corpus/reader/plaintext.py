@@ -1,6 +1,6 @@
 # Natural Language Toolkit: Plaintext Corpus Reader
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Steven Bird <stevenbird1@gmail.com>
 #         Edward Loper <edloper@gmail.com>
 #         Nitin Madnani <nmadnani@umiacs.umd.edu>
@@ -12,10 +12,9 @@ A reader for corpora that consist of plaintext documents.
 """
 
 import nltk.data
-from nltk.tokenize import *
-
-from nltk.corpus.reader.util import *
 from nltk.corpus.reader.api import *
+from nltk.corpus.reader.util import *
+from nltk.tokenize import *
 
 
 class PlaintextCorpusReader(CorpusReader):
@@ -23,7 +22,7 @@ class PlaintextCorpusReader(CorpusReader):
     Reader for corpora that consist of plaintext documents.  Paragraphs
     are assumed to be split using blank lines.  Sentences and words can
     be tokenized using the default tokenizers, or by custom tokenizers
-    specificed as parameters to the constructor.
+    specified as parameters to the constructor.
 
     This corpus reader can be customized (e.g., to skip preface
     sections of specific document formats) by creating a subclass and
@@ -40,11 +39,11 @@ class PlaintextCorpusReader(CorpusReader):
         root,
         fileids,
         word_tokenizer=WordPunctTokenizer(),
-        sent_tokenizer=nltk.data.LazyLoader('tokenizers/punkt/english.pickle'),
+        sent_tokenizer=nltk.data.LazyLoader("tokenizers/punkt/english.pickle"),
         para_block_reader=read_blankline_block,
-        encoding='utf8',
+        encoding="utf8",
     ):
-        """
+        r"""
         Construct a new plaintext corpus reader for a set of documents
         located at the given root directory.  Example usage:
 
@@ -64,22 +63,6 @@ class PlaintextCorpusReader(CorpusReader):
         self._word_tokenizer = word_tokenizer
         self._sent_tokenizer = sent_tokenizer
         self._para_block_reader = para_block_reader
-
-    def raw(self, fileids=None):
-        """
-        :return: the given file(s) as a single string.
-        :rtype: str
-        """
-        if fileids is None:
-            fileids = self._fileids
-        elif isinstance(fileids, string_types):
-            fileids = [fileids]
-        raw_texts = []
-        for f in fileids:
-            _fin = self.open(f)
-            raw_texts.append(_fin.read())
-            _fin.close()
-        return concat(raw_texts)
 
     def words(self, fileids=None):
         """
@@ -102,7 +85,7 @@ class PlaintextCorpusReader(CorpusReader):
         :rtype: list(list(str))
         """
         if self._sent_tokenizer is None:
-            raise ValueError('No sentence tokenizer for this corpus')
+            raise ValueError("No sentence tokenizer for this corpus")
 
         return concat(
             [
@@ -119,7 +102,7 @@ class PlaintextCorpusReader(CorpusReader):
         :rtype: list(list(list(str)))
         """
         if self._sent_tokenizer is None:
-            raise ValueError('No sentence tokenizer for this corpus')
+            raise ValueError("No sentence tokenizer for this corpus")
 
         return concat(
             [
@@ -173,26 +156,6 @@ class CategorizedPlaintextCorpusReader(CategorizedCorpusReader, PlaintextCorpusR
         CategorizedCorpusReader.__init__(self, kwargs)
         PlaintextCorpusReader.__init__(self, *args, **kwargs)
 
-    def _resolve(self, fileids, categories):
-        if fileids is not None and categories is not None:
-            raise ValueError('Specify fileids or categories, not both')
-        if categories is not None:
-            return self.fileids(categories)
-        else:
-            return fileids
-
-    def raw(self, fileids=None, categories=None):
-        return PlaintextCorpusReader.raw(self, self._resolve(fileids, categories))
-
-    def words(self, fileids=None, categories=None):
-        return PlaintextCorpusReader.words(self, self._resolve(fileids, categories))
-
-    def sents(self, fileids=None, categories=None):
-        return PlaintextCorpusReader.sents(self, self._resolve(fileids, categories))
-
-    def paras(self, fileids=None, categories=None):
-        return PlaintextCorpusReader.paras(self, self._resolve(fileids, categories))
-
 
 # FIXME: Is there a better way? How to not hardcode this?
 #       Possibly, add a language kwargs to CategorizedPlaintextCorpusReader to
@@ -200,8 +163,8 @@ class CategorizedPlaintextCorpusReader(CategorizedCorpusReader, PlaintextCorpusR
 class PortugueseCategorizedPlaintextCorpusReader(CategorizedPlaintextCorpusReader):
     def __init__(self, *args, **kwargs):
         CategorizedCorpusReader.__init__(self, kwargs)
-        kwargs['sent_tokenizer'] = nltk.data.LazyLoader(
-            'tokenizers/punkt/portuguese.pickle'
+        kwargs["sent_tokenizer"] = nltk.data.LazyLoader(
+            "tokenizers/punkt/portuguese.pickle"
         )
         PlaintextCorpusReader.__init__(self, *args, **kwargs)
 
@@ -259,5 +222,5 @@ class EuroparlCorpusReader(PlaintextCorpusReader):
 
     def paras(self, fileids=None):
         raise NotImplementedError(
-            'The Europarl corpus reader does not support paragraphs. Please use chapters() instead.'
+            "The Europarl corpus reader does not support paragraphs. Please use chapters() instead."
         )

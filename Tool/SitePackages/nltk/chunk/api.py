@@ -1,6 +1,6 @@
 # Natural Language Toolkit: Chunk parsing API
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Edward Loper <edloper@gmail.com>
 #         Steven Bird <stevenbird1@gmail.com> (minor additions)
 # URL: <http://nltk.org/>
@@ -10,9 +10,8 @@
 ##  Chunk Parser Interface
 ##//////////////////////////////////////////////////////
 
-from nltk.parse import ParserI
-
 from nltk.chunk.util import ChunkScore
+from nltk.parse import ParserI
 
 
 class ChunkParserI(ParserI):
@@ -40,7 +39,7 @@ class ChunkParserI(ParserI):
         Score the accuracy of the chunker against the gold standard.
         Remove the chunking the gold standard text, rechunk it using
         the chunker, and return a ``ChunkScore`` object
-        reflecting the performance of this chunk peraser.
+        reflecting the performance of this chunk parser.
 
         :type gold: list(Tree)
         :param gold: The list of chunked sentences to score the chunker on.

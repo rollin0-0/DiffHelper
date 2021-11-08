@@ -1,6 +1,6 @@
 # Natural Language Toolkit: Naive Bayes Classifiers
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Edward Loper <edloper@gmail.com>
 # URL: <http://nltk.org/>
 # For license information, see LICENSE.TXT
@@ -29,12 +29,11 @@ sum to one:
 |  P(label|features) = --------------------------------------------
 |                        SUM[l]( P(l) * P(f1|l) * ... * P(fn|l) )
 """
-from __future__ import print_function, unicode_literals
 
 from collections import defaultdict
 
-from nltk.probability import FreqDist, DictionaryProbDist, ELEProbDist, sum_logs
 from nltk.classify.api import ClassifierI
+from nltk.probability import DictionaryProbDist, ELEProbDist, FreqDist, sum_logs
 
 ##//////////////////////////////////////////////////////
 ##  Naive Bayes Classifier
@@ -99,10 +98,10 @@ class NaiveBayesClassifier(ClassifierI):
                 if (label, fname) in self._feature_probdist:
                     break
             else:
-                # print 'Ignoring unseen feature %s' % fname
+                # print('Ignoring unseen feature %s' % fname)
                 del featureset[fname]
 
-        # Find the log probabilty of each label, given the features.
+        # Find the log probability of each label, given the features.
         # Start with the log probability of the label itself.
         logprob = {}
         for label in self._labels:
@@ -125,7 +124,7 @@ class NaiveBayesClassifier(ClassifierI):
     def show_most_informative_features(self, n=10):
         # Determine the most relevant features, and display them.
         cpdist = self._feature_probdist
-        print('Most Informative Features')
+        print("Most Informative Features")
 
         for (fname, fval) in self.most_informative_features(n):
 
@@ -133,24 +132,23 @@ class NaiveBayesClassifier(ClassifierI):
                 return cpdist[l, fname].prob(fval)
 
             labels = sorted(
-                [l for l in self._labels if fval in cpdist[l, fname].samples()],
-                key=labelprob,
+                (l for l in self._labels if fval in cpdist[l, fname].samples()),
+                key=lambda element: (-labelprob(element), element),
+                reverse=True,
             )
             if len(labels) == 1:
                 continue
             l0 = labels[0]
             l1 = labels[-1]
             if cpdist[l0, fname].prob(fval) == 0:
-                ratio = 'INF'
+                ratio = "INF"
             else:
-                ratio = '%8.1f' % (
+                ratio = "%8.1f" % (
                     cpdist[l1, fname].prob(fval) / cpdist[l0, fname].prob(fval)
                 )
             print(
-                (
-                    '%24s = %-14r %6s : %-6s = %s : 1.0'
-                    % (fname, fval, ("%s" % l1)[:6], ("%s" % l0)[:6], ratio)
-                )
+                "%24s = %-14r %6s : %-6s = %s : 1.0"
+                % (fname, fval, ("%s" % l1)[:6], ("%s" % l0)[:6], ratio)
             )
 
     def most_informative_features(self, n=100):
@@ -163,7 +161,7 @@ class NaiveBayesClassifier(ClassifierI):
 
         |  max[ P(fname=fval|label1) / P(fname=fval|label2) ]
         """
-        if hasattr(self, '_most_informative_features'):
+        if hasattr(self, "_most_informative_features"):
             return self._most_informative_features[:n]
         else:
             # The set of (fname, fval) pairs used by this classifier.
@@ -186,7 +184,13 @@ class NaiveBayesClassifier(ClassifierI):
             # Convert features to a list, & sort it by how informative
             # features are.
             self._most_informative_features = sorted(
-                features, key=lambda feature_: minprob[feature_] / maxprob[feature_]
+                features,
+                key=lambda feature_: (
+                    minprob[feature_] / maxprob[feature_],
+                    feature_[0],
+                    feature_[1] in [None, False, True],
+                    str(feature_[1]).lower(),
+                ),
             )
         return self._most_informative_features[:n]
 
@@ -252,5 +256,5 @@ def demo():
     classifier.show_most_informative_features()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     demo()

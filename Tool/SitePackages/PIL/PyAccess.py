@@ -23,25 +23,30 @@
 import logging
 import sys
 
-from cffi import FFI
+try:
+    from cffi import FFI
 
+    defs = """
+    struct Pixel_RGBA {
+        unsigned char r,g,b,a;
+    };
+    struct Pixel_I16 {
+        unsigned char l,r;
+    };
+    """
+    ffi = FFI()
+    ffi.cdef(defs)
+except ImportError as ex:
+    # Allow error import for doc purposes, but error out when accessing
+    # anything in core.
+    from ._util import deferred_error
+
+    FFI = ffi = deferred_error(ex)
 
 logger = logging.getLogger(__name__)
 
 
-defs = """
-struct Pixel_RGBA {
-    unsigned char r,g,b,a;
-};
-struct Pixel_I16 {
-    unsigned char l,r;
-};
-"""
-ffi = FFI()
-ffi.cdef(defs)
-
-
-class PyAccess(object):
+class PyAccess:
     def __init__(self, img, readonly=False):
         vals = dict(img.im.unsafe_ptrs)
         self.readonly = readonly
@@ -49,6 +54,7 @@ class PyAccess(object):
         self.image32 = ffi.cast("int **", vals["image32"])
         self.image = ffi.cast("unsigned char **", vals["image"])
         self.xsize, self.ysize = img.im.size
+        self._img = img
 
         # Keep pointer to im object to prevent dereferencing.
         self._im = img.im
@@ -88,7 +94,7 @@ class PyAccess(object):
             and len(color) in [3, 4]
         ):
             # RGB or RGBA value for a P image
-            color = self._palette.getcolor(color)
+            color = self._palette.getcolor(color, self._img)
 
         return self.set_pixel(x, y, color)
 
@@ -122,7 +128,7 @@ class PyAccess(object):
 
 
 class _PyAccess32_2(PyAccess):
-    """ PA, LA, stored in first and last bytes of a 32 bit word """
+    """PA, LA, stored in first and last bytes of a 32 bit word"""
 
     def _post_init(self, *args, **kwargs):
         self.pixels = ffi.cast("struct Pixel_RGBA **", self.image32)
@@ -139,7 +145,7 @@ class _PyAccess32_2(PyAccess):
 
 
 class _PyAccess32_3(PyAccess):
-    """ RGB and friends, stored in the first three bytes of a 32 bit word """
+    """RGB and friends, stored in the first three bytes of a 32 bit word"""
 
     def _post_init(self, *args, **kwargs):
         self.pixels = ffi.cast("struct Pixel_RGBA **", self.image32)
@@ -158,7 +164,7 @@ class _PyAccess32_3(PyAccess):
 
 
 class _PyAccess32_4(PyAccess):
-    """ RGBA etc, all 4 bytes of a 32 bit word """
+    """RGBA etc, all 4 bytes of a 32 bit word"""
 
     def _post_init(self, *args, **kwargs):
         self.pixels = ffi.cast("struct Pixel_RGBA **", self.image32)
@@ -177,7 +183,7 @@ class _PyAccess32_4(PyAccess):
 
 
 class _PyAccess8(PyAccess):
-    """ 1, L, P, 8 bit images stored as uint8 """
+    """1, L, P, 8 bit images stored as uint8"""
 
     def _post_init(self, *args, **kwargs):
         self.pixels = self.image8
@@ -195,7 +201,7 @@ class _PyAccess8(PyAccess):
 
 
 class _PyAccessI16_N(PyAccess):
-    """ I;16 access, native bitendian without conversion """
+    """I;16 access, native bitendian without conversion"""
 
     def _post_init(self, *args, **kwargs):
         self.pixels = ffi.cast("unsigned short **", self.image)
@@ -213,7 +219,7 @@ class _PyAccessI16_N(PyAccess):
 
 
 class _PyAccessI16_L(PyAccess):
-    """ I;16L access, with conversion """
+    """I;16L access, with conversion"""
 
     def _post_init(self, *args, **kwargs):
         self.pixels = ffi.cast("struct Pixel_I16 **", self.image)
@@ -234,7 +240,7 @@ class _PyAccessI16_L(PyAccess):
 
 
 class _PyAccessI16_B(PyAccess):
-    """ I;16B access, with conversion """
+    """I;16B access, with conversion"""
 
     def _post_init(self, *args, **kwargs):
         self.pixels = ffi.cast("struct Pixel_I16 **", self.image)
@@ -255,7 +261,7 @@ class _PyAccessI16_B(PyAccess):
 
 
 class _PyAccessI32_N(PyAccess):
-    """ Signed Int32 access, native endian """
+    """Signed Int32 access, native endian"""
 
     def _post_init(self, *args, **kwargs):
         self.pixels = self.image32
@@ -268,7 +274,7 @@ class _PyAccessI32_N(PyAccess):
 
 
 class _PyAccessI32_Swap(PyAccess):
-    """ I;32L/B access, with byteswapping conversion """
+    """I;32L/B access, with byteswapping conversion"""
 
     def _post_init(self, *args, **kwargs):
         self.pixels = self.image32
@@ -287,7 +293,7 @@ class _PyAccessI32_Swap(PyAccess):
 
 
 class _PyAccessF(PyAccess):
-    """ 32 bit float access """
+    """32 bit float access"""
 
     def _post_init(self, *args, **kwargs):
         self.pixels = ffi.cast("float **", self.image32)

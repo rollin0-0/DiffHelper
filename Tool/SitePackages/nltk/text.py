@@ -1,6 +1,6 @@
 # Natural Language Toolkit: Texts
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Steven Bird <stevenbird1@gmail.com>
 #         Edward Loper <edloper@gmail.com>
 # URL: <http://nltk.org/>
@@ -13,25 +13,21 @@ Functionality includes: concordancing, collocation discovery,
 regular expression search over tokenized strings, and
 distributional similarity.
 """
-from __future__ import print_function, division, unicode_literals, absolute_import
 
-from math import log
-from collections import defaultdict, Counter, namedtuple
-from functools import reduce
 import re
 import sys
+from collections import Counter, defaultdict, namedtuple
+from functools import reduce
+from math import log
 
-from six import text_type
-
+from nltk.collocations import BigramCollocationFinder
 from nltk.lm import MLE
 from nltk.lm.preprocessing import padded_everygram_pipeline
-from nltk.probability import FreqDist
+from nltk.metrics import BigramAssocMeasures, f_measure
 from nltk.probability import ConditionalFreqDist as CFD
-from nltk.util import tokenwrap, LazyConcatenation
-from nltk.metrics import f_measure, BigramAssocMeasures
-from nltk.collocations import BigramCollocationFinder
-from nltk.compat import python_2_unicode_compatible
+from nltk.probability import FreqDist
 from nltk.tokenize import sent_tokenize
+from nltk.util import LazyConcatenation, tokenwrap
 
 ConcordanceLine = namedtuple(
     "ConcordanceLine",
@@ -39,7 +35,7 @@ ConcordanceLine = namedtuple(
 )
 
 
-class ContextIndex(object):
+class ContextIndex:
     """
     A bidirectional index between words and their 'contexts' in a text.
     The context of a word is usually defined to be the words that occur
@@ -130,8 +126,7 @@ class ContextIndex(object):
             return fd
 
 
-@python_2_unicode_compatible
-class ConcordanceIndex(object):
+class ConcordanceIndex:
     """
     An index that can be used to look up the offset locations at which
     a given word occurs in a document.
@@ -190,19 +185,29 @@ class ConcordanceIndex(object):
     def find_concordance(self, word, width=80):
         """
         Find all concordance lines given the query word.
+
+        Provided with a list of words, these will be found as a phrase.
         """
-        half_width = (width - len(word) - 2) // 2
+        if isinstance(word, list):
+            phrase = word
+        else:
+            phrase = [word]
+
+        half_width = (width - len(" ".join(phrase)) - 2) // 2
         context = width // 4  # approx number of words of context
 
         # Find the instances of the word to create the ConcordanceLine
         concordance_list = []
-        offsets = self.offsets(word)
+        offsets = self.offsets(phrase[0])
+        for i, word in enumerate(phrase[1:]):
+            word_offsets = {offset - i - 1 for offset in self.offsets(word)}
+            offsets = sorted(word_offsets.intersection(offsets))
         if offsets:
             for i in offsets:
-                query_word = self._tokens[i]
+                query_word = " ".join(self._tokens[i : i + len(phrase)])
                 # Find the context of query word.
                 left_context = self._tokens[max(0, i - context) : i]
-                right_context = self._tokens[i + 1 : i + context]
+                right_context = self._tokens[i + len(phrase) : i + context]
                 # Create the pretty lines with the query_word in the middle.
                 left_print = " ".join(left_context)[-half_width:]
                 right_print = " ".join(right_context)[:half_width]
@@ -224,8 +229,8 @@ class ConcordanceIndex(object):
     def print_concordance(self, word, width=80, lines=25):
         """
         Print concordance lines given the query word.
-        :param word: The target word
-        :type word: str
+        :param word: The target word or phrase (a list of strings)
+        :type word: str or list
         :param lines: The number of lines to display (default=25)
         :type lines: int
         :param width: The width of each line, in characters (default=80)
@@ -239,12 +244,12 @@ class ConcordanceIndex(object):
             print("no matches")
         else:
             lines = min(lines, len(concordance_list))
-            print("Displaying {} of {} matches:".format(lines, len(concordance_list)))
+            print(f"Displaying {lines} of {len(concordance_list)} matches:")
             for i, concordance_line in enumerate(concordance_list[:lines]):
                 print(concordance_line.line)
 
 
-class TokenSearcher(object):
+class TokenSearcher:
     """
     A class that makes it easier to use regular expressions to search
     over tokenized strings.  The tokenized string is converted to a
@@ -301,8 +306,7 @@ class TokenSearcher(object):
         return hits
 
 
-@python_2_unicode_compatible
-class Text(object):
+class Text:
     """
     A wrapper around a sequence of simple (string) tokens, which is
     intended to support initial exploration of texts (via the
@@ -343,9 +347,9 @@ class Text(object):
             self.name = name
         elif "]" in tokens[:20]:
             end = tokens[:20].index("]")
-            self.name = " ".join(text_type(tok) for tok in tokens[1:end])
+            self.name = " ".join(str(tok) for tok in tokens[1:end])
         else:
-            self.name = " ".join(text_type(tok) for tok in tokens[:8]) + "..."
+            self.name = " ".join(str(tok) for tok in tokens[:8]) + "..."
 
     # ////////////////////////////////////////////////////////////
     # Support item & slice access
@@ -366,8 +370,8 @@ class Text(object):
         Prints a concordance for ``word`` with the specified context window.
         Word matching is not case-sensitive.
 
-        :param word: The target word
-        :type word: str
+        :param word: The target word or phrase (a list of strings)
+        :type word: str or list
         :param width: The width of each line, in characters (default=80)
         :type width: int
         :param lines: The number of lines to display (default=25)
@@ -387,8 +391,8 @@ class Text(object):
         Generate a concordance for ``word`` with the specified context window.
         Word matching is not case-sensitive.
 
-        :param word: The target word
-        :type word: str
+        :param word: The target word or phrase (a list of strings)
+        :type word: str or list
         :param width: The width of each line, in characters (default=80)
         :type width: int
         :param lines: The number of lines to display (default=25)
@@ -406,10 +410,15 @@ class Text(object):
         """
         Return collocations derived from the text, ignoring stopwords.
 
+            >>> from nltk.book import text4
+            >>> text4.collocation_list()[:2]
+            [('United', 'States'), ('fellow', 'citizens')]
+
         :param num: The maximum number of collocations to return.
         :type num: int
         :param window_size: The number of tokens spanned by a collocation (default=2)
         :type window_size: int
+        :rtype: list(tuple(str, str))
         """
         if not (
             "_collocations" in self.__dict__
@@ -427,12 +436,18 @@ class Text(object):
             finder.apply_freq_filter(2)
             finder.apply_word_filter(lambda w: len(w) < 3 or w.lower() in ignored_words)
             bigram_measures = BigramAssocMeasures()
-            self._collocations = finder.nbest(bigram_measures.likelihood_ratio, num)
-        return [w1 + " " + w2 for w1, w2 in self._collocations]
+            self._collocations = list(
+                finder.nbest(bigram_measures.likelihood_ratio, num)
+            )
+        return self._collocations
 
     def collocations(self, num=20, window_size=2):
         """
         Print collocations derived from the text, ignoring stopwords.
+
+            >>> from nltk.book import text4
+            >>> text4.collocations() # doctest: +ELLIPSIS
+            United States; fellow citizens; four years; ...
 
         :param num: The maximum number of collocations to print.
         :type num: int
@@ -562,7 +577,7 @@ class Text(object):
         self._tokenized_sents = [
             sent.split(" ") for sent in sent_tokenize(" ".join(self.tokens))
         ]
-        if not hasattr(self, "trigram_model"):
+        if not hasattr(self, "_trigram_model"):
             print("Building ngram index...", file=sys.stderr)
             self._trigram_model = self._train_default_ngram_lm(
                 self._tokenized_sents, n=3
@@ -640,7 +655,7 @@ class Text(object):
     # Helper Methods
     # ////////////////////////////////////////////////////////////
 
-    _CONTEXT_RE = re.compile("\w+|[\.\!\?]")
+    _CONTEXT_RE = re.compile(r"\w+|[\.\!\?]")
 
     def _context(self, tokens, i):
         """
@@ -700,13 +715,13 @@ class TextCollection(Text):
         self._idf_cache = {}
 
     def tf(self, term, text):
-        """ The frequency of the term in text. """
+        """The frequency of the term in text."""
         return text.count(term) / len(text)
 
     def idf(self, term):
-        """ The number of texts in the corpus divided by the
+        """The number of texts in the corpus divided by the
         number of texts that the term appears in.
-        If a term does not appear in the corpus, 0.0 is returned. """
+        If a term does not appear in the corpus, 0.0 is returned."""
         # idf values are cached for performance.
         idf = self._idf_cache.get(term)
         if idf is None:

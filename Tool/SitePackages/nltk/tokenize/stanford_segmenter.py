@@ -1,9 +1,8 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 # Natural Language Toolkit: Interface to the Stanford Segmenter
 # for Chinese and Arabic
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: 52nlp <52nlpcn@gmail.com>
 #         Casper Lehmann-Strøm <casperlehmann@gmail.com>
 #         Alex Constantin <alex@keyworder.ch>
@@ -11,29 +10,23 @@
 # URL: <http://nltk.org/>
 # For license information, see LICENSE.TXT
 
-from __future__ import unicode_literals, print_function
-
-import tempfile
-import os
 import json
+import os
+import tempfile
 import warnings
 from subprocess import PIPE
 
-from six import text_type
-
-from nltk import compat
 from nltk.internals import (
-    find_jar,
-    find_file,
-    find_dir,
-    config_java,
-    java,
     _java_options,
+    config_java,
+    find_dir,
+    find_file,
+    find_jar,
+    java,
 )
 from nltk.tokenize.api import TokenizerI
 
-
-_stanford_url = 'https://nlp.stanford.edu/software'
+_stanford_url = "https://nlp.stanford.edu/software"
 
 
 class StanfordSegmenter(TokenizerI):
@@ -58,7 +51,7 @@ class StanfordSegmenter(TokenizerI):
     <BLANKLINE>
     """
 
-    _JAR = 'stanford-segmenter.jar'
+    _JAR = "stanford-segmenter.jar"
 
     def __init__(
         self,
@@ -68,15 +61,15 @@ class StanfordSegmenter(TokenizerI):
         path_to_model=None,
         path_to_dict=None,
         path_to_sihan_corpora_dict=None,
-        sihan_post_processing='false',
-        keep_whitespaces='false',
-        encoding='UTF-8',
+        sihan_post_processing="false",
+        keep_whitespaces="false",
+        encoding="UTF-8",
         options=None,
         verbose=False,
-        java_options='-mx2g',
+        java_options="-mx2g",
     ):
         # Raise deprecation warning.
-        warnings.simplefilter('always', DeprecationWarning)
+        warnings.simplefilter("always", DeprecationWarning)
         warnings.warn(
             str(
                 "\nThe StanfordTokenizer will "
@@ -86,21 +79,21 @@ class StanfordSegmenter(TokenizerI):
             DeprecationWarning,
             stacklevel=2,
         )
-        warnings.simplefilter('ignore', DeprecationWarning)
+        warnings.simplefilter("ignore", DeprecationWarning)
 
         stanford_segmenter = find_jar(
             self._JAR,
             path_to_jar,
-            env_vars=('STANFORD_SEGMENTER',),
+            env_vars=("STANFORD_SEGMENTER",),
             searchpath=(),
             url=_stanford_url,
             verbose=verbose,
         )
         if path_to_slf4j is not None:
             slf4j = find_jar(
-                'slf4j-api.jar',
+                "slf4j-api.jar",
                 path_to_slf4j,
-                env_vars=('SLF4J', 'STANFORD_SEGMENTER'),
+                env_vars=("SLF4J", "STANFORD_SEGMENTER"),
                 searchpath=(),
                 url=_stanford_url,
                 verbose=verbose,
@@ -124,68 +117,68 @@ class StanfordSegmenter(TokenizerI):
         self._encoding = encoding
         self.java_options = java_options
         options = {} if options is None else options
-        self._options_cmd = ','.join(
-            '{0}={1}'.format(key, json.dumps(val)) for key, val in options.items()
+        self._options_cmd = ",".join(
+            f"{key}={json.dumps(val)}" for key, val in options.items()
         )
 
     def default_config(self, lang):
         """
-        Attempt to intialize Stanford Word Segmenter for the specified language
+        Attempt to initialize Stanford Word Segmenter for the specified language
         using the STANFORD_SEGMENTER and STANFORD_MODELS environment variables
         """
 
         search_path = ()
-        if os.environ.get('STANFORD_SEGMENTER'):
-            search_path = {os.path.join(os.environ.get('STANFORD_SEGMENTER'), 'data')}
+        if os.environ.get("STANFORD_SEGMENTER"):
+            search_path = {os.path.join(os.environ.get("STANFORD_SEGMENTER"), "data")}
 
         # init for Chinese-specific files
         self._dict = None
         self._sihan_corpora_dict = None
-        self._sihan_post_processing = 'false'
+        self._sihan_post_processing = "false"
 
-        if lang == 'ar':
+        if lang == "ar":
             self._java_class = (
-                'edu.stanford.nlp.international.arabic.process.ArabicSegmenter'
+                "edu.stanford.nlp.international.arabic.process.ArabicSegmenter"
             )
-            model = 'arabic-segmenter-atb+bn+arztrain.ser.gz'
+            model = "arabic-segmenter-atb+bn+arztrain.ser.gz"
 
-        elif lang == 'zh':
-            self._java_class = 'edu.stanford.nlp.ie.crf.CRFClassifier'
-            model = 'pku.gz'
-            self._sihan_post_processing = 'true'
+        elif lang == "zh":
+            self._java_class = "edu.stanford.nlp.ie.crf.CRFClassifier"
+            model = "pku.gz"
+            self._sihan_post_processing = "true"
 
-            path_to_dict = 'dict-chris6.ser.gz'
+            path_to_dict = "dict-chris6.ser.gz"
             try:
                 self._dict = find_file(
                     path_to_dict,
                     searchpath=search_path,
                     url=_stanford_url,
                     verbose=False,
-                    env_vars=('STANFORD_MODELS',),
+                    env_vars=("STANFORD_MODELS",),
                 )
-            except LookupError:
+            except LookupError as e:
                 raise LookupError(
                     "Could not find '%s' (tried using env. "
                     "variables STANFORD_MODELS and <STANFORD_SEGMENTER>/data/)"
                     % path_to_dict
-                )
+                ) from e
 
-            sihan_dir = './data/'
+            sihan_dir = "./data/"
             try:
                 path_to_sihan_dir = find_dir(
                     sihan_dir,
                     url=_stanford_url,
                     verbose=False,
-                    env_vars=('STANFORD_SEGMENTER',),
+                    env_vars=("STANFORD_SEGMENTER",),
                 )
                 self._sihan_corpora_dict = os.path.join(path_to_sihan_dir, sihan_dir)
-            except LookupError:
+            except LookupError as e:
                 raise LookupError(
                     "Could not find '%s' (tried using the "
                     "STANFORD_SEGMENTER environment variable)" % sihan_dir
-                )
+                ) from e
         else:
-            raise LookupError("Unsupported language {}".format(lang))
+            raise LookupError(f"Unsupported language {lang}")
 
         try:
             self._model = find_file(
@@ -193,37 +186,36 @@ class StanfordSegmenter(TokenizerI):
                 searchpath=search_path,
                 url=_stanford_url,
                 verbose=False,
-                env_vars=('STANFORD_MODELS', 'STANFORD_SEGMENTER'),
+                env_vars=("STANFORD_MODELS", "STANFORD_SEGMENTER"),
             )
-        except LookupError:
+        except LookupError as e:
             raise LookupError(
                 "Could not find '%s' (tried using env. "
                 "variables STANFORD_MODELS and <STANFORD_SEGMENTER>/data/)" % model
-            )
+            ) from e
 
     def tokenize(self, s):
         super().tokenize(s)
 
     def segment_file(self, input_file_path):
-        """
-        """
+        """ """
         cmd = [
             self._java_class,
-            '-loadClassifier',
+            "-loadClassifier",
             self._model,
-            '-keepAllWhitespaces',
+            "-keepAllWhitespaces",
             self._keep_whitespaces,
-            '-textFile',
+            "-textFile",
             input_file_path,
         ]
         if self._sihan_corpora_dict is not None:
             cmd.extend(
                 [
-                    '-serDictionary',
+                    "-serDictionary",
                     self._dict,
-                    '-sighanCorporaDict',
+                    "-sighanCorporaDict",
                     self._sihan_corpora_dict,
-                    '-sighanPostProcessing',
+                    "-sighanPostProcessing",
                     self._sihan_post_processing,
                 ]
             )
@@ -236,37 +228,36 @@ class StanfordSegmenter(TokenizerI):
         return self.segment_sents([tokens])
 
     def segment_sents(self, sentences):
-        """
-        """
+        """ """
         encoding = self._encoding
         # Create a temporary input file
         _input_fh, self._input_file_path = tempfile.mkstemp(text=True)
 
         # Write the actural sentences to the temporary input file
-        _input_fh = os.fdopen(_input_fh, 'wb')
-        _input = '\n'.join((' '.join(x) for x in sentences))
-        if isinstance(_input, text_type) and encoding:
+        _input_fh = os.fdopen(_input_fh, "wb")
+        _input = "\n".join(" ".join(x) for x in sentences)
+        if isinstance(_input, str) and encoding:
             _input = _input.encode(encoding)
         _input_fh.write(_input)
         _input_fh.close()
 
         cmd = [
             self._java_class,
-            '-loadClassifier',
+            "-loadClassifier",
             self._model,
-            '-keepAllWhitespaces',
+            "-keepAllWhitespaces",
             self._keep_whitespaces,
-            '-textFile',
+            "-textFile",
             self._input_file_path,
         ]
         if self._sihan_corpora_dict is not None:
             cmd.extend(
                 [
-                    '-serDictionary',
+                    "-serDictionary",
                     self._dict,
-                    '-sighanCorporaDict',
+                    "-sighanCorporaDict",
                     self._sihan_corpora_dict,
-                    '-sighanPostProcessing',
+                    "-sighanPostProcessing",
                     self._sihan_post_processing,
                 ]
             )
@@ -280,12 +271,12 @@ class StanfordSegmenter(TokenizerI):
 
     def _execute(self, cmd, verbose=False):
         encoding = self._encoding
-        cmd.extend(['-inputEncoding', encoding])
+        cmd.extend(["-inputEncoding", encoding])
         _options_cmd = self._options_cmd
         if _options_cmd:
-            cmd.extend(['-options', self._options_cmd])
+            cmd.extend(["-options", self._options_cmd])
 
-        default_options = ' '.join(_java_options)
+        default_options = " ".join(_java_options)
 
         # Configure java.
         config_java(options=self.java_options, verbose=verbose)
@@ -299,16 +290,3 @@ class StanfordSegmenter(TokenizerI):
         config_java(options=default_options, verbose=False)
 
         return stdout
-
-
-def setup_module(module):
-    from nose import SkipTest
-
-    try:
-        seg = StanfordSegmenter()
-        seg.default_config('ar')
-        seg.default_config('zh')
-    except LookupError as e:
-        raise SkipTest(
-            'Tests for nltk.tokenize.stanford_segmenter skipped: %s' % str(e)
-        )

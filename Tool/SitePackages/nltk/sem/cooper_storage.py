@@ -1,17 +1,16 @@
 # Natural Language Toolkit: Cooper storage for Quantifier Ambiguity
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Ewan Klein <ewan@inf.ed.ac.uk>
 # URL: <http://nltk.org/>
 # For license information, see LICENSE.TXT
-from __future__ import print_function
 
-from nltk.sem.logic import LambdaExpression, ApplicationExpression, Variable
 from nltk.parse import load_parser
 from nltk.parse.featurechart import InstantiateVarsChart
+from nltk.sem.logic import ApplicationExpression, LambdaExpression, Variable
 
 
-class CooperStore(object):
+class CooperStore:
     """
     A container for handling quantifier ambiguity via Cooper storage.
     """
@@ -26,8 +25,8 @@ class CooperStore(object):
         self.featstruct = featstruct
         self.readings = []
         try:
-            self.core = featstruct['CORE']
-            self.store = featstruct['STORE']
+            self.core = featstruct["CORE"]
+            self.store = featstruct["STORE"]
         except KeyError:
             print("%s is not a Cooper storage structure" % featstruct)
 
@@ -46,7 +45,7 @@ class CooperStore(object):
             yield ()
 
     def s_retrieve(self, trace=False):
-        """
+        r"""
         Carry out S-Retrieval of binding operators in store. If hack=True,
         serialize the bindop and core as strings and reparse. Ugh.
 
@@ -83,7 +82,7 @@ def parse_with_bindops(sentence, grammar=None, trace=0):
     Use a grammar with Binding Operators to parse a sentence.
     """
     if not grammar:
-        grammar = 'grammars/book_grammars/storage.fcfg'
+        grammar = "grammars/book_grammars/storage.fcfg"
     parser = load_parser(grammar, trace=trace, chart_class=InstantiateVarsChart)
     # Parse the sentence.
     tokens = sentence.split()
@@ -96,11 +95,11 @@ def demo():
     sentence = "every girl chases a dog"
     # sentence = "a man gives a bone to every dog"
     print()
-    print("Analyis of sentence '%s'" % sentence)
+    print("Analysis of sentence '%s'" % sentence)
     print("=" * 50)
     trees = cs.parse_with_bindops(sentence, trace=0)
     for tree in trees:
-        semrep = cs.CooperStore(tree.label()['SEM'])
+        semrep = cs.CooperStore(tree.label()["SEM"])
         print()
         print("Binding operators:")
         print("-" * 15)
@@ -118,8 +117,8 @@ def demo():
         print("-" * 15)
 
         for i, reading in enumerate(semrep.readings):
-            print("%s: %s" % (i + 1, reading))
+            print(f"{i + 1}: {reading}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     demo()

@@ -1,4 +1,4 @@
-.. Copyright (C) 2001-2019 NLTK Project
+.. Copyright (C) 2001-2021 NLTK Project
 .. For license information, see LICENSE.TXT
 
 =================
@@ -8,7 +8,6 @@ EasyInstall Tests
 This file contains some simple tests that will be run by EasyInstall in
 order to test the installation when NLTK-Data is absent.
 
-    >>> from __future__ import print_function
 
 ------------
 Tokenization
@@ -17,7 +16,7 @@ Tokenization
     >>> from nltk.tokenize import wordpunct_tokenize
     >>> s = ("Good muffins cost $3.88\nin New York.  Please buy me\n"
     ...      "two of them.\n\nThanks.")
-    >>> wordpunct_tokenize(s) # doctest: +NORMALIZE_WHITESPACE
+    >>> wordpunct_tokenize(s)
     ['Good', 'muffins', 'cost', '$', '3', '.', '88', 'in', 'New', 'York', '.',
     'Please', 'buy', 'me', 'two', 'of', 'them', '.', 'Thanks', '.']
 
@@ -82,4 +81,3 @@ Parsing
     (S
       (NP the (N cat))
       (VP (V chased) (NP the (N dog)) (PP (P on) (NP the (N rug)))))
-

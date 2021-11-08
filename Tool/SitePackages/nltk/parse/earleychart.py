@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 # Natural Language Toolkit: An Incremental Earley Chart Parser
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Peter Ljunglöf <peter.ljunglof@heatherleaf.se>
 #         Rob Speer <rspeer@mit.edu>
 #         Edward Loper <edloper@gmail.com>
@@ -25,34 +24,33 @@ This is appealing for, say, speech recognizer hypothesis filtering.
 The main parser class is ``EarleyChartParser``, which is a top-down
 algorithm, originally formulated by Jay Earley (1970).
 """
-from __future__ import print_function, division
 
-from six.moves import range
+from time import perf_counter
 
 from nltk.parse.chart import (
+    BottomUpPredictCombineRule,
+    BottomUpPredictRule,
+    CachedTopDownPredictRule,
     Chart,
     ChartParser,
     EdgeI,
+    EmptyPredictRule,
+    FilteredBottomUpPredictCombineRule,
+    FilteredSingleEdgeFundamentalRule,
     LeafEdge,
     LeafInitRule,
-    BottomUpPredictRule,
-    BottomUpPredictCombineRule,
-    TopDownInitRule,
     SingleEdgeFundamentalRule,
-    EmptyPredictRule,
-    CachedTopDownPredictRule,
-    FilteredSingleEdgeFundamentalRule,
-    FilteredBottomUpPredictCombineRule,
+    TopDownInitRule,
 )
 from nltk.parse.featurechart import (
+    FeatureBottomUpPredictCombineRule,
+    FeatureBottomUpPredictRule,
     FeatureChart,
     FeatureChartParser,
+    FeatureEmptyPredictRule,
+    FeatureSingleEdgeFundamentalRule,
     FeatureTopDownInitRule,
     FeatureTopDownPredictRule,
-    FeatureEmptyPredictRule,
-    FeatureBottomUpPredictRule,
-    FeatureBottomUpPredictCombineRule,
-    FeatureSingleEdgeFundamentalRule,
 )
 
 # ////////////////////////////////////////////////////////////
@@ -100,7 +98,7 @@ class IncrementalChart(Chart):
         # Make sure it's a valid index.
         for key in restr_keys:
             if not hasattr(EdgeI, key):
-                raise ValueError('Bad restriction: %s' % key)
+                raise ValueError("Bad restriction: %s" % key)
 
         # Create the index.
         index = self._indexes[restr_keys] = tuple({} for x in self._positions())
@@ -150,7 +148,7 @@ class FeatureIncrementalChart(IncrementalChart, FeatureChart):
         # Make sure it's a valid index.
         for key in restr_keys:
             if not hasattr(EdgeI, key):
-                raise ValueError('Bad restriction: %s' % key)
+                raise ValueError("Bad restriction: %s" % key)
 
         # Create the index.
         index = self._indexes[restr_keys] = tuple({} for x in self._positions())
@@ -197,8 +195,7 @@ class CompleterRule(CompleteFundamentalRule):
 
     def apply(self, chart, grammar, edge):
         if not isinstance(edge, LeafEdge):
-            for new_edge in self._fundamental_rule.apply(chart, grammar, edge):
-                yield new_edge
+            yield from self._fundamental_rule.apply(chart, grammar, edge)
 
 
 class ScannerRule(CompleteFundamentalRule):
@@ -206,8 +203,7 @@ class ScannerRule(CompleteFundamentalRule):
 
     def apply(self, chart, grammar, edge):
         if isinstance(edge, LeafEdge):
-            for new_edge in self._fundamental_rule.apply(chart, grammar, edge):
-                yield new_edge
+            yield from self._fundamental_rule.apply(chart, grammar, edge)
 
 
 class PredictorRule(CachedTopDownPredictRule):
@@ -219,8 +215,7 @@ class FilteredCompleteFundamentalRule(FilteredSingleEdgeFundamentalRule):
         # Since the Filtered rule only works for grammars without empty productions,
         # we only have to bother with complete edges here.
         if edge.is_complete():
-            for new_edge in self._apply_complete(chart, grammar, edge):
-                yield new_edge
+            yield from self._apply_complete(chart, grammar, edge)
 
 
 # ////////////////////////////////////////////////////////////
@@ -237,8 +232,7 @@ class FeatureCompleteFundamentalRule(FeatureSingleEdgeFundamentalRule):
         for right_edge in chart.select(
             start=end, end=end, is_complete=True, lhs=left_edge.nextsym()
         ):
-            for new_edge in fr.apply(chart, grammar, left_edge, right_edge):
-                yield new_edge
+            yield from fr.apply(chart, grammar, left_edge, right_edge)
 
 
 class FeatureCompleterRule(CompleterRule):
@@ -511,13 +505,15 @@ def demo(
     print_grammar=False,
     print_trees=True,
     trace=2,
-    sent='I saw John with a dog with my cookie',
+    sent="I saw John with a dog with my cookie",
     numparses=5,
 ):
     """
     A demonstration of the Earley parsers.
     """
-    import sys, time
+    import sys
+    import time
+
     from nltk.parse.chart import demo_grammar
 
     # The grammar for ChartParser and SteppingChartParser:
@@ -535,14 +531,14 @@ def demo(
 
     # Do the parsing.
     earley = EarleyChartParser(grammar, trace=trace)
-    t = time.clock()
+    t = perf_counter()
     chart = earley.chart_parse(tokens)
     parses = list(chart.parses(grammar.start()))
-    t = time.clock() - t
+    t = perf_counter() - t
 
     # Print results.
     if numparses:
-        assert len(parses) == numparses, 'Not all parses found'
+        assert len(parses) == numparses, "Not all parses found"
     if print_trees:
         for tree in parses:
             print(tree)
@@ -552,5 +548,5 @@ def demo(
         print("Time:", t)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     demo()

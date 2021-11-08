@@ -1,16 +1,14 @@
 # Natural Language Toolkit: Clusterer Utilities
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Trevor Cohn <tacohn@cs.mu.oz.au>
 # Contributor: J Richard Snape
 # URL: <http://nltk.org/>
 # For license information, see LICENSE.TXT
-from __future__ import print_function, unicode_literals, division
-from abc import abstractmethod
-
 import copy
-from sys import stdout
+from abc import abstractmethod
 from math import sqrt
+from sys import stdout
 
 try:
     import numpy
@@ -18,7 +16,6 @@ except ImportError:
     pass
 
 from nltk.cluster.api import ClusterI
-from nltk.compat import python_2_unicode_compatible
 
 
 class VectorSpaceClusterer(ClusterI):
@@ -133,8 +130,8 @@ def cosine_distance(u, v):
     return 1 - (numpy.dot(u, v) / (sqrt(numpy.dot(u, u)) * sqrt(numpy.dot(v, v))))
 
 
-class _DendrogramNode(object):
-    """ Tree node of a dendrogram. """
+class _DendrogramNode:
+    """Tree node of a dendrogram."""
 
     def __init__(self, value, *children):
         self._value = value
@@ -176,8 +173,7 @@ class _DendrogramNode(object):
         return cosine_distance(self._value, comparator._value) < 0
 
 
-@python_2_unicode_compatible
-class Dendrogram(object):
+class Dendrogram:
     """
     Represents a dendrogram, a tree with a specified branching order.  This
     must be initialised with the leaf items, then iteratively call merge for
@@ -204,7 +200,7 @@ class Dendrogram(object):
         :type   indices: seq of int
         """
         assert len(indices) >= 2
-        node = _DendrogramNode(self._merge, *[self._items[i] for i in indices])
+        node = _DendrogramNode(self._merge, *(self._items[i] for i in indices))
         self._merge += 1
         self._items[indices[0]] = node
         for i in indices[1:]:
@@ -231,7 +227,7 @@ class Dendrogram(object):
         """
 
         # ASCII rendering characters
-        JOIN, HLINK, VLINK = '+', '-', '|'
+        JOIN, HLINK, VLINK = "+", "-", "|"
 
         # find the root (or create one)
         if len(self._items) > 1:
@@ -251,15 +247,15 @@ class Dendrogram(object):
         rhalf = int(width - lhalf - 1)
 
         # display functions
-        def format(centre, left=' ', right=' '):
-            return '%s%s%s' % (lhalf * left, centre, right * rhalf)
+        def format(centre, left=" ", right=" "):
+            return f"{lhalf * left}{centre}{right * rhalf}"
 
         def display(str):
             stdout.write(str)
 
         # for each merge, top down
         queue = [(root._value, root)]
-        verticals = [format(' ') for leaf in leaves]
+        verticals = [format(" ") for leaf in leaves]
         while queue:
             priority, node = queue.pop()
             child_left_leaf = list(map(lambda c: c.leaves(False)[0], node._children))
@@ -270,9 +266,9 @@ class Dendrogram(object):
             for i in range(len(leaves)):
                 if leaves[i] in child_left_leaf:
                     if i == min_idx:
-                        display(format(JOIN, ' ', HLINK))
+                        display(format(JOIN, " ", HLINK))
                     elif i == max_idx:
-                        display(format(JOIN, HLINK, ' '))
+                        display(format(JOIN, HLINK, " "))
                     else:
                         display(format(JOIN, HLINK, HLINK))
                     verticals[i] = format(VLINK)
@@ -280,7 +276,7 @@ class Dendrogram(object):
                     display(format(HLINK, HLINK, HLINK))
                 else:
                     display(verticals[i])
-            display('\n')
+            display("\n")
             for child in node._children:
                 if child._children:
                     queue.append((child._value, child))
@@ -288,11 +284,11 @@ class Dendrogram(object):
 
             for vertical in verticals:
                 display(vertical)
-            display('\n')
+            display("\n")
 
         # finally, display the last line
-        display(''.join(item.center(width) for item in last_row))
-        display('\n')
+        display("".join(item.center(width) for item in last_row))
+        display("\n")
 
     def __repr__(self):
         if len(self._items) > 1:
@@ -300,4 +296,4 @@ class Dendrogram(object):
         else:
             root = self._items[0]
         leaves = root.leaves(False)
-        return '<Dendrogram with %d leaves>' % len(leaves)
+        return "<Dendrogram with %d leaves>" % len(leaves)

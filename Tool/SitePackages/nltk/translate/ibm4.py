@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 # Natural Language Toolkit: IBM Model 4
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Tah Wei Hoon <hoon.tw@gmail.com>
 # URL: <http://nltk.org/>
 # For license information, see LICENSE.TXT
@@ -101,18 +100,12 @@ Translation: Parameter Estimation. Computational Linguistics, 19 (2),
 263-311.
 """
 
-from __future__ import division
-
 import warnings
 from collections import defaultdict
 from math import factorial
 
-from nltk.translate import AlignedSent
-from nltk.translate import Alignment
-from nltk.translate import IBMModel
-from nltk.translate import IBMModel3
-from nltk.translate.ibm_model import Counts
-from nltk.translate.ibm_model import longest_target_sentence_length
+from nltk.translate import AlignedSent, Alignment, IBMModel, IBMModel3
+from nltk.translate.ibm_model import Counts, longest_target_sentence_length
 
 
 class IBMModel4(IBMModel):
@@ -207,7 +200,7 @@ class IBMModel4(IBMModel):
             ``IBMModel4`` for the type and purpose of these tables.
         :type probability_tables: dict[str]: object
         """
-        super(IBMModel4, self).__init__(sentence_aligned_corpus)
+        super().__init__(sentence_aligned_corpus)
         self.reset_probabilities()
         self.src_classes = source_word_classes
         self.trg_classes = target_word_classes
@@ -222,20 +215,20 @@ class IBMModel4(IBMModel):
             self.set_uniform_probabilities(sentence_aligned_corpus)
         else:
             # Set user-defined probabilities
-            self.translation_table = probability_tables['translation_table']
-            self.alignment_table = probability_tables['alignment_table']
-            self.fertility_table = probability_tables['fertility_table']
-            self.p1 = probability_tables['p1']
-            self.head_distortion_table = probability_tables['head_distortion_table']
+            self.translation_table = probability_tables["translation_table"]
+            self.alignment_table = probability_tables["alignment_table"]
+            self.fertility_table = probability_tables["fertility_table"]
+            self.p1 = probability_tables["p1"]
+            self.head_distortion_table = probability_tables["head_distortion_table"]
             self.non_head_distortion_table = probability_tables[
-                'non_head_distortion_table'
+                "non_head_distortion_table"
             ]
 
         for n in range(0, iterations):
             self.train(sentence_aligned_corpus)
 
     def reset_probabilities(self):
-        super(IBMModel4, self).reset_probabilities()
+        super().reset_probabilities()
         self.head_distortion_table = defaultdict(
             lambda: defaultdict(lambda: defaultdict(lambda: self.MIN_PROB))
         )
@@ -455,7 +448,7 @@ class Model4Counts(Counts):
     """
 
     def __init__(self):
-        super(Model4Counts, self).__init__()
+        super().__init__()
         self.head_distortion = defaultdict(
             lambda: defaultdict(lambda: defaultdict(lambda: 0.0))
         )

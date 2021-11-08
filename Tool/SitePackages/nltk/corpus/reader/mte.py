@@ -5,9 +5,7 @@ import os
 import re
 from functools import reduce
 
-from six import string_types
-
-from nltk.corpus.reader import concat, TaggedCorpusReader
+from nltk.corpus.reader import TaggedCorpusReader, concat
 from nltk.corpus.reader.xmldocs import XMLCorpusView
 
 
@@ -40,11 +38,11 @@ class MTEFileReader:
     """
 
     ns = {
-        'tei': 'http://www.tei-c.org/ns/1.0',
-        'xml': 'http://www.w3.org/XML/1998/namespace',
+        "tei": "http://www.tei-c.org/ns/1.0",
+        "xml": "http://www.w3.org/XML/1998/namespace",
     }
-    tag_ns = '{http://www.tei-c.org/ns/1.0}'
-    xml_ns = '{http://www.w3.org/XML/1998/namespace}'
+    tag_ns = "{http://www.tei-c.org/ns/1.0}"
+    xml_ns = "{http://www.w3.org/XML/1998/namespace}"
     word_path = "TEI/text/body/div/div/p/s/(w|c)"
     sent_path = "TEI/text/body/div/div/p/s"
     para_path = "TEI/text/body/div/div/p"
@@ -58,30 +56,30 @@ class MTEFileReader:
 
     @classmethod
     def _sent_elt(cls, elt, context):
-        return [cls._word_elt(w, None) for w in xpath(elt, '*', cls.ns)]
+        return [cls._word_elt(w, None) for w in xpath(elt, "*", cls.ns)]
 
     @classmethod
     def _para_elt(cls, elt, context):
-        return [cls._sent_elt(s, None) for s in xpath(elt, '*', cls.ns)]
+        return [cls._sent_elt(s, None) for s in xpath(elt, "*", cls.ns)]
 
     @classmethod
     def _tagged_word_elt(cls, elt, context):
-        if 'ana' not in elt.attrib:
-            return (elt.text, '')
+        if "ana" not in elt.attrib:
+            return (elt.text, "")
 
         if cls.__tags == "" and cls.__tagset == "msd":
-            return (elt.text, elt.attrib['ana'])
+            return (elt.text, elt.attrib["ana"])
         elif cls.__tags == "" and cls.__tagset == "universal":
-            return (elt.text, MTETagConverter.msd_to_universal(elt.attrib['ana']))
+            return (elt.text, MTETagConverter.msd_to_universal(elt.attrib["ana"]))
         else:
-            tags = re.compile('^' + re.sub("-", ".", cls.__tags) + '.*$')
-            if tags.match(elt.attrib['ana']):
+            tags = re.compile("^" + re.sub("-", ".", cls.__tags) + ".*$")
+            if tags.match(elt.attrib["ana"]):
                 if cls.__tagset == "msd":
-                    return (elt.text, elt.attrib['ana'])
+                    return (elt.text, elt.attrib["ana"])
                 else:
                     return (
                         elt.text,
-                        MTETagConverter.msd_to_universal(elt.attrib['ana']),
+                        MTETagConverter.msd_to_universal(elt.attrib["ana"]),
                     )
             else:
                 return None
@@ -91,7 +89,7 @@ class MTEFileReader:
         return list(
             filter(
                 lambda x: x is not None,
-                [cls._tagged_word_elt(w, None) for w in xpath(elt, '*', cls.ns)],
+                [cls._tagged_word_elt(w, None) for w in xpath(elt, "*", cls.ns)],
             )
         )
 
@@ -100,24 +98,24 @@ class MTEFileReader:
         return list(
             filter(
                 lambda x: x is not None,
-                [cls._tagged_sent_elt(s, None) for s in xpath(elt, '*', cls.ns)],
+                [cls._tagged_sent_elt(s, None) for s in xpath(elt, "*", cls.ns)],
             )
         )
 
     @classmethod
     def _lemma_word_elt(cls, elt, context):
-        if 'lemma' not in elt.attrib:
-            return (elt.text, '')
+        if "lemma" not in elt.attrib:
+            return (elt.text, "")
         else:
-            return (elt.text, elt.attrib['lemma'])
+            return (elt.text, elt.attrib["lemma"])
 
     @classmethod
     def _lemma_sent_elt(cls, elt, context):
-        return [cls._lemma_word_elt(w, None) for w in xpath(elt, '*', cls.ns)]
+        return [cls._lemma_word_elt(w, None) for w in xpath(elt, "*", cls.ns)]
 
     @classmethod
     def _lemma_para_elt(cls, elt, context):
-        return [cls._lemma_sent_elt(s, None) for s in xpath(elt, '*', cls.ns)]
+        return [cls._lemma_sent_elt(s, None) for s in xpath(elt, "*", cls.ns)]
 
     def words(self):
         return MTECorpusView(
@@ -178,18 +176,18 @@ class MTETagConverter:
     """
 
     mapping_msd_universal = {
-        'A': 'ADJ',
-        'S': 'ADP',
-        'R': 'ADV',
-        'C': 'CONJ',
-        'D': 'DET',
-        'N': 'NOUN',
-        'M': 'NUM',
-        'Q': 'PRT',
-        'P': 'PRON',
-        'V': 'VERB',
-        '.': '.',
-        '-': 'X',
+        "A": "ADJ",
+        "S": "ADP",
+        "R": "ADV",
+        "C": "CONJ",
+        "D": "DET",
+        "N": "NOUN",
+        "M": "NUM",
+        "Q": "PRT",
+        "P": "PRON",
+        "V": "VERB",
+        ".": ".",
+        "-": "X",
     }
 
     @staticmethod
@@ -203,7 +201,7 @@ class MTETagConverter:
         indicator = tag[0] if not tag[0] == "#" else tag[1]
 
         if not indicator in MTETagConverter.mapping_msd_universal:
-            indicator = '-'
+            indicator = "-"
 
         return MTETagConverter.mapping_msd_universal[indicator]
 
@@ -215,7 +213,7 @@ class MTECorpusReader(TaggedCorpusReader):
     scheme. These tags can be converted to the Universal tagset
     """
 
-    def __init__(self, root=None, fileids=None, encoding='utf8'):
+    def __init__(self, root=None, fileids=None, encoding="utf8"):
         """
         Construct a new MTECorpusreader for a set of documents
         located at the given root directory.  Example usage:
@@ -225,14 +223,15 @@ class MTECorpusReader(TaggedCorpusReader):
 
         :param root: The root directory for this corpus. (default points to location in multext config file)
         :param fileids: A list or regexp specifying the fileids in this corpus. (default is oana-en.xml)
-        :param enconding: The encoding of the given files (default is utf8)
+        :param encoding: The encoding of the given files (default is utf8)
         """
         TaggedCorpusReader.__init__(self, root, fileids, encoding)
+        self._readme = "00README.txt"
 
     def __fileids(self, fileids):
         if fileids is None:
             fileids = self._fileids
-        elif isinstance(fileids, string_types):
+        elif isinstance(fileids, str):
             fileids = [fileids]
         # filter wrong userinput
         fileids = filter(lambda x: x in self._fileids, fileids)
@@ -242,25 +241,9 @@ class MTECorpusReader(TaggedCorpusReader):
             print("No valid multext-east file specified")
         return fileids
 
-    def readme(self):
-        """
-        Prints some information about this corpus.
-        :return: the content of the attached README file
-        :rtype: str
-        """
-        return self.open("00README.txt").read()
-
-    def raw(self, fileids=None):
-        """
-	    :param fileids: A list specifying the fileids that should be used.
-        :return: the given file(s) as a single string.
-        :rtype: str
-        """
-        return reduce([self.open(f).read() for f in self.__fileids(fileids)], [])
-
     def words(self, fileids=None):
         """
-	    :param fileids: A list specifying the fileids that should be used.
+        :param fileids: A list specifying the fileids that should be used.
         :return: the given file(s) as a list of words and punctuation symbols.
         :rtype: list(str)
         """
@@ -273,7 +256,7 @@ class MTECorpusReader(TaggedCorpusReader):
 
     def sents(self, fileids=None):
         """
-	    :param fileids: A list specifying the fileids that should be used.
+        :param fileids: A list specifying the fileids that should be used.
         :return: the given file(s) as a list of sentences or utterances,
                  each encoded as a list of word strings
         :rtype: list(list(str))
@@ -287,7 +270,7 @@ class MTECorpusReader(TaggedCorpusReader):
 
     def paras(self, fileids=None):
         """
-	    :param fileids: A list specifying the fileids that should be used.
+        :param fileids: A list specifying the fileids that should be used.
         :return: the given file(s) as a list of paragraphs, each encoded as a list
                  of sentences, which are in turn encoded as lists of word string
         :rtype: list(list(list(str)))
@@ -301,7 +284,7 @@ class MTECorpusReader(TaggedCorpusReader):
 
     def lemma_words(self, fileids=None):
         """
-	    :param fileids: A list specifying the fileids that should be used.
+        :param fileids: A list specifying the fileids that should be used.
         :return: the given file(s) as a list of words, the corresponding lemmas
                  and punctuation symbols, encoded as tuples (word, lemma)
         :rtype: list(tuple(str,str))
@@ -315,7 +298,7 @@ class MTECorpusReader(TaggedCorpusReader):
 
     def tagged_words(self, fileids=None, tagset="msd", tags=""):
         """
-	    :param fileids: A list specifying the fileids that should be used.
+        :param fileids: A list specifying the fileids that should be used.
         :param tagset: The tagset that should be used in the returned object,
                        either "universal" or "msd", "msd" is the default
         :param tags: An MSD Tag that is used to filter all parts of the used corpus
@@ -338,7 +321,7 @@ class MTECorpusReader(TaggedCorpusReader):
 
     def lemma_sents(self, fileids=None):
         """
-	    :param fileids: A list specifying the fileids that should be used.
+        :param fileids: A list specifying the fileids that should be used.
         :return: the given file(s) as a list of sentences or utterances, each
                  encoded as a list of tuples of the word and the corresponding
                  lemma (word, lemma)
@@ -353,7 +336,7 @@ class MTECorpusReader(TaggedCorpusReader):
 
     def tagged_sents(self, fileids=None, tagset="msd", tags=""):
         """
-	    :param fileids: A list specifying the fileids that should be used.
+        :param fileids: A list specifying the fileids that should be used.
         :param tagset: The tagset that should be used in the returned object,
                        either "universal" or "msd", "msd" is the default
         :param tags: An MSD Tag that is used to filter all parts of the used corpus
@@ -376,7 +359,7 @@ class MTECorpusReader(TaggedCorpusReader):
 
     def lemma_paras(self, fileids=None):
         """
-	    :param fileids: A list specifying the fileids that should be used.
+        :param fileids: A list specifying the fileids that should be used.
         :return: the given file(s) as a list of paragraphs, each encoded as a
                  list of sentences, which are in turn encoded as a list of
                  tuples of the word and the corresponding lemma (word, lemma)
@@ -391,7 +374,7 @@ class MTECorpusReader(TaggedCorpusReader):
 
     def tagged_paras(self, fileids=None, tagset="msd", tags=""):
         """
-	    :param fileids: A list specifying the fileids that should be used.
+        :param fileids: A list specifying the fileids that should be used.
         :param tagset: The tagset that should be used in the returned object,
                        either "universal" or "msd", "msd" is the default
         :param tags: An MSD Tag that is used to filter all parts of the used corpus

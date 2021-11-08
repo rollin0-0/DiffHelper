@@ -6,7 +6,7 @@
 # URL: <http://nltk.org/>
 # For license information, see LICENSE.TXT
 
-"""
+r"""
 Module for incrementally developing simple discourses, and checking for semantic ambiguity,
 consistency and informativeness.
 
@@ -42,29 +42,24 @@ The set of all threads for a discourse is the Cartesian product of all the readi
 (This is not intended to scale beyond very short discourses!) The method ``readings(filter=True)`` will only show
 those threads which are consistent (taking into account any background assumptions).
 """
-from __future__ import print_function
 
 import os
 from abc import ABCMeta, abstractmethod
-from operator import and_, add
 from functools import reduce
-
-from six import add_metaclass
+from operator import add, and_
 
 from nltk.data import show_cfg
-from nltk.tag import RegexpTagger
-from nltk.parse import load_parser
-from nltk.parse.malt import MaltParser
-from nltk.sem.drt import resolve_anaphora, AnaphoraResolutionException
-from nltk.sem.glue import DrtGlue
-from nltk.sem.logic import Expression
-
 from nltk.inference.mace import MaceCommand
 from nltk.inference.prover9 import Prover9Command
+from nltk.parse import load_parser
+from nltk.parse.malt import MaltParser
+from nltk.sem.drt import AnaphoraResolutionException, resolve_anaphora
+from nltk.sem.glue import DrtGlue
+from nltk.sem.logic import Expression
+from nltk.tag import RegexpTagger
 
 
-@add_metaclass(ABCMeta)
-class ReadingCommand(object):
+class ReadingCommand(metaclass=ABCMeta):
     @abstractmethod
     def parse_to_readings(self, sentence):
         """
@@ -112,7 +107,7 @@ class CfgReadingCommand(ReadingCommand):
         :type gramfile: str
         """
         self._gramfile = (
-            gramfile if gramfile else 'grammars/book_grammars/discourse.fcfg'
+            gramfile if gramfile else "grammars/book_grammars/discourse.fcfg"
         )
         self._parser = load_parser(self._gramfile)
 
@@ -142,7 +137,7 @@ class DrtGlueReadingCommand(ReadingCommand):
         """
         if semtype_file is None:
             semtype_file = os.path.join(
-                'grammars', 'sample_grammars', 'drt_glue.semtype'
+                "grammars", "sample_grammars", "drt_glue.semtype"
             )
         self._glue = DrtGlue(
             semtype_file=semtype_file,
@@ -171,7 +166,7 @@ class DrtGlueReadingCommand(ReadingCommand):
         return expression.fol()
 
 
-class DiscourseTester(object):
+class DiscourseTester:
     """
     Check properties of an ongoing discourse.
     """
@@ -186,7 +181,7 @@ class DiscourseTester(object):
         :type background: list(Expression)
         """
         self._input = input
-        self._sentences = dict([('s%s' % i, sent) for i, sent in enumerate(input)])
+        self._sentences = {"s%s" % i: sent for i, sent in enumerate(input)}
         self._models = None
         self._readings = {}
         self._reading_command = (
@@ -212,7 +207,7 @@ class DiscourseTester(object):
         Display the list of sentences in the current discourse.
         """
         for id in sorted(self._sentences):
-            print("%s: %s" % (id, self._sentences[id]))
+            print(f"{id}: {self._sentences[id]}")
 
     def add_sentence(self, sentence, informchk=False, consistchk=False):
         """
@@ -241,9 +236,7 @@ class DiscourseTester(object):
                         print("Not informative relative to thread '%s'" % tid)
 
         self._input.append(sentence)
-        self._sentences = dict(
-            [('s%s' % i, sent) for i, sent in enumerate(self._input)]
-        )
+        self._sentences = {"s%s" % i: sent for i, sent in enumerate(self._input)}
         # check whether adding the new sentence to the discourse preserves consistency (i.e. a model can be found for the combined set of
         # of assumptions
         if consistchk:
@@ -268,9 +261,7 @@ class DiscourseTester(object):
             )
             self.sentences()
             return None
-        self._sentences = dict(
-            [('s%s' % i, sent) for i, sent in enumerate(self._input)]
-        )
+        self._sentences = {"s%s" % i: sent for i, sent in enumerate(self._input)}
         self.readings(verbose=False)
         if verbose:
             print("Current sentences are ")
@@ -303,12 +294,10 @@ class DiscourseTester(object):
         for sid in sorted(self._sentences):
             sentence = self._sentences[sid]
             readings = self._get_readings(sentence)
-            self._readings[sid] = dict(
-                [
-                    ("%s-r%s" % (sid, rid), reading.simplify())
-                    for rid, reading in enumerate(sorted(readings, key=str))
-                ]
-            )
+            self._readings[sid] = {
+                f"{sid}-r{rid}": reading.simplify()
+                for rid, reading in enumerate(sorted(readings, key=str))
+            }
 
     def _construct_threads(self):
         """
@@ -318,9 +307,7 @@ class DiscourseTester(object):
         thread_list = [[]]
         for sid in sorted(self._readings):
             thread_list = self.multiply(thread_list, sorted(self._readings[sid]))
-        self._threads = dict(
-            [("d%s" % tid, thread) for tid, thread in enumerate(thread_list)]
-        )
+        self._threads = {"d%s" % tid: thread for tid, thread in enumerate(thread_list)}
         # re-initialize the filtered threads
         self._filtered_threads = {}
         # keep the same ids, but only include threads which get models
@@ -340,11 +327,11 @@ class DiscourseTester(object):
         else:
             for sid in sorted(self._readings):
                 print()
-                print('%s readings:' % sid)
+                print("%s readings:" % sid)
                 print()  #'-' * 30
                 for rid in sorted(self._readings[sid]):
                     lf = self._readings[sid][rid]
-                    print("%s: %s" % (rid, lf.normalize()))
+                    print(f"{rid}: {lf.normalize()}")
 
     def _show_threads(self, filter=False, show_thread_readings=False):
         """
@@ -354,7 +341,7 @@ class DiscourseTester(object):
         for tid in sorted(threads):
             if show_thread_readings:
                 readings = [
-                    self._readings[rid.split('-')[0]][rid] for rid in self._threads[tid]
+                    self._readings[rid.split("-")[0]][rid] for rid in self._threads[tid]
                 ]
                 try:
                     thread_reading = (
@@ -362,9 +349,9 @@ class DiscourseTester(object):
                         % self._reading_command.combine_readings(readings).normalize()
                     )
                 except Exception as e:
-                    thread_reading = ': INVALID: %s' % e.__class__.__name__
+                    thread_reading = ": INVALID: %s" % e.__class__.__name__
             else:
-                thread_reading = ''
+                thread_reading = ""
 
             print("%s:" % tid, self._threads[tid], thread_reading)
 
@@ -415,7 +402,7 @@ class DiscourseTester(object):
         return [
             (rid, self._readings[sid][rid])
             for rid in threads[thread_id]
-            for sid in rid.split('-')[:1]
+            for sid in rid.split("-")[:1]
         ]
 
     ###############################
@@ -451,7 +438,7 @@ class DiscourseTester(object):
                         print(a)
                     spacer(80)
                 if modelfound:
-                    print(mb.model(format='cooked'))
+                    print(mb.model(format="cooked"))
                 else:
                     print("No model found!\n")
         return results
@@ -474,14 +461,14 @@ class DiscourseTester(object):
             idlist = [rid for rid in threads[tid]]
 
             if not modelfound:
-                print("Inconsistent discourse: %s %s:" % (tid, idlist))
+                print(f"Inconsistent discourse: {tid} {idlist}:")
                 for rid, reading in self.expand_threads(tid):
-                    print("    %s: %s" % (rid, reading.normalize()))
+                    print(f"    {rid}: {reading.normalize()}")
                 print()
             else:
-                print("Consistent discourse: %s %s:" % (tid, idlist))
+                print(f"Consistent discourse: {tid} {idlist}:")
                 for rid, reading in self.expand_threads(tid):
-                    print("    %s: %s" % (rid, reading.normalize()))
+                    print(f"    {rid}: {reading.normalize()}")
                 print()
 
     def add_background(self, background, verbose=False):
@@ -539,12 +526,6 @@ class DiscourseTester(object):
         return result
 
 
-# multiply = DiscourseTester.multiply
-# L1 = [['A'], ['B']]
-# L2 = ['a', 'b', 'c']
-# print multiply(L1,L2)
-
-
 def load_fol(s):
     """
     Temporarily duplicated from ``nltk.sem.util``.
@@ -558,12 +539,12 @@ def load_fol(s):
     statements = []
     for linenum, line in enumerate(s.splitlines()):
         line = line.strip()
-        if line.startswith('#') or line == '':
+        if line.startswith("#") or line == "":
             continue
         try:
             statements.append(Expression.fromstring(line))
-        except Exception:
-            raise ValueError('Unable to parse line %s: %s' % (linenum, line))
+        except Exception as e:
+            raise ValueError(f"Unable to parse line {linenum}: {line}") from e
     return statements
 
 
@@ -575,7 +556,7 @@ def discourse_demo(reading_command=None):
     Illustrate the various methods of ``DiscourseTester``
     """
     dt = DiscourseTester(
-        ['A boxer walks', 'Every boxer chases a girl'], reading_command
+        ["A boxer walks", "Every boxer chases a girl"], reading_command
     )
     dt.models()
     print()
@@ -587,36 +568,36 @@ def discourse_demo(reading_command=None):
     print()
     dt.readings(threaded=True)
     print()
-    dt.models('d1')
-    dt.add_sentence('John is a boxer')
+    dt.models("d1")
+    dt.add_sentence("John is a boxer")
     print()
     dt.sentences()
     print()
     dt.readings(threaded=True)
     print()
     dt = DiscourseTester(
-        ['A student dances', 'Every student is a person'], reading_command
+        ["A student dances", "Every student is a person"], reading_command
     )
     print()
-    dt.add_sentence('No person dances', consistchk=True)
+    dt.add_sentence("No person dances", consistchk=True)
     print()
     dt.readings()
     print()
-    dt.retract_sentence('No person dances', verbose=True)
+    dt.retract_sentence("No person dances", verbose=True)
     print()
     dt.models()
     print()
-    dt.readings('A person dances')
+    dt.readings("A person dances")
     print()
-    dt.add_sentence('A person dances', informchk=True)
+    dt.add_sentence("A person dances", informchk=True)
     dt = DiscourseTester(
-        ['Vincent is a boxer', 'Fido is a boxer', 'Vincent is married', 'Fido barks'],
+        ["Vincent is a boxer", "Fido is a boxer", "Vincent is married", "Fido barks"],
         reading_command,
     )
     dt.readings(filter=True)
     import nltk.data
 
-    background_file = os.path.join('grammars', 'book_grammars', 'background.fol')
+    background_file = os.path.join("grammars", "book_grammars", "background.fol")
     background = nltk.data.load(background_file)
 
     print()
@@ -632,7 +613,7 @@ def drt_discourse_demo(reading_command=None):
     """
     Illustrate the various methods of ``DiscourseTester``
     """
-    dt = DiscourseTester(['every dog chases a boy', 'he runs'], reading_command)
+    dt = DiscourseTester(["every dog chases a boy", "he runs"], reading_command)
     dt.models()
     print()
     dt.sentences()
@@ -645,7 +626,7 @@ def drt_discourse_demo(reading_command=None):
 
 
 def spacer(num=30):
-    print('-' * num)
+    print("-" * num)
 
 
 def demo():
@@ -653,11 +634,11 @@ def demo():
 
     tagger = RegexpTagger(
         [
-            ('^(chases|runs)$', 'VB'),
-            ('^(a)$', 'ex_quant'),
-            ('^(every)$', 'univ_quant'),
-            ('^(dog|boy)$', 'NN'),
-            ('^(he)$', 'PRP'),
+            ("^(chases|runs)$", "VB"),
+            ("^(a)$", "ex_quant"),
+            ("^(every)$", "univ_quant"),
+            ("^(dog|boy)$", "NN"),
+            ("^(he)$", "PRP"),
         ]
     )
     depparser = MaltParser(tagger=tagger)
@@ -666,5 +647,5 @@ def demo():
     )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     demo()

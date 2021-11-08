@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 # Natural Language Toolkit: Chart Parser for Feature-Based Grammars
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Rob Speer <rspeer@mit.edu>
 #         Peter Ljunglöf <peter.ljunglof@heatherleaf.se>
 # URL: <http://nltk.org/>
@@ -11,43 +10,39 @@
 Extension of chart parsing implementation to handle grammars with
 feature structures as nodes.
 """
-from __future__ import print_function, unicode_literals
+from time import perf_counter
 
-from six.moves import range
-
-from nltk.compat import python_2_unicode_compatible
-from nltk.featstruct import FeatStruct, unify, TYPE, find_variables
-from nltk.sem import logic
-from nltk.tree import Tree
+from nltk.featstruct import TYPE, FeatStruct, find_variables, unify
 from nltk.grammar import (
-    Nonterminal,
-    Production,
     CFG,
     FeatStructNonterminal,
+    Nonterminal,
+    Production,
     is_nonterminal,
     is_terminal,
 )
 from nltk.parse.chart import (
-    TreeEdge,
+    BottomUpPredictCombineRule,
+    BottomUpPredictRule,
+    CachedTopDownPredictRule,
     Chart,
     ChartParser,
     EdgeI,
+    EmptyPredictRule,
     FundamentalRule,
     LeafInitRule,
-    EmptyPredictRule,
-    BottomUpPredictRule,
     SingleEdgeFundamentalRule,
-    BottomUpPredictCombineRule,
-    CachedTopDownPredictRule,
     TopDownInitRule,
+    TreeEdge,
 )
+from nltk.sem import logic
+from nltk.tree import Tree
 
 # ////////////////////////////////////////////////////////////
 # Tree Edge
 # ////////////////////////////////////////////////////////////
 
 
-@python_2_unicode_compatible
 class FeatureTreeEdge(TreeEdge):
     """
     A specialized tree edge that allows shared variable bindings
@@ -149,12 +144,12 @@ class FeatureTreeEdge(TreeEdge):
 
     def __str__(self):
         if self.is_complete():
-            return TreeEdge.__unicode__(self)
+            return super().__str__()
         else:
-            bindings = '{%s}' % ', '.join(
-                '%s: %r' % item for item in sorted(self._bindings.items())
+            bindings = "{%s}" % ", ".join(
+                "%s: %r" % item for item in sorted(self._bindings.items())
             )
-            return '%s %s' % (TreeEdge.__unicode__(self), bindings)
+            return f"{super().__str__()} {bindings}"
 
 
 # ////////////////////////////////////////////////////////////
@@ -201,7 +196,7 @@ class FeatureChart(Chart):
         # Make sure it's a valid index.
         for key in restr_keys:
             if not hasattr(EdgeI, key):
-                raise ValueError('Bad restriction: %s' % key)
+                raise ValueError("Bad restriction: %s" % key)
 
         # Create the index.
         index = self._indexes[restr_keys] = {}
@@ -241,8 +236,7 @@ class FeatureChart(Chart):
                 and (edge.lhs()[TYPE] == start[TYPE])
                 and (unify(edge.lhs(), start, rename_vars=True))
             ):
-                for tree in self.trees(edge, complete=True, tree_class=tree_class):
-                    yield tree
+                yield from self.trees(edge, complete=True, tree_class=tree_class)
 
 
 # ////////////////////////////////////////////////////////////
@@ -251,10 +245,10 @@ class FeatureChart(Chart):
 
 
 class FeatureFundamentalRule(FundamentalRule):
-    """
+    r"""
     A specialized version of the fundamental rule that operates on
     nonterminals whose symbols are ``FeatStructNonterminal``s.  Rather
-    tha simply comparing the nonterminals for equality, they are
+    than simply comparing the nonterminals for equality, they are
     unified.  Variable bindings from these unifications are collected
     and stored in the chart using a ``FeatureTreeEdge``.  When a
     complete edge is generated, these bindings are applied to all
@@ -327,16 +321,14 @@ class FeatureSingleEdgeFundamentalRule(SingleEdgeFundamentalRule):
         for left_edge in chart.select(
             end=right_edge.start(), is_complete=False, nextsym=right_edge.lhs()
         ):
-            for new_edge in fr.apply(chart, grammar, left_edge, right_edge):
-                yield new_edge
+            yield from fr.apply(chart, grammar, left_edge, right_edge)
 
     def _apply_incomplete(self, chart, grammar, left_edge):
         fr = self._fundamental_rule
         for right_edge in chart.select(
             start=left_edge.end(), is_complete=True, lhs=left_edge.nextsym()
         ):
-            for new_edge in fr.apply(chart, grammar, left_edge, right_edge):
-                yield new_edge
+            yield from fr.apply(chart, grammar, left_edge, right_edge)
 
 
 # ////////////////////////////////////////////////////////////
@@ -353,7 +345,7 @@ class FeatureTopDownInitRule(TopDownInitRule):
 
 
 class FeatureTopDownPredictRule(CachedTopDownPredictRule):
-    """
+    r"""
     A specialized version of the (cached) top down predict rule that operates
     on nonterminals whose symbols are ``FeatStructNonterminal``s.  Rather
     than simply comparing the nonterminals for equality, they are
@@ -498,7 +490,7 @@ class FeatureChartParser(ChartParser):
         strategy=BU_LC_FEATURE_STRATEGY,
         trace_chart_width=20,
         chart_class=FeatureChart,
-        **parser_args
+        **parser_args,
     ):
         ChartParser.__init__(
             self,
@@ -506,7 +498,7 @@ class FeatureChartParser(ChartParser):
             strategy=strategy,
             trace_chart_width=trace_chart_width,
             chart_class=chart_class,
-            **parser_args
+            **parser_args,
         )
 
 
@@ -584,11 +576,11 @@ class InstantiateVarsChart(FeatureChart):
         edge._lhs = edge.lhs().substitute_bindings(inst_vars)
 
     def inst_vars(self, edge):
-        return dict(
-            (var, logic.unique_variable())
+        return {
+            var: logic.unique_variable()
             for var in edge.lhs().variables()
-            if var.name.startswith('@')
-        )
+            if var.name.startswith("@")
+        }
 
 
 # ////////////////////////////////////////////////////////////
@@ -630,9 +622,10 @@ def demo(
     print_sentence=True,
     trace=1,
     parser=FeatureChartParser,
-    sent='I saw John with a dog with my cookie',
+    sent="I saw John with a dog with my cookie",
 ):
-    import sys, time
+    import sys
+    import time
 
     print()
     grammar = demo_grammar()
@@ -643,12 +636,12 @@ def demo(
     if print_sentence:
         print("Sentence:", sent)
     tokens = sent.split()
-    t = time.clock()
+    t = perf_counter()
     cp = parser(grammar, trace=trace)
     chart = cp.chart_parse(tokens)
     trees = list(chart.parses(grammar.start()))
     if print_times:
-        print("Time: %s" % (time.clock() - t))
+        print("Time: %s" % (perf_counter() - t))
     if print_trees:
         for tree in trees:
             print(tree)
@@ -659,22 +652,22 @@ def demo(
 def run_profile():
     import profile
 
-    profile.run('for i in range(1): demo()', '/tmp/profile.out')
+    profile.run("for i in range(1): demo()", "/tmp/profile.out")
     import pstats
 
-    p = pstats.Stats('/tmp/profile.out')
-    p.strip_dirs().sort_stats('time', 'cum').print_stats(60)
-    p.strip_dirs().sort_stats('cum', 'time').print_stats(60)
+    p = pstats.Stats("/tmp/profile.out")
+    p.strip_dirs().sort_stats("time", "cum").print_stats(60)
+    p.strip_dirs().sort_stats("cum", "time").print_stats(60)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     from nltk.data import load
 
     demo()
     print()
-    grammar = load('grammars/book_grammars/feat0.fcfg')
+    grammar = load("grammars/book_grammars/feat0.fcfg")
     cp = FeatureChartParser(grammar, trace=2)
-    sent = 'Kim likes children'
+    sent = "Kim likes children"
     tokens = sent.split()
     trees = cp.parse(tokens)
     for tree in trees:

@@ -1,4 +1,4 @@
-.. Copyright (C) 2001-2019 NLTK Project
+.. Copyright (C) 2001-2021 NLTK Project
 .. For license information, see LICENSE.TXT
 
 -------------------------------------------
@@ -153,4 +153,3 @@ Convert the transformed tree back to its original form
     >>> un_chomsky_normal_form(markovTree)
     >>> tree == markovTree
     True
-

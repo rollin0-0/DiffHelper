@@ -1,6 +1,6 @@
 # Natural Language Toolkit: Interface to Weka Classsifiers
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Edward Loper <edloper@gmail.com>
 # URL: <http://nltk.org/>
 # For license information, see LICENSE.TXT
@@ -8,29 +8,26 @@
 """
 Classifiers that make use of the external 'Weka' package.
 """
-from __future__ import print_function
-import time
-import tempfile
+
 import os
-import subprocess
 import re
+import subprocess
+import tempfile
+import time
 import zipfile
 from sys import stdin
 
-from six import integer_types, string_types
-
-from nltk.probability import DictionaryProbDist
-from nltk.internals import java, config_java
-
 from nltk.classify.api import ClassifierI
+from nltk.internals import config_java, java
+from nltk.probability import DictionaryProbDist
 
 _weka_classpath = None
 _weka_search = [
-    '.',
-    '/usr/share/weka',
-    '/usr/local/share/weka',
-    '/usr/lib/weka',
-    '/usr/local/lib/weka',
+    ".",
+    "/usr/share/weka",
+    "/usr/local/share/weka",
+    "/usr/lib/weka",
+    "/usr/local/lib/weka",
 ]
 
 
@@ -45,27 +42,25 @@ def config_weka(classpath=None):
 
     if _weka_classpath is None:
         searchpath = _weka_search
-        if 'WEKAHOME' in os.environ:
-            searchpath.insert(0, os.environ['WEKAHOME'])
+        if "WEKAHOME" in os.environ:
+            searchpath.insert(0, os.environ["WEKAHOME"])
 
         for path in searchpath:
-            if os.path.exists(os.path.join(path, 'weka.jar')):
-                _weka_classpath = os.path.join(path, 'weka.jar')
+            if os.path.exists(os.path.join(path, "weka.jar")):
+                _weka_classpath = os.path.join(path, "weka.jar")
                 version = _check_weka_version(_weka_classpath)
                 if version:
-                    print(
-                        ('[Found Weka: %s (version %s)]' % (_weka_classpath, version))
-                    )
+                    print(f"[Found Weka: {_weka_classpath} (version {version})]")
                 else:
-                    print('[Found Weka: %s]' % _weka_classpath)
+                    print("[Found Weka: %s]" % _weka_classpath)
                 _check_weka_version(_weka_classpath)
 
     if _weka_classpath is None:
         raise LookupError(
-            'Unable to find weka.jar!  Use config_weka() '
-            'or set the WEKAHOME environment variable. '
-            'For more information about Weka, please see '
-            'http://www.cs.waikato.ac.nz/ml/weka/'
+            "Unable to find weka.jar!  Use config_weka() "
+            "or set the WEKAHOME environment variable. "
+            "For more information about Weka, please see "
+            "http://www.cs.waikato.ac.nz/ml/weka/"
         )
 
 
@@ -78,7 +73,7 @@ def _check_weka_version(jar):
         return None
     try:
         try:
-            return zf.read('weka/core/version.txt')
+            return zf.read("weka/core/version.txt")
         except KeyError:
             return None
     finally:
@@ -91,10 +86,10 @@ class WekaClassifier(ClassifierI):
         self._model = model_filename
 
     def prob_classify_many(self, featuresets):
-        return self._classify_many(featuresets, ['-p', '0', '-distribution'])
+        return self._classify_many(featuresets, ["-p", "0", "-distribution"])
 
     def classify_many(self, featuresets):
-        return self._classify_many(featuresets, ['-p', '0'])
+        return self._classify_many(featuresets, ["-p", "0"])
 
     def _classify_many(self, featuresets, options):
         # Make sure we can find java & weka.
@@ -103,15 +98,15 @@ class WekaClassifier(ClassifierI):
         temp_dir = tempfile.mkdtemp()
         try:
             # Write the test data file.
-            test_filename = os.path.join(temp_dir, 'test.arff')
+            test_filename = os.path.join(temp_dir, "test.arff")
             self._formatter.write(test_filename, featuresets)
 
             # Call weka to classify the data.
             cmd = [
-                'weka.classifiers.bayes.NaiveBayes',
-                '-l',
+                "weka.classifiers.bayes.NaiveBayes",
+                "-l",
                 self._model,
-                '-T',
+                "-T",
                 test_filename,
             ] + options
             (stdout, stderr) = java(
@@ -123,17 +118,17 @@ class WekaClassifier(ClassifierI):
 
             # Check if something went wrong:
             if stderr and not stdout:
-                if 'Illegal options: -distribution' in stderr:
+                if "Illegal options: -distribution" in stderr:
                     raise ValueError(
-                        'The installed version of weka does '
-                        'not support probability distribution '
-                        'output.'
+                        "The installed version of weka does "
+                        "not support probability distribution "
+                        "output."
                     )
                 else:
-                    raise ValueError('Weka failed to generate output:\n%s' % stderr)
+                    raise ValueError("Weka failed to generate output:\n%s" % stderr)
 
             # Parse weka's output.
-            return self.parse_weka_output(stdout.decode(stdin.encoding).split('\n'))
+            return self.parse_weka_output(stdout.decode(stdin.encoding).split("\n"))
 
         finally:
             for f in os.listdir(temp_dir):
@@ -141,7 +136,7 @@ class WekaClassifier(ClassifierI):
             os.rmdir(temp_dir)
 
     def parse_weka_distribution(self, s):
-        probs = [float(v) for v in re.split('[*,]+', s) if v.strip()]
+        probs = [float(v) for v in re.split("[*,]+", s) if v.strip()]
         probs = dict(zip(self._formatter.labels(), probs))
         return DictionaryProbDist(probs)
 
@@ -152,14 +147,14 @@ class WekaClassifier(ClassifierI):
                 lines = lines[i:]
                 break
 
-        if lines[0].split() == ['inst#', 'actual', 'predicted', 'error', 'prediction']:
-            return [line.split()[2].split(':')[1] for line in lines[1:] if line.strip()]
+        if lines[0].split() == ["inst#", "actual", "predicted", "error", "prediction"]:
+            return [line.split()[2].split(":")[1] for line in lines[1:] if line.strip()]
         elif lines[0].split() == [
-            'inst#',
-            'actual',
-            'predicted',
-            'error',
-            'distribution',
+            "inst#",
+            "actual",
+            "predicted",
+            "error",
+            "distribution",
         ]:
             return [
                 self.parse_weka_distribution(line.split()[-1])
@@ -168,16 +163,16 @@ class WekaClassifier(ClassifierI):
             ]
 
         # is this safe:?
-        elif re.match(r'^0 \w+ [01]\.[0-9]* \?\s*$', lines[0]):
+        elif re.match(r"^0 \w+ [01]\.[0-9]* \?\s*$", lines[0]):
             return [line.split()[1] for line in lines if line.strip()]
 
         else:
             for line in lines[:10]:
                 print(line)
             raise ValueError(
-                'Unhandled output format -- your version '
-                'of weka may not be supported.\n'
-                '  Header: %s' % lines[0]
+                "Unhandled output format -- your version "
+                "of weka may not be supported.\n"
+                "  Header: %s" % lines[0]
             )
 
     # [xx] full list of classifiers (some may be abstract?):
@@ -194,12 +189,12 @@ class WekaClassifier(ClassifierI):
     # VotedPerceptron, Winnow, ZeroR
 
     _CLASSIFIER_CLASS = {
-        'naivebayes': 'weka.classifiers.bayes.NaiveBayes',
-        'C4.5': 'weka.classifiers.trees.J48',
-        'log_regression': 'weka.classifiers.functions.Logistic',
-        'svm': 'weka.classifiers.functions.SMO',
-        'kstar': 'weka.classifiers.lazy.KStar',
-        'ripper': 'weka.classifiers.rules.JRip',
+        "naivebayes": "weka.classifiers.bayes.NaiveBayes",
+        "C4.5": "weka.classifiers.trees.J48",
+        "log_regression": "weka.classifiers.functions.Logistic",
+        "svm": "weka.classifiers.functions.SMO",
+        "kstar": "weka.classifiers.lazy.KStar",
+        "ripper": "weka.classifiers.rules.JRip",
     }
 
     @classmethod
@@ -207,7 +202,7 @@ class WekaClassifier(ClassifierI):
         cls,
         model_filename,
         featuresets,
-        classifier='naivebayes',
+        classifier="naivebayes",
         options=[],
         quiet=True,
     ):
@@ -220,7 +215,7 @@ class WekaClassifier(ClassifierI):
         temp_dir = tempfile.mkdtemp()
         try:
             # Write the training data file.
-            train_filename = os.path.join(temp_dir, 'train.arff')
+            train_filename = os.path.join(temp_dir, "train.arff")
             formatter.write(train_filename, featuresets)
 
             if classifier in cls._CLASSIFIER_CLASS:
@@ -228,10 +223,10 @@ class WekaClassifier(ClassifierI):
             elif classifier in cls._CLASSIFIER_CLASS.values():
                 javaclass = classifier
             else:
-                raise ValueError('Unknown classifier %s' % classifier)
+                raise ValueError("Unknown classifier %s" % classifier)
 
             # Train the weka model.
-            cmd = [javaclass, '-d', model_filename, '-t', train_filename]
+            cmd = [javaclass, "-d", model_filename, "-t", train_filename]
             cmd += list(options)
             if quiet:
                 stdout = subprocess.PIPE
@@ -278,8 +273,8 @@ class ARFF_Formatter:
 
     def write(self, outfile, tokens):
         """Writes ARFF data to a file for the given data."""
-        if not hasattr(outfile, 'write'):
-            outfile = open(outfile, 'w')
+        if not hasattr(outfile, "write"):
+            outfile = open(outfile, "w")
         outfile.write(self.format(tokens))
         outfile.close()
 
@@ -291,25 +286,25 @@ class ARFF_Formatter:
         string (note: not nominal) types.
         """
         # Find the set of all attested labels.
-        labels = set(label for (tok, label) in tokens)
+        labels = {label for (tok, label) in tokens}
 
         # Determine the types of all features.
         features = {}
         for tok, label in tokens:
             for (fname, fval) in tok.items():
                 if issubclass(type(fval), bool):
-                    ftype = '{True, False}'
-                elif issubclass(type(fval), (integer_types, float, bool)):
-                    ftype = 'NUMERIC'
-                elif issubclass(type(fval), string_types):
-                    ftype = 'STRING'
+                    ftype = "{True, False}"
+                elif issubclass(type(fval), (int, float, bool)):
+                    ftype = "NUMERIC"
+                elif issubclass(type(fval), str):
+                    ftype = "STRING"
                 elif fval is None:
                     continue  # can't tell the type.
                 else:
-                    raise ValueError('Unsupported value type %r' % ftype)
+                    raise ValueError("Unsupported value type %r" % ftype)
 
                 if features.get(fname, ftype) != ftype:
-                    raise ValueError('Inconsistent type for %s' % fname)
+                    raise ValueError("Inconsistent type for %s" % fname)
                 features[fname] = ftype
         features = sorted(features.items())
 
@@ -319,20 +314,20 @@ class ARFF_Formatter:
         """Returns an ARFF header as a string."""
         # Header comment.
         s = (
-            '% Weka ARFF file\n'
-            + '% Generated automatically by NLTK\n'
-            + '%% %s\n\n' % time.ctime()
+            "% Weka ARFF file\n"
+            + "% Generated automatically by NLTK\n"
+            + "%% %s\n\n" % time.ctime()
         )
 
         # Relation name
-        s += '@RELATION rel\n\n'
+        s += "@RELATION rel\n\n"
 
         # Input attribute specifications
         for fname, ftype in self._features:
-            s += '@ATTRIBUTE %-30r %s\n' % (fname, ftype)
+            s += "@ATTRIBUTE %-30r %s\n" % (fname, ftype)
 
         # Label attribute specification
-        s += '@ATTRIBUTE %-30r {%s}\n' % ('-label-', ','.join(self._labels))
+        s += "@ATTRIBUTE %-30r {%s}\n" % ("-label-", ",".join(self._labels))
 
         return s
 
@@ -354,29 +349,29 @@ class ARFF_Formatter:
             tokens = [(tok, None) for tok in tokens]
 
         # Data section
-        s = '\n@DATA\n'
+        s = "\n@DATA\n"
         for (tok, label) in tokens:
             for fname, ftype in self._features:
-                s += '%s,' % self._fmt_arff_val(tok.get(fname))
-            s += '%s\n' % self._fmt_arff_val(label)
+                s += "%s," % self._fmt_arff_val(tok.get(fname))
+            s += "%s\n" % self._fmt_arff_val(label)
 
         return s
 
     def _fmt_arff_val(self, fval):
         if fval is None:
-            return '?'
-        elif isinstance(fval, (bool, integer_types)):
-            return '%s' % fval
+            return "?"
+        elif isinstance(fval, (bool, int)):
+            return "%s" % fval
         elif isinstance(fval, float):
-            return '%r' % fval
+            return "%r" % fval
         else:
-            return '%r' % fval
+            return "%r" % fval
 
 
-if __name__ == '__main__':
-    from nltk.classify.util import names_demo, binary_names_demo_features
+if __name__ == "__main__":
+    from nltk.classify.util import binary_names_demo_features, names_demo
 
     def make_classifier(featuresets):
-        return WekaClassifier.train('/tmp/name.model', featuresets, 'C4.5')
+        return WekaClassifier.train("/tmp/name.model", featuresets, "C4.5")
 
     classifier = names_demo(make_classifier, binary_names_demo_features)

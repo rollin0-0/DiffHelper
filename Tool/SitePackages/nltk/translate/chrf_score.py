@@ -1,16 +1,14 @@
-# -*- coding: utf-8 -*-
 # Natural Language Toolkit: ChrF score
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Authors: Maja Popovic
 # Contributors: Liling Tan, Aleš Tamchyna (Memsource)
 # URL: <http://nltk.org/>
 # For license information, see LICENSE.TXT
 
 """ ChrF score implementation """
-from __future__ import division
-from collections import Counter, defaultdict
 import re
+from collections import Counter, defaultdict
 
 from nltk.util import ngrams
 
@@ -103,10 +101,10 @@ def sentence_chrf(
 def _preprocess(sent, ignore_whitespace):
     if type(sent) != str:
         # turn list of tokens into a string
-        sent = ' '.join(sent)
+        sent = " ".join(sent)
 
     if ignore_whitespace:
-        sent = re.sub(r'\s+', '', sent)
+        sent = re.sub(r"\s+", "", sent)
     return sent
 
 

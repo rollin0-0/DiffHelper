@@ -1,13 +1,14 @@
 # Natural Language Toolkit: Wordfreq Application
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Sumukh Ghodke <sghodke@csse.unimelb.edu.au>
 # URL: <http://nltk.org/>
 # For license information, see LICENSE.TXT
 
 from matplotlib import pylab
-from nltk.text import Text
+
 from nltk.corpus import gutenberg
+from nltk.text import Text
 
 
 def plot_word_freq_dist(text):
@@ -25,11 +26,11 @@ def plot_word_freq_dist(text):
 
 
 def app():
-    t1 = Text(gutenberg.words('melville-moby_dick.txt'))
+    t1 = Text(gutenberg.words("melville-moby_dick.txt"))
     plot_word_freq_dist(t1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app()
 
-__all__ = ['app']
+__all__ = ["app"]

@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 # Natural Language Toolkit: Stack decoder
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Tah Wei Hoon <hoon.tw@gmail.com>
 # URL: <http://nltk.org/>
 # For license information, see LICENSE.TXT
@@ -47,7 +46,7 @@ from collections import defaultdict
 from math import log
 
 
-class StackDecoder(object):
+class StackDecoder:
     """
     Phrase-based stack decoder for machine translation
 
@@ -188,9 +187,9 @@ class StackDecoder(object):
 
         if not stacks[sentence_length]:
             warnings.warn(
-                'Unable to translate all words. '
-                'The source sentence contains words not in '
-                'the phrase table'
+                "Unable to translate all words. "
+                "The source sentence contains words not in "
+                "the phrase table"
             )
             # Instead of returning empty output, perhaps a partial
             # translation could be returned
@@ -238,7 +237,7 @@ class StackDecoder(object):
         subsequence covering positions 2, 3, and 4.
         :rtype: dict(int: (dict(int): float))
         """
-        scores = defaultdict(lambda: defaultdict(lambda: float('-inf')))
+        scores = defaultdict(lambda: defaultdict(lambda: float("-inf")))
         for seq_length in range(1, len(src_sentence) + 1):
             for start in range(0, len(src_sentence) - seq_length + 1):
                 end = start + seq_length
@@ -336,7 +335,7 @@ class StackDecoder(object):
         return valid_phrases
 
 
-class _Hypothesis(object):
+class _Hypothesis:
     """
     Partial solution to a translation.
 
@@ -450,7 +449,7 @@ class _Hypothesis(object):
         output.extend(hypothesis.trg_phrase)
 
 
-class _Stack(object):
+class _Stack:
     """
     Collection of _Hypothesis objects
     """
@@ -466,7 +465,7 @@ class _Stack(object):
         self.items = []
 
         if beam_threshold == 0.0:
-            self.__log_beam_threshold = float('-inf')
+            self.__log_beam_threshold = float("-inf")
         else:
             self.__log_beam_threshold = log(beam_threshold)
 

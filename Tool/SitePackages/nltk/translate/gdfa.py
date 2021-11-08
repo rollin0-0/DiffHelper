@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 # Natural Language Toolkit: GDFA word alignment symmetrization
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Authors: Liling Tan
 # URL: <http://nltk.org/>
 # For license information, see LICENSE.TXT
@@ -20,9 +19,9 @@ def grow_diag_final_and(srclen, trglen, e2f, f2e):
             these criteria: (i) neighbor alignments points are not in the
             intersection and (ii) neighbor alignments are in the union.
 
-    Step 3: Add all other alignment points thats not in the intersection, not in
+    Step 3: Add all other alignment points that are not in the intersection, not in
             the neighboring alignments that met the criteria but in the original
-            foward/backward alignment outputs.
+            forward/backward alignment outputs.
 
         >>> forw = ('0-0 2-1 9-2 21-3 10-4 7-5 11-6 9-7 12-8 1-9 3-10 '
         ...         '4-11 17-12 17-13 25-14 13-15 24-16 11-17 28-18')
@@ -67,8 +66,8 @@ def grow_diag_final_and(srclen, trglen, e2f, f2e):
     """
 
     # Converts pharaoh text format into list of tuples.
-    e2f = [tuple(map(int, a.split('-'))) for a in e2f.split()]
-    f2e = [tuple(map(int, a.split('-'))) for a in f2e.split()]
+    e2f = [tuple(map(int, a.split("-"))) for a in e2f.split()]
+    f2e = [tuple(map(int, a.split("-"))) for a in f2e.split()]
 
     neighbors = [(-1, 0), (0, -1), (1, 0), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]
     alignment = set(e2f).intersection(set(f2e))  # Find the intersection.
@@ -77,8 +76,8 @@ def grow_diag_final_and(srclen, trglen, e2f, f2e):
     # *aligned* is used to check if neighbors are aligned in grow_diag()
     aligned = defaultdict(set)
     for i, j in alignment:
-        aligned['e'].add(i)
-        aligned['f'].add(j)
+        aligned["e"].add(i)
+        aligned["f"].add(j)
 
     def grow_diag():
         """
@@ -105,8 +104,8 @@ def grow_diag_final_and(srclen, trglen, e2f, f2e):
                                 e_new not in aligned and f_new not in aligned
                             ) and neighbor in union:
                                 alignment.add(neighbor)
-                                aligned['e'].add(e_new)
-                                aligned['f'].add(f_new)
+                                aligned["e"].add(e_new)
+                                aligned["f"].add(f_new)
                                 prev_len += 1
                                 no_new_points = False
             # iterate until no new points added
@@ -130,8 +129,8 @@ def grow_diag_final_and(srclen, trglen, e2f, f2e):
                     and (e_new, f_new) in union
                 ):
                     alignment.add((e_new, f_new))
-                    aligned['e'].add(e_new)
-                    aligned['f'].add(f_new)
+                    aligned["e"].add(e_new)
+                    aligned["f"].add(f_new)
 
     grow_diag()
     final_and(e2f)

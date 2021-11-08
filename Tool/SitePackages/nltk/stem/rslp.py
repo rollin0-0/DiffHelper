@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
-
 # Natural Language Toolkit: RSLP Stemmer
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Tiago Tresoldi <tresoldi@gmail.com>
 # URL: <http://nltk.org/>
 # For license information, see LICENSE.TXT
@@ -30,9 +28,8 @@
 # comentário, inclusive sobre o desenvolvimento de um stemmer diferente
 # e/ou melhor para o português. Também sugiro utilizar-se a lista de discussão
 # do NLTK para o português para qualquer debate.
-from __future__ import print_function, unicode_literals
-from nltk.data import load
 
+from nltk.data import load
 from nltk.stem.api import StemmerI
 
 
@@ -65,7 +62,7 @@ class RSLPStemmer(StemmerI):
         self._model.append(self.read_rule("step6.pt"))
 
     def read_rule(self, filename):
-        rules = load('nltk:stemmers/rslp/' + filename, format='raw').decode("utf8")
+        rules = load("nltk:stemmers/rslp/" + filename, format="raw").decode("utf8")
         lines = rules.split("\n")
 
         lines = [line for line in lines if line != ""]  # remove blank lines

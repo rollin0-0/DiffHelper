@@ -1,25 +1,21 @@
 # Natural Language Toolkit: CCG Categories
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Graeme Gange <ggange@csse.unimelb.edu.au>
 # URL: <http://nltk.org/>
 # For license information, see LICENSE.TXT
-from __future__ import unicode_literals
-from functools import total_ordering
 
 from abc import ABCMeta, abstractmethod
-from six import add_metaclass
+from functools import total_ordering
 
 from nltk.internals import raise_unorderable_types
-from nltk.compat import python_2_unicode_compatible, unicode_repr
 
 
-@add_metaclass(ABCMeta)
 @total_ordering
-class AbstractCCGCategory(object):
-    '''
+class AbstractCCGCategory(metaclass=ABCMeta):
+    """
     Interface for categories in combinatory grammars.
-    '''
+    """
 
     @abstractmethod
     def is_primitive(self):
@@ -84,13 +80,12 @@ class AbstractCCGCategory(object):
             return self._hash
 
 
-@python_2_unicode_compatible
 class CCGVar(AbstractCCGCategory):
-    '''
+    """
     Class representing a variable CCG category.
     Used for conjunctions (and possibly type-raising, if implemented as a
     unary rule).
-    '''
+    """
 
     _maxID = 0
 
@@ -136,7 +131,7 @@ class CCGVar(AbstractCCGCategory):
         return self
 
     def can_unify(self, other):
-        """ If the variable can be replaced with other
+        """If the variable can be replaced with other
         a substitution is returned.
         """
         if other.is_primitive() or not self._prim_only:
@@ -151,13 +146,12 @@ class CCGVar(AbstractCCGCategory):
 
 
 @total_ordering
-@python_2_unicode_compatible
-class Direction(object):
-    '''
+class Direction:
+    """
     Class representing the direction of a function application.
     Also contains maintains information as to which combinators
     may be used with the category.
-    '''
+    """
 
     def __init__(self, dir, restrictions):
         self._dir = dir
@@ -166,10 +160,10 @@ class Direction(object):
 
     # Testing the application direction
     def is_forward(self):
-        return self._dir == '/'
+        return self._dir == "/"
 
     def is_backward(self):
-        return self._dir == '\\'
+        return self._dir == "\\"
 
     def dir(self):
         return self._dir
@@ -184,16 +178,16 @@ class Direction(object):
         return self._restrs
 
     def is_variable(self):
-        return self._restrs == '_'
+        return self._restrs == "_"
 
     # Unification and substitution of variable directions.
     # Used only if type-raising is implemented as a unary rule, as it
     # must inherit restrictions from the argument category.
     def can_unify(self, other):
         if other.is_variable():
-            return [('_', self.restrs())]
+            return [("_", self.restrs())]
         elif self.is_variable():
-            return [('_', other.restrs())]
+            return [("_", other.restrs())]
         else:
             if self.restrs() == other.restrs():
                 return []
@@ -204,16 +198,16 @@ class Direction(object):
             return self
 
         for (var, restrs) in subs:
-            if var == '_':
+            if var == "_":
                 return Direction(self._dir, restrs)
         return self
 
     # Testing permitted combinators
     def can_compose(self):
-        return ',' not in self._restrs
+        return "," not in self._restrs
 
     def can_cross(self):
-        return '.' not in self._restrs
+        return "." not in self._restrs
 
     def __eq__(self, other):
         return (
@@ -243,23 +237,22 @@ class Direction(object):
         r_str = ""
         for r in self._restrs:
             r_str = r_str + "%s" % r
-        return "%s%s" % (self._dir, r_str)
+        return f"{self._dir}{r_str}"
 
     # The negation operator reverses the direction of the application
     def __neg__(self):
-        if self._dir == '/':
-            return Direction('\\', self._restrs)
+        if self._dir == "/":
+            return Direction("\\", self._restrs)
         else:
-            return Direction('/', self._restrs)
+            return Direction("/", self._restrs)
 
 
-@python_2_unicode_compatible
 class PrimitiveCategory(AbstractCCGCategory):
-    '''
+    """
     Class representing primitive categories.
     Takes a string representation of the category, and a
     list of strings specifying the morphological subcategories.
-    '''
+    """
 
     def __init__(self, categ, restrictions=[]):
         self._categ = categ
@@ -303,17 +296,16 @@ class PrimitiveCategory(AbstractCCGCategory):
     def __str__(self):
         if self._restrs == []:
             return "%s" % self._categ
-        restrictions = "[%s]" % ",".join(unicode_repr(r) for r in self._restrs)
-        return "%s%s" % (self._categ, restrictions)
+        restrictions = "[%s]" % ",".join(repr(r) for r in self._restrs)
+        return f"{self._categ}{restrictions}"
 
 
-@python_2_unicode_compatible
 class FunctionalCategory(AbstractCCGCategory):
-    '''
+    """
     Class that represents a function application category.
     Consists of argument and result categories, together with
     an application direction.
-    '''
+    """
 
     def __init__(self, res, arg, dir):
         self._res = res
@@ -363,4 +355,4 @@ class FunctionalCategory(AbstractCCGCategory):
         return self._dir
 
     def __str__(self):
-        return "(%s%s%s)" % (self._res, self._dir, self._arg)
+        return f"({self._res}{self._dir}{self._arg})"

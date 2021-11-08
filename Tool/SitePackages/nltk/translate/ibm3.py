@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Natural Language Toolkit: IBM Model 3
 #
 # Copyright (C) 2001-2013 NLTK Project
@@ -73,16 +72,11 @@ Translation: Parameter Estimation. Computational Linguistics, 19 (2),
 263-311.
 """
 
-from __future__ import division
-
 import warnings
 from collections import defaultdict
 from math import factorial
 
-from nltk.translate import AlignedSent
-from nltk.translate import Alignment
-from nltk.translate import IBMModel
-from nltk.translate import IBMModel2
+from nltk.translate import AlignedSent, Alignment, IBMModel, IBMModel2
 from nltk.translate.ibm_model import Counts
 
 
@@ -160,7 +154,7 @@ class IBMModel3(IBMModel):
             See ``IBMModel`` for the type and purpose of these tables.
         :type probability_tables: dict[str]: object
         """
-        super(IBMModel3, self).__init__(sentence_aligned_corpus)
+        super().__init__(sentence_aligned_corpus)
         self.reset_probabilities()
 
         if probability_tables is None:
@@ -171,17 +165,17 @@ class IBMModel3(IBMModel):
             self.set_uniform_probabilities(sentence_aligned_corpus)
         else:
             # Set user-defined probabilities
-            self.translation_table = probability_tables['translation_table']
-            self.alignment_table = probability_tables['alignment_table']
-            self.fertility_table = probability_tables['fertility_table']
-            self.p1 = probability_tables['p1']
-            self.distortion_table = probability_tables['distortion_table']
+            self.translation_table = probability_tables["translation_table"]
+            self.alignment_table = probability_tables["alignment_table"]
+            self.fertility_table = probability_tables["fertility_table"]
+            self.p1 = probability_tables["p1"]
+            self.distortion_table = probability_tables["distortion_table"]
 
         for n in range(0, iterations):
             self.train(sentence_aligned_corpus)
 
     def reset_probabilities(self):
-        super(IBMModel3, self).reset_probabilities()
+        super().reset_probabilities()
         self.distortion_table = defaultdict(
             lambda: defaultdict(
                 lambda: defaultdict(lambda: defaultdict(lambda: self.MIN_PROB))
@@ -334,7 +328,7 @@ class Model3Counts(Counts):
     """
 
     def __init__(self):
-        super(Model3Counts, self).__init__()
+        super().__init__()
         self.distortion = defaultdict(
             lambda: defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: 0.0)))
         )

@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 # Natural Language Toolkit: Twitter client
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Ewan Klein <ewan@inf.ed.ac.uk>
 #         Lorenzo Rubio <lrnzcig@gmail.com>
 # URL: <http://nltk.org/>
@@ -11,13 +10,11 @@
 Utility functions for the :module:`twitterclient` module which do not require
 the `twython` library to have been installed.
 """
-from __future__ import print_function
-
 import csv
 import gzip
 import json
 
-from nltk import compat
+from nltk.internals import deprecated
 
 HIER_SEPARATOR = "."
 
@@ -34,10 +31,10 @@ def extract_fields(tweet, fields):
     for field in fields:
         try:
             _add_field_to_out(tweet, field, out)
-        except TypeError:
+        except TypeError as e:
             raise RuntimeError(
-                'Fatal error when extracting fields. Cannot find field ', field
-            )
+                "Fatal error when extracting fields. Cannot find field ", field
+            ) from e
     return out
 
 
@@ -50,9 +47,7 @@ def _add_field_to_out(json, field, out):
 
 
 def _is_composed_key(field):
-    if HIER_SEPARATOR in field:
-        return True
-    return False
+    return HIER_SEPARATOR in field
 
 
 def _get_key_value_composed(field):
@@ -74,7 +69,7 @@ def _get_entity_recursive(json, entity):
             # structure that contain other Twitter objects. See:
             # https://dev.twitter.com/overview/api/entities-in-twitter-objects
 
-            if key == 'entities' or key == 'extended_entities':
+            if key == "entities" or key == "extended_entities":
                 candidate = _get_entity_recursive(value, entity)
                 if candidate is not None:
                     return candidate
@@ -90,7 +85,7 @@ def _get_entity_recursive(json, entity):
 
 
 def json2csv(
-    fp, outfile, fields, encoding='utf8', errors='replace', gzip_compress=False
+    fp, outfile, fields, encoding="utf8", errors="replace", gzip_compress=False
 ):
     """
     Extract selected fields from a file of line-separated JSON tweets and
@@ -123,7 +118,7 @@ def json2csv(
 
     :param gzip_compress: if `True`, output files are compressed with gzip
     """
-    (writer, outf) = outf_writer_compat(outfile, encoding, errors, gzip_compress)
+    (writer, outf) = _outf_writer(outfile, encoding, errors, gzip_compress)
     # write the list of fields as header
     writer.writerow(fields)
     # process the file
@@ -134,22 +129,18 @@ def json2csv(
     outf.close()
 
 
+@deprecated("Use open() and csv.writer() directly instead.")
 def outf_writer_compat(outfile, encoding, errors, gzip_compress=False):
-    """
-    Identify appropriate CSV writer given the Python version
-    """
-    if compat.PY3:
-        if gzip_compress:
-            outf = gzip.open(outfile, 'wt', encoding=encoding, errors=errors)
-        else:
-            outf = open(outfile, 'w', encoding=encoding, errors=errors)
-        writer = csv.writer(outf)
+    """Get a CSV writer with optional compression."""
+    return _outf_writer(outfile, encoding, errors, gzip_compress)
+
+
+def _outf_writer(outfile, encoding, errors, gzip_compress=False):
+    if gzip_compress:
+        outf = gzip.open(outfile, "wt", newline="", encoding=encoding, errors=errors)
     else:
-        if gzip_compress:
-            outf = gzip.open(outfile, 'wb')
-        else:
-            outf = open(outfile, 'wb')
-        writer = compat.UnicodeWriter(outf, encoding=encoding, errors=errors)
+        outf = open(outfile, "w", newline="", encoding=encoding, errors=errors)
+    writer = csv.writer(outf)
     return (writer, outf)
 
 
@@ -159,8 +150,8 @@ def json2csv_entities(
     main_fields,
     entity_type,
     entity_fields,
-    encoding='utf8',
-    errors='replace',
+    encoding="utf8",
+    errors="replace",
     gzip_compress=False,
 ):
     """
@@ -200,10 +191,10 @@ def json2csv_entities(
     :param error: Behaviour for encoding errors, see\
     https://docs.python.org/3/library/codecs.html#codec-base-classes
 
-    :param gzip_compress: if `True`, ouput files are compressed with gzip
+    :param gzip_compress: if `True`, output files are compressed with gzip
     """
 
-    (writer, outf) = outf_writer_compat(outfile, encoding, errors, gzip_compress)
+    (writer, outf) = _outf_writer(outfile, encoding, errors, gzip_compress)
     header = get_header_field_list(main_fields, entity_type, entity_fields)
     writer.writerow(header)
     for line in tweets_file:
@@ -265,7 +256,7 @@ def _write_to_file(object_fields, items, entity_fields, writer):
             json_dict = items[kd]
             if not isinstance(json_dict, dict):
                 raise RuntimeError(
-                    """Key {0} does not contain a dictionary
+                    """Key {} does not contain a dictionary
                 in the json file""".format(
                         kd
                     )

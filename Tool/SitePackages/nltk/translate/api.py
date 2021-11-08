@@ -1,6 +1,6 @@
 # Natural Language Toolkit: API for alignment and translation objects
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Will Zhang <wilzzha@gmail.com>
 #         Guan Gui <ggui@student.unimelb.edu.au>
 #         Steven Bird <stevenbird1@gmail.com>
@@ -8,15 +8,11 @@
 # URL: <http://nltk.org/>
 # For license information, see LICENSE.TXT
 
-from __future__ import print_function, unicode_literals
 import subprocess
 from collections import namedtuple
 
-from nltk.compat import python_2_unicode_compatible
 
-
-@python_2_unicode_compatible
-class AlignedSent(object):
+class AlignedSent:
     """
     Return an aligned sentence object, which encapsulates two sentences
     along with an ``Alignment`` between them.
@@ -83,45 +79,45 @@ class AlignedSent(object):
         words = "[%s]" % (", ".join("'%s'" % w for w in self._words))
         mots = "[%s]" % (", ".join("'%s'" % w for w in self._mots))
 
-        return "AlignedSent(%s, %s, %r)" % (words, mots, self._alignment)
+        return f"AlignedSent({words}, {mots}, {self._alignment!r})"
 
     def _to_dot(self):
         """
         Dot representation of the aligned sentence
         """
-        s = 'graph align {\n'
-        s += 'node[shape=plaintext]\n'
+        s = "graph align {\n"
+        s += "node[shape=plaintext]\n"
 
         # Declare node
         for w in self._words:
-            s += '"%s_source" [label="%s"] \n' % (w, w)
+            s += f'"{w}_source" [label="{w}"] \n'
 
         for w in self._mots:
-            s += '"%s_target" [label="%s"] \n' % (w, w)
+            s += f'"{w}_target" [label="{w}"] \n'
 
         # Alignment
         for u, v in self._alignment:
-            s += '"%s_source" -- "%s_target" \n' % (self._words[u], self._mots[v])
+            s += f'"{self._words[u]}_source" -- "{self._mots[v]}_target" \n'
 
         # Connect the source words
         for i in range(len(self._words) - 1):
-            s += '"%s_source" -- "%s_source" [style=invis]\n' % (
+            s += '"{}_source" -- "{}_source" [style=invis]\n'.format(
                 self._words[i],
                 self._words[i + 1],
             )
 
         # Connect the target words
         for i in range(len(self._mots) - 1):
-            s += '"%s_target" -- "%s_target" [style=invis]\n' % (
+            s += '"{}_target" -- "{}_target" [style=invis]\n'.format(
                 self._mots[i],
                 self._mots[i + 1],
             )
 
         # Put it in the same rank
-        s += '{rank = same; %s}\n' % (' '.join('"%s_source"' % w for w in self._words))
-        s += '{rank = same; %s}\n' % (' '.join('"%s_target"' % w for w in self._mots))
+        s += "{rank = same; %s}\n" % (" ".join('"%s_source"' % w for w in self._words))
+        s += "{rank = same; %s}\n" % (" ".join('"%s_target"' % w for w in self._mots))
 
-        s += '}'
+        s += "}"
 
         return s
 
@@ -129,20 +125,20 @@ class AlignedSent(object):
         """
         Ipython magic : show SVG representation of this ``AlignedSent``.
         """
-        dot_string = self._to_dot().encode('utf8')
-        output_format = 'svg'
+        dot_string = self._to_dot().encode("utf8")
+        output_format = "svg"
         try:
             process = subprocess.Popen(
-                ['dot', '-T%s' % output_format],
+                ["dot", "-T%s" % output_format],
                 stdin=subprocess.PIPE,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
             )
-        except OSError:
-            raise Exception('Cannot find the dot binary from Graphviz package')
+        except OSError as e:
+            raise Exception("Cannot find the dot binary from Graphviz package") from e
         out, err = process.communicate(dot_string)
 
-        return out.decode('utf8')
+        return out.decode("utf8")
 
     def __str__(self):
         """
@@ -152,7 +148,7 @@ class AlignedSent(object):
         """
         source = " ".join(self._words)[:20] + "..."
         target = " ".join(self._mots)[:20] + "..."
-        return "<AlignedSent: '%s' -> '%s'>" % (source, target)
+        return f"<AlignedSent: '{source}' -> '{target}'>"
 
     def invert(self):
         """
@@ -163,7 +159,6 @@ class AlignedSent(object):
         return AlignedSent(self._mots, self._words, self._alignment.invert())
 
 
-@python_2_unicode_compatible
 class Alignment(frozenset):
     """
     A storage class for representing alignment between two sequences, s1, s2.
@@ -293,10 +288,10 @@ def _check_alignment(num_words, num_mots, alignment):
         raise IndexError("Alignment is outside boundary of mots")
 
 
-PhraseTableEntry = namedtuple('PhraseTableEntry', ['trg_phrase', 'log_prob'])
+PhraseTableEntry = namedtuple("PhraseTableEntry", ["trg_phrase", "log_prob"])
 
 
-class PhraseTable(object):
+class PhraseTable:
     """
     In-memory store of translations for a given phrase, and the log
     probability of the those translations

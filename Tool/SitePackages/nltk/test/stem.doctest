@@ -1,4 +1,4 @@
-.. Copyright (C) 2001-2019 NLTK Project
+.. Copyright (C) 2001-2021 NLTK Project
 .. For license information, see LICENSE.TXT
 
 ==========
@@ -11,7 +11,6 @@ Overview
 Stemmers remove morphological affixes from words, leaving only the
 word stem.
 
-    >>> from __future__ import print_function
     >>> from nltk.stem import *
 
 Unit tests for the Porter stemmer
@@ -33,7 +32,7 @@ Test the stemmer on various pluralised words.
 
     >>> singles = [stemmer.stem(plural) for plural in plurals]
 
-    >>> print(' '.join(singles))  # doctest: +NORMALIZE_WHITESPACE
+    >>> print(' '.join(singles))
     caress fli die mule deni die agre own humbl size meet
     state siez item sensat tradit refer colon plot
 
@@ -76,3 +75,31 @@ The 'english' stemmer is better than the original 'porter' stemmer.
 .. note::
 
     Extra stemmer tests can be found in `nltk.test.unit.test_stem`.
+
+Unit tests for ARLSTem Stemmer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    >>> from nltk.stem.arlstem import ARLSTem
+
+Create a Stemmer instance.
+
+    >>> stemmer = ARLSTem()
+
+Stem a word.
+
+    >>> stemmer.stem('يعمل')
+    'عمل'
+
+Unit tests for ARLSTem2 Stemmer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    >>> from nltk.stem.arlstem2 import ARLSTem2
+
+Create a Stemmer instance.
+
+    >>> stemmer = ARLSTem2()
+
+Stem a word.
+
+    >>> stemmer.stem('يعمل')
+    'عمل'

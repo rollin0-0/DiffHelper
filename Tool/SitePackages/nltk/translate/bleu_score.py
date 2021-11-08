@@ -1,28 +1,20 @@
-# -*- coding: utf-8 -*-
 # Natural Language Toolkit: BLEU Score
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Authors: Chin Yee Lee, Hengfeng Li, Ruxin Hou, Calvin Tanujaya Lim
 # Contributors: Björn Mattsson, Dmitrijs Milajevs, Liling Tan
 # URL: <http://nltk.org/>
 # For license information, see LICENSE.TXT
 
 """BLEU score implementation."""
-from __future__ import division
 
 import math
 import sys
-import fractions
 import warnings
 from collections import Counter
+from fractions import Fraction
 
 from nltk.util import ngrams
-
-try:
-    fractions.Fraction(0, 1000, _normalize=False)
-    from fractions import Fraction
-except TypeError:
-    from nltk.compat import Fraction
 
 
 def sentence_bleu(
@@ -66,7 +58,7 @@ def sentence_bleu(
     value 0. This is because the precision for the order of n-grams without
     overlap is 0, and the geometric mean in the final BLEU score computation
     multiplies the 0 with the precision of other n-grams. This results in 0
-    (independently of the precision of the othe n-gram orders). The following
+    (independently of the precision of the other n-gram orders). The following
     example has zero 3-gram and 4-gram overlaps:
 
     >>> round(sentence_bleu([reference1, reference2, reference3], hypothesis2),4) # doctest: +ELLIPSIS
@@ -118,7 +110,7 @@ def corpus_bleu(
     Calculate a single corpus-level BLEU score (aka. system-level BLEU) for all
     the hypotheses and their respective references.
 
-    Instead of averaging the sentence level BLEU scores (i.e. marco-average
+    Instead of averaging the sentence level BLEU scores (i.e. macro-average
     precision), the original BLEU metric (Papineni et al. 2002) accounts for
     the micro-average precision (i.e. summing the numerators and denominators
     for each hypothesis-reference(s) pairs before the division).
@@ -474,23 +466,23 @@ class SmoothingFunction:
         ...               'Party', 'commands']
 
         >>> chencherry = SmoothingFunction()
-        >>> print (sentence_bleu([reference1], hypothesis1)) # doctest: +ELLIPSIS
+        >>> print(sentence_bleu([reference1], hypothesis1)) # doctest: +ELLIPSIS
         0.4118...
-        >>> print (sentence_bleu([reference1], hypothesis1, smoothing_function=chencherry.method0)) # doctest: +ELLIPSIS
+        >>> print(sentence_bleu([reference1], hypothesis1, smoothing_function=chencherry.method0)) # doctest: +ELLIPSIS
         0.4118...
-        >>> print (sentence_bleu([reference1], hypothesis1, smoothing_function=chencherry.method1)) # doctest: +ELLIPSIS
+        >>> print(sentence_bleu([reference1], hypothesis1, smoothing_function=chencherry.method1)) # doctest: +ELLIPSIS
         0.4118...
-        >>> print (sentence_bleu([reference1], hypothesis1, smoothing_function=chencherry.method2)) # doctest: +ELLIPSIS
+        >>> print(sentence_bleu([reference1], hypothesis1, smoothing_function=chencherry.method2)) # doctest: +ELLIPSIS
         0.4489...
-        >>> print (sentence_bleu([reference1], hypothesis1, smoothing_function=chencherry.method3)) # doctest: +ELLIPSIS
+        >>> print(sentence_bleu([reference1], hypothesis1, smoothing_function=chencherry.method3)) # doctest: +ELLIPSIS
         0.4118...
-        >>> print (sentence_bleu([reference1], hypothesis1, smoothing_function=chencherry.method4)) # doctest: +ELLIPSIS
+        >>> print(sentence_bleu([reference1], hypothesis1, smoothing_function=chencherry.method4)) # doctest: +ELLIPSIS
         0.4118...
-        >>> print (sentence_bleu([reference1], hypothesis1, smoothing_function=chencherry.method5)) # doctest: +ELLIPSIS
+        >>> print(sentence_bleu([reference1], hypothesis1, smoothing_function=chencherry.method5)) # doctest: +ELLIPSIS
         0.4905...
-        >>> print (sentence_bleu([reference1], hypothesis1, smoothing_function=chencherry.method6)) # doctest: +ELLIPSIS
+        >>> print(sentence_bleu([reference1], hypothesis1, smoothing_function=chencherry.method6)) # doctest: +ELLIPSIS
         0.4135...
-        >>> print (sentence_bleu([reference1], hypothesis1, smoothing_function=chencherry.method7)) # doctest: +ELLIPSIS
+        >>> print(sentence_bleu([reference1], hypothesis1, smoothing_function=chencherry.method7)) # doctest: +ELLIPSIS
         0.4905...
 
         :param epsilon: the epsilon value use in method 1
@@ -543,13 +535,15 @@ class SmoothingFunction:
     def method2(self, p_n, *args, **kwargs):
         """
         Smoothing method 2: Add 1 to both numerator and denominator from
-        Chin-Yew Lin and Franz Josef Och (2004) Automatic evaluation of
-        machine translation quality using longest common subsequence and
-        skip-bigram statistics. In ACL04.
+        Chin-Yew Lin and Franz Josef Och (2004) ORANGE: a Method for
+        Evaluating Automatic Evaluation Metrics for Machine Translation.
+        In COLING 2004.
         """
         return [
-            Fraction(p_i.numerator + 1, p_i.denominator + 1, _normalize=False)
-            for p_i in p_n
+            Fraction(p_n[i].numerator + 1, p_n[i].denominator + 1, _normalize=False)
+            if i != 0
+            else p_n[0]
+            for i in range(len(p_n))
         ]
 
     def method3(self, p_n, *args, **kwargs):
@@ -574,7 +568,7 @@ class SmoothingFunction:
                 incvnt += 1
         return p_n
 
-    def method4(self, p_n, references, hypothesis, hyp_len, *args, **kwargs):
+    def method4(self, p_n, references, hypothesis, hyp_len=None, *args, **kwargs):
         """
         Smoothing method 4:
         Shorter translations may have inflated precision values due to having
@@ -582,21 +576,27 @@ class SmoothingFunction:
         smaller smoothed counts. Instead of scaling to 1/(2^k), Chen and Cherry
         suggests dividing by 1/ln(len(T)), where T is the length of the translation.
         """
+        incvnt = 1
+        hyp_len = hyp_len if hyp_len else len(hypothesis)
         for i, p_i in enumerate(p_n):
-            if p_i.numerator == 0 and hyp_len != 0:
-                incvnt = i + 1 * self.k / math.log(
-                    hyp_len
-                )  # Note that this K is different from the K from NIST.
-                p_n[i] = 1 / incvnt
+            if p_i.numerator == 0 and hyp_len > 1:
+                # incvnt = i + 1 * self.k / math.log(
+                #     hyp_len
+                # )  # Note that this K is different from the K from NIST.
+                # p_n[i] = incvnt / p_i.denominator\
+                numerator = 1 / (2 ** incvnt * self.k / math.log(hyp_len))
+                p_n[i] = numerator / p_i.denominator
+                incvnt += 1
         return p_n
 
-    def method5(self, p_n, references, hypothesis, hyp_len, *args, **kwargs):
+    def method5(self, p_n, references, hypothesis, hyp_len=None, *args, **kwargs):
         """
         Smoothing method 5:
         The matched counts for similar values of n should be similar. To a
         calculate the n-gram matched count, it averages the n−1, n and n+1 gram
         matched counts.
         """
+        hyp_len = hyp_len if hyp_len else len(hypothesis)
         m = {}
         # Requires an precision value for an addition ngram order.
         p_n_plus1 = p_n + [modified_precision(references, hypothesis, 5)]
@@ -606,7 +606,7 @@ class SmoothingFunction:
             m[i] = p_n[i]
         return p_n
 
-    def method6(self, p_n, references, hypothesis, hyp_len, *args, **kwargs):
+    def method6(self, p_n, references, hypothesis, hyp_len=None, *args, **kwargs):
         """
         Smoothing method 6:
         Interpolates the maximum likelihood estimate of the precision *p_n* with
@@ -615,6 +615,7 @@ class SmoothingFunction:
         Gao and He (2013) Training MRF-Based Phrase Translation Models using
         Gradient Ascent. In NAACL.
         """
+        hyp_len = hyp_len if hyp_len else len(hypothesis)
         # This smoothing only works when p_1 and p_2 is non-zero.
         # Raise an error with an appropriate message when the input is too short
         # to use this smoothing technique.
@@ -632,11 +633,12 @@ class SmoothingFunction:
                 p_n[i] = (m + self.alpha * pi0) / (l + self.alpha)
         return p_n
 
-    def method7(self, p_n, references, hypothesis, hyp_len, *args, **kwargs):
+    def method7(self, p_n, references, hypothesis, hyp_len=None, *args, **kwargs):
         """
         Smoothing method 7:
-        Interpolates methods 5 and 6.
+        Interpolates methods 4 and 5.
         """
+        hyp_len = hyp_len if hyp_len else len(hypothesis)
         p_n = self.method4(p_n, references, hypothesis, hyp_len)
         p_n = self.method5(p_n, references, hypothesis, hyp_len)
         return p_n

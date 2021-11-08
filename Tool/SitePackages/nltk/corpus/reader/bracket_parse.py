@@ -1,6 +1,6 @@
 # Natural Language Toolkit: Penn Treebank Reader
 #
-# Copyright (C) 2001-2019 NLTK Project
+# Copyright (C) 2001-2021 NLTK Project
 # Author: Steven Bird <stevenbird1@gmail.com>
 #         Edward Loper <edloper@gmail.com>
 # URL: <http://nltk.org/>
@@ -11,17 +11,16 @@ Corpus reader for corpora that consist of parenthesis-delineated parse trees.
 
 import sys
 
-from nltk.tree import Tree
-from nltk.tag import map_tag
-
-from nltk.corpus.reader.util import *
 from nltk.corpus.reader.api import *
+from nltk.corpus.reader.util import *
+from nltk.tag import map_tag
+from nltk.tree import Tree
 
 # we use [^\s()]+ instead of \S+? to avoid matching ()
-SORTTAGWRD = re.compile(r'\((\d+) ([^\s()]+) ([^\s()]+)\)')
-TAGWORD = re.compile(r'\(([^\s()]+) ([^\s()]+)\)')
-WORD = re.compile(r'\([^\s()]+ ([^\s()]+)\)')
-EMPTY_BRACKETS = re.compile(r'\s*\(\s*\(')
+SORTTAGWRD = re.compile(r"\((\d+) ([^\s()]+) ([^\s()]+)\)")
+TAGWORD = re.compile(r"\(([^\s()]+) ([^\s()]+)\)")
+WORD = re.compile(r"\([^\s()]+ ([^\s()]+)\)")
+EMPTY_BRACKETS = re.compile(r"\s*\(\s*\(")
 
 
 class BracketParseCorpusReader(SyntaxCorpusReader):
@@ -37,8 +36,8 @@ class BracketParseCorpusReader(SyntaxCorpusReader):
         root,
         fileids,
         comment_char=None,
-        detect_blocks='unindented_paren',
-        encoding='utf8',
+        detect_blocks="unindented_paren",
+        encoding="utf8",
         tagset=None,
     ):
         """
@@ -62,28 +61,24 @@ class BracketParseCorpusReader(SyntaxCorpusReader):
         self._tagset = tagset
 
     def _read_block(self, stream):
-        if self._detect_blocks == 'sexpr':
+        if self._detect_blocks == "sexpr":
             return read_sexpr_block(stream, comment_char=self._comment_char)
-        elif self._detect_blocks == 'blankline':
+        elif self._detect_blocks == "blankline":
             return read_blankline_block(stream)
-        elif self._detect_blocks == 'unindented_paren':
+        elif self._detect_blocks == "unindented_paren":
             # Tokens start with unindented left parens.
-            toks = read_regexp_block(stream, start_re=r'^\(')
+            toks = read_regexp_block(stream, start_re=r"^\(")
             # Strip any comments out of the tokens.
             if self._comment_char:
                 toks = [
-                    re.sub('(?m)^%s.*' % re.escape(self._comment_char), '', tok)
+                    re.sub("(?m)^%s.*" % re.escape(self._comment_char), "", tok)
                     for tok in toks
                 ]
             return toks
         else:
-            assert 0, 'bad block type'
+            assert 0, "bad block type"
 
     def _normalize(self, t):
-        # If there's an empty set of brackets surrounding the actual
-        # parse, then strip them off.
-        if EMPTY_BRACKETS.match(t):
-            t = t.strip()[1:-1]
         # Replace leaves of the form (!), (,), with (! !), (, ,)
         t = re.sub(r"\((.)\)", r"(\1 \1)", t)
         # Replace leaves of the form (tag word root) with (tag word)
@@ -92,15 +87,20 @@ class BracketParseCorpusReader(SyntaxCorpusReader):
 
     def _parse(self, t):
         try:
-            return Tree.fromstring(self._normalize(t))
+            tree = Tree.fromstring(self._normalize(t))
+            # If there's an empty node at the top, strip it off
+            if tree.label() == "" and len(tree) == 1:
+                return tree[0]
+            else:
+                return tree
 
         except ValueError as e:
             sys.stderr.write("Bad tree detected; trying to recover...\n")
             # Try to recover, if we can:
-            if e.args == ('mismatched parens',):
+            if e.args == ("mismatched parens",):
                 for n in range(1, 5):
                     try:
-                        v = Tree(self._normalize(t + ')' * n))
+                        v = Tree(self._normalize(t + ")" * n))
                         sys.stderr.write(
                             "  Recovered by adding %d close " "paren(s)\n" % n
                         )
@@ -110,7 +110,7 @@ class BracketParseCorpusReader(SyntaxCorpusReader):
             # Try something else:
             sys.stderr.write("  Recovered by returning a flat parse.\n")
             # sys.stderr.write(' '.join(t.split())+'\n')
-            return Tree('S', self._tag(t))
+            return Tree("S", self._tag(t))
 
     def _tag(self, t, tagset=None):
         tagged_sent = [(w, p) for (p, w) in TAGWORD.findall(self._normalize(t))]
@@ -145,55 +145,23 @@ class CategorizedBracketParseCorpusReader(
         CategorizedCorpusReader.__init__(self, kwargs)
         BracketParseCorpusReader.__init__(self, *args, **kwargs)
 
-    def _resolve(self, fileids, categories):
-        if fileids is not None and categories is not None:
-            raise ValueError('Specify fileids or categories, not both')
-        if categories is not None:
-            return self.fileids(categories)
-        else:
-            return fileids
-
-    def raw(self, fileids=None, categories=None):
-        return BracketParseCorpusReader.raw(self, self._resolve(fileids, categories))
-
-    def words(self, fileids=None, categories=None):
-        return BracketParseCorpusReader.words(self, self._resolve(fileids, categories))
-
-    def sents(self, fileids=None, categories=None):
-        return BracketParseCorpusReader.sents(self, self._resolve(fileids, categories))
-
-    def paras(self, fileids=None, categories=None):
-        return BracketParseCorpusReader.paras(self, self._resolve(fileids, categories))
-
     def tagged_words(self, fileids=None, categories=None, tagset=None):
-        return BracketParseCorpusReader.tagged_words(
-            self, self._resolve(fileids, categories), tagset
-        )
+        return super().tagged_words(self._resolve(fileids, categories), tagset)
 
     def tagged_sents(self, fileids=None, categories=None, tagset=None):
-        return BracketParseCorpusReader.tagged_sents(
-            self, self._resolve(fileids, categories), tagset
-        )
+        return super().tagged_sents(self._resolve(fileids, categories), tagset)
 
     def tagged_paras(self, fileids=None, categories=None, tagset=None):
-        return BracketParseCorpusReader.tagged_paras(
-            self, self._resolve(fileids, categories), tagset
-        )
+        return super().tagged_paras(self._resolve(fileids, categories), tagset)
 
     def parsed_words(self, fileids=None, categories=None):
-        return BracketParseCorpusReader.parsed_words(
-            self, self._resolve(fileids, categories)
-        )
+        return super().parsed_words(self._resolve(fileids, categories))
 
     def parsed_sents(self, fileids=None, categories=None):
-        return BracketParseCorpusReader.parsed_sents(
-            self, self._resolve(fileids, categories)
-        )
+        return super().parsed_sents(self._resolve(fileids, categories))
 
     def parsed_paras(self, fileids=None, categories=None):
-        return BracketParseCorpusReader.parsed_paras(
-            self, self._resolve(fileids, categories)
-        )
+        return super().parsed_paras(self._resolve(fileids, categories))
 
 
 class AlpinoCorpusReader(BracketParseCorpusReader):
@@ -207,12 +175,12 @@ class AlpinoCorpusReader(BracketParseCorpusReader):
     untouched.
     """
 
-    def __init__(self, root, encoding='ISO-8859-1', tagset=None):
+    def __init__(self, root, encoding="ISO-8859-1", tagset=None):
         BracketParseCorpusReader.__init__(
             self,
             root,
-            'alpino\.xml',
-            detect_blocks='blankline',
+            r"alpino\.xml",
+            detect_blocks="blankline",
             encoding=encoding,
             tagset=tagset,
         )
@@ -220,7 +188,7 @@ class AlpinoCorpusReader(BracketParseCorpusReader):
     def _normalize(self, t, ordered=False):
         """Normalize the xml sentence element in t.
         The sentence elements <alpino_ds>, although embedded in a few overall
-        xml elements, are seperated by blank lines. That's how the reader can
+        xml elements, are separated by blank lines. That's how the reader can
         deliver them one at a time.
         Each sentence has a few category subnodes that are of no use to us.
         The remaining word nodes may or may not appear in the proper order.

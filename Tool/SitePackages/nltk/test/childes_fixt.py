@@ -1,16 +1,12 @@
-# -*- coding: utf-8 -*-
-from __future__ import absolute_import
+def setup_module():
+    import pytest
 
-
-def setup_module(module):
-    from nose import SkipTest
     import nltk.data
 
     try:
-        nltk.data.find('corpora/childes/data-xml/Eng-USA-MOR/')
+        nltk.data.find("corpora/childes/data-xml/Eng-USA-MOR/")
     except LookupError as e:
-        print(e)
-        raise SkipTest(
+        pytest.skip(
             "The CHILDES corpus is not found. "
             "It should be manually downloaded and saved/unpacked "
             "to [NLTK_Data_Dir]/corpora/childes/"

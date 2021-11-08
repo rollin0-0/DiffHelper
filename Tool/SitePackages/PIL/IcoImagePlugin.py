@@ -25,14 +25,12 @@
 import struct
 import warnings
 from io import BytesIO
+from math import ceil, log
 
-from . import Image, ImageFile, BmpImagePlugin, PngImagePlugin
-from ._binary import i8, i16le as i16, i32le as i32
-from math import log, ceil
-
-# __version__ is deprecated and will be removed in a future version. Use
-# PIL.__version__ instead.
-__version__ = "0.1"
+from . import BmpImagePlugin, Image, ImageFile, PngImagePlugin
+from ._binary import i16le as i16
+from ._binary import i32le as i32
+from ._binary import o32le as o32
 
 #
 # --------------------------------------------------------------------
@@ -56,6 +54,8 @@ def _save(im, fp, filename):
     sizes = list(sizes)
     fp.write(struct.pack("<H", len(sizes)))  # idCount(2)
     offset = fp.tell() + len(sizes) * 16
+    bmp = im.encoderinfo.get("bitmap_format") == "bmp"
+    provided_images = {im.size: im for im in im.encoderinfo.get("append_images", [])}
     for size in sizes:
         width, height = size
         # 0 means 256
@@ -64,14 +64,30 @@ def _save(im, fp, filename):
         fp.write(b"\0")  # bColorCount(1)
         fp.write(b"\0")  # bReserved(1)
         fp.write(b"\0\0")  # wPlanes(2)
-        fp.write(struct.pack("<H", 32))  # wBitCount(2)
+
+        tmp = provided_images.get(size)
+        if not tmp:
+            # TODO: invent a more convenient method for proportional scalings
+            tmp = im.copy()
+            tmp.thumbnail(size, Image.LANCZOS, reducing_gap=None)
+        bits = BmpImagePlugin.SAVE[tmp.mode][1] if bmp else 32
+        fp.write(struct.pack("<H", bits))  # wBitCount(2)
 
         image_io = BytesIO()
-        tmp = im.copy()
-        tmp.thumbnail(size, Image.LANCZOS)
-        tmp.save(image_io, "png")
+        if bmp:
+            tmp.save(image_io, "dib")
+
+            if bits != 32:
+                and_mask = Image.new("1", tmp.size)
+                ImageFile._save(
+                    and_mask, image_io, [("raw", (0, 0) + tmp.size, 0, ("1", 0, -1))]
+                )
+        else:
+            tmp.save(image_io, "png")
         image_io.seek(0)
         image_bytes = image_io.read()
+        if bmp:
+            image_bytes = image_bytes[:8] + o32(height * 2) + image_bytes[12:]
         bytes_len = len(image_bytes)
         fp.write(struct.pack("<I", bytes_len))  # dwBytesInRes(4)
         fp.write(struct.pack("<I", offset))  # dwImageOffset(4)
@@ -86,7 +102,7 @@ def _accept(prefix):
     return prefix[:4] == _MAGIC
 
 
-class IcoFile(object):
+class IcoFile:
     def __init__(self, buf):
         """
         Parse image from file-like object containing ico file data
@@ -101,21 +117,21 @@ class IcoFile(object):
         self.entry = []
 
         # Number of items in file
-        self.nb_items = i16(s[4:])
+        self.nb_items = i16(s, 4)
 
         # Get headers for each item
         for i in range(self.nb_items):
             s = buf.read(16)
 
             icon_header = {
-                "width": i8(s[0]),
-                "height": i8(s[1]),
-                "nb_color": i8(s[2]),  # No. of colors in image (0 if >=8bpp)
-                "reserved": i8(s[3]),
-                "planes": i16(s[4:]),
-                "bpp": i16(s[6:]),
-                "size": i32(s[8:]),
-                "offset": i32(s[12:]),
+                "width": s[0],
+                "height": s[1],
+                "nb_color": s[2],  # No. of colors in image (0 if >=8bpp)
+                "reserved": s[3],
+                "planes": i16(s, 4),
+                "bpp": i16(s, 6),
+                "size": i32(s, 8),
+                "offset": i32(s, 12),
             }
 
             # See Wikipedia
@@ -177,9 +193,11 @@ class IcoFile(object):
         if data[:8] == PngImagePlugin._MAGIC:
             # png frame
             im = PngImagePlugin.PngImageFile(self.buf)
+            Image._decompression_bomb_check(im.size)
         else:
             # XOR + AND mask bmp frame
             im = BmpImagePlugin.DibImageFile(self.buf)
+            Image._decompression_bomb_check(im.size)
 
             # change tile dimension to only encompass XOR image
             im._size = (im.size[0], int(im.size[1] / 2))
@@ -187,13 +205,7 @@ class IcoFile(object):
             im.tile[0] = d, (0, 0) + im.size, o, a
 
             # figure out where AND mask image starts
-            mode = a[0]
-            bpp = 8
-            for k, v in BmpImagePlugin.BIT2MODE.items():
-                if mode == v[1]:
-                    bpp = k
-                    break
-
+            bpp = header["bpp"]
             if 32 == bpp:
                 # 32-bit color depth icon image allows semitransparent areas
                 # PIL's DIB format ignores transparency bits, recover them.
@@ -223,8 +235,8 @@ class IcoFile(object):
                 # the total mask data is
                 # padded row size * height / bits per char
 
-                and_mask_offset = o + int(im.size[0] * im.size[1] * (bpp / 8.0))
                 total_bytes = int((w * im.size[1]) / 8)
+                and_mask_offset = header["offset"] + header["size"] - total_bytes
 
                 self.buf.seek(and_mask_offset)
                 mask_data = self.buf.read(total_bytes)
@@ -262,6 +274,10 @@ class IcoImageFile(ImageFile.ImageFile):
     in the icon file.
 
     Handles classic, XP and Vista icon formats.
+
+    When saving, PNG compression is used. Support for this was only added in
+    Windows Vista. If you are unable to view the icon in Windows, convert the
+    image to "RGBA" mode before saving.
 
     This plugin is a refactored version of Win32IconImagePlugin by Bryan Davis
     <casadebender@gmail.com>.
