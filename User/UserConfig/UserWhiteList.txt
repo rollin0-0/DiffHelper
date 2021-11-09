@@ -21,6 +21,7 @@ countryAlang
 phone_name
 ext_device2
 imei2
+CC_MD5
 ssidAbssid
 countryAlang
 carrier_code
@@ -29,9 +30,9 @@ phone_name
 test
 __deprecated_msg
 isRegister
+h
 x
 y
-h
 encode
 config
 Plugins
@@ -51,3 +52,4 @@ setter
 var
 let
 case
+Main
