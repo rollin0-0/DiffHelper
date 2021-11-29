@@ -20,13 +20,13 @@
 试用版有效期到12月中旬
 ```
 
-[配置文件详解](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/配置文件详解)
+[配置文件详解](https://github.com/rowliny/DiffHelper/wiki/配置文件详解)
 
-详情请见 [更新日志](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/更新日志)
+详情请见 [更新日志](https://github.com/rowliny/DiffHelper/wiki/更新日志)
 
 ### 温馨提示:
 
-> 如果按照最下面的使用文档，期间遇到错误，麻烦先移步到 [常见错误](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/常见错误)
+> 如果按照最下面的使用文档，期间遇到错误，麻烦先移步到 [常见错误](https://github.com/rowliny/DiffHelper/wiki/常见错误)
 >
 > 如果是这之外的错误，那么肯定是我兼容性做的还不够好，希望你能联系我
 
@@ -62,7 +62,7 @@ iPA安装包中的二进制(可执行)文件能找到以上所有的符号，所
 
 ## 1. 运行环境:
 
-> MacOS 系统 Python3.10.0 版本 [Python 环境安装](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/Python环境安装)
+> MacOS 系统 Python3.10.0 版本 [Python 环境安装](https://github.com/rowliny/DiffHelper/wiki/Python环境安装)
 
 ## 2. 支持混淆的语言
 
@@ -116,17 +116,17 @@ protocol Optional 修改为: Several
 
 ## 5. 功能和使用
 
-- [功能介绍](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/功能介绍)
+- [功能介绍](https://github.com/rowliny/DiffHelper/wiki/功能介绍)
 
-- [混淆前后注意事宜和建议](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/混淆前后注意事宜和建议)
+- [混淆前后注意事宜和建议](https://github.com/rowliny/DiffHelper/wiki/混淆前后注意事宜和建议)
 
-- [Python 环境安装](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/Python环境安装)
+- [Python 环境安装](https://github.com/rowliny/DiffHelper/wiki/Python环境安装)
 
-- [配置文件详解](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/配置文件详解)
+- [配置文件详解](https://github.com/rowliny/DiffHelper/wiki/配置文件详解)
 
-- [使用说明](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/使用说明)
+- [使用说明](https://github.com/rowliny/DiffHelper/wiki/使用说明)
 
-- [常见错误](https://github.com/iOSCoderMaster/iOSCodeDifferHelper/wiki/常见错误)
+- [常见错误](https://github.com/rowliny/DiffHelper/wiki/常见错误)
 
 ## 个人公众号
 
