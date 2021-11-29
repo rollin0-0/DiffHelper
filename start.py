@@ -1,14 +1,7 @@
 # -*- coding:utf-8 -*-
-
 import os
 import platform
 import sys
-from distutils.version import StrictVersion
-
-
-Red = "31"
-Green = "32"
-Yellow = "33"
 
 parPath = os.path.dirname(os.path.abspath(__file__))
 
@@ -17,8 +10,15 @@ sys.path.append(toolPath)
 
 sitePath = os.path.join(toolPath, "SitePackages")
 sys.path.append(sitePath)
-
 os.chdir(parPath)
+
+from packaging import version
+
+
+Red = "31"
+Green = "32"
+Yellow = "33"
+
 
 try:
     import JustDoIT
@@ -49,7 +49,7 @@ def curSystemVersion():
     output.close()
     systemVersion = lines[0].strip()
     colorPrint(Green, "macOS: " + systemVersion)
-    if StrictVersion(systemVersion) >= StrictVersion("10.15"):
+    if version.parse(systemVersion) >= version.parse("10.15"):
         output = os.popen("spctl --status | awk 'NR==1 {print $2}'")
         status = output.readline()
         output.close()
