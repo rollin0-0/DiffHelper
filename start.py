@@ -10,7 +10,6 @@ sys.path.append(toolPath)
 
 sitePath = os.path.join(toolPath, "SitePackages")
 sys.path.append(sitePath)
-os.chdir(parPath)
 
 from packaging import version
 
@@ -18,12 +17,6 @@ from packaging import version
 Red = "31"
 Green = "32"
 Yellow = "33"
-
-
-try:
-    import JustDoIT
-except Exception:
-    colorPrint(Red, "解决方案:\n\t请参考同级目录下的「使用演示.gif」")
 
 
 def colorPrint(color, log):
@@ -133,6 +126,14 @@ def checkOperateEnv():
     print("*" * 32 + "运行环境符合要求" + "*" * 32)
 
 
+checkOperateEnv()
+
+os.chdir(parPath)
+
+try:
+    import JustDoIT
+except Exception:
+    colorPrint(Red, "解决方案:\n\t请参考同级目录下的「使用演示.gif」")
+
 if __name__ == "__main__":
-    checkOperateEnv()
     JustDoIT.justDoIT()
