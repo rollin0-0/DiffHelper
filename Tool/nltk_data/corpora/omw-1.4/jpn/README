@@ -1,0 +1,10 @@
+Data from Japanese Wordnet SVN
+
+
+ wget http://sourceforge.net/p/wnja/code/HEAD/tree/trunk/tab/wnjpn-all.tab?format=raw -O wnjpn-all.tab
+ wget http://sourceforge.net/p/wnja/code/HEAD/tree/trunk/tab/wnjpn-def.tab?format=raw -O wnjpn-def.tab
+ wget http://sourceforge.net/p/wnja/code/HEAD/tree/trunk/tab/wnjpn-exe.tab?format=raw -O wnjpn-exe.tab
+
+
+We use this for the English and Japanese definitions and examples (as
+you can't just split English on ';').

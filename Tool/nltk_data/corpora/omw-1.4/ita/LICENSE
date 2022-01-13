@@ -1,0 +1,34 @@
+MultiWordNet is licensed under a Creative Commons Attribution 3.0
+Unported License.
+
+The currently available release is MultiWordNet 1.5.0. It includes
+information about 58,000 Italian word senses, 41,500 lemmas and 32,700
+synsets (in correspondence with the English equivalents). It also
+includes a labelling of all WordNet 1.6 synsets with domain labels
+(see WordNet Domains for details).
+
+MultiWordNet data are provided as a dump of a MySQL database, together
+with Java API if required. From the next release, an html-based
+interface using Apache/php/MySQL will also be available.  For a
+detailed description of the distribution data format click HERE.
+
+Please fill the request form with your data (they will be maintained
+in a database at FBK). It is important for us to have feedback on
+research involving MultiWordNet: we kindly ask you to provide us with
+information and comments about how MultiWordNet is used.
+
+Publications or presentations containing research results obtained
+through the use of MultiWordNet should cite the following reference:
+
+    Emanuele Pianta, Luisa Bentivogli and Christian
+    Girardi. MultiWordNet: Developing and Aligned Multilingual
+    Database. In Proceedings of the First International Conference on
+    Global WordNet, Mysore, India, January 21-25, 2002, pp. 293-302.
+
+For more information about MultiWordNet please contact the following persons:
+Manuela Speranza : mansperafbk.eu
+Bernardo Magnini : magninifbk.eu
+Christian Girardi : cgirardifbk.eu
+
+
+[taken from: http://multiwordnet.fbk.eu/english/licence.php]

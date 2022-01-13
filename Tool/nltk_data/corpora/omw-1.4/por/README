@@ -1,0 +1,23 @@
+
+https://github.com/arademaker/openWordnet-PT/blob/master/wn-data-por.tab
+
+
+Latest version should also be at:
+
+ * tab file from https://github.com/arademaker/wordnet-br/blob/master/wn-data-por.tab
+
+ * license copied from https://github.com/arademaker/wordnet-br/blob/master/LICENSE
+
+wget https://github.com/arademaker/openWordnet-PT/raw/master/openMLWN/wn-data-por.tab
+wget https://github.com/arademaker/openWordnet-PT/raw/master/LICENSE
+
+
+wget https://github.com/arademaker/wordnet-br/raw/master/LICENSE
+wget https://github.com/arademaker/wordnet-br/raw/master/wn-data-por.tab
+
+The file no longer needs any post-processing.
+# The file is further processed as follows
+# grep -v \" wn-data-por.tab > wn-data-por-1.tab
+# sed 's/_/ /g' wn-data-por-1.tab > wn-data-por-2.tab
+# mv wn-data-por-2.tab wn-data-por.tab
+# rm wn-data-por-?.tab

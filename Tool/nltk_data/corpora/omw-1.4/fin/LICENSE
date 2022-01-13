@@ -1,0 +1,111 @@
+
+FinnWordNet - the Finnish WordNet
+=================================
+
+
+FinnWordNet
+-----------
+
+FinnWordNet is a wordnet for Finnish. It was created by having
+professional translators translate the word senses of the Princeton
+WordNet (PWN) 3.0 into Finnish and by combining the translations with
+the PWN structure. FinnWordNet is a part of the FIN-CLARIN project:
+
+    http://www.ling.helsinki.fi/finclarin/
+
+For more information about FinnWordNet, please visit the FinnWordNet
+project Web page
+
+    http://www.ling.helsinki.fi/en/lt/research/finnwordnet/
+
+
+Packages and directories
+------------------------
+
+FinnWordNet data is distributed as the following packages:
+
+    fiwn_dict_fi-1.1.2.zip
+    fiwn_lex_fi-1.1.2.zip
+    fiwn_lists_fi-1.1.2.zip
+
+The packages contain the following directories, respectively:
+
+    dict - FinnWordNet data files in the Princeton WordNet database
+        format
+
+    lex - FinnWordNet in the Princeton WordNet lexicographer file
+        format
+
+    lists - Various lists (synsets, translations, relations) generated
+        from FinnWordNet data in a tab-separated-values format
+
+Please refer to the respective README files in the directories for
+more information.
+
+
+General notes about FinnWordNet data
+------------------------------------
+
+The character encoding in all FinnWordNet data is UTF-8.
+
+Newlines are Unix-style (single line feed, ASCII 0x0A).
+
+
+Licence
+-------
+
+Since FinnWordNet retains the structure and glosses of Princeton
+WordNet, it is a derivative of PWN subject to the PWN licence:
+
+    http://wordnet.princeton.edu/wordnet/license/
+
+The PWN licence allows free use, including commercial use, provided
+that a copyright notice is given:
+
+    WordNet Release 3.0 This software and database is being provided
+    to you, the LICENSEE, by Princeton University under the following
+    license. By obtaining, using and/or copying this software and
+    database, you agree that you have read, understood, and will
+    comply with these terms and conditions.: Permission to use, copy,
+    modify and distribute this software and database and its
+    documentation for any purpose and without fee or royalty is hereby
+    granted, provided that you agree to comply with the following
+    copyright notice and statements, including the disclaimer, and
+    that the same appear on ALL copies of the software, database and
+    documentation, including modifications that you make for internal
+    use or for distribution. WordNet 3.0 Copyright 2006 by Princeton
+    University. All rights reserved. THIS SOFTWARE AND DATABASE IS
+    PROVIDED "AS IS" AND PRINCETON UNIVERSITY MAKES NO REPRESENTATIONS
+    OR WARRANTIES, EXPRESS OR IMPLIED. BY WAY OF EXAMPLE, BUT NOT
+    LIMITATION, PRINCETON UNIVERSITY MAKES NO REPRESENTATIONS OR
+    WARRANTIES OF MERCHANT- ABILITY OR FITNESS FOR ANY PARTICULAR
+    PURPOSE OR THAT THE USE OF THE LICENSED SOFTWARE, DATABASE OR
+    DOCUMENTATION WILL NOT INFRINGE ANY THIRD PARTY PATENTS,
+    COPYRIGHTS, TRADEMARKS OR OTHER RIGHTS. The name of Princeton
+    University or Princeton may not be used in advertising or
+    publicity pertaining to distribution of the software and/or
+    database. Title to copyright in this software, database and any
+    associated documentation shall at all times remain with Princeton
+    University and LICENSEE agrees to preserve same.
+
+The translations of FinnWordNet are copyright of the University of
+Helsinki and they are licenced under Creative Commons Attribution (CC
+BY) 3.0, which is similar to the PWN licence:
+
+    http://creativecommons.org/licenses/by/3.0/
+
+Please cite the following paper when referring to FinnWordNet:
+
+    Krister Lindén and Lauri Carlson. 2010. FinnWordNet – WordNet på
+    finska via översättning. LexicoNordica – Nordic Journal of
+    Lexicography, 17:119–140.
+
+
+Contact
+-------
+
+The FinnWordNet project is led by Dr Krister Lindén at the Department
+of Modern Languages (Language Technology) of the University of
+Helsinki. In technical questions, please contact Mr Jyrki Niemi. Email
+addresses are of the form firstname.lastname@helsinki.fi (accents
+removed).

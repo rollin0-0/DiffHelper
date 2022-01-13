@@ -1,0 +1,9 @@
+Data from the Pisa wordnet.
+
+In the original there are some empty definitions and many wrong
+spelled words, all containing apostrophes in place of accented letters
+(for example -uniformita' instead of -uniformità-).  These were
+corrected by Tommaso Petrolito.
+
+ItalWN itself has 49,349 synsets, but only 15,563 ItalWN synsets are
+mapped to Princeton WN, and thus included in the OMW.

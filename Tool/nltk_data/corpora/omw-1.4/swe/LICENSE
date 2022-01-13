@@ -1,0 +1,18 @@
+<olac:olac>
+  <dc:title>WordNet-SALDO </dc:title>
+  <dcterms:alternative>wordnet-saldo</dcterms:alternative>
+  <dc:identifier>hdl:10794/4fc635e47910f6.64094218</dc:identifier>
+  <dc:description>A linking between SALDO senses and Core WordNet</dc:description>
+  <dc:type xsi:type="olac:linguistic-type" olac:code="lexicon"/>
+  <dc:language xsi:type="olac:language" olac:code="swe">Swedish</dc:language>
+  <dc:language xsi:type="olac:language" olac:code="eng">English</dc:language>
+  <dc:rights>CC-BY attribution</dc:rights>
+  <dc:references xsi:type="File">https://svn.spraakdata.gu.se/sb-arkiv/pub/lmf/wordnet-saldo/wordnet-saldo.xml</dc:references>
+  <dc:rights>CC-BY attribution</dc:rights>
+  <dc:references xsi:type="dcterms:URI">http://spraakbanken.gu.se/karp/</dc:references>
+  <dc:rights>CC-BY attribution</dc:rights>
+  <dc:references xsi:type="File">http://spraakbanken.gu.se/swe/resurs/wordnet-saldo</dc:references>
+  <dc:rights>CC-BY attribution</dc:rights>
+  <dc:references xsi:type="File">http://spraakbanken.gu.se/eng/resource/wordnet-saldo</dc:references>
+  <dc:extent>6989 entries</dc:extent>
+</olac:olac>

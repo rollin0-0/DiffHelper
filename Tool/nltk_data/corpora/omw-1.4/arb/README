@@ -1,0 +1,31 @@
+2015: This improved version is an extension of the original Arabic
+Wordnet (http://globalwordnet.org/arabic-wordnet/awn-browser/), it was
+enriched by new verbs, nouns including the broken plurals that is a
+specific form for Arabic words (please see reference paper in
+citation.bib).
+
+
+
+This conversion loses any synsets not in Princeton WordNet 3.0
+
+------------------------------------------------------------------------
+This conversion uses the following mappings
+
+WN-Map: Mappings between WordNet versions
+Copyright (c) 2003 TALP Research Center
+	           Universitat Politècnica de Catalunya. 
+		   Barcelona, Spain
+		   http://www.lsi.upc.es/~nlp
+--------------------------------------------------------------------------
+There are a few AWN IDs that couldn't be mapped (new synsets)
+
+I read in the roots and broken plurals, although we won't show them by default.
+
+I couldn't get prettyprint to work with lxml; but it does with xmlstarlet
+mv arb2-lmf.xml arb2-lmf-ugly.xml; xmlstarlet  format --indent-spaces 2 --encode utf-8  arb2-lmf-ugly.xml > arb2-lmf.xml
+
+
+
+there is also an out of date version without diacritics, produced by Motaz SAAD:
+wn-data-ara.tab
+

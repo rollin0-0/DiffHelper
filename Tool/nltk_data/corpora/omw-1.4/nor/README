@@ -1,0 +1,8 @@
+This directory contains two wordnets for Norwegian Bokmal and Nynorsk.
+
+The main wordnet has a different structure from the Princeton wordnet,
+but roughly 5,000 synsets (the core synsets) have been mapped to PWN
+in cooperation with the Danish wordnet.   
+
+Thanks to Lars Nygaard for giving us access to these files and helping
+us clean them up a little.

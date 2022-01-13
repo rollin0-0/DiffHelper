@@ -1,0 +1,19 @@
+
+   		  ------------------------------------------
+    		  Multilingual Central Respository (MCR) 3.0
+    		  ------------------------------------------
+
+  The contents of this package are distributed under different open licenses. 
+If you want to redistribute this software, part of it, or derived works based 
+on it or on any of its parts, make sure you are doing so under the terms stated
+in the license applying to each of the involved modules.
+
+  The licenses applying to the modules contained in MCR are the following:
+
+ 1.- English WordNet synset and relation data, contained in folder engWN/ are 
+     distributed under the original WordNet license. You can find it at 
+     http://wordnet.princeton.edu/wordnet/license
+
+ 2.- All other data in this package are distributed under Attribution 3.0 Unported
+     (CC BY 3.0) license. You can find it at 
+     http://creativecommons.org/licenses/by/3.0/

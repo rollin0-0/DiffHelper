@@ -1,0 +1,10 @@
+The Hebrew wordnet includes GAP for synsets that are not lexicalized
+in Hebrew, and adds an exclamation mark to Hebrew entries that do not
+perfectly match the English.
+
+Around 334 language specific lemmas ignored for now
+Also 2000+ examples
+
+Original xml incorrectly gives the encoding as ISO-8859-1 (it is UTF-8).
+
+Francis Bond <bond@ieee.org>

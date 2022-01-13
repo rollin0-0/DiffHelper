@@ -1,0 +1,11 @@
+New free Bulgarian wordnet,
+
+Received from Kiril 2014-07-30
+
+First line added by hand:
+URL: 	http://www.bultreebank.org/
+License:	CC BY 3.0
+
+Citation: http://www.lrec-conf.org/proceedings/lrec2010/summaries/848.html
+
+python bin/add-wn.py wns/bul/wn-data-bul.tab  bul btb-wn www/wn-multi.db

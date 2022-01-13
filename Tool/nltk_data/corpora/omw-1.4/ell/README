@@ -1,0 +1,14 @@
+Data from github:
+
+wget https://raw.githubusercontent.com/okfngr/wordnet/master/wngre2.xml
+
+URL: https://github.com/okfngr/wordnet
+LICENSE: apache
+
+Note: had to change 'b' to 'r' for adverbs
+
+
+Losing all the BILI entries; some synsets not recognized (see log)
+
+
+
