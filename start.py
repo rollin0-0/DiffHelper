@@ -126,14 +126,14 @@ def checkOperateEnv():
     print("*" * 32 + "运行环境符合要求" + "*" * 32)
 
 
-checkOperateEnv()
-
 os.chdir(parPath)
 
-try:
-    import JustDoIT
-except Exception:
-    colorPrint(Red, "解决方案:\n\t请参考同级目录下的「使用演示.gif」")
-
 if __name__ == "__main__":
+
+    try:
+        import JustDoIT
+    except Exception:
+        colorPrint(Red, "解决方案:\n\t请参考同级目录下的「使用演示.gif」")
+
+    checkOperateEnv()
     JustDoIT.justDoIT()
