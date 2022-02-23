@@ -130,10 +130,9 @@ os.chdir(parPath)
 
 if __name__ == "__main__":
 
+    checkOperateEnv()
     try:
         import JustDoIT
     except Exception:
         colorPrint(Red, "解决方案:\n\t请参考同级目录下的「使用演示.gif」")
-
-    checkOperateEnv()
     JustDoIT.justDoIT()
