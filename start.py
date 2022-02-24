@@ -135,4 +135,5 @@ if __name__ == "__main__":
         import JustDoIT
     except Exception:
         colorPrint(Red, "解决方案:\n\t请参考同级目录下的「使用演示.gif」")
+        colorPrint(Red, "解决方案:\n\t请参考同级目录下的「m1设置.png」")
     JustDoIT.justDoIT()
