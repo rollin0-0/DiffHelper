@@ -17,6 +17,7 @@
 
 ```
 修复一些小bug
+当前版本已失效，当前版本已失效，当前版本已失效，请不要下载
 ```
 
 [配置文件详解](https://github.com/rowliny/DiffHelper/wiki/配置文件详解)
