@@ -70,7 +70,7 @@ def curSIPStatus():
         colorPrint(Red, "m1芯片设备需要关闭SIP")
         colorPrint(Green, "详情见:")
         colorPrint(Yellow, "https://github.com/rowliny/DiffHelper/wiki/M1芯片关闭SIP")
-        os._exit(1)
+        # os._exit(1)
 
 
 # 判断当前运行python环境
@@ -129,11 +129,10 @@ def checkOperateEnv():
 os.chdir(parPath)
 
 if __name__ == "__main__":
-
     checkOperateEnv()
     try:
         import JustDoIT
     except Exception:
         colorPrint(Red, "解决方案:\n\t请参考同级目录下的「使用演示.gif」")
-        colorPrint(Red, "解决方案:\n\t请参考同级目录下的「m1设置.png」")
+
     JustDoIT.justDoIT()
