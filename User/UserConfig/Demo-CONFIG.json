@@ -1,33 +1,34 @@
 {
   "ExcludeFolderList": [],
-  "IgnoreClassList": ["AppDelegate", "ViewController", "SceneDelegate"],
+
+  "IgnoreClassList": [
+    "AppDelegate",
+    "ViewController",
+    "SceneDelegate"
+  ],
   "IgnoreFolderList": [],
+
   "IgnoreModelList": [],
   "IgnoreModelFolderList": [],
 
+  "PixelOffsetMap" : {
+    "r":10,
+    "g":12,
+    "b":13
+  },
+  "OpenSwift":false,
   "InjectPercent": 0.5,
   "InjectMark": "//mark",
   "InjectMinCount": 2,
   "InjectMaxCount": 3,
-  "OpenInjectMethod": false,
 
-  "ClassNamePrefixMap": {},
-  "PropertyPrefixMap": {},
-  "MethodPrefixMap": {},
-  "EnumPrefixMap": {},
+  "PrefixMap": {},
 
-  "DiffOCString": true,
-  "UnitDiffMaxCount": 4000,
-  "SymbolMaxCount": 5,
-  "AutoDealUnevenSymbol":true,
-  "RemoveWordList": [],
+  "CheckSensitiveWords": false,
+  "DiffOCString": false,
+  "SplitOCStringPercent": 0,
   
-  "SplitOCStringPercent": 1,
-
   "ModifyProjectTime": true,
-  "ProjectStartDate": "20200301",
-  "ProjectEndDate": "20200711",
-
-  "SDKHeaderList": [],
-  "OldMode": false
+  "ProjectStartDate": "20220201",
+  "ProjectEndDate": "20220529"
 }
